@@ -24,7 +24,7 @@
             [showNavigationIndicators]="false"
             [interval]="0"
             [keyboard]="false"
-            >
+          >
             <ng-template
               ngbSlide
               *ngFor="let arrayloop of FormArray.controls; let i = index"
@@ -34,7 +34,7 @@
                   <div class="card-body">
                     <div class="quiz">
                       <div class="data">
-                        {{ "Q-" + (i + 1) }} {{ question[i]['question'] }}
+                        {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
                       </div>
                       <div class="ram">
                         <i
@@ -45,36 +45,36 @@
                         >
                       </div>
                     </div>
-                    <!-- <canvas id="stage" width="200" height="300">
-            
-              </canvas> -->
 
+                    <ng-container
+                      *ngFor="let card of question[this.questionindex].options"
+                    >
+                      <div class="form-check">
+                        <label
+                          class="form-check-label"
+                          *ngIf="card.type == 'checkbox'"
+                          ><input
+                            type="checkbox"
+                            class="form-check-input"
+                            formControlName="radioValue"
+                            value="{{ card.value }}"
+                          />
+                          {{ card.lable }}</label
+                        >
 
-              <ng-container *ngFor="let card of question[this.questionindex].options">
-                <div class="form-check">
-          
-                  <label class="form-check-label" *ngIf="card.type == 'checkbox'"
-                    ><input
-                      type="checkbox"
-                      class="form-check-input"
-                      formControlName="radioValue"
-                      value="{{card.value}}"
-                    />
-                    {{card.lable}}</label
-                  >
-
-                  <label class="form-check-label" *ngIf="card.type == 'radio'"
-                    ><input
-                      type="radio"
-                      class="form-check-input"
-                      formControlName="radioValue"
-                      value="{{card.value}}"
-                    />
-                    {{card.lable}}</label
-                  >
-                </div>
-  
-              </ng-container>
+                        <label
+                          class="form-check-label"
+                          *ngIf="card.type == 'radio'"
+                          ><input
+                            type="radio"
+                            class="form-check-input"
+                            formControlName="radioValue"
+                            value="{{ card.value }}"
+                          />
+                          {{ card.lable }}</label
+                        >
+                      </div>
+                    </ng-container>
                     <div class="radio-button">
                       <button
                         [disabled]="!FormArray.controls[i].dirty"
@@ -94,11 +94,7 @@
                           width: 20%;
                         "
                       >
-                        {{
-                          question.length != i+1
-                            ? "Next"
-                            : "Submit"
-                        }}
+                        {{ question.length != i + 1 ? "Next" : "Submit" }}
                       </button>
                       <button
                         [disabled]="FormArray.controls[i].dirty"
@@ -121,7 +117,7 @@
                         Skip
                       </button>
                       <button
-                        [disabled] = "i == 0"
+                        [disabled]="i == 0"
                         class="carousel-control-Previous"
                         id="previous"
                         role="button"
@@ -131,11 +127,7 @@
                         class="btn btn-primary"
                         aria-hidden="true"
                         data-bs-slide="per"
-                        style="
-                          position: absolute;
-                          left: 7.5%;
-                          width: 20%;
-                        "
+                        style="position: absolute; left: 7.5%; width: 20%"
                       >
                         Previous
                       </button>
