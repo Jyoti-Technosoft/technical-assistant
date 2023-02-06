@@ -1,0 +1,88 @@
+<div class="card shadow" id="card" style="margin-top: 80px">
+  <div class="card-body" style="padding: 0px">
+    <div class="row g-0">
+      <div class="col text-center mb-3 mt-4">
+        <span class="fs-3">Result</span>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="submittedData?.length">
+      <div class="col-4 p-3" *ngFor="let data of submittedData">
+        <div class="">
+          <div class="card shadow">
+            <div class="">
+              <img class="card-img-top" src="{{ data.image }}" alt="" />
+              <h3
+                class="card-title text-center"
+                style="font-weight: bold; padding-top: 10px"
+              >
+                {{ data.type }}
+              </h3>
+              <p class="card-text">
+                <span>
+                  <h5
+                    style="
+                      margin-top: 10px;
+                      text-align: left;
+                      padding-left: 10px;
+                    "
+                  >
+                    User Name : {{ userName }}
+                  </h5>
+                </span>
+
+                <span>
+                  <h5
+                    style="
+                      margin-top: 10px;
+                      text-align: left;
+                      padding-left: 10px;
+                    "
+                  >
+                    Total Points : {{ data.points }}
+                  </h5>
+                </span>
+                <span>
+                  <h5
+                    style="
+                      margin-top: 10px;
+                      text-align: left;
+                      padding-left: 10px;
+                    "
+                  >
+                    Correct Answers : {{ data.correctanswer }}
+                  </h5>
+                </span>
+                <span>
+                  <h5
+                    style="
+                      margin-top: 10px;
+                      text-align: left;
+                      padding-left: 10px;
+                    "
+                  >
+                    Wrong Answers : {{ data.inCorrectAnswer }}
+                  </h5>
+                </span>
+              </p>
+              <div class="text-center">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  routerLink="/dashboard"
+                >
+                  Go Again To Quiz
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!submittedData.length">
+       <h1>
+        No Quiz Played yet
+       </h1>
+    </div>
+  </div>
+</div>
