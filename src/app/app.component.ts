@@ -18,7 +18,7 @@ export class AppComponent {
       if (event instanceof NavigationStart) {
         if (event['url'] == '/login') {
           this.showHead = false;
-        } else if( event['url'] == '/userregistration' ){
+        } else if( event['url'] == '/registration' ){
           this.showHead = false;
         } else{
           this.showHead = true;
