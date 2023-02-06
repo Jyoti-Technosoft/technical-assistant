@@ -4,6 +4,10 @@ import { LoginComponent } from './authorization/login/login.component';
 import { RegistrationComponent } from './authorization/registration/registration.component';
 import { AuthService } from './authorization/auth-guard/auth.service';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
+import { LoginComponent } from './authorization/login/login.component';
+import { RegistrationComponent } from './authorization/registration/registration.component';
+import { AuthService } from './authorization/auth-guard/auth.service';
+import { AuthGuard } from './authorization/auth-guard/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
