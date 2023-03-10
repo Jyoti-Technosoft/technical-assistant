@@ -1,0 +1,33 @@
+*{
+    font-family: Roboto;
+}
+.card{
+    margin: 0 auto; 
+    /* float: none; Added */
+    margin-bottom: 0px;  
+    border-radius: 15px;
+    height: auto;    
+}
+input[type="date"]{
+    margin-left:20px;
+    padding:3px;
+    font-family: "Roboto Mono",monospace;
+    border-radius: 4px;
+    width:320px;
+    margin-top: 10px;
+}
+.cpwd{
+    margin-top: 10px;
+}
+.gender{
+    margin-top: 10px;
+}
+.col-md-3{
+    width:100%;
+    float:left;
+    margin:0;
+}
+form{
+    border-radius: 15px;
+}
+

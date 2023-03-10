@@ -1,0 +1,14 @@
+<app-header></app-header>
+<div class="card shadow" style="width: 40rem; margin-top: 100px;">
+  <div class="card-body">
+    <img class="card-img-top" src="assets\img\rules.png" alt="">
+    <h2 class="card-title text-center"> Welcome to Quiz App</h2>
+     <h4 class="card-subtitle"> Rules:</h4>
+     <ol [innerHTML]="rules">
+     
+  </ol>
+  <div class="text-center">
+    <button class="btn btn-primary" name="button" (click)="quiz()">Start Quiz</button>
+  </div>
+  </div>
+</div>
