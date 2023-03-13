@@ -1,11 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgModel, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { QuestionService } from '../../service/question.service';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ModalComponent } from '../../dialog-service/modal/modal/modal.component';
+
+import { QuestionService } from '../../service/question.service';
 import { DialogService } from 'src/app/dialog-service/dialog.service';
+
 import dialogData from 'src/assets/json/dialogData.json';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,8 +30,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   public formSubmitted() {
+
     let userdata = this.userData?.find(
-      (value: any) => value?.email ==  this.adminForm?.value?.email && value?.password ==  this.adminForm?.value?.password 
+      (value: any) => value?.email ==  this.adminForm?.value?.email && value?.password == this.adminForm?.value?.password 
     );
     if (
       userdata
@@ -51,6 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.initForm();
     if (!localStorage.getItem('registeruser')?.length) {
       let registeruser: any = localStorage.getItem('registeruser');
       registeruser = JSON.parse(registeruser as string);
@@ -60,17 +68,41 @@ export class LoginComponent implements OnInit, OnDestroy {
       let data: any = localStorage.getItem('registeruser');
       this.userData = JSON.parse(data);
     }
-    this.createForm();
+  }
+
+  signout() {
+    localStorage.removeItem('isAuthenticate');
+    document.cookie = 'username' + '=' + null;
+    this.route.navigateByUrl('/login');
+  }
+
+  initForm() {
+    
+    this.adminForm = new FormGroup(
+      {
+        email: new FormControl('', [
+          Validators.required,
+          Validators.email,
+        ]),
+        password: new FormControl('',[
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(15),
+        ])
+      })  
   }
 
   createForm() {
      this.adminForm = this.fb.group({
       email : [''],
       password : ['']
-     })
+     });
   }
 
-
+  get adminFormValidator(){
+   console.log(this.adminForm);
+    return this.adminForm.controls;
+  }
   ngOnDestroy(): void {
   }
 
