@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-
 import { DialogService } from 'src/app/dialog-service/dialog.service';
 
 import dialogData from 'src/assets/json/dialogData.json';
@@ -78,10 +77,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
   }
 
-  get adminFormValidator() {
-
-    return this.adminForm.controls;
-  }
   ngOnDestroy(): void {
   }
 

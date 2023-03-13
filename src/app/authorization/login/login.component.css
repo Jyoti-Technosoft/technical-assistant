@@ -1,0 +1,14 @@
+*{
+    font-family: Roboto;
+}
+
+
+/* @media (min-width: 280px) and (max-width:1280px) {  */
+    label {font-size:calc(70% +  1vh);} 
+    .form-text {font-size:calc(70% +  1vh);}
+    .form-control {font-size:calc(70% +  1vh);}
+  /* } */
+
+  
+  
+  

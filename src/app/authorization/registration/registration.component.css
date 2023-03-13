@@ -1,0 +1,19 @@
+*{
+    font-family: Roboto;
+}
+
+input[type="date"]{
+    margin-left:20px;
+    padding:3px;
+    font-family: "Roboto Mono",monospace;
+    border-radius: 4px;
+    max-width:auto;
+    margin-top: 10px;
+}
+/* @media (min-width: 280px) and (max-width:1280px) {  */
+    label {font-size:calc(70% +  1vh);} 
+    .form-text {font-size:calc(70% +  1vh);}
+    .form-control {font-size:calc(70% +  1vh);}
+  /* } */
+
+
