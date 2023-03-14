@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
+  FormBuilder,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
@@ -23,22 +24,14 @@ export class RegistrationComponent {
   birthday: any;
   mobile: any;
   registeruser: any = [];
-
-  data = {
-    fullname: '',
-    email: '',
-    pwd: '',
-    cpwd: '',
-    gender: '',
-    birthday: '',
-    mobile: '',
-  };
   registrationForm!: FormGroup;
+  submitted = false;
+  acceptTerms: any;
 
-  constructor(private route: Router) {}
+  constructor(private route: Router, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.initForm();
+    this.createForm();
   }
 
   public submitform() {
@@ -63,52 +56,32 @@ export class RegistrationComponent {
     });
     localStorage.setItem('registeruser', JSON.stringify(this.registeruser));
     this.route.navigateByUrl('login');
+
+    this.submitted = true;
+    if (this.registrationForm.invalid) {
+      return;
+    }
   }
 
-
-  initForm() {
-    this.registrationForm = new FormGroup(
-      {
-        id: new FormControl(Date.now()),
-        fullname: new FormControl('', [
-          Validators.required,
-          // Validators.pattern('[a-zA-Z-]'),
-        ]),
-
-        pwd: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(15),
-        ]),
-        cpwd: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(15),
-        ]),
-        gender: new FormControl('', [Validators.required]),
-        birthday: new FormControl('', [Validators.required]),
-        mobile: new FormControl('', [
-          Validators.required,
-          Validators.pattern('[0-9]*'),
-          Validators.minLength(10),
-          Validators.maxLength(10),
-        ]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-      },
-      { validators: this.identityRevealedValidator }
-    );
-  }
   identityRevealedValidator: ValidatorFn = (
-    control: AbstractControl
+    controls: AbstractControl
   ): ValidationErrors | null => {
-    const pwd = control.get('pwd');
-    const cpwd = control.get('cpwd');
-    return pwd && cpwd && pwd.value !== cpwd.value
-      ? { identityRevealed: true }
-      : null;
+    const pwd = this.registrationForm?.controls['pwd'];
+    return pwd?.value !== controls?.value ? { identityRevealed: true } : null;
   };
+
+  validateNumber: ValidatorFn = (
+    controls: AbstractControl
+  ): ValidationErrors | null => {
+    const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
+    return regex.test(controls.value) ? null : { pattern: true };
+  };
+
   getToday(): string {
     return new Date().toISOString().split('T')[0];
+  }
+  disableDate() {
+    return false;
   }
   Submited() {
     console.log(this.registrationForm);
@@ -122,45 +95,42 @@ export class RegistrationComponent {
       this.registrationForm.value.mobile
     );
   }
-  Mustmatch(pwd: any, cpwd: any) {
-    debugger;
-    return () => {
-      debugger;
-      const passwordcontrol = this.registrationForm.controls[pwd];
-      const confirmpasswordcontrol = this.registrationForm.controls[cpwd];
-      if (
-        confirmpasswordcontrol.errors &&
-        !confirmpasswordcontrol.errors['Mustmatch']
-      ) {
-        return;
-      }
-      if (passwordcontrol.value !== confirmpasswordcontrol.value) {
-        confirmpasswordcontrol.setErrors({ Mustmatch: true });
-      } else {
-        confirmpasswordcontrol.setErrors(null);
-      }
-    };
+
+  createForm() {
+    this.registrationForm = this.fb.group({
+      id: new FormControl(Date.now()),
+      fullname: ['', [Validators.required]],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      pwd: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+          ),
+        ]),
+      ],
+      cpwd: [
+        '',
+        Validators.compose([
+          Validators.required,
+          this.identityRevealedValidator,
+        ]),
+      ],
+      gender: ['', Validators.compose([Validators.required])],
+      birthday: ['', Validators.compose([Validators.required])],
+      mobile: [
+        '',
+        Validators.compose([Validators.required, this.validateNumber]),
+      ],
+      acceptTerms: [false, Validators.requiredTrue],
+    });
+  }
+  get f() {
+    return this.registrationForm.controls;
   }
 
-  get FullName(): FormControl {
-    return this.registrationForm.get('fullname') as FormControl;
-  }
-  get Pwd(): FormControl {
-    return this.registrationForm.get('pwd') as FormControl;
-  }
-  get Cpwd(): FormControl {
-    return this.registrationForm.get('cpwd') as FormControl;
-  }
-  get Gender(): FormControl {
-    return this.registrationForm.get('gender') as FormControl;
-  }
-  get Birthday(): FormControl {
-    return this.registrationForm.get('birthday') as FormControl;
-  }
-  get Mobile(): FormControl {
-    return this.registrationForm.get('mobile') as FormControl;
-  }
-  get Email(): FormControl {
-    return this.registrationForm.get('email') as FormControl;
+  get registrationFormValidator() {
+    return this.registrationForm.controls;
   }
 }
