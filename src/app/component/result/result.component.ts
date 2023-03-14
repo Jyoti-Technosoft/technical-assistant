@@ -9,11 +9,7 @@ import quizData from 'src/assets/json/data.json';
 })
 export class ResultComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
-  isQuizCompleted: any;
   userName: any;
-  points: any;
-  correctAnswer: any;
-  inCorrectAnswer: any;
   userData: any;
   submittedData: any;
 

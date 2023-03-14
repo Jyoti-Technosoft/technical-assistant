@@ -10,7 +10,7 @@ import quizData from '../../../assets/json/data.json';
 })
 export class StartquizComponent implements OnInit {
   quizData = {...quizData};
-  rules: any;
+  instruction: any;
   selectedQuizType: any;
   constructor(
     private route:Router,
@@ -25,7 +25,7 @@ export class StartquizComponent implements OnInit {
 
   mapJSONData() {
     this.selectedQuizType = this.activeRoute.snapshot.queryParams['quiz'];
-   this.rules = this.quizData.Quiz.find((data)=> data.quizId == this.selectedQuizType );
+   this.instruction = this.quizData?.Quiz?.find((data)=> data?.quizId == this.selectedQuizType );
   }
 
 
