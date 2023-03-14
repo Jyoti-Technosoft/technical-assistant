@@ -101,7 +101,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   mapJSONData() {
     this.question = [...this.quizData[this.selectedQuizType]?.questions];
     this.question = this.question?.sort(() => Math.random() - 0.67);
-    this.question = [...this.question?.splice(0, 11)];
+    this.question = [...this.question?.splice(0, 10)];
     this.options = this.question[this.questionindex]?.options;
     this.timer = this.quizData[this.selectedQuizType]?.timer;
 
@@ -129,7 +129,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.answer(questionindex, values);
     this.disabledValuesAndForm();
     this.questionindex = questionindex + 1;
-    if (this.questionindex + 1 == this.question.length) {
+    if (this.questionindex == this.question.length) {
       this.submit();
     }
   }
