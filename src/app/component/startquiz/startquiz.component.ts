@@ -9,7 +9,7 @@ import quizData from '../../../assets/json/data.json';
   styleUrls: ['./startquiz.component.css']
 })
 export class StartquizComponent implements OnInit {
-  quizData:any = quizData;
+  quizData = {...quizData};
   rules: any;
   selectedQuizType: any;
   constructor(
@@ -24,11 +24,8 @@ export class StartquizComponent implements OnInit {
   }
 
   mapJSONData() {
-    if (this.questionService.selectedQuizType) {
-      this.selectedQuizType = this.questionService.selectedQuizType;
-    }
-   this.rules = this.quizData[this.selectedQuizType]?.rules;
-   console.log("this.rules ----------",this.rules)
+    this.selectedQuizType = this.activeRoute.snapshot.queryParams['quiz'];
+   this.rules = this.quizData.Quiz.find((data)=> data.quizId == this.selectedQuizType );
   }
 
 

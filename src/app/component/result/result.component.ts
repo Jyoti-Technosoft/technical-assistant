@@ -8,7 +8,7 @@ import quizData from 'src/assets/json/data.json';
   styleUrls: ['./result.component.css'],
 })
 export class ResultComponent implements OnInit, OnDestroy {
-  quizData: any = { ...quizData };
+  quizData = { ...quizData };
   isQuizCompleted: any;
   userName: any;
   points: any;
@@ -42,7 +42,7 @@ export class ResultComponent implements OnInit, OnDestroy {
       return data?.user == this.questionService.getUser();
     });
     this.submittedData = this.submittedData.map((data: any) => {
-      const message = this.quizData?.QuizType?.find((quizData: any) => {
+      const message = this.quizData?.Quiz?.find((quizData: any) => {
         return quizData.quizId == data.type;
       });
       data.image = message?.image;
