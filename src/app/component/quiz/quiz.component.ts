@@ -20,28 +20,15 @@ import { DialogService } from 'src/app/dialog-service/dialog.service';
   styleUrls: ['./quiz.component.css'],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
-  quizData: any = quizData;
+  quizData = { ...quizData };
   correctAnswer: number = 0;
   wrongAnswer: number = 0;
 
   @ViewChild('carousel')
   carousel!: NgbCarousel;
   myForm!: FormGroup;
-  name = [
-    'Q-1.',
-    'Q-2.',
-    'Q-3.',
-    'Q-4.',
-    'Q-5.',
-    'Q-6.',
-    'Q-7.',
-    'Q-8.',
-    'Q-9',
-    'Q-10',
-  ];
+
   question!: any;
-  options!: any;
-  title!: any;
   dialogData = { ...dialogData };
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
 
@@ -67,6 +54,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   timer: any;
   selectedQuizType: any;
   radioValue: any;
+  options: string | number | undefined;
 
   constructor(
     private router: Router,
@@ -99,11 +87,18 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   mapJSONData() {
-    this.question = [...this.quizData[this.selectedQuizType]?.questions];
+    let data: any = this.quizData.Quiz.find(
+      (data) => data.quizId == this.selectedQuizType
+    )?.questions;
+    this.question = [...data];
     this.question = this.question?.sort(() => Math.random() - 0.67);
-    this.question = [...this.question?.splice(0, 11)];
-    this.options = this.question[this.questionindex]?.options;
-    this.timer = this.quizData[this.selectedQuizType]?.timer;
+    this.question = [...this.question?.splice(0, 10)];
+    this.options = this.question.map((question: any) =>
+      question.options.sort(() => Math.random() - 0.69)
+    );
+    this.timer = this.quizData.Quiz.find(
+      (data) => data.quizId == this.selectedQuizType
+    )?.timer;
 
     const formArray = this.myForm.controls['form'] as FormArray;
     this.question.forEach((item: any) => {
@@ -126,7 +121,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.answer(questionindex, values);
     this.disabledValuesAndForm();
     this.questionindex = questionindex + 1;
-    if (this.questionindex + 1 == this.question.length) {
+    if (this.questionindex == this.question.length) {
       this.submit();
     }
   }
@@ -215,17 +210,18 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.points = this.points += 1;
         this.correctanswer++;
       } else if (!selectedAnswer && correctOptions) {
-        debugger;
         this.points = this.points -= 0.25;
         this.inCorrectanswer++;
       }
-      if (questionindex === this.question.length) {
+      debugger;
+      if (questionindex + 1 === this.question.length) {
         this.submit();
       }
     }
   }
 
   ngOnDestroy() {
-    this.interval$?.unsubscribe();
+    this.destroyed$.next(true);
+    this.destroyed$.unsubscribe();
   }
 }
