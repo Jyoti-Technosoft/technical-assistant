@@ -27,30 +27,16 @@ export class Quizcomponent implements OnInit, OnDestroy {
   @ViewChild('carousel')
   carousel!: NgbCarousel;
   myForm!: FormGroup;
-
   question!: any;
   dialogData = { ...dialogData };
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-
-  selectedOption!: boolean;
-
   questionindex = 0;
   counter = 30;
   interval$: any;
-  validate: any;
   points: number = 0;
   correctanswer: number = 0;
   inCorrectanswer: number = 0;
-  dataSource: any;
-  startquiz: any;
-  answerlistArray: any = [];
-  submittedAnswer: any[] = [];
-  isQuizCompleted: boolean = false;
-  findIndex: any;
-  filter: any;
   filterquestionsindex: any;
-  checkIfselctedanswer: any;
-  userName: any;
   timer: any;
   selectedQuizType: any;
   radioValue: any;
@@ -201,9 +187,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   answer(questionindex: number, correctOptions: string) {
     if (!this.FormArray.at(questionindex).get('timer')?.disabled) {
-      if (questionindex === this.question.length) {
-        this.isQuizCompleted = true;
-      }
       let selectedAnswer =
         this.question[questionindex].answer?.[0] == correctOptions;
       if (selectedAnswer && correctOptions) {
@@ -213,7 +196,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.points = this.points -= 0.25;
         this.inCorrectanswer++;
       }
-      debugger;
       if (questionindex + 1 === this.question.length) {
         this.submit();
       }
