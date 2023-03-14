@@ -122,6 +122,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   next(questionindex: number): void {
     this.carousel.next();
+    if (this.dialogService.hasModelOpen()) {
+      this.dialogService.destroy();
+    }
     const values = this.FormArray.controls[questionindex].value.radioValue;
     this.answer(questionindex, values);
     this.disabledValuesAndForm();
@@ -219,7 +222,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.points = this.points -= 0.25;
         this.inCorrectanswer++;
       }
-      if (questionindex === this.question.length) {
+      if (questionindex + 1 === this.question.length) {
         this.submit();
       }
     }
