@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
-  FormControl,
   FormBuilder,
   FormGroup,
   ValidationErrors,
@@ -10,95 +9,89 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { DialogService } from 'src/app/dialog-service/dialog.service';
+
+import dialogData from 'src/assets/json/dialogData.json';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent {
-  email: any;
-  pwd: any;
-  fullname: any;
-  cpwd: any;
-  gender: any;
-  birthday: any;
-  mobile: any;
   registeruser: any = [];
   registrationForm!: FormGroup;
-  submitted = false;
-  acceptTerms: any;
+  dialogData = { ...dialogData };
+  @ViewChild('email') email!: ElementRef;
 
-  constructor(private route: Router, private fb: FormBuilder) {}
+  constructor(
+    private route: Router,
+    private fb: FormBuilder,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
     this.createForm();
+    this.getRegistredUser();
   }
 
-  public submitform() {
-    const formValue = this.registrationForm.value;
-
-    if (localStorage.getItem('registeruser') == null) {
+  getRegistredUser() {
+    if (!localStorage.getItem('registeruser')) {
       this.registeruser = [];
     } else {
       this.registeruser = JSON.parse(
         localStorage.getItem('registeruser') as string
       );
     }
-    this.registeruser.push({
-      id: formValue.id,
-      fullname: formValue.fullname,
-      email: formValue.email,
-      cpwd: formValue.cpwd,
-      password: formValue.pwd,
-      gender: formValue.gender,
-      birthday: formValue.birthday,
-      mobile: formValue.mobile,
-    });
-    localStorage.setItem('registeruser', JSON.stringify(this.registeruser));
-    this.route.navigateByUrl('login');
+  }
 
-    this.submitted = true;
-    if (this.registrationForm.invalid) {
-      return;
+  public submitform(formValue: any) {
+    let findUser = this.registeruser?.find(
+      (value: any) => value.email == formValue.email
+    );
+    if (findUser) {
+      let label = this.dialogData.emailModel.label;
+      let yesButtonLable = this.dialogData.emailModel.yesButtonLable;
+      let NoButtonLable = this.dialogData.emailModel.NoButtonLable;
+      this.dialogService
+        .openDialog(label, yesButtonLable, NoButtonLable)
+        .then((value) => {
+          if (value) {
+            setTimeout(() => {
+              this.email.nativeElement.focus();
+            });
+          }
+        });
+    } else {
+      this.registeruser.push(formValue);
+      localStorage.setItem('registeruser', JSON.stringify(this.registeruser));
+      this.route.navigateByUrl('login');
     }
   }
 
-  identityRevealedValidator: ValidatorFn = (
-    controls: AbstractControl
+  confirmationValidator: ValidatorFn = (
+    control: AbstractControl
   ): ValidationErrors | null => {
     const pwd = this.registrationForm?.controls['pwd'];
-    return pwd?.value !== controls?.value ? { identityRevealed: true } : null;
+    return pwd?.value !== control?.value
+      ? { confirmationValidator: true }
+      : null;
   };
 
   validateNumber: ValidatorFn = (
-    controls: AbstractControl
+    control: AbstractControl
   ): ValidationErrors | null => {
     const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
-    return regex.test(controls.value) ? null : { pattern: true };
+    return regex.test(control.value) ? null : { pattern: true };
   };
 
   getToday(): string {
-    return new Date().toISOString().split('T')[0];
-  }
-  disableDate() {
-    return false;
-  }
-  Submited() {
-    console.log(this.registrationForm);
-    console.log(
-      this.registrationForm.value.fullname,
-      this.registrationForm.value.email,
-      this.registrationForm.value.pwd,
-      this.registrationForm.value.cpwd,
-      this.registrationForm.value.gender,
-      this.registrationForm.value.birthday,
-      this.registrationForm.value.mobile
-    );
+    return new Date().toISOString().slice(0, 10);
   }
 
   createForm() {
     this.registrationForm = this.fb.group({
-      id: new FormControl(Date.now()),
+      id: [Date.now()],
       fullname: ['', [Validators.required]],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       pwd: [
@@ -112,10 +105,7 @@ export class RegistrationComponent {
       ],
       cpwd: [
         '',
-        Validators.compose([
-          Validators.required,
-          this.identityRevealedValidator,
-        ]),
+        Validators.compose([Validators.required, this.confirmationValidator]),
       ],
       gender: ['', Validators.compose([Validators.required])],
       birthday: ['', Validators.compose([Validators.required])],
@@ -125,9 +115,6 @@ export class RegistrationComponent {
       ],
       acceptTerms: [false, Validators.requiredTrue],
     });
-  }
-  get f() {
-    return this.registrationForm.controls;
   }
 
   get registrationFormValidator() {
