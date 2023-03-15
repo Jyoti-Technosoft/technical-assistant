@@ -96,7 +96,7 @@
 
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['cpwd']?.errors?.['confirmationValidator'] && registrationFormValidator['cpwd']?.touched"
+                *ngIf="registrationFormValidator['cpwd']?.errors?.['passwordNotMatched'] && registrationFormValidator['cpwd']?.touched"
               >
                 Passsword and Confirm Password didn't match.
               </div>
@@ -154,7 +154,7 @@
                 type="date"
                 class="form-control input-sm"
                 formControlName="birthday"
-                [max]="getToday()"
+                [max]="todayDate"
                 (keydown)="(false)"
               />
               <div
@@ -174,7 +174,7 @@
                 type="number"
                 formControlName="mobile"
                 class="form-control"
-                placeholder=""
+               
               />
               <div
                 class="form-text text-danger"
@@ -198,9 +198,7 @@
               formControlName="acceptTerms"
               id="acceptTerms"
               class="form-check-input"
-              [ngClass]="{
-                'is-invalid': registrationFormValidator['acceptTerms'].value
-              }"
+              
             />
             <label
               for="acceptTerms"
@@ -226,7 +224,7 @@
               >
                 Register Now
               </button>
-              <p class="text-center">
+              <p class="text-center mt-2">
                 Already have an account? <a routerLink="/login">Log In</a>
               </p>
             </div>

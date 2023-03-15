@@ -19,6 +19,7 @@ import dialogData from 'src/assets/json/dialogData.json';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent {
+  todayDate : string | undefined = new Date().toISOString().slice(0, 10);
   registeruser: any = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
@@ -50,9 +51,9 @@ export class RegistrationComponent {
       (value: any) => value.email == formValue.email
     );
     if (findUser) {
-      let label = this.dialogData.emailModel.label;
-      let yesButtonLable = this.dialogData.emailModel.yesButtonLable;
-      let NoButtonLable = this.dialogData.emailModel.NoButtonLable;
+      let label = this.dialogData.emailModal.label;
+      let yesButtonLable = this.dialogData.emailModal.yesButtonLable;
+      let NoButtonLable = this.dialogData.emailModal.NoButtonLable;
       this.dialogService
         .openDialog(label, yesButtonLable, NoButtonLable)
         .then((value) => {
@@ -69,12 +70,12 @@ export class RegistrationComponent {
     }
   }
 
-  confirmationValidator: ValidatorFn = (
+  passwordNotMatched: ValidatorFn = (
     control: AbstractControl
   ): ValidationErrors | null => {
     const pwd = this.registrationForm?.controls['pwd'];
     return pwd?.value !== control?.value
-      ? { confirmationValidator: true }
+      ? {passwordNotMatched: true }
       : null;
   };
 
@@ -85,9 +86,7 @@ export class RegistrationComponent {
     return regex.test(control.value) ? null : { pattern: true };
   };
 
-  getToday(): string {
-    return new Date().toISOString().slice(0, 10);
-  }
+  
 
   createForm() {
     this.registrationForm = this.fb.group({
@@ -105,7 +104,7 @@ export class RegistrationComponent {
       ],
       cpwd: [
         '',
-        Validators.compose([Validators.required, this.confirmationValidator]),
+        Validators.compose([Validators.required, this.passwordNotMatched]),
       ],
       gender: ['', Validators.compose([Validators.required])],
       birthday: ['', Validators.compose([Validators.required])],

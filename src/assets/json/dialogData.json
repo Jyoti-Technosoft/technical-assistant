@@ -8,5 +8,11 @@
     "label": "Wrong Credentials , Do you want to create new account?",
     "yesButtonLable": "Yes",
     "NoButtonLable": "No"
+  },
+  "emailModal": {
+    "label": "This Email is already registerd with Us, Do you want to login again?.",
+    "yesButtonLable": "Yes",
+    "NoButtonLable": "No"
   }
+  
 }
