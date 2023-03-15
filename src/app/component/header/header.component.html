@@ -1,10 +1,10 @@
 <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light" style="padding: 0px;">
   <div class="container-fluid">
     <a href="#" class="navbar-brand h1" routerLink="/dashboard" style="margin: 0px;">
-      <img class="d-inline-block" src="assets/img/logo1.png" width="35" height="35" />
+      <img class="d-inline-block" src="assets/img/logo1.png" alt="Jyoti Techn" width="35" height="35" />
       <span>APPLICATION</span></a>
         
-      <div class="navigation">
+      <div class="navigation" *ngIf="userName">
         <div class="container-fluid">
           <div class="collapse navbar-collapse"> 
             <img src="assets/img/logo1.png" alt="" class="img-responsive"/>
@@ -44,7 +44,7 @@
                All Rights Reserved
             </div>
             <div class="credits">
-              Designed by <a href="https://jyotitechnosoft.com/" target="_blank">Jyoti Technosoft LLP</a>
+              Designed by <a href="https://jyotitechnosoft.com/"  rel="noopener noreferrer" target="_blank">Jyoti Technosoft LLP</a>
             </div>
           </div>
         </div>
