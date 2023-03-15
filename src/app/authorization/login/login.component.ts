@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 import { DialogService } from 'src/app/dialog-service/dialog.service';
 
 import dialogData from 'src/assets/json/dialogData.json';
@@ -14,22 +15,24 @@ import dialogData from 'src/assets/json/dialogData.json';
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
-  adminForm!: FormGroup;
+  adminForm!:FormGroup;
 
   constructor(
     private route: Router,
+    
     private dialogService: DialogService,
-    private fb: FormBuilder
+    private fb:FormBuilder
   ) {}
+
 
   public formSubmitted() {
     let userdata = this.userData?.find(
-      (value: any) =>
-        value?.email == this.adminForm?.value?.email &&
-        value?.password == this.adminForm?.value?.password
+      (value: any) => value?.email ==  this.adminForm?.value?.emailId && value?.password == this.adminForm?.value?.password 
     );
-    if (userdata) {
-      document.cookie = 'username' + '=' + userdata.id;
+    if (
+      userdata
+      ) {
+      document.cookie = "username" + "=" + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('/dashboard');
     } else {
@@ -40,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .openDialog(label, yesButtonLable, NoButtonLable)
         .then((value) => {
           if (value) {
-            this.route.navigateByUrl('userregistration');
+            this.route.navigateByUrl('registration');
           } else {
             this.adminForm?.reset();
           }
@@ -54,11 +57,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       let registeruser: any = localStorage.getItem('registeruser');
       registeruser = JSON.parse(registeruser);
       alert('There is no user create one');
-      this.route.navigateByUrl('/userregistration');
+      this.route.navigateByUrl('/registration');
     } else {
       let data: any = localStorage.getItem('registeruser');
       this.userData = JSON.parse(data);
     }
+    
   }
 
   signout() {
@@ -69,23 +73,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.adminForm = this.fb.group({
-      emailId: [
-        '',
-        Validators.compose([Validators.required, Validators.email]),
-      ],
-      password: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(12),
-        ]),
-      ],
+      emailId: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12)])]
     });
   }
 
   get adminFormValidator() {
+
     return this.adminForm.controls;
   }
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+  }
+
 }
