@@ -42,6 +42,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
   selectedQuizType: any;
   radioValue: any;
   options: string | number | undefined;
+  positivePoints: any;
+  negativePoints: any;
+  numberOfQuestions: any;
+  
 
   constructor(
     private router: Router,
@@ -74,18 +78,27 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   mapJSONData() {
+    this.numberOfQuestions = this.quizData.Quiz.find(
+      (data) => data.quizId == this.selectedQuizType
+    )?.numberOfQuestions;
     let data: any = this.quizData.Quiz.find(
       (data) => data.quizId == this.selectedQuizType
     )?.questions;
     this.question = [...data];
     this.question = this.question?.sort(() => Math.random() - 0.67);
-    this.question = [...this.question?.splice(0, 10)];
+    this.question = [...this.question?.splice(0, this.numberOfQuestions)];
     this.options = this.question.map((question: any) =>
       question.options.sort(() => Math.random() - 0.69)
     );
     this.timer = this.quizData.Quiz.find(
       (data) => data.quizId == this.selectedQuizType
     )?.timer;
+    this.positivePoints = this.quizData.Quiz.find(
+      (data) => data.quizId == this.selectedQuizType
+    )?.PositivePoints;
+    this.negativePoints = this.quizData.Quiz.find(
+      (data) => data.quizId == this.selectedQuizType
+    )?.NegativePoints;
 
     const formArray = this.myForm.controls['form'] as FormArray;
     this.question.forEach((item: any) => {
@@ -102,23 +115,23 @@ export class Quizcomponent implements OnInit, OnDestroy {
     return this.myForm.controls['form'] as FormArray;
   }
 
-  next(questionindex: number): void {
+  nextQuestion(questionindex: number): void {
     this.carousel.next();
     const values = this.FormArray.controls[questionindex].value.radioValue;
     this.answer(questionindex, values);
     this.disabledValuesAndForm();
     this.questionindex = questionindex + 1;
     if (this.questionindex == this.question.length) {
-      this.submit();
+      this.submitQuiz();
     }
   }
 
-  prev(questionindex: number) {
+  previousQuestion(questionindex: number) {
     this.questionindex = questionindex - 1;
     this.carousel?.prev();
   }
 
-  submit() {
+  submitQuiz() {
     let data: any = localStorage.getItem('result')
       ? localStorage.getItem('result')
       : [];
@@ -140,7 +153,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.router.navigate(['/result']);
   }
 
-  skip(questionindex: number) {
+  skipQuestion(questionindex: number) {
     let label = this.dialogData.skipModel.label;
     let yesButtonLable = this.dialogData.skipModel.yesButtonLable;
     let NoButtonLable = this.dialogData.skipModel.NoButtonLable;
@@ -149,7 +162,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       .then((value) => {
         if (value) {
           this.questionindex = questionindex;
-          this.next(this.questionindex);
+          this.nextQuestion(this.questionindex);
         }
       });
   }
@@ -182,7 +195,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
           !this.FormArray.controls.at(this.questionindex)?.get('timer')
             ?.disabled
         ) {
-          this.next(this.questionindex);
+          this.nextQuestion(this.questionindex);
         }
       });
   }
@@ -190,12 +203,12 @@ export class Quizcomponent implements OnInit, OnDestroy {
   answer(questionindex: number, correctOptions: string) {
     if (!this.FormArray.at(questionindex).get('timer')?.disabled) {
       let selectedAnswer =
-        this.question[questionindex].answer?.[0] == correctOptions;
+        this.question[questionindex].answer.id == correctOptions;
       if (selectedAnswer && correctOptions) {
-        this.points = this.points += 1;
+        this.points = this.points += this.positivePoints;
         this.correctanswer++;
       } else if (!selectedAnswer && correctOptions) {
-        this.points = this.points -= 0.25;
+        this.points = this.points -= this.negativePoints;
         this.inCorrectanswer++;
       }
     }
