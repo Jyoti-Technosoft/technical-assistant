@@ -14,7 +14,7 @@
       data-ride="carousel"
     >
       <form [formGroup]="myForm">
-        <button type="submit" (click)="submit()">Submit</button>
+        <button type="submit" (click)="submitQuiz()">Submit</button>
 
         <div formArrayName="form">
           <ngb-carousel
@@ -60,7 +60,7 @@
                       formControlName="radioValue"
                       value="{{card.value}}"
                     />
-                    {{card.lable}}</label
+                    {{card.label}}</label
                   >
 
                   <label class="form-check-label" *ngIf="card.type == 'radio'"
@@ -68,9 +68,9 @@
                       type="radio"
                       class="form-check-input"
                       formControlName="radioValue"
-                      value="{{card.value}}"
+                      value="{{card.id}}"
                     />
-                    {{card.lable}}</label
+                    {{card.label}}</label
                   >
                 </div>
   
@@ -83,7 +83,7 @@
                         role="button"
                         data-slide="next"
                         type="button"
-                        (click)="next(i)"
+                        (click)="nextQuestion(i)"
                         class="btn btn-success"
                         aria-hidden="true"
                         data-bs-slide="next"
@@ -107,7 +107,7 @@
                         role="button"
                         data-slide="skip"
                         type="button"
-                        (click)="skip(i)"
+                        (click)="skipQuestion(i)"
                         class="btn btn-dark"
                         aria-hidden="true"
                         data-bs-slide="per"
@@ -127,7 +127,7 @@
                         role="button"
                         data-slide="Previous"
                         type="button"
-                        (click)="prev(i)"
+                        (click)="previousQuestion(i)"
                         class="btn btn-primary"
                         aria-hidden="true"
                         data-bs-slide="per"
