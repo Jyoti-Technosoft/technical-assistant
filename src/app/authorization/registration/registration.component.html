@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container registration-conatiner">
   <div class="card shadow">
     <div class="card-body">
       <form
@@ -11,74 +11,80 @@
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
-            <label for="fullname" class="form-label"
-              >Full Name (FirstName , LastName)</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="fullname"
-              formControlName="fullname"
-            />
-            <div
-              class="form-text text-danger"
-              *ngIf="registrationFormValidator['fullname'].errors?.['required'] &&  (registrationFormValidator['fullname']?.touched || registrationFormValidator['fullname']?.dirty)"
-            >
-              Name is required.
+          <div class="field">
+            <div class="col">
+              <label for="fullname" class="form-label"
+                >Full Name (FirstName , LastName)</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="fullname"
+                formControlName="fullname"
+              />
+              <div
+                class="form-text text-danger"
+                *ngIf="registrationFormValidator['fullname'].errors?.['required'] &&  (registrationFormValidator['fullname']?.touched || registrationFormValidator['fullname']?.dirty)"
+              >
+                Name is required.
+              </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input
-              #email
-              type="text"
-              class="form-control"
-              id="email"
-              formControlName="email"
-            />
-            <div
-              class="form-text text-danger"
-              *ngIf="registrationFormValidator['email']?.errors?.['required'] && (registrationFormValidator['email'].dirty ||  registrationFormValidator['email']?.touched)"
-            >
-              Email is required.
-            </div>
-            <div
-              class="form-text text-danger"
-              *ngIf="registrationFormValidator['email']?.errors?.['email'] && (registrationFormValidator['email']?.dirty || registrationFormValidator ['email']?.touched)"
-            >
-              Email is Invalid.
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="pwd"
-              formControlName="pwd"
-            />
-            <div
-              class="form-text text-danger"
-              *ngIf="registrationFormValidator['pwd']?.errors?.['required'] && (registrationFormValidator['pwd']?.dirty || registrationFormValidator['pwd']?.touched)"
-            >
-              Password is required.
-            </div>
-            <div
-              class="form-text text-danger"
-              *ngIf="registrationFormValidator['pwd']?.errors?.['pattern']"
-            >
-              Password should be atleast 8 characters long and should contain
-              one number,one character and one special character
+          <div class="field">
+            <div class="col">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                #email
+                type="text"
+                class="form-control"
+                id="email"
+                formControlName="email"
+              />
+              <div
+                class="form-text text-danger"
+                *ngIf="registrationFormValidator['email']?.errors?.['required'] && (registrationFormValidator['email'].dirty ||  registrationFormValidator['email']?.touched)"
+              >
+                Email is required.
+              </div>
+              <div
+                class="form-text text-danger"
+                *ngIf="registrationFormValidator['email']?.errors?.['email'] && (registrationFormValidator['email']?.dirty || registrationFormValidator ['email']?.touched)"
+              >
+                Email is Invalid.
+              </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-mb-3">
+          <div class="field">
+            <div class="col">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="pwd"
+                formControlName="pwd"
+              />
+              <div
+                class="form-text text-danger"
+                *ngIf="registrationFormValidator['pwd']?.errors?.['required'] && (registrationFormValidator['pwd']?.dirty || registrationFormValidator['pwd']?.touched)"
+              >
+                Password is required.
+              </div>
+              <div
+                class="form-text text-danger"
+                *ngIf="registrationFormValidator['pwd']?.errors?.['pattern']"
+              >
+                Password should be atleast 8 characters long and should contain
+                one number,one character and one special character
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
             <div class="field">
               <label for="cpwd" class="form-label">Confirm Password</label>
               <input
@@ -147,7 +153,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-mb-3">
+          <div class="col">
             <div class="field">
               <label for="birthday" class="form-label"> Date Of Birth :</label>
               <input
@@ -167,14 +173,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-mb-3 mt-0">
+          <div class="col">
             <div class="field">
               <label for="mobile" class="form-label">Mobile Number</label>
               <input
                 type="number"
                 formControlName="mobile"
                 class="form-control"
-               
               />
               <div
                 class="form-text text-danger"
@@ -198,12 +203,8 @@
               formControlName="acceptTerms"
               id="acceptTerms"
               class="form-check-input"
-              
             />
-            <label
-              for="acceptTerms"
-              class="form-check-label"
-              style="margin-bottom: 5px"
+            <label for="acceptTerms" class="form-check-label"
               >Accept Terms & Conditions</label
             >
             <div
@@ -215,18 +216,20 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-mb-3">
-            <div class="d-grid">
-              <button
-                type="submit"
-                [disabled]="!registrationForm.valid"
-                class="btn btn-success"
-              >
-                Register Now
-              </button>
-              <p class="text-center mt-2">
-                Already have an account? <a routerLink="/login">Log In</a>
-              </p>
+          <div class="field">
+            <div class="col">
+              <div class="d-grid">
+                <button
+                  type="submit"
+                  [disabled]="!registrationForm.valid"
+                  class="btn btn-success"
+                >
+                  Register Now
+                </button>
+                <p class="text-center mt-2">
+                  Already have an account? <a routerLink="/login">Log In</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
