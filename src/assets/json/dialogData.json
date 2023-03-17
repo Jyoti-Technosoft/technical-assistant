@@ -5,7 +5,7 @@
     "NoButtonLable": "No"
   },
   "loginModel": {
-    "label": "Wrong Credentials , Do you want to create new account?",
+    "label": "No user registered with this email id and password , Do you want to create one ?",
     "yesButtonLable": "Yes",
     "NoButtonLable": "No"
   },

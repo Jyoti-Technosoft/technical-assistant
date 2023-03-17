@@ -9,7 +9,9 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { ToastService } from 'src/app/toast.service';
 
 import dialogData from 'src/assets/json/dialogData.json';
 
@@ -19,16 +21,17 @@ import dialogData from 'src/assets/json/dialogData.json';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent {
-  todayDate : string | undefined = new Date().toISOString().slice(0, 10);
   registeruser: any = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
+  todayDate : string | undefined = new Date().toISOString().slice(0, 10);
   @ViewChild('email') email!: ElementRef;
 
   constructor(
     private route: Router,
     private fb: FormBuilder,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    public toastService: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +39,11 @@ export class RegistrationComponent {
     this.getRegistredUser();
   }
 
-  getRegistredUser() {
+// Toast mesaage
+showMessage(){
+  this.toastService.show('User Registered Successfully!', { classname:'bg-success text-light', delay:10000 });
+}
+getRegistredUser() {
     if (!localStorage.getItem('registeruser')) {
       this.registeruser = [];
     } else {
@@ -58,16 +65,21 @@ export class RegistrationComponent {
         .openDialog(label, yesButtonLable, NoButtonLable)
         .then((value) => {
           if (value) {
+            this.route.navigateByUrl('login');
+          }
+          else{
             setTimeout(() => {
               this.email.nativeElement.focus();
             });
           }
         });
-    } else {
+    } 
+    else {
       this.registeruser.push(formValue);
       localStorage.setItem('registeruser', JSON.stringify(this.registeruser));
       this.route.navigateByUrl('login');
     }
+    
   }
 
   passwordNotMatched: ValidatorFn = (
