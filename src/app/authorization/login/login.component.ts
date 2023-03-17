@@ -31,6 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   public formSubmitted() {
+    debugger
+    console.log(this.adminForm)
     console.log(this.adminForm)
     let userdata = this.userData?.find(
       (value: any) => value?.email ==  this.adminForm?.value?.email && value?.pwd ==  this.adminForm?.value?.password
@@ -41,8 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       document.cookie = "username" + "=" + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('/dashboard');
-    } 
-    else {
+    } else {
       let label = this.dialogData.loginModel.label;
       let yesButtonLable = this.dialogData.loginModel.yesButtonLable;
       let NoButtonLable = this.dialogData.loginModel.NoButtonLable;
@@ -51,9 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         .then((value) => {
           if (value) {
             this.route.navigateByUrl('userregistration');
-          } 
-          else {
-           this.toastService.show('Wrong Credential',{ classname: 'bg-danger text-light',delay:10000 })
+          } else {
+            this.adminForm?.reset();
           }
         });
     }

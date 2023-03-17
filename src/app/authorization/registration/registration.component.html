@@ -216,22 +216,18 @@
           </div>
         </div>
         <div class="row">
-          <div class="field">
-            <div class="col">
-              <div class="d-grid">
-                <button
-                  type="submit"
-                  [disabled]="!registrationForm.valid"
-                  class="btn btn-success"
-                  (click)="showMessage()"
-                  
-                >
-                  Register Now
-                </button>
-                <p class="text-center mt-2">
-                  Already have an account? <a routerLink="/login">Log In</a>
-                </p>
-              </div>
+          <div class="col-mb-3">
+            <div class="d-grid">
+              <button
+                type="submit"
+                [disabled]="!registrationForm.valid"
+                class="btn btn-success"
+              >
+                Register Now
+              </button>
+              <p class="text-center mt-2">
+                Already have an account? <a routerLink="/login">Log In</a>
+              </p>
             </div>
           </div>
         </div>

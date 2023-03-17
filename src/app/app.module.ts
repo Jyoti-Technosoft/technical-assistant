@@ -10,10 +10,11 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import '@angular/localize'
 import '@angular/localize/init';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
-import { ToastComponent } from "./toast/toast.component";
+
 import { QuestionService } from './service/question.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponentModule } from './layout/layout-component.module';
+import { ToastComponent } from './toast/toast.component';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -23,7 +24,6 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
         AppComponent,
         LoginComponent,
         RegistrationComponent,
-        ToastComponent
     ],
     providers: [AuthGuard, QuestionService],
     bootstrap: [AppComponent],

@@ -21,7 +21,7 @@ export class QuestionService {
     if (document.cookie) {
       let cookie = document.cookie;
       cookie = cookie.split('=')[1];
-      return cookie;
+      return cookie ? cookie : false;
     } else {
       return false;
     }
