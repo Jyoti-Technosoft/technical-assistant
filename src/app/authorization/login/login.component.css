@@ -1,13 +1,31 @@
-*{
-    font-family: Roboto;
+* {
+  font-family: Roboto;
 }
-h6{
-    margin-top: 14px;
+
+.fs-4 {
+  color: rgb(41, 41, 231);
+  font-weight: bold;
 }
-.card{
-    margin: 0 auto; /* Added */
-    /* float: none; Added */
-    /* margin-bottom: 30px; Added */
-    border-radius: 15px;
-    height: auto;    
+.form-control {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 1px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #d1d1d4 !important;
+}
+
+.card {
+  padding: 10px;
+  margin: 0 auto;
+  height: auto;
+}
+
+.btn.btn-primary {
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  margin: 10px 40px;
+  border-radius: 50px;
+  font-size: 16px;
 }

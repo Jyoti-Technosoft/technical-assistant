@@ -1,33 +1,38 @@
-*{
-    font-family: Roboto;
-}
-.card{
-    margin: 0 auto; 
-    /* float: none; Added */
-    margin-bottom: 0px;  
-    border-radius: 15px;
-    height: auto;    
-}
-input[type="date"]{
-    margin-left:20px;
-    padding:3px;
-    font-family: "Roboto Mono",monospace;
-    border-radius: 4px;
-    width:320px;
-    margin-top: 10px;
-}
-.cpwd{
-    margin-top: 10px;
-}
-.gender{
-    margin-top: 10px;
-}
-.col-md-3{
-    width:100%;
-    float:left;
-    margin:0;
-}
-form{
-    border-radius: 15px;
+* {
+  font-family: Roboto;
 }
 
+.cards.shadow {
+    width: 35rem;
+     margin-top: 5rem; 
+}
+
+.fs-3 {
+  font-weight: bold;
+  color: rgb(63, 63, 236);
+}
+.card {
+  margin: 0 auto;
+  padding: 20px;
+  margin-bottom: 0px;
+  height: auto;
+}
+
+.form-control {
+  margin-top: 10px;
+  width: 100%;
+  box-shadow: none;
+  border-radius: 1px;
+  border-bottom: 2px solid #d1d1d4 !important;
+  border: none;
+}
+
+
+.btn.btn-success {
+  padding: 15px 20px;
+  font-weight: bold;
+  font-size: 16px;
+  margin: 20px 80px;
+  border-radius: 50px;
+  margin-top: 20px;
+}
