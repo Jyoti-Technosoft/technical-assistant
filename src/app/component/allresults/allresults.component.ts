@@ -3,15 +3,18 @@ import { QuestionService } from '../../service/question.service';
 import quizData from 'src/assets/json/data.json';
 
 @Component({
-  selector: 'app-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['./result.component.css'],
+  selector: 'app-allresults',
+  templateUrl: './allresults.component.html',
+  styleUrls: ['./allresults.component.css']
 })
-export class ResultComponent implements OnInit, OnDestroy {
+export class AllresultsComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
   userName: any;
   userData: any;
   submittedData: any;
+  initialData:number = 8;
+  showMoreData:any;
+  allResultData: any;
 
   constructor(public questionService: QuestionService) {}
 
@@ -33,19 +36,33 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   resultData() {
     let data: any = localStorage.getItem('result');
-    this.submittedData = JSON.parse(data);
-    this.submittedData = this.submittedData.filter((data: any) => {
+    this.allResultData = JSON.parse(data); 
+    this.allResultData = this.allResultData?.filter((data: any) => {
       return data?.user == this.questionService.getUser();
     });
-    this.submittedData = this.submittedData.map((data: any) => {
+    this.allResultData = this.allResultData?.map((data: any) => {
       const message = this.quizData?.Quiz?.find((quizData: any) => {
         return quizData.quizId == data.type;
       });
       data.image = message?.image;
       return data;
     });
-    this.submittedData = this.submittedData.splice(this.submittedData.length-1,1);
+    this.allResultData = this.allResultData?.reverse();
+    this.submittedData = this.allResultData.slice(0,this.initialData);
   }
 
-  ngOnDestroy(): void {}
+  initialLetter(userName:string) {
+    const intials = userName.split(' ').map(name => name[0]).join('').toUpperCase();
+    return intials
+  }
+
+  loadMoreData() {
+    this.showMoreData = this.initialData += 8;
+    this.submittedData = this.allResultData.slice(0,this.showMoreData);
+  }
+
+  ngOnDestroy(): void {
+    
+  }
+
 }
