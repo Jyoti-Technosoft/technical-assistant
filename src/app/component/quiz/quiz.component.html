@@ -14,7 +14,6 @@
       data-ride="carousel"
     >
       <form [formGroup]="myForm">
-        <button type="submit" (click)="submit()">Submit</button>
 
         <div formArrayName="form">
           <ngb-carousel
@@ -45,10 +44,6 @@
                         >
                       </div>
                     </div>
-                    <!-- <canvas id="stage" width="200" height="300">
-            
-              </canvas> -->
-
 
               <ng-container *ngFor="let card of question[this.questionindex].options">
                 <div class="form-check">

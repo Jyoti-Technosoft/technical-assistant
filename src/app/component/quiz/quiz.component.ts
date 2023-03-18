@@ -13,6 +13,7 @@ import { QuestionService } from '../../service/question.service';
 import quizData from '../../../assets/json/data.json';
 import dialogData from '../../../assets/json/dialogData.json';
 import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-questions',
@@ -147,6 +148,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       inCorrectAnswer: this.inCorrectanswer,
       type: this.selectedQuizType,
       user: this.questionService.getUser(),
+      date: new Date().toISOString().slice(0, 10)
     };
     stringifyData.push(currentData);
 
@@ -218,9 +220,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
         debugger;
         this.points = this.points -= 0.25;
         this.inCorrectanswer++;
-      }
-      if (questionindex === this.question.length) {
-        this.submit();
       }
     }
   }

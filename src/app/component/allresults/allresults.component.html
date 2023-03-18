@@ -1,0 +1,62 @@
+<div class="col text-center mb-3" style="margin-top: 50px">
+  <span class="fs-3">Result</span>
+</div>
+
+<div class="container" *ngIf="submittedData?.length">
+  <div class="row">
+    <div
+      class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+      *ngFor="let data of submittedData"
+    >
+      <div class="card card-margin result_card">
+        <div class="card-header no-border">
+          <h5 class="card-title">{{ data.type }}</h5>
+        </div>
+        <div class="card-body pt-0">
+          <div class="all-result">
+            <div class="title-wrapper">
+              <div class="date-primary">
+                <div [innerHtml]="initialLetter(userName)"></div>
+              </div>
+              <div class="quiz-info">
+                <span class="username">User Name : {{ userName }}</span>
+                <span class="widget-49-meeting-time"></span>
+              </div>
+            </div>
+            <ul class="quiz-points">
+              <li class="points">
+                <span>Date : {{ data.date }}</span>
+              </li>
+              <li class="points">
+                <span>Total Points : {{ data.points }}</span>
+              </li>
+              <li class="points">
+                <span>Correct Answers : {{ data.correctanswer }}</span>
+              </li>
+              <li class="points">
+                <span>Wrong Answers : {{ data.inCorrectAnswer }}</span>
+              </li>
+            </ul>
+            <div class="quiz-action">
+              <a
+                routerLink="/dashboard"
+                class="btn btn-sm btn-flash-border-primary"
+                >Start Quiz Again</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="loadMoreData()"
+    >
+      Show More
+    </button>
+  </div>
+  <div *ngIf="!submittedData.length">
+    <h1>No Quiz Played yet</h1>
+  </div>
+</div>

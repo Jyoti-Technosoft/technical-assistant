@@ -13,7 +13,7 @@ import { CommonModule } from "@angular/common";
 import { StartquizComponent } from "../component/startquiz/startquiz.component";
 import { Quizcomponent } from "../component/quiz/quiz.component";
 import { ResultComponent } from "../component/result/result.component";
-
+import { AllresultsComponent } from "../component/allresults/allresults.component";
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { ResultComponent } from "../component/result/result.component";
         StartquizComponent,
         Quizcomponent,
         ResultComponent,
-        FullLayoutComponent
+        FullLayoutComponent,
+        AllresultsComponent
     ],
     imports:[
         NgbDropdownModule,

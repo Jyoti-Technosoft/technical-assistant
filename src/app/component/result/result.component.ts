@@ -48,11 +48,7 @@ export class ResultComponent implements OnInit, OnDestroy {
       data.image = message?.image;
       return data;
     });
-    this.submittedData = this.submittedData?.reverse();
-  }
-
-  againQuiz() {
-    window.location.reload();
+    this.submittedData = this.submittedData.splice(this.submittedData.length-1,1);
   }
 
   ngOnDestroy(): void {}
