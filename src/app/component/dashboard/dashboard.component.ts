@@ -8,18 +8,16 @@ import quizData from '../../../assets/json/data.json';
 })
 export class DashboardComponent implements OnInit,OnDestroy {
   quizData = {...quizData};
-  title: any;
-  arrayIndex=0;
-  QuizType:any;
+  quizs:any;
  
    ngOnInit(): void {
-    this.QuizType = this.quizData.Quiz;
+    this.quizs = this.quizData.quiz;
   }
   constructor(
     private route:Router,
   ){}
 
-  quizname(title:any){
+  startQuiz(title:any){
     const queryParams : Params = { quiz : title}
     this.route.navigate(['/quizname'],{queryParams});
   }

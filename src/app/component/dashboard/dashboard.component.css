@@ -12,8 +12,6 @@ h5{
     /* float: none; Added */
     /* margin-bottom: 0px;  */
     border-radius: 15px;
-    height: 500px;
-    width: 61rem;
     overflow: scroll;
     overflow-x: hidden;
     padding: 15px;
@@ -39,9 +37,7 @@ h5{
     height:330px;
     width:250px;
 } */
-.card{
-    height: 350px;
-}
+
 /* .card-wrapper{
     
     display: flex;
