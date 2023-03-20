@@ -7,9 +7,9 @@
         class="rounded-4 mt-5 mb-5 bg-light"
       >
         <div class="col text-center p-3">
-          <img src="assets/img/login.png" width="60px" height="60px" />
-          <br />
-          <span class="fs-3">Login</span>
+          <img src="assets/img/login.png" class="image" />
+          <br>
+          <span class="fs-2">Login</span>
         </div>
 
         <div class="row p-3">
@@ -23,14 +23,14 @@
             />
             <div
               class="form-text text-danger"
-              *ngIf="adminFormValidator['emailId']?.errors?.['required'] && (adminFormValidator['emailId']?.dirty ||  adminFormValidator['emailId']?.touched)"
+              *ngIf="(adminFormValidator['emailId']?.errors?.['required'] && (adminFormValidator['emailId']?.dirty ||  adminFormValidator['emailId']?.touched))"
             >
               Email is required
             </div>
 
             <div
               class="form-text text-danger"
-              *ngIf=" adminFormValidator['emailId']?.errors?.['email'] && (adminFormValidator['emailId']?.dirty || adminFormValidator['emailId']?.touched)"
+              *ngIf="(adminFormValidator['emailId']?.errors?.['email'] && (adminFormValidator['emailId']?.dirty || adminFormValidator['emailId']?.touched))"
             >
               Email is Invalid
             </div>
@@ -48,13 +48,13 @@
             />
             <div
               class="form-text text-danger"
-              *ngIf="adminFormValidator['password']?.errors?.['required'] && (adminFormValidator['password']?.dirty || adminFormValidator['password']?.touched)"
+              *ngIf="(adminFormValidator['password']?.errors?.['required'] && (adminFormValidator['password']?.dirty || adminFormValidator['password']?.touched))"
             >
               Password is required
             </div>
             <div
               class="form-text text-danger"
-              *ngIf="adminFormValidator['password']?.errors?.['minlength'] || adminFormValidator['password']?.errors?.['maxlength'] && (adminFormValidator['password']?.dirty || adminFormValidator['password']?.touched)"
+              *ngIf="(adminFormValidator['password']?.errors?.['minlength'] || adminFormValidator['password']?.errors?.['maxlength'] && (adminFormValidator['password']?.dirty || adminFormValidator['password']?.touched))"
             >
               Password should be at least 6 and at the max 12 characters long
             </div>
