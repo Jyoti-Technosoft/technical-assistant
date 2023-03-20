@@ -24,6 +24,8 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
         AppComponent,
         LoginComponent,
         RegistrationComponent,
+        ToastComponent
+       
     ],
     providers: [AuthGuard, QuestionService],
     bootstrap: [AppComponent],

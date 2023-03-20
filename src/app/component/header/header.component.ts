@@ -20,7 +20,7 @@ export class HeaderComponent {
   }
 
   getData() {
-    let data: any = localStorage.getItem('registeruser');
+    let data: any = localStorage.getItem('registerUser');
     this.userData = JSON.parse(data);
     let userId: any = this.questionService.getUser();
     this.userName = this.userData?.find(
