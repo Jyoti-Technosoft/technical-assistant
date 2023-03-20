@@ -2,37 +2,33 @@
   font-family: Roboto;
 }
 
-.cards.shadow {
-    width: 35rem;
-     margin-top: 5rem; 
-}
-
 .fs-3 {
   font-weight: bold;
   color: rgb(63, 63, 236);
 }
 .card {
+  padding: 10px;
   margin: 0 auto;
-  padding: 20px;
   margin-bottom: 0px;
   height: auto;
 }
 
 .form-control {
-  margin-top: 10px;
-  width: 100%;
+  padding: 5px;
   box-shadow: none;
   border-radius: 1px;
+  width: 100%;
   border-bottom: 2px solid #d1d1d4 !important;
   border: none;
 }
 
-
 .btn.btn-success {
-  padding: 15px 20px;
-  font-weight: bold;
-  font-size: 16px;
-  margin: 20px 80px;
+  padding: 15px;
+  font-size: 17px;
+  margin: 10px 10px;
   border-radius: 50px;
-  margin-top: 20px;
+  margin-top: 10px;
+}
+.fixed-height {
+    height: 25px;
 }
