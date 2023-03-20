@@ -6,7 +6,7 @@ import quizData from '../../../assets/json/data.json';
 @Component({
   selector: 'app-carddesign',
   templateUrl: './startquiz.component.html',
-  styleUrls: ['./startquiz.component.css']
+  styleUrls: ['./startquiz.component.scss']
 })
 export class StartquizComponent implements OnInit {
   quizData:any = quizData;
