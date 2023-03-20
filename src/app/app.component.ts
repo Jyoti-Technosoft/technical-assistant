@@ -8,7 +8,6 @@ import { NavigationStart, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'technical-assistant';
-  showHead: boolean = false;
 
   ngOnInit() {
   }
