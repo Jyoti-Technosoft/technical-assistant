@@ -2,6 +2,8 @@
 .DS_Store
 Thumbs.db
 
+# angular catche 
+/.angular
 
 # Logs
 logs
