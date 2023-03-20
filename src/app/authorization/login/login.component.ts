@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
   adminForm!:FormGroup;
+  adminForm!:FormGroup;
 
   constructor(
     private route: Router,
@@ -22,12 +23,17 @@ export class LoginComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private dialogService: DialogService,
     private fb:FormBuilder
+    private fb:FormBuilder
   ) {}
 
   public formSubmitted() {
     let userdata = this.userData?.find(
       (value: any) => value?.email ==  this.adminForm?.value?.email && value?.password ==  this.adminForm?.value?.password 
     );
+    if (
+      userdata
+      ) {
+      document.cookie = "username" + "=" + userdata.id;
     if (
       userdata
       ) {
@@ -70,7 +76,10 @@ export class LoginComponent implements OnInit, OnDestroy {
      })
   }
 
-
+  get adminFormValidator() {
+    return this.adminForm.controls;
+  }
+  
   ngOnDestroy(): void {
   }
 
