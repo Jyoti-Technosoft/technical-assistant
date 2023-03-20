@@ -4,7 +4,7 @@ import { QuestionService } from '../../service/question.service';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.css'],
+  styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit, OnDestroy {
   userName: any;
