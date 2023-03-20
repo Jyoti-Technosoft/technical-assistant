@@ -1,40 +1,40 @@
-*{
-    font-family: Roboto;
+* {
+  font-family: Roboto;
 }
-.card_result {
-    margin: 0 auto;
-    margin-bottom: 50px;
-    border-radius: 15px;
+.card-result {
+  margin: 0 auto;
+  margin-bottom: 50px;
+  border-radius: 15px;
 }
 
 .card-title {
-    margin-bottom: 30px;
-    text-align: center;
-    background-color: rgb(230, 230, 230);
-    border-radius: 6px;
-    padding: 5px;
+  margin-bottom: 30px;
+  text-align: center;
+  background-color: rgb(230, 230, 230);
+  border-radius: 6px;
+  padding: 5px;
 }
 
 .card-img-top {
-    height: auto;
-    width: 150px;
-    float: right;
+  height: auto;
+  width: 150px;
+  float: right;
 }
-.row{
-    align-items: center;
-    margin-top: 70px;
+.row {
+  align-items: center;
+  margin-top: 70px;
 }
 
 .btn-success {
-    text-align: center;
-    border-radius: 5px;
-    align-items: center;
-    font-style: bold;
-    margin: 20px 15px 0px 20px;
-    font-weight: 500;
-    font-size: 20px;
+  text-align: center;
+  border-radius: 5px;
+  align-items: center;
+  font-style: bold;
+  margin: 20px 15px 0px 20px;
+  font-weight: 500;
+  font-size: 20px;
 }
 
 h5 {
-    font-weight: bold;
+  font-weight: bold;
 }

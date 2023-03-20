@@ -1,49 +1,50 @@
-<div class="col-lg-5 col-md-7 col-sm-12 col-xs-12" style="margin: 75px auto; float: none; margin-bottom: 10px;">
-<div class="card shadow card_result">
-  
-  
-  
-  <div class="container">
-    <div class="card-body" *ngFor="let data of submittedData">
-      <h2 class="card-title">Result</h2>
-      
-      <div class="field">
-      <div class="container">
-      <img class="card-img-top" src="assets\img\logo1.png" alt="" />
-      </div>
-      <span>
-        <h5>Name : {{ userName }}</h5>
-      </span>
-      <span>
-        <h5>
-          Total Points : {{ data.points }}
-        </h5>
-      </span>
-      <span>
-        <h5>
-          Correct Answers : {{ data.correctanswer }}
-        </h5>
-      </span>
-      <span>
-        <h5>
-          Wrong Answers : {{ data.inCorrectAnswer }}
-        </h5>
-      </span>
-    </div>
-    </div>
+<div
+  class="col-lg-5 col-md-7 col-sm-12 col-xs-12"
+  style="margin: 75px auto; float: none; margin-bottom: 10px"
+>
+  <div class="card shadow card-result">
     <div class="container">
-    <div class="row">
-      <div class="text-center" style="margin-bottom: 30px;">
-        <button type="button" class="btn btn-success" routerLink="/allresults">
-          Show All Results
-        </button>
-        <button type="button" class="btn btn-success" routerLink="/dashboard">
-          Go Again To Quiz
-        </button>
+      <div class="card-body" *ngFor="let data of submittedData">
+        <h2 class="card-title">Result</h2>
+
+        <div class="field">
+          <div class="container">
+            <img class="card-img-top" src="assets\img\logo1.png" alt="" />
+          </div>
+          <span>
+            <h5>Name : {{ userName }}</h5>
+          </span>
+          <span>
+            <h5>Total Points : {{ data?.points }}</h5>
+          </span>
+          <span>
+            <h5>Correct Answers : {{ data?.correctanswer }}</h5>
+          </span>
+          <span>
+            <h5>Wrong Answers : {{ data?.inCorrectAnswer }}</h5>
+          </span>
+        </div>
       </div>
+      <div class="container">
+        <div class="row">
+          <div class="text-center" style="margin-bottom: 30px">
+            <button
+              type="button"
+              class="btn btn-success"
+              routerLink="/allresults"
+            >
+              Show All Results
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              routerLink="/dashboard"
+            >
+              Go Again To Quiz
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-
