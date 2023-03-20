@@ -38,7 +38,7 @@ export class ResultComponent implements OnInit, OnDestroy {
       return data?.user == this.questionService.getUser();
     });
     this.submittedData = this.submittedData.map((data: any) => {
-      const message = this.quizData?.Quiz?.find((quizData: any) => {
+      const message = this.quizData?.quiz?.find((quizData: any) => {
         return quizData.quizId == data.type;
       });
       data.image = message?.image;

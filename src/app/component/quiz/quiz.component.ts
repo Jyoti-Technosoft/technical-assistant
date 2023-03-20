@@ -8,7 +8,7 @@ import {
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { interval, ReplaySubject, takeUntil } from 'rxjs';
+import { interval, Observable, ReplaySubject, Subscription, takeUntil } from 'rxjs';
 import { QuestionService } from '../../service/question.service';
 import quizData from '../../../assets/json/data.json';
 import dialogData from '../../../assets/json/dialogData.json';
@@ -22,29 +22,25 @@ import { DatePipe } from '@angular/common';
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
-  correctAnswer: number = 0;
-  wrongAnswer: number = 0;
-
   @ViewChild('carousel')
   carousel!: NgbCarousel;
   myForm!: FormGroup;
   question!: any;
   dialogData = { ...dialogData };
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-  questionindex = 0;
-  counter = 30;
-  interval$: any;
+  questionIndex:number = 0;
+  interval$!: Subscription;
   points: number = 0;
   correctanswer: number = 0;
   inCorrectanswer: number = 0;
-  filterquestionsindex: any;
-  timer: any;
+  filterquestionsindex!: number;
+  timer!: any;
   selectedQuizType: any;
-  radioValue: any;
+  radioValue!: string;
   options: string | number | undefined;
   positivePoints: any;
   negativePoints: any;
-  numberOfQuestions: any;
+  numberOfQuestions!: string | undefined;
   
 
   constructor(
@@ -61,7 +57,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.filterquestionsindex = this.questionindex;
+    this.filterquestionsindex = this.questionIndex;
     this.startCounter();
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
 
@@ -78,10 +74,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   mapJSONData() {
-    this.numberOfQuestions = this.quizData.Quiz.find(
+    this.numberOfQuestions = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
     )?.numberOfQuestions;
-    let data: any = this.quizData.Quiz.find(
+    let data: any = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
     )?.questions;
     this.question = [...data];
@@ -90,15 +86,15 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.options = this.question.map((question: any) =>
       question.options.sort(() => Math.random() - 0.69)
     );
-    this.timer = this.quizData.Quiz.find(
-      (data) => data.quizId == this.selectedQuizType
+    this.timer = this.quizData?.quiz?.find(
+      (data) => data?.quizId == this.selectedQuizType
     )?.timer;
-    this.positivePoints = this.quizData.Quiz.find(
+    this.positivePoints = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
-    )?.PositivePoints;
-    this.negativePoints = this.quizData.Quiz.find(
+    )?.positivePoints;
+    this.negativePoints = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
-    )?.NegativePoints;
+    )?.negativePoints;
 
     const formArray = this.myForm.controls['form'] as FormArray;
     this.question.forEach((item: any) => {
@@ -115,19 +111,19 @@ export class Quizcomponent implements OnInit, OnDestroy {
     return this.myForm.controls['form'] as FormArray;
   }
 
-  nextQuestion(questionindex: number): void {
+  nextQuestion(questionIndex: number): void {
     this.carousel.next();
-    const values = this.FormArray.controls[questionindex].value.radioValue;
-    this.answer(questionindex, values);
+    const values = this.FormArray.controls[questionIndex].value.radioValue;
+    this.answer(questionIndex, values);
     this.disabledValuesAndForm();
-    this.questionindex = questionindex + 1;
-    if (this.questionindex == this.question.length) {
+    this.questionIndex = questionIndex + 1;
+    if (this.questionIndex == this.question.length) {
       this.submitQuiz();
     }
   }
 
-  previousQuestion(questionindex: number) {
-    this.questionindex = questionindex - 1;
+  previousQuestion(questionIndex: number) {
+    this.questionIndex = questionIndex - 1;
     this.carousel?.prev();
   }
 
@@ -153,7 +149,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.router.navigate(['/result']);
   }
 
-  skipQuestion(questionindex: number) {
+  skipQuestion(questionIndex: number) {
     let label = this.dialogData.skipModel.label;
     let yesButtonLable = this.dialogData.skipModel.yesButtonLable;
     let NoButtonLable = this.dialogData.skipModel.NoButtonLable;
@@ -161,49 +157,49 @@ export class Quizcomponent implements OnInit, OnDestroy {
       .openDialog(label, yesButtonLable, NoButtonLable)
       .then((value) => {
         if (value) {
-          this.questionindex = questionindex;
-          this.nextQuestion(this.questionindex);
+          this.questionIndex = questionIndex;
+          this.nextQuestion(this.questionIndex);
         }
       });
   }
 
   disabledValuesAndForm() {
     this.FormArray.controls
-      .at(this.questionindex)
+      .at(this.questionIndex)
       ?.get('radioValue')
       ?.disable();
-    this.FormArray.controls.at(this.questionindex)?.get('timer')?.disable();
-    this.FormArray.controls.at(this.questionindex)?.markAsDirty();
+    this.FormArray.controls.at(this.questionIndex)?.get('timer')?.disable();
+    this.FormArray.controls.at(this.questionIndex)?.markAsDirty();
   }
 
   startCounter() {
     this.interval$ = interval(1000)
       .pipe(takeUntil(this.destroyed$))
       .subscribe((val) => {
-        const counterValue = this.FormArray.controls.at(this.questionindex)
+        const counterValue = this.FormArray.controls.at(this.questionIndex)
           ?.value.timer;
         if (
           Number(counterValue) != 0 &&
-          !this.FormArray.controls.at(this.questionindex)?.get('timer')
+          !this.FormArray.controls.at(this.questionIndex)?.get('timer')
             ?.disabled
         ) {
           this.FormArray.controls
-            .at(this.questionindex)
+            .at(this.questionIndex)
             ?.patchValue({ timer: counterValue - 1 });
         } else if (
           Number(counterValue) === 0 &&
-          !this.FormArray.controls.at(this.questionindex)?.get('timer')
+          !this.FormArray.controls.at(this.questionIndex)?.get('timer')
             ?.disabled
         ) {
-          this.nextQuestion(this.questionindex);
+          this.nextQuestion(this.questionIndex);
         }
       });
   }
 
-  answer(questionindex: number, correctOptions: string) {
-    if (!this.FormArray.at(questionindex).get('timer')?.disabled) {
+  answer(questionIndex: number, correctOptions: string) {
+    if (!this.FormArray.at(questionIndex).get('timer')?.disabled) {
       let selectedAnswer =
-        this.question[questionindex].answer.id == correctOptions;
+        this.question[questionIndex].answer.id == correctOptions;
       if (selectedAnswer && correctOptions) {
         this.points = this.points += this.positivePoints;
         this.correctanswer++;

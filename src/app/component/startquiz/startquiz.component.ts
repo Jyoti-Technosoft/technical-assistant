@@ -11,7 +11,7 @@ import quizData from '../../../assets/json/data.json';
 export class StartquizComponent implements OnInit {
   quizData = {...quizData};
   instruction: any;
-  selectedQuizType: any;
+  selectedQuizType!: string;
   constructor(
     private route:Router,
     private activeRoute: ActivatedRoute,
@@ -25,7 +25,7 @@ export class StartquizComponent implements OnInit {
 
   mapJSONData() {
     this.selectedQuizType = this.activeRoute.snapshot.queryParams['quiz'];
-   this.instruction = this.quizData?.Quiz?.find((data)=> data?.quizId == this.selectedQuizType );
+   this.instruction = this.quizData?.quiz?.find((data)=> data?.quizId == this.selectedQuizType );
   }
 
 

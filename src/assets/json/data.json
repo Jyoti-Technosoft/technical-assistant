@@ -1,11 +1,11 @@
 {
-  "Quiz": [
+  "quiz": [
     {
       "quizId": "Html/CSS",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
       "timer": 30,
-      "PositivePoints": 10,
-      "NegativePoints": 1,
+      "positivePoints": 10,
+      "negativePoints": 1,
       "numberOfQuestions": "3",
       "type": "radio",
       "title": "HTML-CSS Quiz",
@@ -13,7 +13,6 @@
       "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages.",
       "questions": [
         {
-          "questionId": "Q-1.",
           "question": "What is HTML?",
           "options": [
             {
@@ -40,7 +39,6 @@
           "answer": { "id": 4 }
         },
         {
-          "questionId": "Q-2.",
           "question": "Which of the following tag is used for inserting the largest heading in HTML?",
           "options": [
             {
@@ -67,7 +65,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-3.",
           "question": " HTML stands for __________",
           "options": [
             {
@@ -94,7 +91,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-4.",
           "question": "Which element is used to get highlighted text in HTML5?",
           "options": [
             {
@@ -121,7 +117,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-5.",
           "question": "How do we write comments in HTML?",
           "options": [
             {
@@ -148,7 +143,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-6.",
           "question": "Which of the following tag is used to embed css in html page?",
           "options": [
             {
@@ -175,7 +169,6 @@
           "answer": { "id": 4 }
         },
         {
-          "questionId": "Q-7.",
           "question": "Which of the following has introduced text, list, box, margin, border, color, and background properties?",
           "options": [
             {
@@ -202,7 +195,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-8.",
           "question": "What is the work of <address> element in HTML5?",
           "options": [
             {
@@ -229,7 +221,6 @@
           "answer": { "id": 4 }
         },
         {
-          "questionId": "Q-9.",
           "question": " Which tag is used to create a dropdown in HTML Form?",
           "options": [
             {
@@ -256,7 +247,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-10.",
           "question": "Which of the following CSS style property is used to specify an italic text?",
           "options": [
             {
@@ -283,7 +273,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-11.",
           "question": " Which of the following function defines a linear gradient as a CSS image?",
           "options": [
             {
@@ -310,7 +299,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-12.",
           "question": "Which of the following CSS property can be used to set the image as a border instead of the border style?",
           "options": [
             {
@@ -337,7 +325,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-13.",
           "question": "Which of the following CSS property sets the font size of text?",
           "options": [
             {
@@ -364,7 +351,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-14.",
           "question": "Which of the following CSS selector selects the elements that are checked?",
           "options": [
             {
@@ -396,15 +382,14 @@
       "quizId": "javascript",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
       "timer": " 50 ",
-      "PositivePoints": 1,
-      "NegativePoints": 0.25,
+      "positivePoints": 1,
+      "negativePoints": 0.25,
       "numberOfQuestions": "3",
       "title": "JavaScript Quiz",
       "image": "assets\\img\\javascript.jpg",
       "description": "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.",
       "questions": [
         {
-          "questionId": "Q-1.",
           "question": "What is JavaScript?",
           "options": [
             {
@@ -431,7 +416,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-2.",
           "question": "Arrays in JavaScript are defined by which of the following statements?",
           "options": [
             {
@@ -458,7 +442,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-3.",
           "question": "Which of the following is not javascript data types?",
           "options": [
             {
@@ -485,7 +468,6 @@
           "answer": { "id": 4 }
         },
         {
-          "questionId": "Q-4.",
           "question": "Which of the following can be used to call a JavaScript Code Snippet?",
           "options": [
             {
@@ -512,7 +494,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-5.",
           "question": "Why JavaScript Engine is needed?",
           "options": [
             {
@@ -539,7 +520,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-6.",
           "question": "JavaScript is a _______________ language.",
           "options": [
             {
@@ -566,7 +546,6 @@
           "answer": { "id": 4 }
         },
         {
-          "questionId": "Q-7.",
           "question": "A conditional expression is also called a _______________",
           "options": [
             {
@@ -593,7 +572,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-8.",
           "question": "The “var” and “function” are __________",
           "options": [
             {
@@ -620,7 +598,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-9.",
           "question": "If you have a function f and an object o, you can define a method named m of o with ________",
           "options": [
             {
@@ -647,7 +624,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-10.",
           "question": "The statement a===b refers to _________",
           "options": [
             {
@@ -679,15 +655,14 @@
       "quizId": "reactJS",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
       "timer": "20",
-      "PositivePoints": "1",
-      "NegativePoints": "0.25",
+      "positivePoints": "1",
+      "negativePoints": "0.25",
       "numberOfQuestions": "3",
       "title": "React JS Quiz",
       "image": "assets\\img\\react-js.png",
       "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta.",
       "questions": [
         {
-          "questionId": "Q-1.",
           "question": "What is React.js?",
           "options": [
             {
@@ -714,7 +689,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-2.",
           "question": "Which of the following acts as the input of a class-based component?",
           "options": [
             {
@@ -741,7 +715,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-3.",
           "question": "React.js is written in which of the following language?",
           "options": [
             {
@@ -768,7 +741,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-4.",
           "question": "In which of the following directory React Components are saved?",
           "options": [
             {
@@ -795,7 +767,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-5.",
           "question": "Which of the following command is used to Install create-react-app?",
           "options": [
             {
@@ -827,15 +798,14 @@
       "quizId": "angular",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
       "timer": "60",
-      "PositivePoints": "1",
-      "NegativePoints": "0.25",
+      "positivePoints": "1",
+      "negativePoints": "0.25",
       "numberOfQuestions": "3",
       "title": "Angular Quiz",
       "image": "assets\\img\\angular.jpg",
       "description": "Angular is a development platform, built on TypeScript.component-based framework for building scalabel web applications.",
       "questions": [
         {
-          "questionId": "Q-1.",
           "question": "Which of the following statement is true for AngularJS?",
           "options": [
             {
@@ -862,7 +832,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-2.",
           "question": "Which of the following is the correct syntax for writing AngularJS expressions?",
           "options": [
             {
@@ -889,7 +858,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-3.",
           "question": "Which of the following statement is correct about data binding in AngularJS?",
           "options": [
             {
@@ -916,7 +884,6 @@
           "answer": { "id": 1 }
         },
         {
-          "questionId": "Q-4.",
           "question": "AngularJS expressions bind AngularJS data to HTML like which of the following directive?",
           "options": [
             {
@@ -943,7 +910,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-5.",
           "question": "Among the following, on which architectural pattern is AngularJS based?",
           "options": [
             {
@@ -970,7 +936,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-6.",
           "question": "Which of the following is an advantage of AngularJS?",
           "options": [
             {
@@ -997,7 +962,6 @@
           "answer": { "id": 4 }
         },
         {
-          "questionId": "Q-7.",
           "question": " Which of the following types of the component can be used to create a custom directive?",
           "options": [
             {
@@ -1024,7 +988,6 @@
           "answer": { "id": 4 }
         },
         {
-          "questionId": "Q-8.",
           "question": "  How many $RootScope an AngularJS application can have?",
           "options": [
             {
@@ -1051,7 +1014,6 @@
           "answer": { "id": 2 }
         },
         {
-          "questionId": "Q-9.",
           "question": " What is deep linking in AngularJS?",
           "options": [
             {
@@ -1078,7 +1040,6 @@
           "answer": { "id": 3 }
         },
         {
-          "questionId": "Q-10.",
           "question": "Which of the following statement is true in the case of $routeProvider?",
           "options": [
             {
