@@ -16,7 +16,7 @@ import dialogData from 'src/assets/json/dialogData.json';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css'],
+  styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
   todayDate : string | undefined = new Date().toISOString().slice(0, 10);
