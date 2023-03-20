@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+
 import '@angular/localize';
-import '@angular/localize/init';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './authorization/login/login.component';
@@ -24,7 +23,6 @@ import { QuestionService } from './service/question.service';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     LayoutComponentModule,
   ],
 })
