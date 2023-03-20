@@ -1,34 +1,29 @@
-body{
-    background: #F4F7FD;
-    margin-top:20px;
+body {
+  background: #f4f7fd;
+  margin-top: 20px;
 }
 
 .card-margin {
-    margin-bottom: 1.875rem;
-    margin: 10px;
+  margin-bottom: 1.875rem;
+  margin: 10px;
 }
 
-.card-header.no-border {
-    border: 0;
-}
 .card-header {
-    background: none;
-    padding: 0 0.9375rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    min-height: 50px;
-}
-.card-header:first-child {
-    border-radius: calc(8px - 1px) calc(8px - 1px) 0 0;
+  background: none;
+  padding: 0 0.9375rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  border: 0;
 }
 
-.all-result .title-wrapper {
+.title-wrapper {
   display: flex;
   align-items: center;
 }
 
-.all-result .title-wrapper .date-primary {
+.initial-letter {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,233 +32,32 @@ body{
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
   color: #000000;
   text-align: center;
   line-height: 10rem;
 }
 
-.all-result .title-wrapper .all-result-date-secondary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #fcfcfd;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-secondary .date-day {
-  color: #dde1e9;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-secondary .date-month {
-  color: #dde1e9;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .all-result-date-success {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #e8faf8;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-success .date-day {
-  color: #17d1bd;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-success .date-month {
-  color: #17d1bd;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .all-result-date-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #ebf7ff;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-info .date-day {
-  color: #36afff;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-info .date-month {
-  color: #36afff;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .all-result-date-warning {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: floralwhite;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-warning .date-day {
-  color: #FFC868;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-warning .date-month {
-  color: #FFC868;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .all-result-date-danger {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #feeeef;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-danger .date-day {
-  color: #F95062;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-danger .date-month {
-  color: #F95062;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .all-result-date-light {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #fefeff;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-light .date-day {
-  color: #f7f9fa;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-light .date-month {
-  color: #f7f9fa;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .all-result-date-dark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #ebedee;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-dark .date-day {
-  color: #394856;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-dark .date-month {
-  color: #394856;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .all-result-date-base {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background-color: #f0fafb;
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-}
-
-.all-result .title-wrapper .all-result-date-base .date-day {
-  color: #68CBD7;
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.all-result .title-wrapper .all-result-date-base .date-month {
-  color: #68CBD7;
-  line-height: 1;
-  font-size: 1rem;
-  text-transform: uppercase;
-}
-
-.all-result .title-wrapper .quiz-info {
+.quiz-info {
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
 }
 
-.all-result .title-wrapper .quiz-info .username {
+.username {
   color: #3c4142;
   font-size: 14px;
 }
 
-.all-result .title-wrapper .quiz-info .all-result-meeting-time {
-  color: #B1BAC5;
+.all-result-meeting-time {
+  color: #b1bac5;
   font-size: 13px;
 }
 
-.all-result .quiz-points {
+.quiz-points {
   font-weight: 400;
   font-size: 13px;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .all-result .quiz-points .points {
@@ -271,14 +65,6 @@ body{
   color: #727686;
 }
 
-.all-result .quiz-points .points span {
-  margin-left: .5rem;
-}
-
-.all-result .quiz-action {
+.quiz-action {
   text-align: right;
-}
-
-.all-result .quiz-action a {
-  text-transform: uppercase;
 }
