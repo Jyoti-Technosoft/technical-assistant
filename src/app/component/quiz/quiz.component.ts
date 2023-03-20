@@ -116,7 +116,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     });
   }
 
-  get FormArray() {
+  get formArray() {
     return this.myForm.controls['form'] as FormArray;
   }
 
@@ -125,7 +125,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     if (this.dialogService.hasModelOpen()) {
       this.dialogService.destroy();
     }
-    const values = this.FormArray.controls[questionindex].value.radioValue;
+    const values = this.formArray!.controls[questionindex].value.radioValue;
     this.answer(questionindex, values);
     this.disabledValuesAndForm();
     this.questionindex = questionindex + 1;
@@ -175,31 +175,31 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   disabledValuesAndForm() {
-    this.FormArray.controls
+    this.formArray.controls
       .at(this.questionindex)
       ?.get('radioValue')
       ?.disable();
-    this.FormArray.controls.at(this.questionindex)?.get('timer')?.disable();
-    this.FormArray.controls.at(this.questionindex)?.markAsDirty();
+    this.formArray.controls.at(this.questionindex)?.get('timer')?.disable();
+    this.formArray.controls.at(this.questionindex)?.markAsDirty();
   }
 
   startCounter() {
     this.interval$ = interval(1000)
       .pipe(takeUntil(this.destroyed$))
       .subscribe((val) => {
-        const counterValue = this.FormArray.controls.at(this.questionindex)
+        const counterValue = this.formArray.controls.at(this.questionindex)
           ?.value.timer;
         if (
           Number(counterValue) != 0 &&
-          !this.FormArray.controls.at(this.questionindex)?.get('timer')
+          !this.formArray.controls.at(this.questionindex)?.get('timer')
             ?.disabled
         ) {
-          this.FormArray.controls
+          this.formArray.controls
             .at(this.questionindex)
             ?.patchValue({ timer: counterValue - 1 });
         } else if (
           Number(counterValue) === 0 &&
-          !this.FormArray.controls.at(this.questionindex)?.get('timer')
+          !this.formArray.controls.at(this.questionindex)?.get('timer')
             ?.disabled
         ) {
           this.next(this.questionindex);
@@ -208,7 +208,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   answer(questionindex: number, correctOptions: string) {
-    if (!this.FormArray.at(questionindex).get('timer')?.disabled) {
+    if (!this.formArray.at(questionindex).get('timer')?.disabled) {
       if (questionindex === this.question.length) {
         this.isQuizCompleted = true;
       }

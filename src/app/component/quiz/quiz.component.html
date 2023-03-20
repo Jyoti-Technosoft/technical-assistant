@@ -27,7 +27,7 @@
             >
             <ng-template
               ngbSlide
-              *ngFor="let arrayloop of FormArray.controls; let i = index"
+              *ngFor="let arrayloop of formArray.controls; let i = index"
             >
               <ng-container [formGroupName]="i">
                 <div class="card" style="width: 60rem; margin-top: 7rem">
@@ -41,7 +41,7 @@
                           style="font-size: 20px; width: 80px"
                           class="fa fa-clock"
                           >&#xf017;
-                          {{ FormArray.controls.at(i)?.value?.timer }} sec</i
+                          {{ formArray.controls.at(i)?.value?.timer }} sec</i
                         >
                       </div>
                     </div>
@@ -77,7 +77,7 @@
               </ng-container>
                     <div class="radio-button">
                       <button
-                        [disabled]="!FormArray.controls[i].dirty"
+                        [disabled]="!formArray.controls[i].dirty"
                         class="carousel-control-next"
                         id="next"
                         role="button"
@@ -101,7 +101,7 @@
                         }}
                       </button>
                       <button
-                        [disabled]="FormArray.controls[i].dirty"
+                        [disabled]="formArray.controls[i].dirty"
                         class="carousel-control-Previous"
                         id="skip"
                         role="button"

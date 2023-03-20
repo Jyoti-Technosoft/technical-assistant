@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class DialogService {
-  adminform: any;
 
   constructor(private modalService: NgbModal, private route: Router) {}
 
@@ -27,11 +26,11 @@ export class DialogService {
       modalRef.componentInstance.NoButtonLable = NoButtonLable;
 
       modalRef.result
-        .then((data) => {
-          resolve(<boolean>data);
+        .then((answer) => {
+          resolve(<boolean>answer);
         })
-        .catch((data) => {
-          resolve(<boolean>data);
+        .catch((answer) => {
+          resolve(<boolean>answer);
         });
     });
   }
