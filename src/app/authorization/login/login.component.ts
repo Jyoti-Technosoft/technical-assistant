@@ -36,11 +36,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('/dashboard');
     } else {
-      let label = this.dialogData.loginModel.label;
-      let yesButtonLable = this.dialogData.loginModel.yesButtonLable;
-      let NoButtonLable = this.dialogData.loginModel.NoButtonLable;
+      let configData = this.dialogData.loginModel;
       this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
+        .openDialog(configData)
         .then((value) => {
           if (value) {
             this.route.navigateByUrl('registration');

@@ -17,7 +17,7 @@ import { DialogService } from 'src/app/dialog-service/dialog.service';
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css'],
+  styleUrls: ['./quiz.component.scss'],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData: any = quizData;
@@ -67,6 +67,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   timer: any;
   selectedQuizType: any;
   radioValue: any;
+  
 
   constructor(
     private router: Router,
@@ -158,11 +159,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   skip(questionindex: number) {
-    let label = this.dialogData.skipModel.label;
-    let yesButtonLable = this.dialogData.skipModel.yesButtonLable;
-    let NoButtonLable = this.dialogData.skipModel.NoButtonLable;
+    let configData = this.dialogData.skipModel;
     this.dialogService
-      .openDialog(label, yesButtonLable, NoButtonLable)
+      .openDialog(configData)
       .then((value) => {
         if (value) {
           this.questionindex = questionindex;
@@ -215,7 +214,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.points = this.points += 1;
         this.correctanswer++;
       } else if (!selectedAnswer && correctOptions) {
-        debugger;
+        
         this.points = this.points -= 0.25;
         this.inCorrectanswer++;
       }

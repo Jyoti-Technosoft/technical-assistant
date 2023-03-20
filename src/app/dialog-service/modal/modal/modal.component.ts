@@ -9,14 +9,11 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ModalComponent implements OnInit  {
   
-  @Input() public label: any;
-  @Input() public yesButtonLable: any;
-  @Input() public NoButtonLable: any;
-
-
-
+  @Input() public configData: any;
+ 
   constructor(public activeModal: NgbActiveModal) {
   }
+  
   ngOnInit() {
   }
 
