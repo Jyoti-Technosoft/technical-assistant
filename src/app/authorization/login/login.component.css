@@ -2,6 +2,14 @@
   font-family: Roboto;
 }
 
+.card.shadow {
+  width: 25rem;
+  margin-top: 80px;
+}
+.userlogo {
+  width: 60px;
+  height: 60px;
+}
 .fs-4 {
   color: rgb(41, 41, 231);
   font-weight: bold;
@@ -20,7 +28,9 @@
   margin: 0 auto;
   height: auto;
 }
-
+.d-grid {
+  margin-top: 20px;
+}
 .btn.btn-primary {
   font-weight: bold;
   border: none;

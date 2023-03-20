@@ -1,14 +1,9 @@
-<div class="card shadow" style="width: 25rem; margin-top: 80px">
+<div class="card shadow">
   <div class="card-body">
     <form [formGroup]="adminForm" (ngSubmit)="formSubmitted()" class="">
       <div class="row g-0">
         <div class="col text-center">
-          <img
-            src="assets/img/login.png"
-            alt="logo"
-            width="60px"
-            height="60px"
-          />
+          <img class="userlogo" src="assets/img/login.png" alt="logo" />
           <br />
           <span class="fs-4">Login</span>
         </div>
@@ -48,10 +43,9 @@
           <div class="d-grid">
             <button
               type="button"
-              [disabled]="!adminForm?.valid"
+              [disabled]="!adminForm.valid"
               (click)="formSubmitted()"
               class="btn btn-primary"
-              style="margin-top: 30px"
             >
               Log in
             </button>
