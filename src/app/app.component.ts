@@ -7,7 +7,7 @@ import { NavigationStart, Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'navbar';
+  title = 'technical-assistant';
   showHead: boolean = false;
 
   ngOnInit() {
