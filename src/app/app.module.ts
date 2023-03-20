@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import '@angular/localize';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './authorization/login/login.component';
 import { RegistrationComponent } from './authorization/registration/registration.component';
