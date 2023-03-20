@@ -3,9 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "navbar": {
+    "technical-assistant": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/navbar",
+            "outputPath": "dist/technical-assistant",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -22,12 +26,13 @@
               "@angular/localize"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -62,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "navbar:build:production"
+              "browserTarget": "technical-assistant:build:production"
             },
             "development": {
-              "browserTarget": "navbar:build:development"
+              "browserTarget": "technical-assistant:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +78,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "navbar:build"
+            "browserTarget": "technical-assistant:build"
           }
         },
         "test": {
@@ -86,12 +91,13 @@
               "@angular/localize"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

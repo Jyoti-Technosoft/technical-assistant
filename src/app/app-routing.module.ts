@@ -7,15 +7,20 @@ import { RegistrationComponent } from './authorization/registration/registration
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo:'/login', pathMatch:'full'},
-  {path: 'login', component:LoginComponent, canActivate:[AuthGuard]},
-  {path: 'registration', component:RegistrationComponent},
-  {path : '', loadChildren: () => import('./layout/layout-component.module').then(m=>m.LayoutComponentModule)
-},
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'userregistration', component: RegistrationComponent },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./layout/layout-component.module').then(
+        (m) => m.LayoutComponentModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
