@@ -20,7 +20,7 @@ import dialogData from 'src/assets/json/dialogData.json';
 })
 export class RegistrationComponent {
   todayDate : string | undefined = new Date().toISOString().slice(0, 10);
-  registeruser: any = [];
+  registerUser: any = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
   @ViewChild('email') email!: ElementRef;
@@ -37,17 +37,17 @@ export class RegistrationComponent {
   }
 
   getRegistredUser() {
-    if (!localStorage.getItem('registeruser')) {
-      this.registeruser = [];
+    if (!localStorage.getItem('registerUser')) {
+      this.registerUser = [];
     } else {
-      this.registeruser = JSON.parse(
-        localStorage.getItem('registeruser') as string
+      this.registerUser = JSON.parse(
+        localStorage.getItem('registerUser') as string
       );
     }
   }
 
-  public submitform(formValue: any) {
-    let findUser = this.registeruser?.find(
+  submitform(formValue: any) {
+    let findUser = this.registerUser?.find(
       (value: any) => value.email == formValue.email
     );
     if (findUser) {
@@ -64,18 +64,18 @@ export class RegistrationComponent {
           }
         });
     } else {
-      this.registeruser.push(formValue);
-      localStorage.setItem('registeruser', JSON.stringify(this.registeruser));
+      this.registerUser.push(formValue);
+      localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
       this.route.navigateByUrl('login');
     }
   }
 
-  passwordNotMatched: ValidatorFn = (
+  validateConfirmaPassword: ValidatorFn = (
     control: AbstractControl
   ): ValidationErrors | null => {
     const pwd = this.registrationForm?.controls['pwd'];
     return pwd?.value !== control?.value
-      ? {passwordNotMatched: true }
+      ? {validateConfirmaPassword: true }
       : null;
   };
 
@@ -91,7 +91,7 @@ export class RegistrationComponent {
   createForm() {
     this.registrationForm = this.fb.group({
       id: [Date.now()],
-      fullname: ['', [Validators.required]],
+      fullName: ['', [Validators.required]],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       pwd: [
         '',
@@ -104,7 +104,7 @@ export class RegistrationComponent {
       ],
       cpwd: [
         '',
-        Validators.compose([Validators.required, this.passwordNotMatched]),
+        Validators.compose([Validators.required, this.validateConfirmaPassword]),
       ],
       gender: ['', Validators.compose([Validators.required])],
       birthday: ['', Validators.compose([Validators.required])],

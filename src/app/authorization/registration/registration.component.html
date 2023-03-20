@@ -5,7 +5,7 @@
         [formGroup]="registrationForm"
         (ngSubmit)="submitform(registrationForm.value)"
       >
-        <div class="row g-0">
+        <div class="row">
           <div class="col text-center p-2 mb-3">
             <span class="fs-3">User Registration</span>
           </div>
@@ -13,18 +13,18 @@
         <div class="row">
           <div class="field">
             <div class="col">
-              <label for="fullname" class="form-label"
+              <label for="fullName" class="form-label"
                 >Full Name (FirstName , LastName)</label
               >
               <input
                 type="text"
                 class="form-control"
-                id="fullname"
-                formControlName="fullname"
+                id="fullName"
+                formControlName="fullName"
               />
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['fullname'].errors?.['required'] &&  (registrationFormValidator['fullname']?.touched || registrationFormValidator['fullname']?.dirty)"
+                *ngIf="(registrationFormValidator['fullName'].errors?.['required'] &&  (registrationFormValidator['fullName']?.touched || registrationFormValidator['fullName']?.dirty))"
               >
                 Name is required.
               </div>
@@ -44,13 +44,13 @@
               />
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['email']?.errors?.['required'] && (registrationFormValidator['email'].dirty ||  registrationFormValidator['email']?.touched)"
+                *ngIf="(registrationFormValidator['email']?.errors?.['required'] && (registrationFormValidator['email'].dirty ||  registrationFormValidator['email']?.touched))"
               >
                 Email is required.
               </div>
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['email']?.errors?.['email'] && (registrationFormValidator['email']?.dirty || registrationFormValidator ['email']?.touched)"
+                *ngIf="(registrationFormValidator['email']?.errors?.['email'] && (registrationFormValidator['email']?.dirty || registrationFormValidator ['email']?.touched))"
               >
                 Email is Invalid.
               </div>
@@ -69,7 +69,7 @@
               />
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['pwd']?.errors?.['required'] && (registrationFormValidator['pwd']?.dirty || registrationFormValidator['pwd']?.touched)"
+                *ngIf="(registrationFormValidator['pwd']?.errors?.['required'] && (registrationFormValidator['pwd']?.dirty || registrationFormValidator['pwd']?.touched))"
               >
                 Password is required.
               </div>
@@ -95,14 +95,14 @@
               />
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['cpwd']?.errors?.['required'] && (registrationFormValidator['cpwd']?.dirty || registrationFormValidator['cpwd']?.touched)"
+                *ngIf="(registrationFormValidator['cpwd']?.errors?.['required'] && (registrationFormValidator['cpwd']?.dirty || registrationFormValidator['cpwd']?.touched))"
               >
                 Confirmn Password is Required..
               </div>
 
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['cpwd']?.errors?.['passwordNotMatched'] && registrationFormValidator['cpwd']?.touched"
+                *ngIf="(registrationFormValidator['cpwd']?.errors?.['validateConfirmaPassword'] && registrationFormValidator['cpwd']?.touched)"
               >
                 Passsword and Confirm Password didn't match.
               </div>
@@ -145,7 +145,7 @@
               </div>
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['gender']?.errors?.['required'] && (registrationFormValidator['gender']?.dirty || registrationFormValidator['gender']?.touched)"
+                *ngIf="(registrationFormValidator['gender']?.errors?.['required'] && (registrationFormValidator['gender']?.dirty || registrationFormValidator['gender']?.touched))"
               >
                 Gender is required.
               </div>
@@ -165,7 +165,7 @@
               />
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['birthday']?.errors?.['required'] && (registrationFormValidator['birthday']?.dirty || registrationFormValidator['birthday']?.touched)"
+                *ngIf="(registrationFormValidator['birthday']?.errors?.['required'] && (registrationFormValidator['birthday']?.dirty || registrationFormValidator['birthday']?.touched))"
               >
                 Birthday is required.
               </div>
@@ -176,24 +176,26 @@
           <div class="col">
             <div class="field">
               <label for="mobile" class="form-label">Mobile Number</label>
+              <div class="">
               <input
                 type="number"
                 formControlName="mobile"
-                class="form-control"
+                class="form-control number"
               />
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['mobile']?.errors?.['required'] && (registrationFormValidator['mobile']?.dirty || registrationFormValidator['mobile']?.touched)"
+                *ngIf="(registrationFormValidator['mobile']?.errors?.['required'] && (registrationFormValidator['mobile']?.dirty || registrationFormValidator['mobile']?.touched))"
               >
                 Number is required.
               </div>
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['mobile']?.errors?.['pattern'] && registrationFormValidator['mobile']?.touched && !registrationFormValidator['mobile']?.errors?.['required'] "
+                *ngIf="(registrationFormValidator['mobile']?.errors?.['pattern'] && registrationFormValidator['mobile']?.touched && !registrationFormValidator['mobile']?.errors?.['required']) "
               >
                 Please insert a valid Mobile number.
               </div>
             </div>
+          </div>
           </div>
         </div>
         <div class="form-group form-check">
@@ -208,7 +210,7 @@
               >Accept Terms & Conditions</label
             >
             <div
-              *ngIf="registrationFormValidator['acceptTerms'].value"
+              *ngIf="(registrationFormValidator['acceptTerms'].value)"
               class="invalid-feedback"
             >
               Accept Ts & Cs is required
