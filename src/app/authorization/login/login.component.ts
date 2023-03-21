@@ -16,11 +16,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
   adminForm!:FormGroup;
+  adminForm!:FormGroup;
 
   constructor(
     private route: Router,
     
     private dialogService: DialogService,
+    private fb:FormBuilder
     private fb:FormBuilder
   ) {}
 
@@ -29,6 +31,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     let userdata = this.userData?.find(
       (value: any) => value?.email ==  this.adminForm?.value?.emailId && value?.password == this.adminForm?.value?.password 
     );
+    if (
+      userdata
+      ) {
+      document.cookie = "username" + "=" + userdata.id;
     if (
       userdata
       ) {
