@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { DialogService } from 'src/app/dialog-service/dialog.service';
@@ -13,11 +13,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
   adminForm!:FormGroup;
-
+  
   constructor(
     private route: Router,
     private dialogService: DialogService,
-    private fb: FormBuilder
+    private fb:FormBuilder
   ) {}
 
   public formSubmitted() {
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       ) {
       document.cookie = "username" + "=" + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
-      this.route.navigateByUrl('/dashboard');
+      this.route.navigateByUrl('dashboard');
     } else {
       let label = this.dialogData.loginModel.label;
       let yesButtonLable = this.dialogData.loginModel.yesButtonLable;
@@ -47,25 +47,26 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.createForm();
     if (!localStorage.getItem('registeruser')?.length) {
       let registeruser: any = localStorage.getItem('registeruser');
       registeruser = JSON.parse(registeruser as string);
-      alert('There is no user create one');
-      this.route.navigateByUrl('/registration');
     } else {
       let data: any = localStorage.getItem('registeruser');
       this.userData = JSON.parse(data);
     }
-    this.createForm();
   }
 
   createForm() {
-     this.adminForm = this.fb.group({
-      email : [''],
-      password : ['']
-     })
+    this.adminForm = this.fb.group({
+      emailId: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12)])]
+    });
   }
 
+  get adminFormValidator() {
+    return this.adminForm.controls;
+  }
 
   ngOnDestroy(): void {
   }
