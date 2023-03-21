@@ -37,6 +37,7 @@ yarn-error.log
 testem.log
 /typings
 
+<<<<<<< HEAD
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output
@@ -76,6 +77,8 @@ yarn-error.log
 testem.log
 /typings
 
+=======
+>>>>>>> 2aa80d7fa7772cd8cdbb0bea5acde66dce3118cb
 # System files
 .DS_Store
 Thumbs.db
@@ -186,6 +189,7 @@ dist
 # TernJS port file
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 .tern-port
 =======
 .tern-port
@@ -193,3 +197,6 @@ dist
 =======
 .tern-port
 >>>>>>> cfcfd26 (-chagned git igonore changes)
+=======
+.tern-port
+>>>>>>> 2aa80d7fa7772cd8cdbb0bea5acde66dce3118cb
