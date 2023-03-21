@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+body{
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+}
+@font-face{
+    font-family: Roboto;
+    src:url(assets/fonts/Roboto-Regular.ttf) format('truetype');
+}
