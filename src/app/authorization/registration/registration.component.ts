@@ -72,7 +72,6 @@ export class RegistrationComponent {
         id: new FormControl(Date.now()),
         fullname: new FormControl('', [
           Validators.required,
-          // Validators.pattern('[a-zA-Z-]'),
         ]),
 
         pwd: new FormControl('', [
@@ -122,10 +121,9 @@ export class RegistrationComponent {
       this.registrationForm.value.mobile
     );
   }
+
   Mustmatch(pwd: any, cpwd: any) {
-    debugger;
     return () => {
-      debugger;
       const passwordcontrol = this.registrationForm.controls[pwd];
       const confirmpasswordcontrol = this.registrationForm.controls[cpwd];
       if (

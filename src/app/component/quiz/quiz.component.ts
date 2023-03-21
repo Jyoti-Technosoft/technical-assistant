@@ -93,7 +93,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
   unloadHandler(event: Event) {
     let result;
     if (result) {
-      // Do more processing...
     }
     event.returnValue = false; // stay on same page
   }
