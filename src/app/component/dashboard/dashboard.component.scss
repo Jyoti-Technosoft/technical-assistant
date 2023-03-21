@@ -9,8 +9,6 @@ h5{
 }
 #card{
     margin: 0 auto; 
-    /* float: none; Added */
-    /* margin-bottom: 0px;  */
     border-radius: 15px;
     height: 500px;
     width: 61rem;
@@ -32,36 +30,11 @@ h5{
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 	background-color: #c6c6c6;
 }
-/* .card{
-    margin-bottom: 20px;
-    margin-left: 25px;
-    left:0px;
-    height:330px;
-    width:250px;
-} */
+
 .card{
     height: 350px;
 }
-/* .card-wrapper{
-    
-    display: flex;
-    position: absolute;
-    top: 10%;
-    left: 0%;
-    height: auto;
-} */
-/* .row {
-    display: flex;
-    flex-wrap: wrap;
- }
- 
- .row > div[class*='col-3'] {
-   display: flex;
- }
- .limitTextHeight {
-    
-    overflow: hidden;
-} */
+
 .card-text{
     font-size: 12px;
     min-height: 110px;
