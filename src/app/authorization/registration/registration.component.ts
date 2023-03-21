@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,28 +15,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-  email: any;
-  pwd: any;
-  fullname: any;
-  cpwd: any;
-  gender: any;
-  birthday: any;
-  mobile: any;
+
   registeruser: any = [];
-  data = {
-    fullname: '',
-    email: '',
-    pwd: '',
-    cpwd: '',
-    gender: '',
-    birthday: '',
-    mobile: '',
-  };
   registrationForm!: FormGroup;
+
   constructor(private route: Router) {}
+
   ngOnInit(): void {
     this.initForm();
   }
+
   public submitform() {
     const formValue = this.registrationForm.value;
     if (localStorage.getItem('registeruser') == null) {
@@ -52,13 +47,13 @@ export class RegistrationComponent {
     localStorage.setItem('registeruser', JSON.stringify(this.registeruser));
     this.route.navigateByUrl('login');
   }
+
   initForm() {
     this.registrationForm = new FormGroup(
       {
         id: new FormControl(Date.now()),
         fullname: new FormControl('', [
           Validators.required,
-          // Validators.pattern('[a-zA-Z-]'),
         ]),
 
         pwd: new FormControl('', [
@@ -94,7 +89,7 @@ export class RegistrationComponent {
       ? { identityRevealed: true }
       : null;
   };
-  
+
   getToday(): string {
     return new Date().toISOString().split('T')[0];
   }

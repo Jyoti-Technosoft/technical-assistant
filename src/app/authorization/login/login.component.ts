@@ -12,7 +12,7 @@ import dialogData from 'src/assets/json/dialogData.json';
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
-  adminForm!:FormGroup;
+  loginForm!:FormGroup;
   
   constructor(
     private route: Router,
@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb:FormBuilder
   ) {}
 
-  public formSubmitted() {
+  public formSubmitted(formValue:any) {
     let userdata = this.userData?.find(
-      (value: any) => value?.email ==  this.adminForm?.value?.email && value?.password ==  this.adminForm?.value?.password 
+      (value: any) => value?.email ==  formValue?.emailId && value?.cpwd ==  formValue?.password 
     );
     if (
       userdata
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           if (value) {
             this.route.navigateByUrl('registration');
           } else {
-            this.adminForm?.reset();
+            this.loginForm?.reset();
           }
         });
     }
@@ -58,14 +58,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   createForm() {
-    this.adminForm = this.fb.group({
+    this.loginForm = this.fb.group({
       emailId: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12)])]
     });
   }
 
-  get adminFormValidator() {
-    return this.adminForm.controls;
+  get loginFormControl() {
+    return this.loginForm.controls;
   }
 
   ngOnDestroy(): void {
