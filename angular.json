@@ -22,6 +22,7 @@
             "main": "src/main.ts",
             "polyfills": [
               "zone.js",
+              "@angular/localize/init",
               "@angular/localize"
             ],
             "tsConfig": "tsconfig.app.json",
@@ -86,6 +87,7 @@
             "polyfills": [
               "zone.js",
               "zone.js/testing",
+              "@angular/localize/init",
               "@angular/localize"
             ],
             "tsConfig": "tsconfig.spec.json",
