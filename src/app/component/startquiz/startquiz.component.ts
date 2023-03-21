@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+
 import { QuestionService } from 'src/app/service/question.service';
 import quizData from '../../../assets/json/data.json';
 
@@ -28,7 +29,6 @@ export class StartquizComponent implements OnInit {
       this.selectedQuizType = this.questionService.selectedQuizType;
     }
    this.rules = this.quizData[this.selectedQuizType]?.rules;
-   console.log("this.rules ----------",this.rules)
   }
 
 
