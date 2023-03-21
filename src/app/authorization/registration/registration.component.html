@@ -64,18 +64,18 @@
               <input
                 type="password"
                 class="form-control"
-                id="pwd"
-                formControlName="pwd"
+                id="password"
+                formControlName="password"
               />
               <div
                 class="form-text text-danger"
-                *ngIf="(registrationFormValidator['pwd']?.errors?.['required'] && (registrationFormValidator['pwd']?.dirty || registrationFormValidator['pwd']?.touched))"
+                *ngIf="(registrationFormValidator['password']?.errors?.['required'] && (registrationFormValidator['password']?.dirty || registrationFormValidator['password']?.touched))"
               >
                 Password is required.
               </div>
               <div
                 class="form-text text-danger"
-                *ngIf="registrationFormValidator['pwd']?.errors?.['pattern']"
+                *ngIf="registrationFormValidator['password']?.errors?.['pattern']"
               >
                 Password should be atleast 8 characters long and should contain
                 one number,one character and one special character
@@ -86,23 +86,23 @@
         <div class="row">
           <div class="col">
             <div class="field">
-              <label for="cpwd" class="form-label">Confirm Password</label>
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
               <input
                 type="password"
                 class="form-control"
-                id="cpwd"
-                formControlName="cpwd"
+                id="confirmPassword"
+                formControlName="confirmPassword"
               />
               <div
                 class="form-text text-danger"
-                *ngIf="(registrationFormValidator['cpwd']?.errors?.['required'] && (registrationFormValidator['cpwd']?.dirty || registrationFormValidator['cpwd']?.touched))"
+                *ngIf="(registrationFormValidator['confirmPassword']?.errors?.['required'] && (registrationFormValidator['confirmPassword']?.dirty || registrationFormValidator['confirmPassword']?.touched))"
               >
                 Confirmn Password is Required..
               </div>
 
               <div
                 class="form-text text-danger"
-                *ngIf="(registrationFormValidator['cpwd']?.errors?.['validateConfirmaPassword'] && registrationFormValidator['cpwd']?.touched)"
+                *ngIf="(registrationFormValidator['confirmPassword']?.errors?.['validateConfirmaPassword'] && registrationFormValidator['confirmPassword']?.touched)"
               >
                 Passsword and Confirm Password didn't match.
               </div>

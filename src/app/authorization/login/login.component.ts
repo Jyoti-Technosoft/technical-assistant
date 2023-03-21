@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       let data: any = localStorage.getItem('registerUser');
       this.userData = JSON.parse(data);
     }
-    
+    this.createForm()
   }
 
   signout() {

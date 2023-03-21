@@ -73,8 +73,8 @@ export class RegistrationComponent {
   validateConfirmaPassword: ValidatorFn = (
     control: AbstractControl
   ): ValidationErrors | null => {
-    const pwd = this.registrationForm?.controls['pwd'];
-    return pwd?.value !== control?.value
+    const password = this.registrationForm?.controls['password'];
+    return password?.value !== control?.value
       ? {validateConfirmaPassword: true }
       : null;
   };
@@ -93,7 +93,7 @@ export class RegistrationComponent {
       id: [Date.now()],
       fullName: ['', [Validators.required]],
       email: ['', Validators.compose([Validators.required, Validators.email])],
-      pwd: [
+      password: [
         '',
         Validators.compose([
           Validators.required,
@@ -102,7 +102,7 @@ export class RegistrationComponent {
           ),
         ]),
       ],
-      cpwd: [
+      confirmPassword: [
         '',
         Validators.compose([Validators.required, this.validateConfirmaPassword]),
       ],
