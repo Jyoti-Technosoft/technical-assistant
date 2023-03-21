@@ -30,7 +30,7 @@
               *ngFor="let arrayloop of formArray.controls; let i = index"
             >
               <ng-container [formGroupName]="i">
-                <div class="card" style="width: 60rem; margin-top: 7rem">
+                <div class="card card-size">
                   <div class="card-body">
                     <div class="quiz">
                       <div class="data">
@@ -38,8 +38,7 @@
                       </div>
                       <div class="ram">
                         <i
-                          style="font-size: 20px; width: 80px"
-                          class="fa fa-clock"
+                          class="fa fa-clock timer"
                           >&#xf017;
                           {{ formArray.controls.at(i)?.value?.timer }} sec</i
                         >
