@@ -198,12 +198,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   answer(questionIndex: number, correctOptions: string) {
     if (!this.FormArray.at(questionIndex).get('timer')?.disabled) {
-      let selectedAnswer =
-        this.question[questionIndex].answer.id == correctOptions;
-      if (selectedAnswer && correctOptions) {
+      if (this.question[questionIndex].answer.id && correctOptions) {
         this.points = this.points += this.positivePoints;
         this.correctanswer++;
-      } else if (!selectedAnswer && correctOptions) {
+      } else if (!this.question[questionIndex].answer.id && correctOptions) {
         this.points = this.points -= this.negativePoints;
         this.inCorrectanswer++;
       }

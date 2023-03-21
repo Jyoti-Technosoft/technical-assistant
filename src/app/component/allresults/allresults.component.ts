@@ -19,7 +19,6 @@ export class AllresultsComponent implements OnInit, OnDestroy {
   constructor(public questionService: QuestionService) {}
 
   ngOnInit(): void {
-    this.userName = this.questionService?.userName;
     this.resultData();
     if (!this.userName) {
       this.getData();
@@ -41,7 +40,7 @@ export class AllresultsComponent implements OnInit, OnDestroy {
       return data?.user == this.questionService.getUser();
     });
     this.allResultData = this.allResultData?.map((data: any) => {
-      const message = this.quizData?.Quiz?.find((quizData: any) => {
+      const message = this.quizData?.quiz?.find((quizData: any) => {
         return quizData.quizId == data.type;
       });
       data.image = message?.image;
