@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponentModule } from './layout/layout-component.module';
 
 
-@NgModule({
+@NgModule({ 
     declarations: [
         AppComponent,
         LoginComponent,

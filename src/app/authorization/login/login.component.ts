@@ -12,7 +12,7 @@ import dialogData from 'src/assets/json/dialogData.json';
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
-  adminForm!:FormGroup;
+  adminForm!: FormGroup;
 
   constructor(
     private route: Router,
@@ -22,12 +22,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public formSubmitted() {
     let userdata = this.userData?.find(
-      (value: any) => value?.email ==  this.adminForm?.value?.email && value?.password ==  this.adminForm?.value?.password 
+      (value: any) =>
+        value?.email == this.adminForm?.value?.email &&
+        value?.password == this.adminForm?.value?.password
     );
-    if (
-      userdata
-      ) {
-      document.cookie = "username" + "=" + userdata.id;
+    if (userdata) {
+      document.cookie = 'username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('/dashboard');
     } else {
@@ -47,27 +47,24 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('registeruser')?.length) {
-      let registeruser: any = localStorage.getItem('registeruser');
-      registeruser = JSON.parse(registeruser as string);
+    if (!localStorage.getItem('registerUser')?.length) {
+      let registerUser: any = localStorage.getItem('registerUser');
+      registerUser = JSON.parse(registerUser as string);
       alert('There is no user create one');
       this.route.navigateByUrl('/registration');
     } else {
-      let data: any = localStorage.getItem('registeruser');
+      let data: any = localStorage.getItem('registerUser');
       this.userData = JSON.parse(data);
     }
     this.createForm();
   }
 
   createForm() {
-     this.adminForm = this.fb.group({
-      email : [''],
-      password : ['']
-     })
+    this.adminForm = this.fb.group({
+      email: [''],
+      password: [''],
+    });
   }
 
-
-  ngOnDestroy(): void {
-  }
-
+  ngOnDestroy(): void {}
 }

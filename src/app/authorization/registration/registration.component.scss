@@ -1,33 +1,30 @@
-*{
-    font-family: Roboto;
+* {
+  font-family: Roboto;
 }
-.card{
-    margin: 0 auto; 
-    /* float: none; Added */
-    margin-bottom: 0px;  
-    border-radius: 15px;
-    height: auto;    
+.registration-conatiner {
+  margin: 0 auto;
+  margin-bottom: 0px;
+  border-radius: 15px;
+  height: auto;
+  width: 35rem;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
 }
-input[type="date"]{
-    margin-left:20px;
-    padding:3px;
-    font-family: "Roboto Mono",monospace;
-    border-radius: 4px;
-    width:320px;
-    margin-top: 10px;
+input[type="date"] {
+  font-family: "Roboto Mono", monospace;
+  border-radius: 4px;
 }
-.cpwd{
-    margin-top: 10px;
+.field {
+  margin-top: 15px;
 }
-.gender{
-    margin-top: 10px;
+.form {
+  border-radius: 15px;
 }
-.col-md-3{
-    width:100%;
-    float:left;
-    margin:0;
+/* to disable input field with number arrow */
+.number::-webkit-inner-spin-button,
+.number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
-form{
-    border-radius: 15px;
-}
-
