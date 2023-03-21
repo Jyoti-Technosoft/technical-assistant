@@ -8,9 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { DialogService } from 'src/app/dialog-service/dialog.service';
-
 import dialogData from 'src/assets/json/dialogData.json';
 
 @Component({
@@ -20,7 +18,7 @@ import dialogData from 'src/assets/json/dialogData.json';
 })
 export class RegistrationComponent {
   todayDate: string | undefined = new Date().toISOString().slice(0, 10);
-  registerUser: any = [];
+  registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
   @ViewChild('email') email!: ElementRef;
@@ -84,6 +82,7 @@ export class RegistrationComponent {
     const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
     return regex.test(control.value) ? null : { pattern: true };
   };
+  
   createForm() {
     this.registrationForm = this.fb.group({
       id: [Date.now()],
@@ -106,7 +105,7 @@ export class RegistrationComponent {
         ]),
       ],
       gender: ['', Validators.compose([Validators.required])],
-      birthday: ['', Validators.compose([Validators.required])],
+      dateOfBirth: ['', Validators.compose([Validators.required])],
       mobile: [
         '',
         Validators.compose([Validators.required, this.validateNumber]),
@@ -114,6 +113,7 @@ export class RegistrationComponent {
       acceptTerms: [false, Validators.requiredTrue],
     });
   }
+
   get registrationFormValidator() {
     return this.registrationForm.controls;
   }

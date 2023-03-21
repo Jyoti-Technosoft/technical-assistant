@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="field">
+          <div class="form-container">
             <div class="col">
               <label for="fullName" class="form-label"
                 >Full Name (FirstName , LastName)</label
@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="field">
+          <div class="form-container">
             <div class="col">
               <label for="email" class="form-label">Email Address</label>
               <input
@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="field">
+          <div class="form-container">
             <div class="col">
               <label for="password" class="form-label">Password</label>
               <input
@@ -86,7 +86,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <div class="field">
+            <div class="form-container">
               <label for="confirmPassword" class="form-label"
                 >Confirm Password</label
               >
@@ -112,7 +112,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="field">
+          <div class="form-container">
             <div class="m-1">Gender</div>
             <div class="wrapper">
               <div class="form-check form-check-inline">
@@ -157,18 +157,18 @@
 
         <div class="row">
           <div class="col">
-            <div class="field">
+            <div class="form-container">
               <label for="birthday" class="form-label"> Date Of Birth :</label>
               <input
                 type="date"
                 class="form-control input-sm"
-                formControlName="birthday"
+                formControlName="dateOfBirth"
                 [max]="todayDate"
                 (keydown)="(false)"
               />
               <div
                 class="form-text text-danger"
-                *ngIf="(registrationFormValidator['birthday']?.errors?.['required'] && (registrationFormValidator['birthday']?.dirty || registrationFormValidator['birthday']?.touched))"
+                *ngIf="(registrationFormValidator['dateOfBirth']?.errors?.['required'] && (registrationFormValidator['dateOfBirth']?.dirty || registrationFormValidator['dateOfBirth']?.touched))"
               >
                 Birthday is required.
               </div>
@@ -178,7 +178,7 @@
 
         <div class="row">
           <div class="col">
-            <div class="field">
+            <div class="form-container">
               <label for="mobile" class="form-label">Mobile Number</label>
               <input
                 type="number"
@@ -202,7 +202,7 @@
           </div>
         </div>
         <div class="form-group form-check">
-          <div class="field">
+          <div class="form-container">
             <input
               type="checkbox"
               formControlName="acceptTerms"
@@ -221,7 +221,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="field">
+          <div class="form-container">
             <div class="col">
               <div class="d-grid">
                 <button
