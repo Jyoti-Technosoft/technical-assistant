@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './authorization/login/login.component';
-import { RegistrationComponent } from './authorization/registration/registration.component';
 import { NonauthGuard } from './authorization/nonauth.guard';
-
+import { RegistrationComponent } from './authorization/registration/registration.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,7 +16,6 @@ const routes: Routes = [
         (m) => m.LayoutComponentModule
       ),
   },
-  {path:'**',redirectTo:'login',pathMatch:'full'}
 ];
 
 @NgModule({

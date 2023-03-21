@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .then((value) => {
           if (value) {
             this.route.navigateByUrl('registration');
+            this.route.navigateByUrl('registration');
           } else {
             this.adminForm?.reset();
           }

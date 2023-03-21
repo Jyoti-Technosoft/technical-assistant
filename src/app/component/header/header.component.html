@@ -2,7 +2,68 @@
   class="navbar fixed-top navbar-expand-sm navbar-light bg-light"
   style="padding: 0px"
 >
+<nav
+  class="navbar fixed-top navbar-expand-sm navbar-light bg-light"
+  style="padding: 0px"
+>
   <div class="container-fluid">
+    <a
+      href="#"
+      class="navbar-brand h1"
+      routerLink="/dashboard"
+      style="margin: 0px"
+    >
+      <img
+        class="d-inline-block"
+        src="assets/img/logo1.png"
+        width="35"
+        height="35"
+      />
+      <span>APPLICATION</span></a
+    >
+
+    <div class="navigation">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <img src="assets/img/logo1.png" alt="" class="img-responsive" />
+          <div ngbDropdown class="d-inline-block">
+            <a
+              type="button"
+              class="nav-link dropdown-toggle"
+              id="dropdownBasic1"
+              style="color: rgb(116, 116, 116)"
+              ngbDropdownToggle
+            >
+              {{ userName }}
+            </a>
+            <div
+              ngbDropdownMenu
+              aria-labelledby="dropdownBasic1"
+              style="min-width: auto; border: none"
+            >
+              <button
+                ngbDropdownItem
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                About
+              </button>
+              <button
+                ngbDropdownItem
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal1"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <a
       href="#"
       class="navbar-brand h1"
@@ -70,6 +131,13 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -80,14 +148,27 @@
           data-bs-dismiss="modal"
           aria-label="Close"
         ></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
         <div class="container">
+          <div class="d-flex justify-content-center">
           <div class="d-flex justify-content-center">
             <img src="../../assets/img/logo1.png" alt="" />
           </div>
           <div class="content text-center">
             <h1>Jyoti Technosoft LLP</h1>
+            <p>Visit Our Website at jyotitechnosoft for more updates</p>
+            <div class="copyright">
+              &copy; Copyright
+              <strong><span>Jyoti Technosoft LLP</span></strong>
+
+              All Rights Reserved
             <p>Visit Our Website at jyotitechnosoft for more updates</p>
             <div class="copyright">
               &copy; Copyright
@@ -100,6 +181,10 @@
               <a href="https://jyotitechnosoft.com/" target="_blank"
                 >Jyoti Technosoft LLP</a
               >
+              Designed by
+              <a href="https://jyotitechnosoft.com/" target="_blank"
+                >Jyoti Technosoft LLP</a
+              >
             </div>
           </div>
         </div>
@@ -108,10 +193,14 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
       </div>
     </div>
   </div>
 </div>
+<!-- TODO: Remove this and add inside dialog-service -->
 <!-- TODO: Remove this and add inside dialog-service -->
 
 <div class="container-fluid">
