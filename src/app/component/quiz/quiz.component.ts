@@ -154,9 +154,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
     stringifyData.push(currentData);
 
     localStorage.setItem('result', JSON.stringify(stringifyData));
-    this.questionService.points = this.points;
-    this.questionService.correctanswer = this.correctanswer;
-    this.questionService.inCorrectAnswer = this.inCorrectanswer;
     this.router.navigate(['/result']);
   }
 

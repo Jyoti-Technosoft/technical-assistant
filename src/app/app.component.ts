@@ -8,22 +8,8 @@ import { NavigationStart, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'technical-assistant';
-  showHead: boolean = false;
 
   ngOnInit() {
   }
 
-  constructor(private router: Router) {
-    router.events.forEach((event) => {
-      if (event instanceof NavigationStart) {
-        if (event['url'] == '/login') {
-          this.showHead = false;
-        } else if( event['url'] == '/userregistration' ){
-          this.showHead = false;
-        } else{
-          this.showHead = true;
-        }
-      }
-    });
-  }
 }

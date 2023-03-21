@@ -20,11 +20,9 @@ export class ResultComponent implements OnInit, OnDestroy {
   constructor(public questionService: QuestionService) {}
 
   ngOnInit(): void {
-    this.userName = this.questionService?.userName;
     this.resultData();
-    if (!this.userName) {
-      this.getData();
-    }
+    this.getData();
+
   }
 
   getData() {

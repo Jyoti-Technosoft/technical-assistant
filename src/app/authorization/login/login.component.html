@@ -1,60 +1,92 @@
-<div class="card shadow" style="width: 25rem; margin-top: 80px;">
-    <div class="card-body">
-        <form [formGroup]="adminForm" (ngSubmit)="formSubmitted()" class="">
-            <div class="row g-0">
-                <div class="col text-center">
-                    <img src="assets/img/login.png" width="60px" height="60px">
-                    <br>
-                    <span class="fs-4">Login</span>
-                </div>
+<div class="container-fluid">
+  <div class="row align-items-center min-vh-100">
+    <div class="mx-auto col-sm-5 col-md-6 col-lg-5 col-xl-4 col-xxl-3">
+      <form
+        [formGroup]="adminForm"
+        (ngSubmit)="formSubmitted()"
+        class="rounded-4 mt-5 mb-5 bg-light"
+      >
+        <div class="col text-center p-3">
+          <img src="assets/img/login.png" class="image" />
+          <br>
+          <span class="fs-2">Login</span>
+        </div>
+
+        <div class="row p-3">
+          <div class="col-md-12">
+            <label for="emailId" class="form-label">Email Address</label>
+            <input
+              type="text"
+              class="form-control"
+              id="emailId"
+              formControlName="emailId"
+            />
+            <div
+              class="form-text text-danger"
+              *ngIf="(adminFormValidator['emailId']?.errors?.['required'] && (adminFormValidator['emailId']?.dirty ||  adminFormValidator['emailId']?.touched))"
+            >
+              Email is required
             </div>
-            <div class="row">
-                <div class="col mb-3">
-                    <label for="emailId" class="form-label" >Email
-                        Address</label>
-                    <input type="text" class="form-control" id="emailId" formControlName="email">
-                    <div class="form-text text-danger"
-                        *ngIf="">
-                        Email is required.
-                    </div>
-                    <div class="form-text text-danger"
-                        *ngIf="">
-                        Email is Invalid.
-                    </div>
-                </div>
+
+            <div
+              class="form-text text-danger"
+              *ngIf="(adminFormValidator['emailId']?.errors?.['email'] && (adminFormValidator['emailId']?.dirty || adminFormValidator['emailId']?.touched))"
+            >
+              Email is Invalid
             </div>
-            <div class="row">
-                <div class="col-mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password"  formControlName="password">
-                    <div class="form-text text-danger"
-                        *ngIf="">
-                        Password is required.
-                    </div>
-                    <div class="form-text text-danger"
-                        *ngIf="">
-                        Password should be at least 6 and at the max 15 characters long.
-                    </div>
-                </div>
+          </div>
+        </div>
+
+        <div class="row p-3">
+          <div class="col-md-12">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+            />
+            <div
+              class="form-text text-danger"
+              *ngIf="(adminFormValidator['password']?.errors?.['required'] && (adminFormValidator['password']?.dirty || adminFormValidator['password']?.touched))"
+            >
+              Password is required
             </div>
-            <div class="row">
-                <div class="col-mb-3">
-                    <div class="d-grid">
-                        <button type="button" [disabled]="!adminForm?.valid" (click)="formSubmitted()" class="btn btn-primary"
-                            style="margin-top: 30px;" >Log in</button>
-                    </div>
-                </div>
+            <div
+              class="form-text text-danger"
+              *ngIf="(adminFormValidator['password']?.errors?.['minlength'] || adminFormValidator['password']?.errors?.['maxlength'] && (adminFormValidator['password']?.dirty || adminFormValidator['password']?.touched))"
+            >
+              Password should be at least 6 and at the max 12 characters long
             </div>
+          </div>
+        </div>
+
+        <div class="row p-3">
+          <div class="col-md-12">
+            <div class="d-grid">
+              <button
+                type="submit"
+                [disabled]="!adminForm.valid"
+                class="btn btn-primary fs-5"
+              >
+                Log in
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row p-3">
+          <div class="col-md-12">
             <div class="text-center">
-                <h6>Don't Have an Account ?<a href="/userregistration"> Register Now</a></h6>
+              <label>
+                Don't Have an Account ?<a routerLink="/registration">
+                  Register Now</a
+                >
+              </label>
             </div>
-        </form>
+          </div>
+        </div>
+      </form>
     </div>
-    
+  </div>
 </div>
-
-
-
-
-        <!-- <button type="button" class="btn btn-success">Register as User</button>
-        <button type="button" class="btn btn-success">Register as Admin</button> -->
