@@ -2,9 +2,8 @@
     font-family: Roboto;
 }
 .card{
-    margin: 0 auto; /* Added */
-    /* float: none; Added */
-    margin-bottom: 50px; /* Added */
+    margin: 0 auto;
+    margin-bottom: 50px; 
     border-radius: 15px;
     height: auto;    
 }
@@ -24,8 +23,6 @@ button{
 }
 .card-title{
     margin-bottom: 10px;
-    /* margin: 10px 20px; */
-    /* background-color: rgb(230, 230, 230); */
     padding: 6px;
     border-radius: 6px;
 }

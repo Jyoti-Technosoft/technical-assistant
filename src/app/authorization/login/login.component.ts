@@ -1,12 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgModel, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { ModalComponent } from '../../dialog-service/modal/modal/modal.component';
-
-import { QuestionService } from '../../service/question.service';
 import { DialogService } from 'src/app/dialog-service/dialog.service';
 import { ToastService } from 'src/app/toast.service';
 
@@ -14,7 +9,7 @@ import dialogData from 'src/assets/json/dialogData.json';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
@@ -23,8 +18,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: Router,
-    private questionService: QuestionService,
-    private modalService: NgbModal,
     private dialogService: DialogService,
     private fb:FormBuilder,
     public toastService: ToastService
@@ -51,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .openDialog(label, yesButtonLable, NoButtonLable)
         .then((value) => {
           if (value) {
-            this.route.navigateByUrl('userregistration');
+            this.route.navigateByUrl('registration');
           } else {
             this.adminForm?.reset();
           }
@@ -63,9 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (!localStorage.getItem('registeruser')?.length) {
       let registeruser: any = localStorage.getItem('registeruser');
       registeruser = JSON.parse(registeruser as string);
-      // alert('There is no user create one');
-      } 
-      else {
+      } else {
       let data: any = localStorage.getItem('registeruser');
       this.userData = JSON.parse(data);
     }

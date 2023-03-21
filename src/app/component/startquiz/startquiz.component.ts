@@ -6,7 +6,7 @@ import quizData from '../../../assets/json/data.json';
 @Component({
   selector: 'app-carddesign',
   templateUrl: './startquiz.component.html',
-  styleUrls: ['./startquiz.component.css']
+  styleUrls: ['./startquiz.component.scss']
 })
 export class StartquizComponent implements OnInit {
   quizData:any = quizData;
@@ -24,11 +24,7 @@ export class StartquizComponent implements OnInit {
   }
 
   mapJSONData() {
-    if (this.questionService.selectedQuizType) {
-      this.selectedQuizType = this.questionService.selectedQuizType;
-    }
    this.rules = this.quizData[this.selectedQuizType]?.rules;
-   console.log("this.rules ----------",this.rules)
   }
 
 

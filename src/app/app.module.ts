@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './authorization/login/login.component';
-import { NgIf } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegistrationComponent } from './authorization/registration/registration.component';
+
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import '@angular/localize'
-import '@angular/localize/init';
+
+import { RegistrationComponent } from './authorization/registration/registration.component';
+import { LoginComponent } from './authorization/login/login.component';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
 
 import { QuestionService } from './service/question.service';
@@ -27,8 +26,6 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
         ToastComponent
        
     ],
-    providers: [AuthGuard, QuestionService],
-    bootstrap: [AppComponent],
     imports: [
         BrowserModule,
         AppRoutingModule,
@@ -37,7 +34,9 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
         ReactiveFormsModule,
         HttpClientModule,
         LayoutComponentModule,
-        NgbToastModule,
-    ]
+        NgbToastModule
+    ],
+    providers: [AuthGuard,QuestionService],
+    bootstrap: [AppComponent],
 })
 export class AppModule { }

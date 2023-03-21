@@ -17,7 +17,7 @@ import { DialogService } from 'src/app/dialog-service/dialog.service';
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css'],
+  styleUrls: ['./quiz.component.scss'],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData: any = quizData;
@@ -93,7 +93,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
   unloadHandler(event: Event) {
     let result;
     if (result) {
-      // Do more processing...
     }
     event.returnValue = false; // stay on same page
   }

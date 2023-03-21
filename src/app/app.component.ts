@@ -4,10 +4,10 @@ import { NavigationStart, Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'navbar';
+  title = 'technical-assistant';
   showHead: boolean = false;
 
   ngOnInit() {
@@ -18,7 +18,7 @@ export class AppComponent {
       if (event instanceof NavigationStart) {
         if (event['url'] == '/login') {
           this.showHead = false;
-        } else if( event['url'] == '/userregistration' ){
+        } else if( event['url'] == '/registration' ){
           this.showHead = false;
         } else{
           this.showHead = true;
