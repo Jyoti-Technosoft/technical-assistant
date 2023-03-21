@@ -14,10 +14,7 @@ export class HeaderComponent {
   constructor(private route: Router, public questionService: QuestionService) {}
 
   ngOnInit() {
-    this.userName = this.questionService?.userName;
-    if (!this.userName) {
-      this.getData();
-    }
+    this.getData();
   }
 
   getData() {

@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
 import { QuestionService } from './service/question.service';
-import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponentModule } from './layout/layout-component.module';
 
 
@@ -26,10 +25,9 @@ import { LayoutComponentModule } from './layout/layout-component.module';
         FormsModule,
         NgbCarouselModule,
         ReactiveFormsModule,
-        HttpClientModule,
         LayoutComponentModule
     ],
     providers: [AuthGuard,QuestionService],
     bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

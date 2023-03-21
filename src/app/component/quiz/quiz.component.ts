@@ -9,6 +9,7 @@ import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { interval, ReplaySubject, takeUntil } from 'rxjs';
+
 import { QuestionService } from '../../service/question.service';
 import quizData from '../../../assets/json/data.json';
 import dialogData from '../../../assets/json/dialogData.json';
@@ -150,9 +151,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
     stringifyData.push(currentData);
 
     localStorage.setItem('result', JSON.stringify(stringifyData));
-    this.questionService.points = this.points;
-    this.questionService.correctanswer = this.correctanswer;
-    this.questionService.inCorrectAnswer = this.inCorrectanswer;
     this.router.navigate(['/result']);
   }
 
@@ -182,7 +180,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   startCounter() {
     this.interval$ = interval(1000)
       .pipe(takeUntil(this.destroyed$))
-      .subscribe((val) => {
+      .subscribe((val:number) => {
         const counterValue = this.FormArray.controls.at(this.questionindex)
           ?.value.timer;
         if (

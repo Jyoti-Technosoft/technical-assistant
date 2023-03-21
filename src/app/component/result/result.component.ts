@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QuestionService } from '../../service/question.service';
+
 import quizData from 'src/assets/json/data.json';
 
 @Component({
@@ -20,11 +21,8 @@ export class ResultComponent implements OnInit, OnDestroy {
   constructor(public questionService: QuestionService) {}
 
   ngOnInit(): void {
-    this.userName = this.questionService?.userName;
     this.resultData();
-    if (!this.userName) {
-      this.getData();
-    }
+    this.getData();
   }
 
   getData() {
