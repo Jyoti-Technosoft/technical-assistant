@@ -1,25 +1,53 @@
 <nav
-  class="navbar fixed-top navbar-expand-sm navbar-light bg-light"
-  style="padding: 0px"
+  class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0"
 >
   <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/dashboard">
+      <img
+        class="nav-img d-inline-block"
+        src="assets/img/logo1.png"
+        alt="Jyoti Techn"
+      />
+      <span>APPLICATION</span></a
+    >
 
-    <a href="#" class="navbar-brand h1" routerLink="/dashboard" style="margin: 0px;">
-      <img class="d-inline-block" src="assets/img/logo1.png" alt="Jyoti Techn" width="35" height="35" />
-      <span>APPLICATION</span></a>
-        
-      <div class="navigation" *ngIf="userName">
-        <div class="container-fluid">
-          <div class="collapse navbar-collapse"> 
-            <img src="assets/img/logo1.png" alt="" class="img-responsive"/>
-            <div ngbDropdown class="d-inline-block">
-              <a  type="button" class="nav-link dropdown-toggle" id="dropdownBasic1" style="color:rgb(116, 116, 116)" ngbDropdownToggle>
-                {{ userName }}
-              </a>
-              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" style="min-width: auto; border: none;">
-                <button ngbDropdownItem type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">About</button>
-                <button ngbDropdownItem type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Sign Out</button>
-              </div>
+    <div class="navigation" *ngIf="userName">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <img src="assets/img/logo1.png" alt="" class="img-responsive" />
+          <div ngbDropdown class="d-inline-block">
+            <a
+              type="button"
+              class="nav-link dropdown-toggle"
+              id="dropdownBasic1"
+              style="color: rgb(116, 116, 116)"
+              ngbDropdownToggle
+            >
+              {{ userName }}
+            </a>
+            <div
+              ngbDropdownMenu
+              aria-labelledby="dropdownBasic1"
+              style="min-width: auto; border: none"
+            >
+              <button
+                ngbDropdownItem
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                About
+              </button>
+              <button
+                ngbDropdownItem
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal1"
+              >
+                Sign Out
+              </button>
             </div>
           </div>
         </div>
@@ -61,7 +89,13 @@
               All Rights Reserved
             </div>
             <div class="credits">
-              Designed by <a href="https://jyotitechnosoft.com/"  rel="noopener noreferrer" target="_blank">Jyoti Technosoft LLP</a>
+              Designed by
+              <a
+                href="https://jyotitechnosoft.com/"
+                rel="noopener noreferrer"
+                target="_blank"
+                >Jyoti Technosoft LLP</a
+              >
             </div>
           </div>
         </div>
