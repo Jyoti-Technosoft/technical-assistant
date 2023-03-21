@@ -27,7 +27,7 @@ export class RegistrationComponent {
 
   public submitform() {
     const formValue = this.registrationForm.value;
-    if (localStorage.getItem('registeruser') == null) {
+    if (!localStorage.getItem('registeruser')) {
       this.registeruser = [];
     } else {
       this.registeruser = JSON.parse(
