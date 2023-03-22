@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="card shadow card-layout">
+    <div class="card-body h-auto">
+      <div class="row g-0">
+        <div class="col text-center mb-3 mt-4">
+          <span class="fs-3">Result</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="submittedData?.length">
+      <div class="col-4 p-3" *ngFor="let data of submittedData">
+        <div class="card shadow">
+          <img class="card-img-top" src="{{ data.image }}" alt="quiz-logo" />
+          <h3 class="card-title text-center">
+            {{ data.type }}
+          </h3>
+          <p>
+            <span>
+              <h5 class="card-text">User Name : {{ userName }}</h5>
+            </span>
+
+            <span>
+              <h5 class="card-text">Total Points : {{ data.points }}</h5>
+            </span>
+            <span>
+              <h5 class="card-text">
+                Correct Answers : {{ data.correctAnswer }}
+              </h5>
+            </span>
+            <span>
+              <h5 class="card-text">
+                Wrong Answers : {{ data.inCorrectAnswer }}
+              </h5>
+            </span>
+          </p>
+          <div class="text-center">
+            <button
+              type="button"
+              class="btn btn-success"
+              (click)="startQuizAgain(data.type)"
+            >
+              Go Again To Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!submittedData.length">
+      <h1>No Quiz Played yet</h1>
+    </div>
+  </div>
+</div>
