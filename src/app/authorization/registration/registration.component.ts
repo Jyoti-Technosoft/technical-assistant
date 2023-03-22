@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import {
   AbstractControl,
-  FormControl,
+  FormBuilder,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
@@ -9,156 +9,113 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { DialogService } from 'src/app/dialog-service/dialog.service';
+import dialogData from 'src/assets/json/dialogData.json';
+
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-  email: any;
-  pwd: any;
-  fullname: any;
-  cpwd: any;
-  gender: any;
-  birthday: any;
-  mobile: any;
-  registeruser: any = [];
-
-  data = {
-    fullname: '',
-    email: '',
-    pwd: '',
-    cpwd: '',
-    gender: '',
-    birthday: '',
-    mobile: '',
-  };
+  todayDate: string | undefined = new Date().toISOString().slice(0, 10);
+  registerUser: any[] = [];
   registrationForm!: FormGroup;
+  dialogData = { ...dialogData };
+  @ViewChild('email') email!: ElementRef;
 
-  constructor(private route: Router) {}
+  constructor(
+    private route: Router,
+    private fb: FormBuilder,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    this.createForm();
+    this.getRegistredUser();
   }
 
-  public submitform() {
-    const formValue = this.registrationForm.value;
-
-    if (localStorage.getItem('registeruser') == null) {
-      this.registeruser = [];
+  getRegistredUser() {
+    if (localStorage.getItem('registerUser')) {
     } else {
-      this.registeruser = JSON.parse(
-        localStorage.getItem('registeruser') as string
+      this.registerUser = JSON.parse(
+        localStorage.getItem('registerUser') as string
       );
     }
-    this.registeruser.push({
-      id: formValue.id,
-      fullname: formValue.fullname,
-      email: formValue.email,
-      cpwd: formValue.cpwd,
-      password: formValue.pwd,
-      gender: formValue.gender,
-      birthday: formValue.birthday,
-      mobile: formValue.mobile,
-    });
-    localStorage.setItem('registeruser', JSON.stringify(this.registeruser));
-    this.route.navigateByUrl('login');
   }
 
-
-  initForm() {
-    this.registrationForm = new FormGroup(
-      {
-        id: new FormControl(Date.now()),
-        fullname: new FormControl('', [
-          Validators.required,
-        ]),
-
-        pwd: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(15),
-        ]),
-        cpwd: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(15),
-        ]),
-        gender: new FormControl('', [Validators.required]),
-        birthday: new FormControl('', [Validators.required]),
-        mobile: new FormControl('', [
-          Validators.required,
-          Validators.pattern('[0-9]*'),
-          Validators.minLength(10),
-          Validators.maxLength(10),
-        ]),
-        email: new FormControl('', [Validators.required, Validators.email]),
-      },
-      { validators: this.identityRevealedValidator }
+  submitform(formValue: any) {
+    let findUser = this.registerUser?.find(
+      (value: any) => value.email == formValue.email
     );
+    if (findUser) {
+      let label = this.dialogData.emailModal.label;
+      let yesButtonLable = this.dialogData.emailModal.yesButtonLable;
+      let NoButtonLable = this.dialogData.emailModal.NoButtonLable;
+      this.dialogService
+        .openDialog(label, yesButtonLable, NoButtonLable)
+        .then((value) => {
+          if (value) {
+            setTimeout(() => {
+              this.email.nativeElement.focus();
+            });
+          }
+        });
+    } else {
+      this.registerUser.push(formValue);
+      localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
+      this.route.navigateByUrl('login');
+    }
   }
-  identityRevealedValidator: ValidatorFn = (
+
+  validateConfirmaPassword: ValidatorFn = (
     control: AbstractControl
   ): ValidationErrors | null => {
-    const pwd = control.get('pwd');
-    const cpwd = control.get('cpwd');
-    return pwd && cpwd && pwd.value !== cpwd.value
-      ? { identityRevealed: true }
+    const password = this.registrationForm?.controls['password'];
+    return password?.value !== control?.value
+      ? { validateConfirmaPassword: true }
       : null;
   };
-  getToday(): string {
-    return new Date().toISOString().split('T')[0];
-  }
-  Submited() {
-    console.log(this.registrationForm);
-    console.log(
-      this.registrationForm.value.fullname,
-      this.registrationForm.value.email,
-      this.registrationForm.value.pwd,
-      this.registrationForm.value.cpwd,
-      this.registrationForm.value.gender,
-      this.registrationForm.value.birthday,
-      this.registrationForm.value.mobile
-    );
+
+  validateNumber: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
+    return regex.test(control.value) ? null : { pattern: true };
+  };
+  
+  createForm() {
+    this.registrationForm = this.fb.group({
+      id: [Date.now()],
+      fullName: ['', [Validators.required]],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+          ),
+        ]),
+      ],
+      confirmPassword: [
+        '',
+        Validators.compose([
+          Validators.required,
+          this.validateConfirmaPassword,
+        ]),
+      ],
+      gender: ['', Validators.compose([Validators.required])],
+      dateOfBirth: ['', Validators.compose([Validators.required])],
+      mobile: [
+        '',
+        Validators.compose([Validators.required, this.validateNumber]),
+      ],
+      acceptTerms: [false, Validators.requiredTrue],
+    });
   }
 
-  Mustmatch(pwd: any, cpwd: any) {
-    return () => {
-      const passwordcontrol = this.registrationForm.controls[pwd];
-      const confirmpasswordcontrol = this.registrationForm.controls[cpwd];
-      if (
-        confirmpasswordcontrol.errors &&
-        !confirmpasswordcontrol.errors['Mustmatch']
-      ) {
-        return;
-      }
-      if (passwordcontrol.value !== confirmpasswordcontrol.value) {
-        confirmpasswordcontrol.setErrors({ Mustmatch: true });
-      } else {
-        confirmpasswordcontrol.setErrors(null);
-      }
-    };
-  }
-
-  get FullName(): FormControl {
-    return this.registrationForm.get('fullname') as FormControl;
-  }
-  get Pwd(): FormControl {
-    return this.registrationForm.get('pwd') as FormControl;
-  }
-  get Cpwd(): FormControl {
-    return this.registrationForm.get('cpwd') as FormControl;
-  }
-  get Gender(): FormControl {
-    return this.registrationForm.get('gender') as FormControl;
-  }
-  get Birthday(): FormControl {
-    return this.registrationForm.get('birthday') as FormControl;
-  }
-  get Mobile(): FormControl {
-    return this.registrationForm.get('mobile') as FormControl;
-  }
-  get Email(): FormControl {
-    return this.registrationForm.get('email') as FormControl;
+  get registrationFormValidator() {
+    return this.registrationForm.controls;
   }
 }
