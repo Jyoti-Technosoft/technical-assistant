@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ) {}
 
   public formSubmitted(formValue:any) {
-    let userdata = this.userData?.find(
+   let userdata = this.userData?.find(
       (value: any) => value?.email ==  formValue?.emailId && value?.password ==  formValue?.password 
     );
     if (userdata) {
@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    if (localStorage.getItem('registeruser')?.length) {
-      let data: any = localStorage.getItem('registeruser');
+    if (localStorage.getItem('registerUser')?.length) {
+      let data: any = localStorage.getItem('registerUser');
       this.userData = JSON.parse(data);
     }
   }
