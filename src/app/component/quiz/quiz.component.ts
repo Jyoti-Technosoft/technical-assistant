@@ -25,7 +25,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
   @ViewChild('carousel')
   carousel!: NgbCarousel;
-  myForm!: FormGroup;
+  quizForm!: FormGroup;
   question!: any;
   options!: any[];
   title!: any;
@@ -34,8 +34,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
   questionIndex: number = 0;
   interval$!: Subscription;
   points: number = 0;
-  correctanswer: number = 0;
-  inCorrectanswer: number = 0;
+  correctAnswer: number = 0;
+  inCorrectAnswer: number = 0;
   timer: number | undefined;
   selectedQuizType: any;
   positivePoints: any;
@@ -49,16 +49,15 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private questionService: QuestionService,
     private dialogService: DialogService
   ) {
-    this.myForm = this.fb.group({
+    this.quizForm = this.fb.group({
       form: this.fb.array([]),
     });
   }
 
   ngOnInit(): void {
-    this.startCounter();
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
-
-    this.mapJSONData();
+    this.startCounter();
+    this.mapJsonData();
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -69,30 +68,20 @@ export class Quizcomponent implements OnInit, OnDestroy {
     event.returnValue = false; // stay on same page
   }
 
-  mapJSONData() {
-    this.numberOfQuestions = this.quizData.quiz.find(
+  mapJsonData() {
+    const quizData:any = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
-    )?.numberOfQuestions;
-    let data: any = this.quizData.quiz.find(
-      (data) => data.quizId == this.selectedQuizType
-    )?.questions;
-    this.question = [...data];
-    this.question = this.question?.sort(() => Math.random() - 0.67);
-    this.question = [...this.question?.splice(0, this.numberOfQuestions)];
+    );
+    this.question = [...quizData.questions];
+    this.question = this.question?.sort(() => Math.random() - 0.67).splice(0, quizData.numberOfQuestions);
     this.options = this.question.map((question: any) =>
       question.options.sort(() => Math.random() - 0.69)
     );
-    this.timer = this.quizData?.quiz?.find(
-      (data) => data?.quizId == this.selectedQuizType
-    )?.timer;
-    this.positivePoints = this.quizData.quiz.find(
-      (data) => data.quizId == this.selectedQuizType
-    )?.positivePoints;
-    this.negativePoints = this.quizData.quiz.find(
-      (data) => data.quizId == this.selectedQuizType
-    )?.negativePoints;
+    this.timer = quizData?.timer;
+    this.positivePoints = quizData?.positivePoints;
+    this.negativePoints = quizData.negativePoints;
 
-    const formArray = this.myForm.controls['form'] as FormArray;
+    const formArray = this.quizForm.controls['form'] as FormArray;
     this.question.forEach((item: any) => {
       formArray.push(
         this.fb.group({
@@ -104,10 +93,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   get FormArray() {
-    return this.myForm.controls['form'] as FormArray;
+    return this.quizForm.controls['form'] as FormArray;
   }
 
-  nextQuestion(questionIndex: number): void {
+  nextQuestion(questionIndex: number) {
     this.carousel.next();
     const values = this.FormArray.controls[questionIndex].value.radioValue;
     this.answer(questionIndex, values);
@@ -130,8 +119,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
     let stringifyData = data.length == 0 ? data : JSON.parse(data);
     let currentData = {
       points: this.points,
-      correctanswer: this.correctanswer,
-      inCorrectAnswer: this.inCorrectanswer,
+      correctanswer: this.correctAnswer,
+      inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuizType,
       user: this.questionService.getUser(),
     };
@@ -139,9 +128,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
     localStorage.setItem('result', JSON.stringify(stringifyData));
     this.questionService.points = this.points;
-    this.questionService.correctanswer = this.correctanswer;
-    this.questionService.inCorrectAnswer = this.inCorrectanswer;
-    this.router.navigate(['/result']);
+    this.questionService.correctanswer = this.correctAnswer;
+    this.questionService.inCorrectAnswer = this.inCorrectAnswer;
+    this.router.navigateByUrl('result');
   }
 
   skipQuestion(questionIndex: number) {
@@ -191,14 +180,14 @@ export class Quizcomponent implements OnInit, OnDestroy {
       });
   }
 
-  answer(questionIndex: number, correctOptions: string) {
+  answer(questionIndex: number, selectedOption: number) {
     if (!this.FormArray.at(questionIndex).get('timer')?.disabled) {
-      if (this.question[questionIndex].answer.id && correctOptions) {
+      if ((this.question[questionIndex].answer?.id == selectedOption)) {
         this.points = this.points += this.positivePoints;
-        this.correctanswer++;
-      } else if (!this.question[questionIndex].answer.id && correctOptions) {
+        this.correctAnswer++;
+      } else if (!(this.question[questionIndex].answer?.id == selectedOption)) {
         this.points = this.points -= this.negativePoints;
-        this.inCorrectanswer++;
+        this.inCorrectAnswer++;
       }
     }
   }

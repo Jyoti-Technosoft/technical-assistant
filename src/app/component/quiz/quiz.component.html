@@ -1,112 +1,108 @@
-<div class="carousel slide" data-bs-touch="false" data-bs-interval="false">
-  <div class="container carousel-inner">
-    <form [formGroup]="myForm">
-      <div formArrayName="form">
-        <ngb-carousel
-          #carousel
-          *ngIf="question?.length"
-          [showNavigationArrows]="false"
-          [showNavigationIndicators]="false"
-          [interval]="0"
-          [keyboard]="false"
+<div class="container carousel-inner">
+  <form [formGroup]="quizForm">
+    <div formArrayName="form">
+      <ngb-carousel
+        #carousel
+        *ngIf="question?.length"
+        [showNavigationArrows]="false"
+        [showNavigationIndicators]="false"
+        [interval]="0"
+        [keyboard]="false"
+      >
+        <ng-template
+          ngbSlide
+          *ngFor="let arrayloop of FormArray.controls; let i = index"
         >
-          <ng-template
-            ngbSlide
-            *ngFor="let arrayloop of FormArray.controls; let i = index"
-          >
-            <ng-container [formGroupName]="i">
-              <div class="p-5">
-                <div class="card card-layout">
-                  <div class="card-body card-body-layout">
-                    <div class="quiz">
-                      <div class="data">
-                        {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
-                      </div>
-                      <div class="timer">
-                        <i class="fa fa-clock timer"
-                          >&#xf017;
-                          {{ FormArray.controls.at(i)?.value?.timer }} sec</i
-                        >
-                      </div>
+          <ng-container [formGroupName]="i">
+            <div class="p-5">
+              <div class="card card-layout">
+                <div class="card-body card-body-layout">
+                  <div class="quiz">
+                    <div class="data">
+                      {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
                     </div>
+                    <div class="timer">
+                      <i class="fa fa-clock timer"
+                        >&#xf017;
+                        {{ FormArray.controls.at(i)?.value?.timer }} sec</i
+                      >
+                    </div>
+                  </div>
 
-                    <ng-container
-                      *ngFor="let card of question[this.questionIndex].options"
+                  <ng-container *ngFor="let card of question[i].options">
+                    <div class="form-check">
+                      <label
+                        class="form-check-label"
+                        *ngIf="card.type == 'checkbox'"
+                        ><input
+                          type="checkbox"
+                          class="form-check-input"
+                          formControlName="radioValue"
+                          value="{{ card.id }}"
+                        />
+                        {{ card.label }}</label
+                      >
+
+                      <label
+                        class="form-check-label"
+                        *ngIf="card.type == 'radio'"
+                        ><input
+                          type="radio"
+                          class="form-check-input"
+                          formControlName="radioValue"
+                          value="{{ card.id }}"
+                        />
+                        {{ card.label }}</label
+                      >
+                    </div>
+                  </ng-container>
+                  <div class="radio-button">
+                    <button
+                      [disabled]="!FormArray.controls[i].dirty"
+                      id="next"
+                      role="button"
+                      data-slide="next"
+                      type="button"
+                      (click)="nextQuestion(i)"
+                      class="btn btn-success next-button"
+                      aria-hidden="true"
+                      data-bs-slide="next"
                     >
-                      <div class="form-check">
-                        <label
-                          class="form-check-label"
-                          *ngIf="card.type == 'checkbox'"
-                          ><input
-                            type="checkbox"
-                            class="form-check-input"
-                            formControlName="radioValue"
-                            value="{{ card.id }}"
-                          />
-                          {{ card.label }}</label
-                        >
-
-                        <label
-                          class="form-check-label"
-                          *ngIf="card.type == 'radio'"
-                          ><input
-                            type="radio"
-                            class="form-check-input"
-                            formControlName="radioValue"
-                            value="{{ card.id }}"
-                          />
-                          {{ card.label }}</label
-                        >
-                      </div>
-                    </ng-container>
-                    <div class="radio-button">
-                      <button
-                        [disabled]="!FormArray.controls[i].dirty"
-                        id="next"
-                        role="button"
-                        data-slide="next"
-                        type="button"
-                        (click)="nextQuestion(i)"
-                        class="btn btn-success next-button"
-                        aria-hidden="true"
-                        data-bs-slide="next"
-                      >
-                        {{ question.length != i + 1 ? "Next" : "Submit" }}
-                      </button>
-                      <button
-                        [disabled]="FormArray.controls[i].dirty"
-                        id="skip"
-                        role="button"
-                        data-slide="skip"
-                        type="button"
-                        (click)="skipQuestion(i)"
-                        class="btn btn-dark skip-button"
-                        aria-hidden="true"
-                        data-bs-slide="per"
-                      >
-                        Skip
-                      </button>
-                      <button
-                        [disabled]="i == 0"
-                        id="previous"
-                        role="button"
-                        data-slide="Previous"
-                        type="button"
-                        (click)="previousQuestion(i)"
-                        class="btn btn-primary previous-button"
-                        aria-hidden="true"
-                        data-bs-slide="per"
-                      >
-                        Previous
-                      </button>
-                    </div>
+                      {{ question.length != i + 1 ? "Next" : "Submit" }}
+                    </button>
+                    <button
+                      [disabled]="FormArray.controls[i].dirty"
+                      id="skip"
+                      role="button"
+                      data-slide="skip"
+                      type="button"
+                      (click)="skipQuestion(i)"
+                      class="btn btn-dark skip-button"
+                      aria-hidden="true"
+                      data-bs-slide="per"
+                    >
+                      Skip
+                    </button>
+                    <button
+                      [disabled]="i == 0"
+                      id="previous"
+                      role="button"
+                      data-slide="Previous"
+                      type="button"
+                      (click)="previousQuestion(i)"
+                      class="btn btn-primary previous-button"
+                      aria-hidden="true"
+                      data-bs-slide="per"
+                    >
+                      Previous
+                    </button>
                   </div>
                 </div>
               </div>
-            </ng-container>
-          </ng-template>
-        </ngb-carousel>
-      </div>
-    </form>
-  </div>
+            </div>
+          </ng-container>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </form>
 </div>
