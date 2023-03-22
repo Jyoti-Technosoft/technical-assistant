@@ -1,0 +1,17 @@
+{
+  "skipModel": {
+    "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
+    "yesButtonLable": "Yes",
+    "NoButtonLable": "No"
+  },
+  "loginModel": {
+    "label": "Wrong Credentials , Do you want to create new account?",
+    "yesButtonLable": "Yes",
+    "NoButtonLable": "No"
+  },
+  "emailModal": {
+    "label": "This Email is already registerd with Us, Do you want to login again?.",
+    "yesButtonLable": "Yes",
+    "NoButtonLable": "No"
+  }
+}
