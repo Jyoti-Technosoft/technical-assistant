@@ -6,12 +6,13 @@ import quizData from '../../../assets/json/data.json';
 @Component({
   selector: 'app-carddesign',
   templateUrl: './startquiz.component.html',
-  styleUrls: ['./startquiz.component.scss'],
+  styleUrls: ['./startquiz.component.scss']
 })
 export class StartquizComponent implements OnInit {
   quizData = { ...quizData };
   instruction: any;
   selectedQuizType!: string;
+  
   constructor(private route: Router, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {

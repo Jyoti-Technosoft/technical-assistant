@@ -628,17 +628,17 @@
           "options": [
             {
               "id": 1,
-              "label": "Both a and b are equal in id, type and reference address",
+              "label": "Both a and b are equal in value, type and reference address",
               "type": "radio"
             },
             {
               "id": 2,
-              "label": "Both a and b are equal in id",
+              "label": "Both a and b are equal in value",
               "type": "radio"
             },
             {
               "id": 3,
-              "label": "Both a and b are equal in id and type",
+              "label": "Both a and b are equal in value and type",
               "type": "radio"
             },
             {

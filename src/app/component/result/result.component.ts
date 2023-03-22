@@ -5,7 +5,7 @@ import quizData from 'src/assets/json/data.json';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss'],
+  styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
