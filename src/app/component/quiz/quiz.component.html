@@ -1,45 +1,29 @@
-<app-header></app-header>
-<div
-  id="carouselExampleControlsNoTouching"
-  class="carousel slide"
-  data-bs-touch="false"
-  data-bs-interval="false"
->
-  <div class="carousel-inner">
-    <div
-      id="carouselExampleControls"
-      data-bs-interval="false"
-      data-wrap="false"
-      class="carousel slide"
-      data-ride="carousel"
-    >
-      <form [formGroup]="myForm">
-        <button type="submit" (click)="submit()">Submit</button>
-
-        <div formArrayName="form">
-          <ngb-carousel
-            #carousel
-            *ngIf="name"
-            [showNavigationArrows]="false"
-            [showNavigationIndicators]="false"
-            [interval]="0"
-            [keyboard]="false"
+<div class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+  <div class="container carousel-inner">
+    <form [formGroup]="myForm">
+      <div formArrayName="form">
+        <ngb-carousel
+          #carousel
+          *ngIf="question?.length"
+          [showNavigationArrows]="false"
+          [showNavigationIndicators]="false"
+          [interval]="0"
+          [keyboard]="false"
+        >
+          <ng-template
+            ngbSlide
+            *ngFor="let arrayloop of FormArray.controls; let i = index"
           >
-            <ng-template
-              ngbSlide
-              *ngFor="let arrayloop of FormArray.controls; let i = index"
-            >
-              <ng-container [formGroupName]="i">
-                <div class="card" style="width: 60rem; margin-top: 7rem">
-                  <div class="card-body">
+            <ng-container [formGroupName]="i">
+              <div class="p-5">
+                <div class="card card-layout">
+                  <div class="card-body card-body-layout">
                     <div class="quiz">
                       <div class="data">
                         {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
                       </div>
-                      <div class="ram">
-                        <i
-                          style="font-size: 20px; width: 80px"
-                          class="fa fa-clock"
+                      <div class="timer">
+                        <i class="fa fa-clock timer"
                           >&#xf017;
                           {{ FormArray.controls.at(i)?.value?.timer }} sec</i
                         >
@@ -47,7 +31,7 @@
                     </div>
 
                     <ng-container
-                      *ngFor="let card of question[this.questionindex].options"
+                      *ngFor="let card of question[this.questionIndex].options"
                     >
                       <div class="form-check">
                         <label
@@ -57,9 +41,9 @@
                             type="checkbox"
                             class="form-check-input"
                             formControlName="radioValue"
-                            value="{{ card.value }}"
+                            value="{{ card.id }}"
                           />
-                          {{ card.lable }}</label
+                          {{ card.label }}</label
                         >
 
                         <label
@@ -69,76 +53,60 @@
                             type="radio"
                             class="form-check-input"
                             formControlName="radioValue"
-                            value="{{ card.value }}"
+                            value="{{ card.id }}"
                           />
-                          {{ card.lable }}</label
+                          {{ card.label }}</label
                         >
                       </div>
                     </ng-container>
                     <div class="radio-button">
                       <button
                         [disabled]="!FormArray.controls[i].dirty"
-                        class="carousel-control-next"
                         id="next"
                         role="button"
                         data-slide="next"
                         type="button"
-                        (click)="next(i)"
-                        class="btn btn-success"
+                        (click)="nextQuestion(i)"
+                        class="btn btn-success next-button"
                         aria-hidden="true"
                         data-bs-slide="next"
-                        style="
-                          position: absolute;
-                          left: 73%;
-
-                          width: 20%;
-                        "
                       >
                         {{ question.length != i + 1 ? "Next" : "Submit" }}
                       </button>
                       <button
                         [disabled]="FormArray.controls[i].dirty"
-                        class="carousel-control-Previous"
                         id="skip"
                         role="button"
                         data-slide="skip"
                         type="button"
-                        (click)="skip(i)"
-                        class="btn btn-dark"
+                        (click)="skipQuestion(i)"
+                        class="btn btn-dark skip-button"
                         aria-hidden="true"
                         data-bs-slide="per"
-                        style="
-                          position: absolute;
-                          left: 40%;
-
-                          width: 20%;
-                        "
                       >
                         Skip
                       </button>
                       <button
                         [disabled]="i == 0"
-                        class="carousel-control-Previous"
                         id="previous"
                         role="button"
                         data-slide="Previous"
                         type="button"
-                        (click)="prev(i)"
-                        class="btn btn-primary"
+                        (click)="previousQuestion(i)"
+                        class="btn btn-primary previous-button"
                         aria-hidden="true"
                         data-bs-slide="per"
-                        style="position: absolute; left: 7.5%; width: 20%"
                       >
                         Previous
                       </button>
                     </div>
                   </div>
                 </div>
-              </ng-container>
-            </ng-template>
-          </ngb-carousel>
-        </div>
-      </form>
-    </div>
+              </div>
+            </ng-container>
+          </ng-template>
+        </ngb-carousel>
+      </div>
+    </form>
   </div>
 </div>

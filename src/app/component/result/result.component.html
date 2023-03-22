@@ -1,9 +1,11 @@
-<div class="card shadow" id="card" style="margin-top: 80px">
-  <div class="card-body" style="padding: 0px">
+<div class="container">
+<div class="card shadow card-layout">
+  <div class="card-body">
     <div class="row g-0">
       <div class="col text-center mb-3 mt-4">
         <span class="fs-3">Result</span>
       </div>
+    </div>
     </div>
 
     <div class="row" *ngIf="submittedData?.length">
@@ -12,55 +14,24 @@
           <div class="card shadow">
             <div class="">
               <img class="card-img-top" src="{{ data.image }}" alt="" />
-              <h3
-                class="card-title text-center"
-                style="font-weight: bold; padding-top: 10px"
-              >
+              <h3 class="card-title text-center">
                 {{ data.type }}
               </h3>
-              <p class="card-text">
+              <p>
                 <span>
-                  <h5
-                    style="
-                      margin-top: 10px;
-                      text-align: left;
-                      padding-left: 10px;
-                    "
-                  >
-                    User Name : {{ userName }}
-                  </h5>
+                  <h5 class="card-text">User Name : {{ userName }}</h5>
                 </span>
 
                 <span>
-                  <h5
-                    style="
-                      margin-top: 10px;
-                      text-align: left;
-                      padding-left: 10px;
-                    "
-                  >
-                    Total Points : {{ data.points }}
-                  </h5>
+                  <h5 class="card-text">Total Points : {{ data.points }}</h5>
                 </span>
                 <span>
-                  <h5
-                    style="
-                      margin-top: 10px;
-                      text-align: left;
-                      padding-left: 10px;
-                    "
-                  >
+                  <h5 class="card-text">
                     Correct Answers : {{ data.correctanswer }}
                   </h5>
                 </span>
                 <span>
-                  <h5
-                    style="
-                      margin-top: 10px;
-                      text-align: left;
-                      padding-left: 10px;
-                    "
-                  >
+                  <h5 class="card-text">
                     Wrong Answers : {{ data.inCorrectAnswer }}
                   </h5>
                 </span>
