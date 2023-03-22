@@ -8,7 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+
+import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 
 @Component({
@@ -26,13 +27,14 @@ export class RegistrationComponent {
   constructor(
     private route: Router,
     private fb: FormBuilder,
-    private dialogService: DialogService
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
     this.createForm();
     this.getRegistredUser();
   }
+
   getRegistredUser() {
     if (!localStorage.getItem('registerUser')) {
       this.registerUser = [];
@@ -48,22 +50,15 @@ export class RegistrationComponent {
       (value: any) => value.email == formValue.email
     );
     if (findUser) {
-      let label = this.dialogData.emailModal.label;
-      let yesButtonLable = this.dialogData.emailModal.yesButtonLable;
-      let NoButtonLable = this.dialogData.emailModal.NoButtonLable;
-      this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
-        .then((value) => {
-          if (value) {
-            setTimeout(() => {
-              this.email.nativeElement.focus();
-            });
-          }
-        });
+      this.toastService.showErrorMessage('This user Id Is already Registerad');
+      setTimeout(() => {
+        this.email.nativeElement.focus();
+      });
     } else {
+      this.toastService.showSuccessMessage('Registered Successfully');
+      this.route.navigateByUrl('/dashboard');
       this.registerUser.push(formValue);
       localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
-      this.route.navigateByUrl('login');
     }
   }
 
@@ -82,7 +77,7 @@ export class RegistrationComponent {
     const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
     return regex.test(control.value) ? null : { pattern: true };
   };
-  
+
   createForm() {
     this.registrationForm = this.fb.group({
       id: [Date.now()],

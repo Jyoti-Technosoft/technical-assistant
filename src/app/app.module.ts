@@ -6,12 +6,14 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { RegistrationComponent } from './authorization/registration/registration.component';
 import { LoginComponent } from './authorization/login/login.component';
+import { ToastComponent } from './toast/toast.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
 import { QuestionService } from './service/question.service';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutComponentModule } from './layout/layout-component.module';
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({ 
@@ -19,6 +21,7 @@ import { LayoutComponentModule } from './layout/layout-component.module';
         AppComponent,
         LoginComponent,
         RegistrationComponent,
+        ToastComponent
     ],
     imports: [
         BrowserModule,
@@ -27,7 +30,8 @@ import { LayoutComponentModule } from './layout/layout-component.module';
         NgbCarouselModule,
         ReactiveFormsModule,
         HttpClientModule,
-        LayoutComponentModule
+        LayoutComponentModule,
+        NgbToastModule
     ],
     providers: [AuthGuard,QuestionService],
     bootstrap: [AppComponent],

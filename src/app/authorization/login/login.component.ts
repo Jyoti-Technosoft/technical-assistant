@@ -2,7 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from '../../dialog-service/modal/modal/modal.component';
+import { QuestionService } from '../../service/question.service';
+import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 @Component({
   selector: 'app-login',
@@ -16,47 +19,34 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: Router,
-    private dialogService: DialogService,
+    private questionService: QuestionService,
+    private modalService: NgbModal,
+    public toastService: ToastService,
     private fb: FormBuilder
   ) {}
 
-  public formSubmitted() {
+  public formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
         value?.email == this.adminForm?.value?.email &&
         value?.password == this.adminForm?.value?.password
     );
     if (userdata) {
+      this.toastService.showSuccessMessage('Login Successfully!');
       document.cookie = 'username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('/dashboard');
     } else {
-      let label = this.dialogData.loginModel.label;
-      let yesButtonLable = this.dialogData.loginModel.yesButtonLable;
-      let NoButtonLable = this.dialogData.loginModel.NoButtonLable;
-      this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
-        .then((value) => {
-          if (value) {
-            this.route.navigateByUrl('registration');
-          } else {
-            this.adminForm?.reset();
-          }
-        });
+      this.toastService.showErrorMessage('Wrong Credential!');
     }
   }
 
   ngOnInit(): void {
-    if (!localStorage.getItem('registerUser')?.length) {
-      let registerUser: any = localStorage.getItem('registerUser');
-      registerUser = JSON.parse(registerUser as string);
-      alert('There is no user create one');
-      this.route.navigateByUrl('/registration');
-    } else {
+    this.createForm();
+    if (localStorage.getItem('registerUser')?.length) {
       let data: any = localStorage.getItem('registerUser');
       this.userData = JSON.parse(data);
     }
-    this.createForm();
   }
 
   createForm() {
