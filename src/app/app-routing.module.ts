@@ -4,10 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './authorization/login/login.component';
 import { RegistrationComponent } from './authorization/registration/registration.component';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
+import { NonAuthGuard } from './authorization/auth-guard/non-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
   { path: 'registration', component: RegistrationComponent },
   {
     path: '',
@@ -16,6 +17,7 @@ const routes: Routes = [
         (m) => m.LayoutComponentModule
       ),
   },
+  {path:'**',redirectTo:'login',pathMatch:'full'}
 ];
 
 @NgModule({
