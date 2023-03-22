@@ -8,12 +8,8 @@ import quizData from 'src/assets/json/data.json';
   styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit, OnDestroy {
-  quizData: any = { ...quizData };
-  isQuizCompleted: any;
+  quizData = { ...quizData };
   userName: any;
-  points: any;
-  correctAnswer: any;
-  inCorrectAnswer: any;
   userData: any;
   submittedData: any;
 
@@ -30,8 +26,8 @@ export class ResultComponent implements OnInit, OnDestroy {
   getData() {
     let data: any = localStorage.getItem('registeruser');
     this.userData = JSON.parse(data);
-    this.userName = this.userData.find((data:any)=>{
-      return data.id == this.questionService.getUser()
+    this.userName = this.userData.find((data: any) => {
+      return data.id == this.questionService.getUser();
     })?.fullname;
   }
 
@@ -42,17 +38,13 @@ export class ResultComponent implements OnInit, OnDestroy {
       return data?.user == this.questionService.getUser();
     });
     this.submittedData = this.submittedData.map((data: any) => {
-      const message = this.quizData?.QuizType?.find((quizData: any) => {
+      const message = this.quizData?.quiz?.find((quizData: any) => {
         return quizData.quizId == data.type;
       });
       data.image = message?.image;
       return data;
     });
     this.submittedData = this.submittedData?.reverse();
-  }
-
-  againQuiz() {
-    window.location.reload();
   }
 
   ngOnDestroy(): void {}

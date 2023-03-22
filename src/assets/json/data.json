@@ -1,1107 +1,1071 @@
 {
-  "QuizType": [
+  "quiz": [
     {
-      "quizId": "htmlcss",
+      "quizId": "Html/CSS",
+      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
+      "timer": 30,
+      "positivePoints": 10,
+      "negativePoints": 1,
+      "numberOfQuestions": "3",
+      "type": "radio",
       "title": "HTML-CSS Quiz",
-      "image":"assets\\img\\html-css1.png",
-      "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages."
-    },
-    {
-       "quizId":"javascript",
-       "title":"JavaScript Quiz",
-       "image":"assets\\img\\javascript.jpg",
-       "description": "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions."
-    },
-    {
-      "quizId": "reactJS",
-      "title":"React JS Quiz",
-      "image":"assets\\img\\react-js.png",
-      "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta."
-    },
-    {
-      "quizId":"angular",
-      "title":"Angular Quiz",
-      "image":"assets\\img\\angular.jpg",
-      "description": "Angular is a development platform, built on TypeScript.component-based framework for building scalable web applications."
-    }
-  ],
-  "htmlcss": {
-     "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-      "timer": 80,
-      "type":"radio",
+      "image": "assets\\img\\html-css1.png",
+      "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages.",
       "questions": [
         {
-          "id": "Q-1.",
           "question": "What is HTML?",
           "options": [
             {
-              "value":"a",
-              "lable": "HTML describes the structure of a webpage",
-              "type":"radio"
+              "id": 1,
+              "label": "HTML describes the structure of a webpage",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "HTML is the standard markup language mainly used to create web pages",
-              "type":"radio"
+              "id": 2,
+              "label": "HTML is the standard markup language mainly used to create web pages",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "HTML consists of a set of elements that helps the browser how to view the content",
-              "type":"radio"
+              "id": 3,
+              "label": "HTML consists of a set of elements that helps the browser how to view the content",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "All of the mentioned",
-              "type":"radio"
+              "id": 4,
+              "label": "All of the mentioned",
+              "type": "radio"
             }
           ],
-          "answer": ["d"]
+          "answer": { "id": 4 }
         },
         {
-          "id": "Q-2.",
           "question": "Which of the following tag is used for inserting the largest heading in HTML?",
           "options": [
             {
-              "value":"a",
-              "lable": "head",
-              "type":"radio"
+              "id": 1,
+              "label": "head",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "<h1>",
-              "type":"radio"
+              "id": 2,
+              "label": "<h1>",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "<h6>",
-              "type":"radio"
+              "id": 3,
+              "label": "<h6>",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "heading",
-              "type":"radio"
+              "id": 4,
+              "label": "heading",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-3.",
           "question": " HTML stands for __________",
           "options": [
             {
-              "value":"a",
-              "lable": "HyperText Markup Language",
-              "type":"radio"
+              "id": 1,
+              "label": "HyperText Markup Language",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "HyperText Machine Language",
-              "type":"radio"
+              "id": 2,
+              "label": "HyperText Machine Language",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "HyperText Marking Language",
-              "type":"radio"
+              "id": 3,
+              "label": "HyperText Marking Language",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "HighText Marking Language",
-              "type":"radio"
+              "id": 4,
+              "label": "HighText Marking Language",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-4.",
           "question": "Which element is used to get highlighted text in HTML5?",
           "options": [
             {
-              "value":"a",
-              "lable": "<u>",
-              "type":"radio"
+              "id": 1,
+              "label": "<u>",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "<mark>",
-              "type":"radio"
+              "id": 2,
+              "label": "<mark>",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "<highlight>",
-              "type":"radio"
+              "id": 3,
+              "label": "<highlight>",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "<b>",
-              "type":"radio"
+              "id": 4,
+              "label": "<b>",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-5.",
           "question": "How do we write comments in HTML?",
           "options": [
             {
-              "value":"a",
-              "lable": "</…….>",
-              "type":"radio"
+              "id": 1,
+              "label": "</…….>",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "<!……>",
-              "type":"radio"
+              "id": 2,
+              "label": "<!……>",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "</……/>",
-              "type":"radio"
+              "id": 3,
+              "label": "</……/>",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "<…….!>",
-              "type":"radio"
+              "id": 4,
+              "label": "<…….!>",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-6.",
           "question": "Which of the following tag is used to embed css in html page?",
           "options": [
             {
-              "value":"a",
-              "lable": "<css>",
-              "type":"radio"
+              "id": 1,
+              "label": "<css>",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "<!DOCTYPE html>",
-              "type":"radio"
+              "id": 2,
+              "label": "<!DOCTYPE html>",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "<script>",
-              "type":"radio"
+              "id": 3,
+              "label": "<script>",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "<style>",
-              "type":"radio"
+              "id": 4,
+              "label": "<style>",
+              "type": "radio"
             }
           ],
-          "answer": ["d"]
+          "answer": { "id": 4 }
         },
         {
-          "id": "Q-7.",
           "question": "Which of the following has introduced text, list, box, margin, border, color, and background properties?",
           "options": [
             {
-              "value":"a",
-              "lable": "HTML",
-              "type":"radio"
+              "id": 1,
+              "label": "HTML",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "PHP",
-              "type":"radio"
+              "id": 2,
+              "label": "PHP",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "CSS",
-              "type":"radio"
+              "id": 3,
+              "label": "CSS",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "Ajax",
-              "type":"radio"
+              "id": 4,
+              "label": "Ajax",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-8.",
           "question": "What is the work of <address> element in HTML5?",
           "options": [
             {
-              "value":"a",
-              "lable": "contains IP address",
-              "type":"radio"
+              "id": 1,
+              "label": "contains IP address",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "contains home address",
-              "type":"radio"
+              "id": 2,
+              "label": "contains home address",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "contains url",
-              "type":"radio"
+              "id": 3,
+              "label": "contains url",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "contains contact details for author",
-              "type":"radio"
+              "id": 4,
+              "label": "contains contact details for author",
+              "type": "radio"
             }
           ],
-          "answer": ["d"]
+          "answer": { "id": 4 }
         },
         {
-          "id": "Q-9.",
           "question": " Which tag is used to create a dropdown in HTML Form?",
           "options": [
             {
-              "value":"a",
-              "lable": "<input>",
-              "type":"radio"
+              "id": 1,
+              "label": "<input>",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "<select>",
-              "type":"radio"
+              "id": 2,
+              "label": "<select>",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "<text>",
-              "type":"radio"
+              "id": 3,
+              "label": "<text>",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "<textarea>",
-              "type":"radio"
+              "id": 4,
+              "label": "<textarea>",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-10.",
           "question": "Which of the following CSS style property is used to specify an italic text?",
           "options": [
             {
-              "value":"a",
-              "lable": "style",
-              "type":"radio"
+              "id": 1,
+              "label": "style",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "font",
-              "type":"radio"
+              "id": 2,
+              "label": "font",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "font-style",
-              "type":"radio"
+              "id": 3,
+              "label": "font-style",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "@font-face",
-              "type":"radio"
+              "id": 4,
+              "label": "@font-face",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-11.",
           "question": " Which of the following function defines a linear gradient as a CSS image?",
           "options": [
             {
-              "value":"a",
-              "lable": "gradient()",
-              "type":"radio"
+              "id": 1,
+              "label": "gradient()",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "linear-gradient()",
-              "type":"radio"
+              "id": 2,
+              "label": "linear-gradient()",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "grayscale()",
-              "type":"radio"
+              "id": 3,
+              "label": "grayscale()",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "image()",
-              "type":"radio"
+              "id": 4,
+              "label": "image()",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-12.",
           "question": "Which of the following CSS property can be used to set the image as a border instead of the border style?",
           "options": [
             {
-              "value":"a",
-              "lable": "background-image-source",
-              "type":"radio"
+              "id": 1,
+              "label": "background-image-source",
+              "type": "radio"
             },
             {
-              "value": "b",
-              "lable": "background-image",
-              "type":"radio"
+              "id": 2,
+              "label": "background-image",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "border-image-source",
-              "type":"radio"
+              "id": 3,
+              "label": "border-image-source",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "border-image",
-              "type":"radio"
+              "id": 4,
+              "label": "border-image",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-13.",
           "question": "Which of the following CSS property sets the font size of text?",
           "options": [
             {
-              "value": "a",
-              "lable": "font-size",
-              "type":"radio"
+              "id": 1,
+              "label": "font-size",
+              "type": "radio"
             },
             {
-              "value": "b",
-              "lable": "text-size",
-              "type":"radio"
+              "id": 2,
+              "label": "text-size",
+              "type": "radio"
             },
             {
-              "value": "c",
-              "lable": "text",
-              "type":"radio"
+              "id": 3,
+              "label": "text",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "size",
-              "type":"radio"
+              "id": 4,
+              "label": "size",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-14.",
           "question": "Which of the following CSS selector selects the elements that are checked?",
           "options": [
             {
-              "value": "a",
-              "lable":":checked",
-              "type":"radio"
+              "id": 1,
+              "label": ":checked",
+              "type": "radio"
             },
             {
-              "value": "b",
-              "lable":"E ~ F",
-              "type":"radio"
+              "id": 2,
+              "label": "E ~ F",
+              "type": "radio"
             },
             {
-              "value": "c",
-              "lable": "::after",
-              "type":"radio"
+              "id": 3,
+              "label": "::after",
+              "type": "radio"
             },
             {
-              "value": "d",
-              "lable": "none of the mentioned",
-              "type":"radio"
+              "id": 4,
+              "label": "none of the mentioned",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         }
       ]
     },
-    "javascript": {
+    {
+      "quizId": "javascript",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-      "timer": " 50 ",
+      "timer": 50,
+      "positivePoints": 1,
+      "negativePoints": 0.25,
+      "numberOfQuestions": "3",
+      "title": "JavaScript Quiz",
+      "image": "assets\\img\\javascript.jpg",
+      "description": "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.",
       "questions": [
         {
-          "id": "Q-1.",
           "question": "What is JavaScript?",
           "options": [
             {
-               "value":"a",
-               "lable":"JavaScript is a scripting language used to make the website interactive",
-               "type":"radio"
+              "id": 1,
+              "label": "JavaScript is a scripting language used to make the website interactive",
+              "type": "radio"
             },
             {
-               "value":"b",
-               "lable":"JavaScript is an assembly language used to make the website interactive",
-               "type":"radio"
+              "id": 2,
+              "label": "JavaScript is an assembly language used to make the website interactive",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "JavaScript is a compiled language used to make the website interactive",
-              "type":"radio"
+              "id": 3,
+              "label": "JavaScript is a compiled language used to make the website interactive",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "None of the mentioned",
-              "type":"radio"
+              "id": 4,
+              "label": "None of the mentioned",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-2.",
           "question": "Arrays in JavaScript are defined by which of the following statements?",
           "options": [
             {
-              "value":"a",
-              "lable": "It is an ordered list of values",
-              "type":"radio"
+              "id": 1,
+              "label": "It is an ordered list of ids",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "It is an ordered list of objects",
-              "type":"radio"
+              "id": 2,
+              "label": "It is an ordered list of objects",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "It is an ordered list of string",
-              "type":"radio"
+              "id": 3,
+              "label": "It is an ordered list of string",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "It is an ordered list of functions",
-              "type":"radio"
+              "id": 4,
+              "label": "It is an ordered list of functions",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-3.",
           "question": "Which of the following is not javascript data types?",
           "options": [
             {
-              "value":"a",
-              "lable": "Null type",
-              "type":"radio"
+              "id": 1,
+              "label": "Null type",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "Undefined type",
-              "type":"radio"
+              "id": 2,
+              "label": "Undefined type",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "Number type",
-              "type":"radio"
+              "id": 3,
+              "label": "Number type",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "All of the mentioned",
-              "type":"radio"
+              "id": 4,
+              "label": "All of the mentioned",
+              "type": "radio"
             }
           ],
-          "answer": ["d"]
+          "answer": { "id": 4 }
         },
         {
-          "id": "Q-4.",
           "question": "Which of the following can be used to call a JavaScript Code Snippet?",
           "options": [
             {
-              "value":"a",
-              "lable": "Function/Method",
-              "type":"radio"
+              "id": 1,
+              "label": "Function/Method",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "Preprocessor",
-              "type":"radio"
+              "id": 2,
+              "label": "Preprocessor",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "Triggering Event",
-              "type":"radio"
+              "id": 3,
+              "label": "Triggering Event",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"RMI",
-              "type":"radio"
+              "id": 4,
+              "label": "RMI",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-5.",
           "question": "Why JavaScript Engine is needed?",
           "options": [
             {
-              "value":"a",
-              "lable":"Both Compiling & Interpreting the JavaScript",
-              "type":"radio"
+              "id": 1,
+              "label": "Both Compiling & Interpreting the JavaScript",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"Parsing the javascript",
-              "type":"radio"
+              "id": 2,
+              "label": "Parsing the javascript",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"Interpreting the JavaScript",
-              "type":"radio"
+              "id": 3,
+              "label": "Interpreting the JavaScript",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "Compiling the JavaScript",
-              "type":"radio"
+              "id": 4,
+              "label": "Compiling the JavaScript",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-6.",
           "question": "JavaScript is a _______________ language.",
           "options": [
             {
-              "value":"a",
-              "lable": "Object-Oriented",
-              "type":"radio"
+              "id": 1,
+              "label": "Object-Oriented",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "High-level",
-              "type":"radio"
+              "id": 2,
+              "label": "High-level",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "Assembly-language",
-              "type":"radio"
+              "id": 3,
+              "label": "Assembly-language",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "Object-Based",
-              "type":"radio"
+              "id": 4,
+              "label": "Object-Based",
+              "type": "radio"
             }
           ],
-          "answer": ["d"]
+          "answer": { "id": 4 }
         },
         {
-          "id": "Q-7.",
           "question": "A conditional expression is also called a _______________",
           "options": [
             {
-              "value":"a",
-              "lable": "Alternative to if-else",
-              "type":"radio"
+              "id": 1,
+              "label": "Alternative to if-else",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "Immediate if",
-              "type":"radio"
+              "id": 2,
+              "label": "Immediate if",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "If-then-else statement",
-              "type":"radio"
+              "id": 3,
+              "label": "If-then-else statement",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "Switch statement",
-              "type":"radio"
+              "id": 4,
+              "label": "Switch statement",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-8.",
           "question": "The “var” and “function” are __________",
           "options": [
             {
-              "value":"a",
-              "lable": "Keywords",
-              "type":"radio"
+              "id": 1,
+              "label": "Keywords",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "Declaration statements",
-              "type":"radio"
+              "id": 2,
+              "label": "Declaration statements",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "Data types",
-              "type":"radio"
+              "id": 3,
+              "label": "Data types",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "Prototypes",
-              "type":"radio"
+              "id": 4,
+              "label": "Prototypes",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-9.",
           "question": "If you have a function f and an object o, you can define a method named m of o with ________",
           "options": [
             {
-              "value":"a",
-              "lable": "o.m=m.f;",
-              "type":"radio"
+              "id": 1,
+              "label": "o.m=m.f;",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "o.m=f;",
-              "type":"radio"
+              "id": 2,
+              "label": "o.m=f;",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"o=f.m;",
-              "type":"radio"
+              "id": 3,
+              "label": "o=f.m;",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"o=f;",
-              "type":"radio"
+              "id": 4,
+              "label": "o=f;",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-10.",
           "question": "The statement a===b refers to _________",
           "options": [
             {
-              "value":"a",
-              "lable":"Both a and b are equal in value, type and reference address",
-              "type":"radio"
+              "id": 1,
+              "label": "Both a and b are equal in id, type and reference address",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"Both a and b are equal in value",
-              "type":"radio"
+              "id": 2,
+              "label": "Both a and b are equal in id",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"Both a and b are equal in value and type",
-              "type":"radio"
+              "id": 3,
+              "label": "Both a and b are equal in id and type",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"There is no such statement",
-              "type":"radio"
+              "id": 4,
+              "label": "There is no such statement",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         }
       ]
     },
-    "reactJS": {
+    {
+      "quizId": "reactJS",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-      "timer": "20",
+      "timer": 20,
+      "positivePoints": "1",
+      "negativePoints": "0.25",
+      "numberOfQuestions": "3",
+      "title": "React JS Quiz",
+      "image": "assets\\img\\react-js.png",
+      "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta.",
       "questions": [
         {
-          "id": "Q-1.",
           "question": "What is React.js?",
           "options": [
             {
-              "value":"a",
-              "lable":"Open-source JavaScript back-end library",
-              "type":"radio"
+              "id": 1,
+              "label": "Open-source JavaScript back-end library",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"JavaScript front-end library to create a database",
-              "type":"radio"
+              "id": 2,
+              "label": "JavaScript front-end library to create a database",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"Free and open-source JavaScript front-end library",
-              "type":"radio"
+              "id": 3,
+              "label": "Free and open-source JavaScript front-end library",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"None of the mentioned",
-              "type":"radio"
+              "id": 4,
+              "label": "None of the mentioned",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-2.",
           "question": "Which of the following acts as the input of a class-based component?",
           "options": [
             {
-              "value":"a",
-              "lable":"Class",
-              "type":"radio"
+              "id": 1,
+              "label": "Class",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"Props",
-              "type":"radio"
+              "id": 2,
+              "label": "Props",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"Factory",
-              "type":"radio"
+              "id": 3,
+              "label": "Factory",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"None of the mentioned",
-              "type":"radio"
+              "id": 4,
+              "label": "None of the mentioned",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-3.",
           "question": "React.js is written in which of the following language?",
           "options": [
             {
-              "value":"a",
-              "lable":"C",
-              "type":"radio"
+              "id": 1,
+              "label": 3,
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"C++",
-              "type":"radio"
+              "id": 2,
+              "label": "C++",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"JavaScript",
-              "type":"radio"
+              "id": 3,
+              "label": "JavaScript",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"Java",
-              "type":"radio"
+              "id": 4,
+              "label": "Java",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-4.",
           "question": "In which of the following directory React Components are saved?",
           "options": [
             {
-              "value":"a",
-              "lable":"Inside js/components/",
-              "type":"radio"
+              "id": 1,
+              "label": "Inside js/components/",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"Inside components/js/",
-              "type":"radio"
+              "id": 2,
+              "label": "Inside components/js/",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"Inside vendor/js/components/",
-              "type":"radio"
+              "id": 3,
+              "label": "Inside vendor/js/components/",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"Inside vendor/components/",
-              "type":"radio"
+              "id": 4,
+              "label": "Inside vendor/components/",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-5.",
           "question": "Which of the following command is used to Install create-react-app?",
           "options": [
             {
-              "value":"a",
-              "lable":"npm install create-react-app",
-              "type":"radio"
+              "id": 1,
+              "label": "npm install create-react-app",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"npm install -f create-react-app",
-              "type":"radio"
+              "id": 2,
+              "label": "npm install -f create-react-app",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"npm install -g create-react-app",
-              "type":"radio"
+              "id": 3,
+              "label": "npm install -g create-react-app",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"install -g create-react-app",
-              "type":"radio"
+              "id": 4,
+              "label": "install -g create-react-app",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         }
       ]
     },
-    "angular": {
+    {
+      "quizId": "angular",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-      "timer":"60",
+      "timer": 60,
+      "positivePoints": "1",
+      "negativePoints": "0.25",
+      "numberOfQuestions": "3",
+      "title": "Angular Quiz",
+      "image": "assets\\img\\angular.jpg",
+      "description": "Angular is a development platform, built on TypeScript.component-based framework for building scalabel web applications.",
       "questions": [
         {
-          "id": "Q-1.",
           "question": "Which of the following statement is true for AngularJS?",
           "options": [
             {
-              "value":"a",
-              "lable":"AngularJS is a closed-source front-end web framework",
-              "type":"radio"
+              "id": 1,
+              "label": "AngularJS is a closed-source front-end web framework",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"AngularJS is an open-source front-end web framework",
-              "type":"radio"
+              "id": 2,
+              "label": "AngularJS is an open-source front-end web framework",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"AngularJS is an open-source backend web framework",
-              "type":"radio"
+              "id": 3,
+              "label": "AngularJS is an open-source backend web framework",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"AngularJS is a closed-source back-end web framework",
-              "type":"radio"
-           }
+              "id": 4,
+              "label": "AngularJS is a closed-source back-end web framework",
+              "type": "radio"
+            }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-2.",
           "question": "Which of the following is the correct syntax for writing AngularJS expressions?",
           "options": [
             {
-              "value":"a",
-              "lable":"{{expression}}",
-              "type":"radio"
+              "id": 1,
+              "label": "{{expression}}",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"{{expression | filter1 | filter2 | …}}",
-              "type":"radio"
+              "id": 2,
+              "label": "{{expression | filter1 | filter2 | …}}",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"Both of the mentioned",
-              "type":"radio"
+              "id": 3,
+              "label": "Both of the mentioned",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "None of the mentioned",
-              "type":"radio"
+              "id": 4,
+              "label": "None of the mentioned",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-3.",
           "question": "Which of the following statement is correct about data binding in AngularJS?",
           "options": [
             {
-              "value":"a",
-              "lable": "Automatic synchronization of data between model and view components",
-              "type":"radio"
+              "id": 1,
+              "label": "Automatic synchronization of data between model and view components",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "Automatic synchronization of data between model and controller components",
-              "type":"radio"
+              "id": 2,
+              "label": "Automatic synchronization of data between model and controller components",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "Technique to save html data in the database",
-              "type":"radio"
+              "id": 3,
+              "label": "Technique to save html data in the database",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "Technique to bind database data to html control",
-              "type":"radio"
+              "id": 4,
+              "label": "Technique to bind database data to html control",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         },
         {
-          "id": "Q-4.",
           "question": "AngularJS expressions bind AngularJS data to HTML like which of the following directive?",
           "options": [
             {
-              "value":"a",
-              "lable": "ng-repeat",
-              "type":"radio"
+              "id": 1,
+              "label": "ng-repeat",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "ng-bind",
-              "type":"radio"
+              "id": 2,
+              "label": "ng-bind",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "ng-app",
-              "type":"radio"
+              "id": 3,
+              "label": "ng-app",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "ng-model",
-              "type":"radio"
+              "id": 4,
+              "label": "ng-model",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-5.",
           "question": "Among the following, on which architectural pattern is AngularJS based?",
           "options": [
             {
-              "value":"a",
-              "lable": "Decorater Pattern",
-              "type":"radio"
+              "id": 1,
+              "label": "Decorater Pattern",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "Observer Pattern",
-              "type":"radio"
+              "id": 2,
+              "label": "Observer Pattern",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "MVVM architecture Pattern",
-              "type":"radio"
+              "id": 3,
+              "label": "MVVM architecture Pattern",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "MVC architecture Pattern",
-              "type":"radio"
+              "id": 4,
+              "label": "MVC architecture Pattern",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-6.",
           "question": "Which of the following is an advantage of AngularJS?",
           "options": [
             {
-              "value":"a",
-              "lable": "AngularJS code is unit testable.",
-              "type":"radio"
+              "id": 1,
+              "label": "AngularJS code is unit testable.",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": " AngularJS provides reusable components.",
-              "type":"radio"
+              "id": 2,
+              "label": " AngularJS provides reusable components.",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "AngularJS uses dependency injection and makes use of separation of concerns",
-              "type":"radio"
+              "id": 3,
+              "label": "AngularJS uses dependency injection and makes use of separation of concerns",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "All of the above",
-              "type":"radio"
+              "id": 4,
+              "label": "All of the above",
+              "type": "radio"
             }
           ],
-          "answer": ["d"]
+          "answer": { "id": 4 }
         },
         {
-          "id": "Q-7.",
           "question": " Which of the following types of the component can be used to create a custom directive?",
           "options": [
             {
-              "value":"a",
-              "lable": "Element directives.",
-              "type":"radio"
+              "id": 1,
+              "label": "Element directives.",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": " Attribute",
-              "type":"radio"
+              "id": 2,
+              "label": " Attribute",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":  "CSS",
-              "type":"radio"
+              "id": 3,
+              "label": "CSS",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":  "All of the above.",
-              "type":"radio"
+              "id": 4,
+              "label": "All of the above.",
+              "type": "radio"
             }
           ],
-          "answer": ["d"]
+          "answer": { "id": 4 }
         },
         {
-          "id": "Q-8.",
           "question": "  How many $RootScope an AngularJS application can have?",
           "options": [
             {
-              "value":"a",
-              "lable":"Zero",
-              "type":"radio"
+              "id": 1,
+              "label": "Zero",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"One",
-              "type":"radio"
+              "id": 2,
+              "label": "One",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "Two",
-              "type":"radio"
+              "id": 3,
+              "label": "Two",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "Infinity",
-              "type":"radio"
+              "id": 4,
+              "label": "Infinity",
+              "type": "radio"
             }
           ],
-          "answer": ["b"]
+          "answer": { "id": 2 }
         },
         {
-          "id": "Q-9.",
           "question": " What is deep linking in AngularJS?",
           "options": [
             {
-              "value":"a",
-              "lable":"Deep linking is an SEO-based technique.",
-              "type":"radio"
+              "id": 1,
+              "label": "Deep linking is an SEO-based technique.",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable":"Deep linking refers to linking various views to the main page.",
-              "type":"radio"
+              "id": 2,
+              "label": "Deep linking refers to linking various views to the main page.",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable":"Deep linking allows you to encode the state of an application in the URL so that it can be bookmarked.",
-              "type":"radio"
+              "id": 3,
+              "label": "Deep linking allows you to encode the state of an application in the URL so that it can be bookmarked.",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable":"All of the Above",
-              "type":"radio"
+              "id": 4,
+              "label": "All of the Above",
+              "type": "radio"
             }
           ],
-          "answer": ["c"]
+          "answer": { "id": 3 }
         },
         {
-          "id": "Q-10.",
           "question": "Which of the following statement is true in the case of $routeProvider?",
           "options": [
             {
-              "value":"a",
-              "lable": "It is a service.",
-              "type":"radio"
+              "id": 1,
+              "label": "It is a service.",
+              "type": "radio"
             },
             {
-              "value":"b",
-              "lable": "It is a module.",
-              "type":"radio"
+              "id": 2,
+              "label": "It is a module.",
+              "type": "radio"
             },
             {
-              "value":"c",
-              "lable": "It is a component.",
-              "type":"radio"
+              "id": 3,
+              "label": "It is a component.",
+              "type": "radio"
             },
             {
-              "value":"d",
-              "lable": "None of the above.",
-              "type":"radio"
+              "id": 4,
+              "label": "None of the above.",
+              "type": "radio"
             }
           ],
-          "answer": ["a"]
+          "answer": { "id": 1 }
         }
       ]
     }
-  }
-  
+  ]
+}
