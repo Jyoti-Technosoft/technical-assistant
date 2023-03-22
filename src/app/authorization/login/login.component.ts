@@ -22,12 +22,10 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public formSubmitted(formValue:any) {
     let userdata = this.userData?.find(
-      (value: any) => value?.email ==  formValue?.emailId && value?.cpwd ==  formValue?.password 
+      (value: any) => value?.email ==  formValue?.emailId && value?.password ==  formValue?.password 
     );
-    if (
-      userdata
-      ) {
-      document.cookie = "username" + "=" + userdata.id;
+    if (userdata) {
+      document.cookie = 'username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('dashboard');
     } else {

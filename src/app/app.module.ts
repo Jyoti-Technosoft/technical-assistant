@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
 import { QuestionService } from './service/question.service';
 
-@NgModule({
+@NgModule({ 
     declarations: [
         AppComponent,
         LoginComponent,
