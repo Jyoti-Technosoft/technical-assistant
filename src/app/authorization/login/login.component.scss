@@ -1,12 +1,16 @@
-*{
-    font-family: Roboto;
+.image {
+  width: 4rem;
+  height: 4rem;
 }
-h6{
-    margin-top: 14px;
+.form-label {
+  font-size: calc(70% + 1vh);
 }
-// TODO:Please do not apply on direct class of boostrap 
-.card{
-    margin: 0 auto; 
-    border-radius: 15px;
-    height: auto;    
+
+.form-text {
+  font-size: calc(70% + 1vh);
+  margin-left: 5px;
+}
+
+.form-control {
+  font-size: calc(70% + 1vh);
 }

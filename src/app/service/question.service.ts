@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,7 +10,7 @@ export class QuestionService {
   inCorrectAnswer: number = 0;
   public selectedQuiztype!: string;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
   
   ngOnInit(): void {}
 
