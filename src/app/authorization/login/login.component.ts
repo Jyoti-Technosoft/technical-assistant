@@ -29,13 +29,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       ) {
       document.cookie = "username" + "=" + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
-      this.route.navigateByUrl('/dashboard');
+      this.route.navigateByUrl('dashboard');
     } else {
-      let label = this.dialogData.loginModel.label;
-      let yesButtonLable = this.dialogData.loginModel.yesButtonLable;
-      let NoButtonLable = this.dialogData.loginModel.NoButtonLable;
+      let configData = this.dialogData.loginModel;
       this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
+        .openDialog(configData)
         .then((value) => {
           if (value) {
             this.route.navigateByUrl('registration');
@@ -51,7 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       let registeruser: any = localStorage.getItem('registeruser');
       registeruser = JSON.parse(registeruser as string);
       alert('There is no user create one');
-      this.route.navigateByUrl('/registration');
+      this.route.navigateByUrl('registration');
     } else {
       let data: any = localStorage.getItem('registeruser');
       this.userData = JSON.parse(data);

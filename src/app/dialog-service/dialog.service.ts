@@ -19,12 +19,10 @@ export class DialogService {
 
   dialogData = {...dialogData};
 
-  openDialog(label:string, yesButtonLable:string, NoButtonLable:string):Promise<boolean>{
+  openDialog(configData:any):Promise<boolean>{
     return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(ModalComponent);
-      modalRef.componentInstance.label = label;
-      modalRef.componentInstance.yesButtonLable = yesButtonLable;
-      modalRef.componentInstance.NoButtonLable = NoButtonLable;
+      modalRef.componentInstance.configData = configData ;
       
       modalRef.result.then((data) => {
         resolve(<boolean> data)

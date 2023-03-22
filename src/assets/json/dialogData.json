@@ -1,12 +1,18 @@
 {
   "skipModel": {
     "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
-    "yesButtonLable": "Yes",
-    "NoButtonLable": "No"
+    "yes": "Yes",
+    "no": "No"
   },
   "loginModel": {
     "label": "Wrong Credentials , Do you want to create new account?",
-    "yesButtonLable": "Yes",
-    "NoButtonLable": "No"
+    "yes": "Yes",
+    "no": "No"
+  },
+  "signoutModel":
+  {
+    "label": "Are you sure you want to singout from quiz?",
+    "yes": "Yes",
+    "no": "Cancel"
   }
 }

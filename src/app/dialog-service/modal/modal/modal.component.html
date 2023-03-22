@@ -2,11 +2,11 @@
     <h1 class="modal-title fs-5" id="exampleModalLabel">Alert</h1>
   </div>
 <div class="modal-body">
-    <p>{{label}} </p>
+    <p>{{configData?.label}} </p>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark"  (click)="activeModal.close(false)">{{NoButtonLable}}</button>
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(true)" >{{yesButtonLable}}</button> 
+    <button type="button" class="btn btn-outline-dark"  (click)="activeModal.close(false)">{{configData?.no}}</button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(true)" >{{configData?.yes}}</button> 
 </div>
 

@@ -157,11 +157,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   skip(questionindex: number) {
-    let label = this.dialogData.skipModel.label;
-    let yesButtonLable = this.dialogData.skipModel.yesButtonLable;
-    let NoButtonLable = this.dialogData.skipModel.NoButtonLable;
+    let configData = this.dialogData.skipModel;
     this.dialogService
-      .openDialog(label, yesButtonLable, NoButtonLable)
+      .openDialog(configData)
       .then((value) => {
         if (value) {
           this.questionindex = questionindex;
