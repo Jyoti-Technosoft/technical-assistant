@@ -1,6 +1,7 @@
 .quiz_card {
   height: auto;
 }
+
 .header_txt {
   position: relative;
   z-index: 2;
@@ -9,12 +10,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .header_title {
+    font-size: 25px;
+    font-weight: 600;
+    user-select: none;
+  }
 }
-.header_title {
-  font-size: 25px;
-  font-weight: 600;
-  user-select: none;
-}
+
 .timer {
   color: #004085;
   background: #cce5ff;
@@ -26,6 +28,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  .timer_left_txt {
+    font-size: 17px;
+    font-weight: 600;
+    user-select: none;
+  }
+  .timer_sec {
+    font-size: 18px;
+    font-weight: 500;
+    height: 30px;
+    width: 40px;
+    color: #fff;
+    border-radius: 5px;
+    line-height: 30px;
+    text-align: center;
+    background: #343a40;
+    border: 1px solid #343a40;
+    user-select: none;
+  }
 }
 
 .que_txt {
@@ -36,32 +56,11 @@
   box-sizing: border-box;
   height: auto;
   width: auto;
-}
-
-.timer_left_txt {
-  font-size: 17px;
-  font-weight: 600;
-  user-select: none;
-}
-
-.timer_sec {
-  font-size: 18px;
-  font-weight: 500;
-  height: 30px;
-  width: 40px;
-  color: #fff;
-  border-radius: 5px;
-  line-height: 30px;
-  text-align: center;
-  background: #343a40;
-  border: 1px solid #343a40;
-  user-select: none;
-}
-
-.que_data {
-  font-size: 20px;
-  font-weight: 600;
-  user-select: none;
+  .que_data {
+    font-size: 20px;
+    font-weight: 600;
+    user-select: none;
+  }
 }
 
 .option {
@@ -74,21 +73,14 @@
   margin-top: 15px;
   align-items: center;
   width: 100%;
+  user-select: none;
 }
+
 .hightlight-selected {
   background: rgb(133, 190, 255) !important;
   border: 1px solid #4a98ff !important;
   font-weight: 600;
 }
-.opt_check{
-  display: none;
-}
-
-.option  {
-  cursor: pointer;
-  user-select: none;
-}
-
 
 .footer_txt {
   position: relative;
@@ -98,24 +90,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  .total_que {
+    .footer_right_txt {
+      text-align: center;
+      margin: 0;
+      user-select: none;
+      padding: 0 5px;
+    }
+  }
 }
 
 .btn-dark {
   margin: 0 10px;
-}
-
-.total_que p span {
-  font-weight: 600;
-  user-select: none;
-}
-
-.total_que p {
-  text-align: center;
-  margin: 0;
-  user-select: none;
-  padding: 0 5px;
-}
-
-.total_que span p:first-child {
-  padding-left: 0px;
 }

@@ -67,7 +67,7 @@
                                 >
                                   <input
                                     type="checkbox"
-                                    class="form-check-input opt_check"
+                                    class="form-check-input d-none"
                                     formControlName="radioValue"
                                     value="{{ card.value }}"
                                   />
@@ -86,7 +86,7 @@
                                 >
                                   <input
                                     type="radio"
-                                    class="form-check-input opt_check"
+                                    class="form-check-input d-none"
                                     formControlName="radioValue"
                                     value="{{ card.value }}"
                                   />
@@ -99,54 +99,38 @@
 
                         <div class="card-footer footer_txt">
                           <div class="total_que">
-                            <p>
-                              <span>{{ i + 1 }}</span> Of
-                              <span>{{ question.length - 1 }}</span> Questions
+                            <p class="footer_right_txt">
+                              <strong>{{ i + 1 }}</strong> Of <strong>{{ question.length - 1 }}</strong> Questions
                             </p>
                           </div>
 
                           <div class="form_btn">
                             <button
                               [disabled]="i == 0"
-                              class="carousel-control-Previous"
-                              id="previous"
-                              role="button"
-                              data-slide="Previous"
-                              type="button"
+                              data-slide="previous"
                               (click)="prev(i)"
+                              type="button"
                               class="btn btn-primary"
-                              aria-hidden="true"
-                              data-bs-slide="per"
                             >
                               Previous
                             </button>
 
                             <button
                               [disabled]="FormArray.controls[i].dirty"
-                              class="carousel-control-Previous"
-                              id="skip"
-                              role="button"
                               data-slide="skip"
                               type="button"
                               (click)="skip(i)"
                               class="btn btn-dark"
-                              aria-hidden="true"
-                              data-bs-slide="per"
                             >
                               Skip
                             </button>
 
                             <button
                               [disabled]="!FormArray.controls[i].dirty"
-                              class="carousel-control-next"
-                              id="next"
-                              role="button"
                               data-slide="next"
                               type="button"
                               (click)="next(i)"
                               class="btn btn-success"
-                              aria-hidden="true"
-                              data-bs-slide="next"
                             >
                               {{ question.length != i + 1 ? "Next" : "Submit" }}
                             </button>
