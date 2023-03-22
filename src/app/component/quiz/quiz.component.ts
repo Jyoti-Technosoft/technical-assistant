@@ -101,8 +101,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     if (this.dialogService.hasModelOpen()) {
       this.dialogService.destroy();
     }
-    const values = this.formArray.controls[questionIndex].value.radioValue;
-    this.answer(questionIndex, values);
+    this.answer(questionIndex, this.formArray.controls[questionIndex].value.radioValue);
     this.disabledValuesAndForm();
     this.questionIndex = questionIndex + 1;
     if (this.questionIndex == this.question.length) {
@@ -182,7 +181,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   answer(questionIndex: number, selectedOption: string) {
     if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
-      if (this.question[questionIndex].answer.id && selectedOption) {
+      if (this.question[questionIndex].answer?.id == selectedOption) {
         this.points = this.points += this.positivePoints;
         this.correctAnswer++;
       } else if (!(this.question[questionIndex].answer?.id == selectedOption)) {
