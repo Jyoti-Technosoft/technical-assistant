@@ -25,7 +25,7 @@
             </span>
             <span>
               <h5 class="card-text">
-                Correct Answers : {{ data.correctanswer }}
+                Correct Answers : {{ data.correctAnswer }}
               </h5>
             </span>
             <span>
@@ -38,7 +38,7 @@
             <button
               type="button"
               class="btn btn-success"
-              routerLink="/dashboard"
+              (click)="startQuizAgain(data.type)"
             >
               Go Again To Quiz
             </button>

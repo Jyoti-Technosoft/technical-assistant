@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QuestionService } from '../../service/question.service';
 import quizData from 'src/assets/json/data.json';
+import { Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-result',
@@ -13,7 +14,10 @@ export class ResultComponent implements OnInit, OnDestroy {
   userData: any;
   submittedData: any;
 
-  constructor(public questionService: QuestionService) {}
+  constructor(
+    public questionService: QuestionService,
+    public router:Router
+    ) {}
 
   ngOnInit(): void {
     this.userName = this.questionService?.userName;
@@ -45,6 +49,11 @@ export class ResultComponent implements OnInit, OnDestroy {
       return data;
     });
     this.submittedData = this.submittedData?.reverse();
+  }
+
+  startQuizAgain(quizName:string){
+    const queryParams: Params = { quiz: quizName };
+    this.router.navigate(['/quizname'], { queryParams });
   }
 
   ngOnDestroy(): void {}

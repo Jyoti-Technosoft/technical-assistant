@@ -16,10 +16,10 @@ export class StartquizComponent implements OnInit {
   constructor(private route: Router, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.mapJSONData();
+    this.mapJsonData();
   }
 
-  mapJSONData() {
+  mapJsonData() {
     this.selectedQuizType = this.activeRoute.snapshot.queryParams['quiz'];
     this.instruction = this.quizData?.quiz?.find(
       (data) => data?.quizId == this.selectedQuizType

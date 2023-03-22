@@ -19,7 +19,7 @@ import { DialogService } from 'src/app/dialog-service/dialog.service';
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  styleUrls: ['./quiz.component.scss']
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
@@ -37,9 +37,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
   correctAnswer: number = 0;
   inCorrectAnswer: number = 0;
   timer: number | undefined;
-  selectedQuizType: any;
-  positivePoints: any;
-  negativePoints: any;
+  selectedQuizType!: string;
+  positivePoints!: number;
+  negativePoints!: number;
   numberOfQuestions!: string | undefined;
 
   constructor(
@@ -119,7 +119,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     let stringifyData = data.length == 0 ? data : JSON.parse(data);
     let currentData = {
       points: this.points,
-      correctanswer: this.correctAnswer,
+      correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuizType,
       user: this.questionService.getUser(),
@@ -127,9 +127,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
     stringifyData.push(currentData);
 
     localStorage.setItem('result', JSON.stringify(stringifyData));
-    this.questionService.points = this.points;
-    this.questionService.correctanswer = this.correctAnswer;
-    this.questionService.inCorrectAnswer = this.inCorrectAnswer;
     this.router.navigateByUrl('result');
   }
 
