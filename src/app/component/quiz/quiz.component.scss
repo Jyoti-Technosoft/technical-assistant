@@ -1,19 +1,11 @@
-.quiz_card {
-  height: auto;
-}
 
 .header_txt {
-  position: relative;
-  z-index: 2;
+  z-index: 1;
   height: 70px;
   padding: 0 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   .header_title {
     font-size: 25px;
     font-weight: 600;
-    user-select: none;
   }
 }
 
@@ -24,14 +16,9 @@
   height: 45px;
   width: 145px;
   padding: 0px 8px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   .timer_left_txt {
     font-size: 17px;
     font-weight: 600;
-    user-select: none;
   }
   .timer_sec {
     font-size: 18px;
@@ -39,41 +26,29 @@
     height: 30px;
     width: 40px;
     color: #fff;
-    border-radius: 5px;
     line-height: 30px;
-    text-align: center;
     background: #343a40;
     border: 1px solid #343a40;
-    user-select: none;
   }
 }
 
 .que_txt {
   padding: 15px 15px;
-  display: inline-block;
-  border-radius: 5px;
   font-size: 20px;
   box-sizing: border-box;
-  height: auto;
-  width: auto;
   .que_data {
     font-size: 20px;
     font-weight: 600;
-    user-select: none;
   }
 }
 
 .option {
   background: rgb(222, 239, 255);
   border: 1px solid #84c5fe;
-  border-radius: 5px;
   padding: 8px 15px;
   font-size: 17px;
   cursor: pointer;
   margin-top: 15px;
-  align-items: center;
-  width: 100%;
-  user-select: none;
 }
 
 .hightlight-selected {
@@ -83,18 +58,11 @@
 }
 
 .footer_txt {
-  position: relative;
-  z-index: 2;
+  z-index: 1;
   height: 70px;
   padding: 0 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   .total_que {
     .footer_right_txt {
-      text-align: center;
-      margin: 0;
-      user-select: none;
       padding: 0 5px;
     }
   }

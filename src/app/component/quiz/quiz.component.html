@@ -1,15 +1,11 @@
 <div
-  id="carouselExampleControlsNoTouching"
-  class="carousel slide"
   data-bs-touch="false"
   data-bs-interval="false"
 >
   <div class="carousel-inner">
     <div
-      id="carouselExampleControls"
       data-bs-interval="false"
       data-wrap="false"
-      class="carousel slide"
       data-ride="carousel"
     >
       <form [formGroup]="myForm">
@@ -30,21 +26,21 @@
                 <div class="container-fluid">
                   <div class="d-flex align-items-center min-vh-100">
                     <div class="container mx-auto">
-                      <div class="card quiz_card">
-                        <div class="card-header header_txt">
-                          <div class="header_title">
+                      <div class="card quiz_card h-auto">
+                        <div class="card-header header_txt d-flex align-items-center justify-content-between position-relative">
+                          <div class="header_title user-select-none">
                             {{ [this.selectedQuizType] }}
                           </div>
-                          <div class="timer">
-                            <div class="timer_left_txt">Time Left</div>
-                            <div class="timer_sec">
+                          <div class="timer d-flex align-items-center justify-content-between rounded-2">
+                            <div class="timer_left_txt user-select-none">Time Left</div>
+                            <div class="timer_sec user-select-none text-center rounded-2">
                               {{ FormArray.controls.at(i)?.value?.timer }}
                             </div>
                           </div>
                         </div>
 
-                        <div class="card-body que_txt">
-                          <div class="que_data">
+                        <div class="card-body que_txt d-inline-block rounded-2">
+                          <div class="que_data user-select-none">
                             {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
                           </div>
 
@@ -56,7 +52,7 @@
                             >
                               <div class="form_check">
                                 <label
-                                  class="form-check-label option"
+                                  class="form-check-label option w-100 rounded-2 align-items-center user-select-none"
                                   *ngIf="card.type == 'checkbox'"
                                   [ngClass]="
                                     FormArray.controls.at(i)?.value
@@ -75,7 +71,7 @@
                                 </label>
 
                                 <label
-                                  class="form-check-label option"
+                                  class="form-check-label option w-100 rounded-2 align-items-center user-select-none"
                                   *ngIf="card.type == 'radio'"
                                   [ngClass]="
                                     FormArray.controls.at(i)?.value
@@ -97,9 +93,9 @@
                           </div>
                         </div>
 
-                        <div class="card-footer footer_txt">
+                        <div class="card-footer footer_txt d-flex align-items-center justify-content-between position-relative">
                           <div class="total_que">
-                            <p class="footer_right_txt">
+                            <p class="footer_right_txt text-center user-select-none m-0">
                               <strong>{{ i + 1 }}</strong> Of <strong>{{ question.length - 1 }}</strong> Questions
                             </p>
                           </div>
