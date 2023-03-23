@@ -52,18 +52,14 @@
                           <label
                             class="form-check-label option w-100 rounded-2 align-items-center user-select-none"
                             *ngIf="card.type == 'checkbox'"
-                            [ngClass]="
-                              FormArray.controls.at(i)?.value.radioValue ===
-                              card.value
-                                ? 'hightlight-selected'
-                                : ''
-                            "
+                            [class.hightlight-selected]="FormArray.controls.at(i)?.value.radioValue == card.id"
+                          >
                           >
                             <input
                               type="checkbox"
                               class="form-check-input d-none"
                               formControlName="radioValue"
-                              value="{{ card.value }}"
+                              value="{{ card.id }}"
                             />
                             {{ card.lable }}
                           </label>
@@ -71,12 +67,7 @@
                           <label
                             class="form-check-label option w-100 rounded-2 align-items-center user-select-none"
                             *ngIf="card.type == 'radio'"
-                            [ngClass]="
-                              FormArray.controls.at(i)?.value.radioValue ==
-                              card.id
-                                ? 'hightlight-selected'
-                                : ''
-                            "
+                            [class.hightlight-selected]="FormArray.controls.at(i)?.value.radioValue == card.id"
                           >
                             <input
                               type="radio"
