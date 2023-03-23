@@ -18,14 +18,13 @@ import dialogData from 'src/assets/json/dialogData.json';
   styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
-  todayDate: string | undefined = new Date().toISOString().slice(0, 10);
+  todayDate: string | undefined = new Date().toISOString().slice(0,10);
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
   @ViewChild('email') email!: ElementRef;
-
-  constructor(
-    private route: Router,
+  
+  constructor(private route: Router,
     private fb: FormBuilder,
     private toastService: ToastService
   ) {}
@@ -56,7 +55,7 @@ export class RegistrationComponent {
       });
     } else {
       this.toastService.showSuccessMessage('Registered Successfully');
-      this.route.navigateByUrl('/dashboard');
+      this.route.navigateByUrl('login');
       this.registerUser.push(formValue);
       localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
     }
@@ -113,3 +112,7 @@ export class RegistrationComponent {
     return this.registrationForm.controls;
   }
 }
+
+ 
+
+ 
