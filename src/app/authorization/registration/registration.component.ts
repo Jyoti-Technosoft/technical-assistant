@@ -15,8 +15,9 @@ import dialogData from 'src/assets/json/dialogData.json';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  styleUrls: ['./registration.component.scss']
 })
+
 export class RegistrationComponent {
   todayDate: string | undefined = new Date().toISOString().slice(0,10);
   registerUser: any[] = [];
@@ -35,21 +36,19 @@ export class RegistrationComponent {
   }
 
   getRegistredUser() {
-    if (!localStorage.getItem('registerUser')) {
-      this.registerUser = [];
-    } else {
+    if (localStorage.getItem('registerUser')) {
       this.registerUser = JSON.parse(
         localStorage.getItem('registerUser') as string
       );
-    }
-  }
+   }  
+ }
 
   submitform(formValue: any) {
     let findUser = this.registerUser?.find(
       (value: any) => value.email == formValue.email
     );
     if (findUser) {
-      this.toastService.showErrorMessage('This user Id Is already Registerad');
+      this.toastService.showErrorMessage('This user Id is already Registered');
       setTimeout(() => {
         this.email.nativeElement.focus();
       });

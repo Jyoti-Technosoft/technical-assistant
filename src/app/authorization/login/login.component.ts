@@ -2,9 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DialogService } from 'src/app/dialog-service/dialog.service';
-import { ModalComponent } from '../../dialog-service/modal/modal/modal.component';
 import { QuestionService } from '../../service/question.service';
 import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
@@ -12,8 +9,9 @@ import dialogData from 'src/assets/json/dialogData.json';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
@@ -21,10 +19,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   
   constructor(
     private route: Router,
-    private dialogService: DialogService,
     private fb:FormBuilder,
     private questionService: QuestionService,
-    private modalService: NgbModal,
     public toastService: ToastService,
   ) {}
 
