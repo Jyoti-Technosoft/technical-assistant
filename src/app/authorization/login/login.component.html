@@ -1,11 +1,11 @@
-<div class="card shadow">
+<div class="card shadow col-lg-3 col-md-6 col-sm-8 mx-auto mt-5 col-10">
   <div class="card-body">
-    <form [formGroup]="adminForm" (ngSubmit)="formSubmitted()" class="">
+    <form [formGroup]="adminForm" (ngSubmit)="formSubmitted()">
       <div class="row g-0">
         <div class="col text-center">
           <img class="userlogo" src="assets/img/login.png" alt="logo" />
           <br />
-          <span class="fs-4">Login</span>
+          <span class="text-primary fs-2 fw-bold">Login</span>
         </div>
       </div>
       <div class="row">
@@ -40,12 +40,12 @@
       </div>
       <div class="row">
         <div class="col-mb-3">
-          <div class="d-grid">
+          <div class="d-flex justify-content-center mt-4">
             <button
               type="button"
               [disabled]="!adminForm.valid"
               (click)="formSubmitted()"
-              class="btn btn-primary"
+              class="btn btn-primary rounded-pill w-50"
             >
               Log in
             </button>

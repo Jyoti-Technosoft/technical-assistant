@@ -1,9 +1,9 @@
-<div class="card shadow col-lg-4 col-md-4 col-sm-8 col-xs-8 mt-5">
-  <div class="card-body py-0">
-    <form [formGroup]="registrationForm" (ngSubmit)="submitform()" class="p-3">
+<div class="card shadow col-lg-4 col-md-6 col-sm-8 mx-auto mt-5 col-10">
+  <div class="card-body py-3 px-4">
+    <form [formGroup]="registrationForm" (ngSubmit)="submitform()">
       <div class="row g-0">
         <div class="col text-center p-1 mb-2">
-          <span class="fs-3"> Registration Form</span>
+          <span class="text-primary fs-2 fw-bold"> Registration Form</span>
         </div>
       </div>
 
@@ -197,12 +197,12 @@
 
       <div class="row">
         <div class="col-mb-3">
-          <div class="d-grid">
+          <div class="d-flex justify-content-center">
             <button
               type="button"
               [disabled]="!registrationForm.valid"
               (click)="submitform()"
-              class="btn btn-success"
+              class="btn btn-success rounded-pill w-50"
             >
               Register Now
             </button>
