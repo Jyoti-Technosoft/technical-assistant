@@ -1,32 +1,37 @@
-<app-header></app-header>
-<div class="card shadow" id="card" style="margin-top: 80px">
-  <div class="card-body" style="padding: 0px">
-    <div class="row g-0">
-      <div class="col text-center mb-3 mt-4">
-        <span class="fs-3">Choose Quiz</span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-3 p-3" *ngFor="let data of QuizType; let i = index">
-        <div class="">
-          <div class="card shadow">
-            <img class="card-img-top" src="{{ data.image }}" alt="" />
-            <div class="card-body">
-              <h5 class="card-title">{{ data.title }}</h5>
-              <p class="card-text">
-                {{ data.description }}
-              </p>
-              <div class="text-center">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  (click)="quizname(data.quizId)"
-                >
-                  Start Quiz
-                </button>
-              </div>
+<div class="container">
+  <div class="row">
+    <div class="min-vh-100 d-flex align-items-center">
+      <div class="card card-layout mt-5">
+        <div class="card-body">
+          <div class="row g-0">
+            <div class="col text-center mb-3 mt-4">
+              <span class="fs-3">Choose Quiz</span>
             </div>
+          </div>
+
+          <div class="row">
+            <ng-container *ngFor="let data of quizs; let i = index">
+              <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                <div class="card shadow">
+                  <img class="card-img-top" src="{{ data.image }}" alt="quiz-logo" />
+                  <div class="card-body">
+                    <h5 class="card-title">{{ data.title }}</h5>
+                    <p class="card-text">
+                      {{ data.description }}
+                    </p>
+                    <div class="text-center">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="startQuiz(data.quizId)"
+                      >
+                        Start Quiz
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>

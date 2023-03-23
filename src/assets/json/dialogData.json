@@ -2,17 +2,36 @@
   "skipModel": {
     "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "type":"skipModel"
   },
   "loginModel": {
     "label": "Wrong Credentials , Do you want to create new account?",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "type":"loginModel"
+  },
+  "emailModel": {
+    "label": "This Email is already registerd with Us, Do you want to login again?.",
+    "yes": "Yes",
+    "no": "No",
+    "type":"emailModel"
   },
   "signoutModel":
   {
     "label": "Are you sure you want to singout from quiz?",
     "yes": "Yes",
-    "no": "Cancel"
+    "no": "No",
+    "type":"signoutModel"
+  },
+  "aboutModel":
+  {
+    "image": "assets\\img\\logo1.png",
+    "companyName": "Jyoti Technosoft LLP",
+    "visitorInfo": "Visit Our Website at jyotitechnosoft for more updates",
+    "copyrightInfo":"Copyright",
+    "companyLink":"https://jyotitechnosoft.com/",
+    "no": "Cancel",
+    "type":"aboutModel"
   }
 }

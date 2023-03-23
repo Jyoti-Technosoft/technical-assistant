@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal/modal/modal.component';
 import dialogData from '../../assets/json/dialogData.json';
-import { Router } from '@angular/router';
+
 
 
 @Injectable({
@@ -14,7 +14,7 @@ export class DialogService {
   
   constructor(
     private modalService:NgbModal,
-    private route:Router
+  
   ) {}
 
   dialogData = {...dialogData};
