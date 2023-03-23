@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class QuestionService {
+
+export class AuthenticationService {
   userName: any;
   points: number = 0;
   correctanswer: number = 0;
@@ -14,13 +15,7 @@ export class QuestionService {
   
   ngOnInit(): void {}
 
-  getUser(): string | boolean {
-    if (document.cookie) {
-      let cookie = document.cookie;
-      cookie = cookie.split('=')[1];
-      return cookie ? cookie : false;
-    } else {
-      return false;
-    }
+  getUser(): string {
+    return document.cookie.split('=')[1];
   }
 }

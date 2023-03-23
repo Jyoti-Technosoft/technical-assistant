@@ -11,7 +11,7 @@ import { interval, Subscription, ReplaySubject, takeUntil } from 'rxjs';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
-import { QuestionService } from 'src/app/service/question.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import quizData from 'src/assets/json/data.json';
 import dialogData from 'src/assets/json/dialogData.json';
 import { DialogService } from 'src/app/dialog-service/dialog.service';
@@ -46,7 +46,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private router: Router,
     private activeRouter: ActivatedRoute,
     private fb: FormBuilder,
-    private questionService: QuestionService,
+    private authenticationService: AuthenticationService,
     private dialogService: DialogService
   ) {
     this.quizForm = this.fb.group({
@@ -122,7 +122,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuizType,
-      user: this.questionService.getUser(),
+      user: this.authenticationService.getUser(),
     };
     stringifyData.push(currentData);
 

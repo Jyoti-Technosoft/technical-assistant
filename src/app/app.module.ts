@@ -8,7 +8,7 @@ import { RegistrationComponent } from './authorization/registration/registration
 import { LayoutComponentModule } from './layout/layout-component.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
-import { QuestionService } from './service/question.service';
+import { AuthenticationService } from './service/authentication.service';
 
 @NgModule({ 
     declarations: [
@@ -23,7 +23,7 @@ import { QuestionService } from './service/question.service';
         ReactiveFormsModule,
         LayoutComponentModule
     ],
-    providers: [AuthGuard,QuestionService],
+    providers: [AuthGuard,AuthenticationService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
