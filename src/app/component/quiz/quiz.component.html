@@ -8,11 +8,11 @@
       data-wrap="false"
       data-ride="carousel"
     >
-      <form [formGroup]="myForm">
+      <form [formGroup]="quizForm">
         <div formArrayName="form">
           <ngb-carousel
             #carousel
-            *ngIf="name"
+            *ngIf="question?.length"
             [showNavigationArrows]="false"
             [showNavigationIndicators]="false"
             [interval]="0"
@@ -47,7 +47,7 @@
                           <div class="option_list">
                             <ng-container
                               *ngFor="
-                                let card of question[this.questionindex].options
+                                let card of question[this.questionIndex].options
                               "
                             >
                               <div class="form_check">
@@ -75,7 +75,7 @@
                                   *ngIf="card.type == 'radio'"
                                   [ngClass]="
                                     FormArray.controls.at(i)?.value
-                                      .radioValue === card.value
+                                      .radioValue == card.id
                                       ? 'hightlight-selected'
                                       : ''
                                   "
@@ -84,9 +84,9 @@
                                     type="radio"
                                     class="form-check-input d-none"
                                     formControlName="radioValue"
-                                    value="{{ card.value }}"
+                                    value="{{ card.id }}"
                                   />
-                                  {{ card.lable }}
+                                  {{ card.label }}
                                 </label>
                               </div>
                             </ng-container>
@@ -96,7 +96,7 @@
                         <div class="card-footer footer_txt d-flex align-items-center justify-content-between position-relative">
                           <div class="total_que">
                             <p class="footer_right_txt text-center user-select-none m-0">
-                              <strong>{{ i + 1 }}</strong> Of <strong>{{ question.length - 1 }}</strong> Questions
+                              <strong>{{ i + 1 }}</strong> Of <strong>{{ question.length }}</strong> Questions
                             </p>
                           </div>
 
@@ -104,7 +104,7 @@
                             <button
                               [disabled]="i == 0"
                               data-slide="previous"
-                              (click)="prev(i)"
+                              (click)="previousQuestion(i)"
                               type="button"
                               class="btn btn-primary"
                             >
@@ -115,7 +115,7 @@
                               [disabled]="FormArray.controls[i].dirty"
                               data-slide="skip"
                               type="button"
-                              (click)="skip(i)"
+                              (click)="skipQuestion(i)"
                               class="btn btn-dark"
                             >
                               Skip
@@ -125,7 +125,7 @@
                               [disabled]="!FormArray.controls[i].dirty"
                               data-slide="next"
                               type="button"
-                              (click)="next(i)"
+                              (click)="nextQuestion(i)"
                               class="btn btn-success"
                             >
                               {{ question.length != i + 1 ? "Next" : "Submit" }}
