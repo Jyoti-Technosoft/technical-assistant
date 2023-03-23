@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private fb:FormBuilder
   ) {}
 
-  public formSubmitted(formValue:any) {
+   formSubmitted(formValue:any) {
    let userdata = this.userData?.find(
       (value: any) => value?.email ==  formValue?.emailId && value?.password ==  formValue?.password 
     );
