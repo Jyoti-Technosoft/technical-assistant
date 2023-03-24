@@ -8,13 +8,16 @@ import { AuthenticationService } from '../../service/authentication.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent {
   userName: any;
   userData: any;
-  constructor(private route: Router, public authenticationService: AuthenticationService) {}
+  constructor(
+    private route: Router,
+    public authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
-    this.userName = this.authenticationService?.userName;
     if (!this.userName) {
       this.getData();
     }
