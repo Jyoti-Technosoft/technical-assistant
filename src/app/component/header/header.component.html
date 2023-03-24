@@ -3,31 +3,22 @@
   style="padding: 0px"
 >
   <div class="container-fluid">
-    <a
-      href="#"
-      class="navbar-brand h1"
-      routerLink="/dashboard"
-      style="margin: 0px"
-    >
-      <img
-        class="d-inline-block"
-        src="assets/img/logo1.png"
-        width="35"
-        height="35"
-      />
-      <span>APPLICATION</span></a
+    <a href="#" class="navbar-brand h1" routerLink="/dashboard">
+      <img class="d-inline-block image" src="assets/img/logo1.png" />
+      <span class="companyname">APPLICATION</span></a
     >
 
     <div class="navigation">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
-          <img src="assets/img/logo1.png" alt="" class="img-responsive" />
+          <div class="initial-letter">
+            <div [innerHtml]="getUserLetter(userName)"></div>
+          </div>
           <div ngbDropdown class="d-inline-block">
             <a
               type="button"
               class="nav-link dropdown-toggle"
               id="dropdownBasic1"
-              style="color: rgb(116, 116, 116)"
               ngbDropdownToggle
             >
               {{ userName }}
@@ -35,7 +26,7 @@
             <div
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
-              style="min-width: auto; border: none"
+              class="dropdown-layout"
             >
               <button
                 ngbDropdownItem
@@ -91,7 +82,7 @@
             <p>Visit Our Website at jyotitechnosoft for more updates</p>
             <div class="copyright">
               &copy; Copyright
-              <strong><span>Jyoti Technosoft LLP</span></strong>
+              <strong><span class="companyname">Jyoti Technosoft LLP</span></strong>
 
               All Rights Reserved
             </div>
@@ -112,7 +103,6 @@
     </div>
   </div>
 </div>
-<!-- TODO: Remove this and add inside dialog-service -->
 
 <div
   class="modal"

@@ -21,13 +21,21 @@ export class HeaderComponent {
   }
 
   getData() {
-    let data: any = localStorage.getItem('registeruser');
-    this.userData = JSON.parse(data);
-    let userId: any = this.questionService.getUser();
-    this.userName = this.userData?.find(
-      (data: any) => data?.id == userId
-    )?.fullname;
+    let data: any = localStorage.getItem('registerUser');
+    this.userName = JSON.parse(data).find((data: any) => {
+      return data.id == this.questionService.getUser();
+    })?.fullName;
   }
+
+  getUserLetter(userName: string) {
+    const intials = userName
+    .split(' ')
+    .map((name) => name[0])
+    .join('')
+    .toUpperCase();
+  return intials;
+}
+
   signout() {
     localStorage.removeItem('isAuthenticate');
     document.cookie = 'username' + '=' + null;

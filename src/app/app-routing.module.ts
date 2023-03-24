@@ -16,6 +16,7 @@ const routes: Routes = [
         (m) => m.LayoutComponentModule
       ),
   },
+  {path:"**",redirectTo:'/login',pathMatch:'full'}
 ];
 
 @NgModule({

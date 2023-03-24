@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { QuestionService } from '../../service/question.service';
-import quizData from 'src/assets/json/data.json';
 import { Params, Router } from '@angular/router';
 
 @Component({
@@ -9,10 +8,8 @@ import { Params, Router } from '@angular/router';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit, OnDestroy {
-  quizData = { ...quizData };
   userName: any;
-  userData: any;
-  submittedData: any;
+  allResultData: any;
 
   constructor(
     public questionService: QuestionService,
@@ -20,7 +17,6 @@ export class ResultComponent implements OnInit, OnDestroy {
     ) {}
 
   ngOnInit(): void {
-    this.userName = this.questionService?.userName;
     this.resultData();
     if (!this.userName) {
       this.getData();
@@ -28,27 +24,21 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    let data: any = localStorage.getItem('registeruser');
-    this.userData = JSON.parse(data);
-    this.userName = this.userData.find((data: any) => {
+    let data: any = localStorage.getItem('registerUser');
+    this.userName = JSON.parse(data).find((data: any) => {
       return data.id == this.questionService.getUser();
-    })?.fullname;
+    })?.fullName;
   }
 
   resultData() {
     let data: any = localStorage.getItem('result');
-    this.submittedData = JSON.parse(data);
-    this.submittedData = this.submittedData.filter((data: any) => {
+    this.allResultData = JSON.parse(data).filter((data: any) => {
       return data?.user == this.questionService.getUser();
     });
-    this.submittedData = this.submittedData.map((data: any) => {
-      const message = this.quizData?.quiz?.find((quizData: any) => {
-        return quizData.quizId == data.type;
-      });
-      data.image = message?.image;
-      return data;
-    });
-    this.submittedData = this.submittedData?.reverse();
+    this.allResultData = this.allResultData.splice(
+      this.allResultData.length - 1,
+      1
+    );
   }
 
   startQuizAgain(quizName:string){

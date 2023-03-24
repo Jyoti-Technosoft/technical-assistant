@@ -7,6 +7,7 @@ import { Quizcomponent } from '../component/quiz/quiz.component';
 import { ResultComponent } from '../component/result/result.component';
 import { StartquizComponent } from '../component/startquiz/startquiz.component';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
+import { AllresultsComponent } from '../component/allresults/allresults.component';
 
 const routes: Routes = [
    { path:'',
@@ -17,7 +18,7 @@ const routes: Routes = [
         { path: 'quizname', component:StartquizComponent},
         { path: 'quiz', component:Quizcomponent},
         { path: 'result', component:ResultComponent},
-
+        { path: 'allresults', component:AllresultsComponent }
      ]
    }
 ];
