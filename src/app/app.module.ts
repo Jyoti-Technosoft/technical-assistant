@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './authorization/registration/registration.component';
 import { LoginComponent } from './authorization/login/login.component';
@@ -10,7 +12,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
 import { QuestionService } from './service/question.service';
 import { LayoutComponentModule } from './layout/layout-component.module';
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({ 
     declarations: [
