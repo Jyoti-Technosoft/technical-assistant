@@ -2,16 +2,19 @@
   "skipModel": {
     "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
     "yes": "Yes",
+    "modelLable":"Alert",
     "no": "No",
     "type":"skipModel"
   },
   "loginModel": {
+    "modelLable":"Alert",
     "label": "Wrong Credentials , Do you want to create new account?",
     "yes": "Yes",
     "no": "No",
     "type":"loginModel"
   },
   "emailModel": {
+    "modelLable":"Alert",
     "label": "This Email is already registerd with Us, Do you want to login again?.",
     "yes": "Yes",
     "no": "No",
@@ -19,6 +22,7 @@
   },
   "signoutModel":
   {
+    "modelLable":"Alert",
     "label": "Are you sure you want to singout from quiz?",
     "yes": "Yes",
     "no": "No",
@@ -32,6 +36,9 @@
     "copyrightInfo":"Copyright",
     "companyLink":"https://jyotitechnosoft.com/",
     "no": "Cancel",
+    "closeRightButton" : true,
+    "companyDetails":true,
+    "modelLable":"About",
     "type":"aboutModel"
   }
 }

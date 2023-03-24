@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    if (localStorage.getItem('registerUser')?.length) {
+    if (localStorage.getItem('registerUser')) {
       let data: any = localStorage.getItem('registerUser');
       this.userData = JSON.parse(data);
     }
