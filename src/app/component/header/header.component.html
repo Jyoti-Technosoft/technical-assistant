@@ -1,18 +1,12 @@
 <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
-    <a href="" class="navbar-brand" routerLink="/dashboard">
-      <img
-        class="d-inline-block"
-        src="assets/img/logo1.png"
-        alt="Jyoti Techn"
-      />
-      <span>APPLICATION</span></a
+    <a class="navbar-brand" routerLink="/dashboard">
+      <img class="col-1" src="assets/img/logo1.png" alt="Jyoti Techn" />
+      <span class="appliaction">APPLICATION</span></a
     >
-
     <div class="navigation" *ngIf="userName">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
-          <img src="assets/img/logo1.png" alt="" class="img-responsive" />
           <div ngbDropdown class="d-inline-block">
             <a
               type="button"
@@ -32,7 +26,7 @@
                 type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#about"
               >
                 About
               </button>
@@ -41,7 +35,7 @@
                 type="button"
                 class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal1"
+                data-bs-target="#sign"
               >
                 Sign Out
               </button>
@@ -55,7 +49,7 @@
 
 <div
   class="modal"
-  id="exampleModal"
+  id="about"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
@@ -82,7 +76,6 @@
             <div class="copyright">
               &copy; Copyright
               <strong><span>Jyoti Technosoft LLP</span></strong>
-
               All Rights Reserved
             </div>
             <div class="credits">
@@ -105,10 +98,11 @@
     </div>
   </div>
 </div>
+<!-- TODO: Remove this and add inside dialog-service -->
 
 <div
   class="modal"
-  id="exampleModal1"
+  id="sign"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
