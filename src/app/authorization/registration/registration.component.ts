@@ -83,7 +83,7 @@ export class RegistrationComponent {
     const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
     return regex.test(control.value) ? null : { pattern: true };
   };
-  
+
   createForm() {
     this.registrationForm = this.fb.group({
       id: [Date.now()],
