@@ -10,6 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
 import { QuestionService } from './service/question.service';
 
+//store module
+import { storeModule } from './store/store.module';
+
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({ 
     declarations: [
         AppComponent,
@@ -18,9 +23,11 @@ import { QuestionService } from './service/question.service';
     ],
     imports: [
         BrowserModule,
+        storeModule ,
         AppRoutingModule,
         FormsModule,
         ReactiveFormsModule,
+        StoreDevtoolsModule.instrument({maxAge:25,logOnly:true}),
         LayoutComponentModule
     ],
     providers: [AuthGuard,QuestionService],
