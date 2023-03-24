@@ -1,24 +1,15 @@
-<nav
-  class="navbar fixed-top navbar-expand-sm navbar-light bg-light"
-  style="padding: 0px"
->
+<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
   <div class="container-fluid">
-    <a
-      href="#"
-      class="navbar-brand h1"
-      routerLink="/dashboard"
-      style="margin: 0px"
-    >
+    <a href="" class="navbar-brand" routerLink="/dashboard">
       <img
         class="d-inline-block"
         src="assets/img/logo1.png"
-        width="35"
-        height="35"
+        alt="Jyoti Techn"
       />
       <span>APPLICATION</span></a
     >
 
-    <div class="navigation">
+    <div class="navigation" *ngIf="userName">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
           <img src="assets/img/logo1.png" alt="" class="img-responsive" />
@@ -27,15 +18,14 @@
               type="button"
               class="nav-link dropdown-toggle"
               id="dropdownBasic1"
-              style="color: rgb(116, 116, 116)"
               ngbDropdownToggle
             >
               {{ userName }}
             </a>
             <div
+              class="dropdown"
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
-              style="min-width: auto; border: none"
             >
               <button
                 ngbDropdownItem
@@ -64,7 +54,7 @@
 </nav>
 
 <div
-  class="modal fade"
+  class="modal"
   id="exampleModal"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
@@ -97,7 +87,10 @@
             </div>
             <div class="credits">
               Designed by
-              <a href="https://jyotitechnosoft.com/" target="_blank"
+              <a
+                href="https://jyotitechnosoft.com/"
+                rel="noopener noreferrer"
+                target="_blank"
                 >Jyoti Technosoft LLP</a
               >
             </div>
@@ -112,7 +105,6 @@
     </div>
   </div>
 </div>
-<!-- TODO: Remove this and add inside dialog-service -->
 
 <div
   class="modal"
@@ -120,13 +112,9 @@
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
-  style="align-items: center"
 >
   <div class="modal-dialog">
-    <div
-      class="modal-content"
-      style="width: 350px; position: absolute; right: 90px"
-    >
+    <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5">Alert</h1>
         <button
@@ -144,17 +132,11 @@
           type="button"
           class="btn btn-primary"
           data-bs-dismiss="modal"
-          style="margin-bottom: 6px; margin-left: 20px"
           (click)="signout()"
         >
           Yes
         </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-          style="margin-left: 178px; margin-bottom: 6px"
-        >
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cancel
         </button>
       </div>
