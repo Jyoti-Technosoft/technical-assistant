@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { QuestionService } from '../../service/question.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private route: Router,
     private fb:FormBuilder,
-    private questionService: QuestionService,
+    private authenticationService: AuthenticationService,
     public toastService: ToastService,
   ) {}
 
