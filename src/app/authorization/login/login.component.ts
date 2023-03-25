@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
 
     if (userdata) {
-      document.cookie = 'username' + '=' + userdata.id;
+      document.cookie = 'Username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('dashboard');
     } else {
@@ -63,14 +63,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(12),
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+          ),
         ]),
       ],
     });
   }
 
-  get loginFormControl() {
+  get loginFormValidator() {
     return this.loginForm.controls;
   }
 

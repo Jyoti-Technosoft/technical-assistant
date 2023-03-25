@@ -1,6 +1,10 @@
 <div class="card shadow">
   <div class="card-body">
-    <form [formGroup]="loginForm" (ngSubmit)="formSubmitted(loginForm.value)" class="p-3">
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="formSubmitted(loginForm.value)"
+      class="p-3"
+    >
       <div class="row g-0">
         <div class="col text-center">
           <img class="userlogo" src="assets/img/login.png" alt="logo" />
@@ -9,35 +13,54 @@
         </div>
       </div>
       <div class="row">
-        <div class="col mb-3">
+        <div class="col-mb-3">
           <input
-            type="text"
-            class="form-control"
+            type="email"
             placeholder="Email Address"
+            class="form-control"
             id="email"
             formControlName="email"
           />
-          <div class="form-text text-danger" *ngIf="">Email is required.</div>
-          <div class="form-text text-danger" *ngIf="">Email is Invalid.</div>
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="loginFormValidator['email'].errors?.['required'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched)"
+            >
+              Email is required.
+            </span>
+            <span
+              *ngIf="loginFormValidator['email'].errors?.['email'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched)"
+            >
+              Email is Invalid.
+            </span>
+          </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-mb-3">
           <input
             type="password"
-            placeholder="Passsword"
+            placeholder="Password"
             class="form-control"
             id="password"
             formControlName="password"
           />
-          <div class="form-text text-danger" *ngIf="">
-            Password is required.
-          </div>
-          <div class="form-text text-danger" *ngIf="">
-            Password should be at least 6 and at the max 15 characters long.
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="loginFormValidator['password'].errors?.['required'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched)"
+            >
+              Password is required.
+            </span>
+            <span
+              *ngIf="loginFormValidator['password'].errors?.['pattern'] || loginFormValidator['password'].errors?.['maxlength'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched)"
+            >
+              Password should be atleast 8 characters long and should contain
+              one number,one character and one special character.
+            </span>
           </div>
         </div>
       </div>
+
       <div class="row">
         <div class="col-mb-3">
           <div class="d-grid">
