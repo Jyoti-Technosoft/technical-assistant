@@ -1,57 +1,39 @@
-<nav
-  class="navbar fixed-top navbar-expand-sm navbar-light bg-light"
-  style="padding: 0px"
->
+<nav class="navbar p-0 navbar-expand-sm fixed-top navbar-light bg-light">
   <div class="container-fluid">
-    <a
-      href="#"
-      class="navbar-brand h1"
-      routerLink="/dashboard"
-      style="margin: 0px"
+    <a class="navbar-brand" routerLink="/dashboard">
+      <img class="col-1" src="assets/img/logo1.png" alt="Jyoti Techn" />
+      <span class="title">APPLICATION</span></a
     >
-      <img
-        class="d-inline-block"
-        src="assets/img/logo1.png"
-        width="35"
-        height="35"
-      />
-      <span>APPLICATION</span></a
-    >
-
-    <div class="navigation">
+    <div class="navigation" *ngIf="userName">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
-          <img src="assets/img/logo1.png" alt="" class="img-responsive" />
           <div ngbDropdown class="d-inline-block">
             <a
-              type="button"
-              class="nav-link dropdown-toggle"
+              type="button "
+              class="nav-link dropdown"
               id="dropdownBasic1"
-              style="color: rgb(116, 116, 116)"
               ngbDropdownToggle
             >
               {{ userName }}
             </a>
             <div
+              class="dropdown"
               ngbDropdownMenu
               aria-labelledby="dropdownBasic1"
-              style="min-width: auto; border: none"
             >
               <button
                 ngbDropdownItem
                 type="button"
-                class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
+                data-bs-target="#about"
               >
                 About
               </button>
               <button
                 ngbDropdownItem
                 type="button"
-                class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#exampleModal1"
+                data-bs-target="#sign"
               >
                 Sign Out
               </button>
@@ -64,8 +46,8 @@
 </nav>
 
 <div
-  class="modal fade"
-  id="exampleModal"
+  class="modal"
+  id="about"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
@@ -84,7 +66,7 @@
       <div class="modal-body">
         <div class="container">
           <div class="d-flex justify-content-center">
-            <img src="../../assets/img/logo1.png" alt="" />
+            <img src="../../assets/img/logo1.png" alt="logo" />
           </div>
           <div class="content text-center">
             <h1>Jyoti Technosoft LLP</h1>
@@ -92,12 +74,14 @@
             <div class="copyright">
               &copy; Copyright
               <strong><span>Jyoti Technosoft LLP</span></strong>
-
               All Rights Reserved
             </div>
             <div class="credits">
               Designed by
-              <a href="https://jyotitechnosoft.com/" target="_blank"
+              <a
+                href="https://jyotitechnosoft.com/"
+                rel="noopener noreferrer"
+                target="_blank"
                 >Jyoti Technosoft LLP</a
               >
             </div>
@@ -116,17 +100,13 @@
 
 <div
   class="modal"
-  id="exampleModal1"
+  id="sign"
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
-  style="align-items: center"
 >
   <div class="modal-dialog">
-    <div
-      class="modal-content"
-      style="width: 350px; position: absolute; right: 90px"
-    >
+    <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5">Alert</h1>
         <button
@@ -144,17 +124,11 @@
           type="button"
           class="btn btn-primary"
           data-bs-dismiss="modal"
-          style="margin-bottom: 6px; margin-left: 20px"
           (click)="signout()"
         >
           Yes
         </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-          style="margin-left: 178px; margin-bottom: 6px"
-        >
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cancel
         </button>
       </div>

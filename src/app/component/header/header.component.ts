@@ -14,23 +14,21 @@ export class HeaderComponent {
   constructor(private route: Router, public questionService: QuestionService) {}
 
   ngOnInit() {
-    this.userName = this.questionService?.userName;
-    if (!this.userName) {
-      this.getData();
-    }
+    this.getData();
   }
 
   getData() {
-    let data: any = localStorage.getItem('registeruser');
+    let data: any = localStorage.getItem('registerUser');
     this.userData = JSON.parse(data);
     let userId: any = this.questionService.getUser();
     this.userName = this.userData?.find(
       (data: any) => data?.id == userId
-    )?.fullname;
+    )?.fullName;
+    console.log(this.userData);
   }
   signout() {
     localStorage.removeItem('isAuthenticate');
-    document.cookie = 'username' + '=' + null;
+    document.cookie = 'userName' + '=' + null;
     this.route.navigateByUrl('/login');
   }
 }
