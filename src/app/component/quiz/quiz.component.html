@@ -10,7 +10,7 @@
     >
       <ng-template
         ngbSlide
-        *ngFor="let arrayloop of FormArray.controls; let i = index"
+        *ngFor="let arrayloop of formArray.controls; let i = index"
       >
         <ng-container [formGroupName]="i">
           <div class="container-fluid">
@@ -32,7 +32,7 @@
                       <div
                         class="timer_sec user-select-none text-center rounded-2"
                       >
-                        {{ FormArray.controls.at(i)?.value?.timer }}
+                        {{ formArray.controls.at(i)?.value?.timer }}
                       </div>
                     </div>
                   </div>
@@ -52,7 +52,7 @@
                           <label
                             class="form-check-label option w-100 rounded-2 align-items-center user-select-none"
                             *ngIf="card.type == 'checkbox'"
-                            [class.hightlight-selected]="FormArray.controls.at(i)?.value.radioValue == card.id"
+                            [class.hightlight-selected]="formArray.controls.at(i)?.value.radioValue == card.id"
                           >
                           >
                             <input
@@ -67,7 +67,7 @@
                           <label
                             class="form-check-label option w-100 rounded-2 align-items-center user-select-none"
                             *ngIf="card.type == 'radio'"
-                            [class.hightlight-selected]="FormArray.controls.at(i)?.value.radioValue == card.id"
+                            [class.hightlight-selected]="formArray.controls.at(i)?.value.radioValue == card.id"
                           >
                             <input
                               type="radio"
@@ -106,7 +106,7 @@
                       </button>
 
                       <button
-                        [disabled]="FormArray.controls[i].dirty"
+                        [disabled]="formArray.controls[i].dirty"
                         data-slide="skip"
                         type="button"
                         (click)="skipQuestion(i)"
@@ -116,7 +116,7 @@
                       </button>
 
                       <button
-                        [disabled]="!FormArray.controls[i].dirty"
+                        [disabled]="!formArray.controls[i].dirty"
                         data-slide="next"
                         type="button"
                         (click)="nextQuestion(i)"

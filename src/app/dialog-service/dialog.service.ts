@@ -5,31 +5,39 @@ import { ModalComponent } from './modal/modal/modal.component';
 import dialogData from '../../assets/json/dialogData.json';
 import { Router } from '@angular/router';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class DialogService {
-  adminform: any;
   
-  constructor(
-    private modalService:NgbModal,
-    private route:Router
-  ) {}
+  constructor(private modalService: NgbModal, private route: Router) {}
 
-  dialogData = {...dialogData};
+  dialogData = { ...dialogData };
 
-  openDialog(label:string, yesButtonLable:string, NoButtonLable:string):Promise<boolean>{
+  openDialog(
+    label: string,
+    yesButtonLable: string,
+    NoButtonLable: string
+  ): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(ModalComponent);
       modalRef.componentInstance.label = label;
       modalRef.componentInstance.yesButtonLable = yesButtonLable;
       modalRef.componentInstance.NoButtonLable = NoButtonLable;
-      
-      modalRef.result.then((data) => {
-        resolve(<boolean> data)
-      }); 
-    })
+
+      modalRef.result
+        .then((answer) => {
+          resolve(<boolean>answer);
+        })
+        .catch((answer) => {
+          resolve(<boolean>answer);
+        });
+    });
   }
-    
- }
+  hasModelOpen() {
+    return this.modalService.hasOpenModals();
+  }
+  destroy() {
+    this.modalService.dismissAll(false);
+  }
+}

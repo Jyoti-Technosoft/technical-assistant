@@ -1,12 +1,33 @@
-<div class="modal-header">
-    <h1 class="modal-title fs-5" id="exampleModalLabel">Alert</h1>
+<div class="container-fluid">
+  <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12">
+    <div class="modal-content confirmation-box">
+      <div class="modal-header box-content">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Alert</h1>
+        <button
+          type="button"
+          class="btn-close cross-btn"
+          data-bs-dismiss="modal"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>{{ label }}</p>
+      </div>
+      <div class="modal-footer footer-content">
+        <button
+          type="button"
+          class="btn btn-danger no-btn"
+          (click)="activeModal.close(false)"
+        >
+          {{ NoButtonLable }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-success yes-btn"
+          (click)="activeModal.close(true)"
+        >
+          {{ yesButtonLable }}
+        </button>
+      </div>
+    </div>
   </div>
-<div class="modal-body">
-    <p>{{label}} </p>
 </div>
-
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark"  (click)="activeModal.close(false)">{{NoButtonLable}}</button>
-    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(true)" >{{yesButtonLable}}</button> 
-</div>
-
