@@ -48,13 +48,12 @@ export class RegistrationComponent {
       (value: any) => value.email == formValue.email
     );
     if (findUser) {
-      this.toastService.showErrorMessage('This user Id is already Registered');
+      this.toastService.showErrorMessage('This email id is already registered');
       setTimeout(() => {
         this.email.nativeElement.focus();
       });
     } else {
       this.toastService.showSuccessMessage('Registered Successfully');
-      this.route.navigateByUrl('login');
       this.registerUser.push(formValue);
       localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
     }
