@@ -2,7 +2,6 @@
 .header_txt {
   z-index: 1;
   height: 70px;
-  padding: 0 15px;
   .header_title {
     font-size: 25px;
     font-weight: 600;
@@ -15,7 +14,6 @@
   border: 1px solid #b8daff;
   height: 45px;
   width: 145px;
-  padding: 0px 8px;
   .timer_left_txt {
     font-size: 17px;
     font-weight: 600;
@@ -44,7 +42,6 @@
 .option {
   background: rgb(222, 239, 255);
   border: 1px solid #84c5fe;
-  padding: 8px 15px;
   font-size: 17px;
   cursor: pointer;
 }
@@ -58,14 +55,6 @@
 .footer_txt {
   z-index: 1;
   height: 70px;
-  padding: 0 15px;
-  .total_que {
-    .footer_right_txt {
-      padding: 0 5px;
-    }
-  }
 }
 
-.btn-dark {
-  margin: 0 10px;
-}
+

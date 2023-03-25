@@ -19,13 +19,13 @@
                 <div class="m-3">
                   <div class="card quiz_card h-auto">
                     <div
-                      class="card-header header_txt d-flex align-items-center justify-content-between position-relative"
+                      class="card-header header_txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
                     >
                       <div class="header_title user-select-none">
                         {{ [this.selectedQuizType] }}
                       </div>
                       <div
-                        class="timer d-flex align-items-center justify-content-between rounded-2"
+                        class="timer d-flex align-items-center justify-content-between rounded-2 px-2 py-0"
                       >
                         <div class="timer_left_txt user-select-none">
                           Time Left
@@ -51,7 +51,7 @@
                         >
                           <div class="form_check">
                             <label
-                              class="form-check-label option w-100 rounded-2 align-items-center user-select-none"
+                              class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
                               *ngIf="card.type == 'checkbox'"
                               [class.hightlight-selected]="
                                 formArray.controls.at(i)?.value.radioValue ==
@@ -69,7 +69,7 @@
                             </label>
 
                             <label
-                              class="form-check-label option mt-3 w-100 rounded-2 align-items-center user-select-none"
+                              class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
                               *ngIf="card.type == 'radio'"
                               [class.hightlight-selected]="
                                 formArray.controls.at(i)?.value.radioValue ==
@@ -90,11 +90,11 @@
                     </div>
 
                     <div
-                      class="card-footer footer_txt d-flex align-items-center justify-content-between position-relative"
+                      class="card-footer footer_txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
                     >
                       <div class="total_que">
                         <p
-                          class="footer_right_txt text-center user-select-none m-0"
+                          class="footer_right_txt py-0 px-1 text-center user-select-none m-0"
                         >
                           <strong>{{ i + 1 }}</strong> Of
                           <strong>{{ question.length }}</strong> Questions
@@ -117,7 +117,7 @@
                           data-slide="skip"
                           type="button"
                           (click)="skipQuestion(i)"
-                          class="btn btn-dark"
+                          class="btn btn-dark my-0 mx-2"
                         >
                           Skip
                         </button>
