@@ -9,9 +9,9 @@ import { RegistrationComponent } from './authorization/registration/registration
 import { LoginComponent } from './authorization/login/login.component';
 import { ToastComponent } from './toast/toast.component';
 import { AppRoutingModule } from './app-routing.module';
-import { AuthGuard } from './authorization/auth-guard/auth.guard';
-import { QuestionService } from './service/question.service';
 import { LayoutComponentModule } from './layout/layout-component.module';
+import { AuthGuard } from './authorization/auth-guard/auth.guard';
+import { AuthenticationService } from './service/authentication.service';
 
 @NgModule({ 
     declarations: [
@@ -28,7 +28,7 @@ import { LayoutComponentModule } from './layout/layout-component.module';
         LayoutComponentModule,
         NgbToastModule
     ],
-    providers: [AuthGuard,QuestionService],
+    providers: [AuthGuard,AuthenticationService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

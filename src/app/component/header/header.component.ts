@@ -1,31 +1,35 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { QuestionService } from '../../service/question.service';
+import { AuthenticationService } from '../../service/authentication.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent {
   userName: any;
   userData: any;
-  constructor(private route: Router, public questionService: QuestionService) {}
+  constructor(
+    private route: Router,
+    public authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit() {
-    this.getData();
     if (!this.userName) {
     }
   }
 
   getData() {
-    this.userData = JSON.parse(localStorage.getItem('registerUser') as string);
-    let userId: any = this.questionService.getUser();
+    let data: any = localStorage.getItem('registerUser');
+    this.userData = JSON.parse(data);
+    let userId: any = this.authenticationService.getUser();
     this.userName = this.userData?.find(
       (data: any) => data?.id == userId
     )?.fullName;
-    }
+  }
   signout() {
     localStorage.removeItem('isAuthenticate');
     document.cookie = 'username' + '=' + null;
