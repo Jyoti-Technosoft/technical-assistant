@@ -5,13 +5,8 @@ import { Injectable } from '@angular/core';
 })
 
 export class AuthenticationService {
-  userName: any;
-  points: number = 0;
-  correctanswer: number = 0;
-  inCorrectAnswer: number = 0;
-  public selectedQuiztype!: string;
-
-  constructor() {}
+  
+constructor() {}
 
   ngOnInit(): void {}
 

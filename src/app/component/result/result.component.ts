@@ -20,7 +20,6 @@ export class ResultComponent implements OnInit, OnDestroy {
     ) {}
 
   ngOnInit(): void {
-    this.userName = this.authenticationService?.userName;
     this.resultData();
     if (!this.userName) {
       this.getData();
