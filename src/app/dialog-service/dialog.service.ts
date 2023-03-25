@@ -8,7 +8,6 @@ import { ModalComponent } from './modal/modal/modal.component';
   providedIn: 'root',
 })
 export class DialogService {
-  adminform: any;
   
   constructor(
     private modalService:NgbModal,
@@ -25,5 +24,11 @@ export class DialogService {
       }); 
     })
   }
-    
- }
+  
+  hasModelOpen() {
+    return this.modalService.hasOpenModals();
+  }
+  destroy() {
+    this.modalService.dismissAll(false);
+  }
+}

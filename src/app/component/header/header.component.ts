@@ -1,28 +1,35 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { QuestionService } from '../../service/question.service';
 import { DialogService } from 'src/app/dialog-service/dialog.service';
 import dialogData from 'src/assets/json/dialogData.json'
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent {
   userName: any;
   dialogData = { ...dialogData };
   userData: any;
-  constructor(private route: Router, public questionService: QuestionService,private dialogService: DialogService,) {}
+  constructor(
+    private route: Router,
+    public authenticationService: AuthenticationService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit() {
-      this.getData();   
+    if (!this.userName) {
+    }
   }
 
   getData() {
-    let data:any = localStorage.getItem('registerUser');
+    let data: any = localStorage.getItem('registerUser');
     this.userData = JSON.parse(data);
+    let userId: any = this.authenticationService.getUser();
     this.userName = this.userData?.find(
       (data: any) => data?.id
     )?.fullName;

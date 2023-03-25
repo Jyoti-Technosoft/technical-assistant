@@ -4,21 +4,8 @@
     "yes": "Yes",
     "modelLable":"Alert",
     "no": "No",
+    "closeRightButton" : true,
     "type":"skipModel"
-  },
-  "loginModel": {
-    "modelLable":"Alert",
-    "label": "Wrong Credentials , Do you want to create new account?",
-    "yes": "Yes",
-    "no": "No",
-    "type":"loginModel"
-  },
-  "emailModel": {
-    "modelLable":"Alert",
-    "label": "This Email is already registerd with Us, Do you want to login again?.",
-    "yes": "Yes",
-    "no": "No",
-    "type":"emailModel"
   },
   "signoutModel":
   {
