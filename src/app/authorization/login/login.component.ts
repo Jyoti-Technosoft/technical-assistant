@@ -2,7 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
+import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 
 @Component({
@@ -18,33 +19,24 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: Router,
-    private dialogService: DialogService,
-    private fb: FormBuilder
+    private fb:FormBuilder,
+    private authenticationService: AuthenticationService,
+    public toastService: ToastService,
   ) {}
 
-  public formSubmitted(formValue: any) {
+  formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
         value?.email == formValue?.emailId &&
         value?.password == formValue?.password
     );
     if (userdata) {
+      this.toastService.showSuccessMessage('Login Successfully!');
       document.cookie = 'username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('dashboard');
     } else {
-      let label = this.dialogData.loginModel.label;
-      let yesButtonLable = this.dialogData.loginModel.yesButtonLable;
-      let NoButtonLable = this.dialogData.loginModel.NoButtonLable;
-      this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
-        .then((value) => {
-          if (value) {
-            this.route.navigateByUrl('registration');
-          } else {
-            this.loginForm?.reset();
-          }
-        });
+      this.toastService.showErrorMessage('Wrong Credential!');
     }
   }
 

@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Params, Router } from '@angular/router';
+
 import { AuthenticationService } from '../../service/authentication.service';
 import quizData from 'src/assets/json/data.json';
-import { Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-result',
@@ -27,11 +28,11 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    let data: any = localStorage.getItem('registeruser');
+    let data: any = localStorage.getItem('registerUser');
     this.userData = JSON.parse(data);
     this.userName = this.userData.find((data: any) => {
       return data.id == this.authenticationService.getUser();
-    })?.fullname;
+    })?.fullName;
   }
 
   resultData() {

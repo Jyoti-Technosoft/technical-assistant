@@ -19,7 +19,6 @@ export class HeaderComponent {
 
   ngOnInit() {
     if (!this.userName) {
-      this.getData();
     }
   }
 
