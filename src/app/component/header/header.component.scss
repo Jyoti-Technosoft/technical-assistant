@@ -1,8 +1,12 @@
-* {
-  font-family: Roboto;
-}
-
 .application {
   border-bottom: 3px solid green;
   font-size: 15px;
+}
+.image {
+  width: 35px;
+  height: 35px;
+}
+.dropdownInfo {
+  min-width: auto;
+  border: none;
 }

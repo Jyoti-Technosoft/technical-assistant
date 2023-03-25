@@ -3,52 +3,35 @@
   style="padding: 0px"
 >
   <div class="container-fluid">
-    <a
-      href="#"
-      class="navbar-brand h1"
-      routerLink="/dashboard"
-      style="margin: 0px"
-    >
-      <img
-        class="d-inline-block"
-        src="assets/img/logo1.png"
-        width="35"
-        height="35"
-      />
+    <a class="navbar-brand h1" routerLink="/dashboard">
+      <img class="d-inline-block image" src="assets/img/logo1.png" />
       <span>APPLICATION</span></a
     >
 
     <div class="navigation">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
-          <img src="assets/img/logo1.png" alt="" class="img-responsive" />
+          <img
+            src="assets/img/logo1.png"
+            alt="Company Logo"
+            class="img-responsive image"
+          />
           <div ngbDropdown class="d-inline-block">
             <a
               type="button"
               class="nav-link dropdown-toggle"
               id="dropdownBasic1"
-              style="color: rgb(116, 116, 116)"
               ngbDropdownToggle
             >
               {{ userName }}
             </a>
             <div
               ngbDropdownMenu
-              aria-labelledby="dropdownBasic1"
-              style="min-width: auto; border: none"
+              class="dropdownInfo"
+              aria-labelledby="dropdown"
             >
-              <button
-                ngbDropdownItem
-                (click)="about()"
-              >
-                About
-              </button>
-              <button
-                ngbDropdownItem
-                (click)="signout()"
-              >
-                Sign Out
-              </button>
+              <button ngbDropdownItem (click)="about()">About</button>
+              <button ngbDropdownItem (click)="signout()">Sign Out</button>
             </div>
           </div>
         </div>
@@ -56,7 +39,3 @@
     </div>
   </div>
 </nav>
-     
-<!-- TODO: Remove this and add inside dialog-service -->
-
-

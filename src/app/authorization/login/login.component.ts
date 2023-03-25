@@ -6,14 +6,11 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
-
-
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
@@ -21,9 +18,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: Router,
-    private fb:FormBuilder,
+    private fb: FormBuilder,
     private authenticationService: AuthenticationService,
-    public toastService: ToastService,
+    public toastService: ToastService
   ) {}
 
   formSubmitted(formValue: any) {
@@ -45,8 +42,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.createForm();
     if (localStorage.getItem('registerUser')) {
-      let data: any = localStorage.getItem('registerUser');
-      this.userData = JSON.parse(data);
+      this.userData = JSON.parse(
+        localStorage.getItem('registerUser') as string
+      );
     }
   }
 
