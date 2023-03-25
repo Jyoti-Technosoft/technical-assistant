@@ -4,11 +4,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './authorization/login/login.component';
 import { RegistrationComponent } from './authorization/registration/registration.component';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
+import { FullLayoutComponent } from './layout/full-layout/full-layout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'registration', component: RegistrationComponent },
+  {
+    path: '', component: FullLayoutComponent, children: [
+      { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+      { path: 'registration', component: RegistrationComponent },
+    ]
+  },
+
   {
     path: '',
     loadChildren: () =>
@@ -22,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
