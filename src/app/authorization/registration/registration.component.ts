@@ -9,25 +9,25 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  styleUrls: ['./registration.component.scss']
 })
+
 export class RegistrationComponent {
-  todayDate: string | undefined = new Date().toISOString().slice(0, 10);
+  todayDate: string | undefined = new Date().toISOString().slice(0,10);
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
   @ViewChild('email') email!: ElementRef;
-
-  constructor(
-    private route: Router,
+  
+  constructor(private route: Router,
     private fb: FormBuilder,
-    private dialogService: DialogService
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -40,30 +40,22 @@ export class RegistrationComponent {
       this.registerUser = JSON.parse(
         localStorage.getItem('registerUser') as string
       );
-    }
-  }
+   }  
+ }
 
   submitform(formValue: any) {
     let findUser = this.registerUser?.find(
       (value: any) => value.email == formValue.email
     );
     if (findUser) {
-      let label = this.dialogData.emailModal.label;
-      let yesButtonLable = this.dialogData.emailModal.yesButtonLable;
-      let NoButtonLable = this.dialogData.emailModal.NoButtonLable;
-      this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
-        .then((value) => {
-          if (value) {
-            setTimeout(() => {
-              this.email.nativeElement.focus();
-            });
-          }
-        });
+      this.toastService.showErrorMessage('This email id is already registered');
+      setTimeout(() => {
+        this.email.nativeElement.focus();
+      });
     } else {
+      this.toastService.showSuccessMessage('Registered Successfully');
       this.registerUser.push(formValue);
       localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
-      this.route.navigateByUrl('login');
     }
   }
 
@@ -82,7 +74,7 @@ export class RegistrationComponent {
     const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
     return regex.test(control.value) ? null : { pattern: true };
   };
-  
+
   createForm() {
     this.registrationForm = this.fb.group({
       id: [Date.now()],
@@ -118,3 +110,7 @@ export class RegistrationComponent {
     return this.registrationForm.controls;
   }
 }
+
+ 
+
+ 
