@@ -2,31 +2,25 @@
   "skipModel": {
     "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
     "yes": "Yes",
-    "modelLable":"Alert",
+    "modelLabel": "Alert",
     "no": "No",
-    "closeRightButton" : true,
-    "type":"skipModel"
+    "type": "skipModel"
   },
-  "signoutModel":
-  {
-    "modelLable":"Alert",
+  "signoutModel": {
+    "modelLabel": "Alert",
     "label": "Are you sure you want to singout from quiz?",
     "yes": "Yes",
     "no": "No",
-    "closeRightButton" : true,
-    "type":"signoutModel"
+    "type": "signoutModel"
   },
-  "aboutModel":
-  {
+  "aboutModel": {
     "image": "assets\\img\\logo1.png",
     "companyName": "Jyoti Technosoft LLP",
     "visitorInfo": "Visit Our Website at jyotitechnosoft for more updates",
-    "copyrightInfo":"Copyright",
-    "companyLink":"https://jyotitechnosoft.com/",
+    "copyrightInfo": "Copyright",
+    "companyLink": "https://jyotitechnosoft.com/",
     "no": "Cancel",
-    "closeRightButton" : true,
-    "companyDetails":true,
-    "modelLable":"About",
-    "type":"aboutModel"
+    "modelLabel": "About",
+    "type": "aboutModel"
   }
 }
