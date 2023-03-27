@@ -6,7 +6,7 @@ import { QuestionService } from '../../service/question.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   userName: any;
@@ -14,20 +14,16 @@ export class HeaderComponent {
   constructor(private route: Router, public questionService: QuestionService) {}
 
   ngOnInit() {
-    this.userName = this.questionService?.userName;
-    if (!this.userName) {
-      this.getData();
-    }
+    this.getData();
   }
 
   getData() {
-    let data: any = localStorage.getItem('registeruser');
-    this.userData = JSON.parse(data);
+    this.userData = JSON.parse(localStorage.getItem('registerUser') as string);
     let userId: any = this.questionService.getUser();
     this.userName = this.userData?.find(
       (data: any) => data?.id == userId
-    )?.fullname;
-  }
+    )?.fullName;
+    }
   signout() {
     localStorage.removeItem('isAuthenticate');
     document.cookie = 'username' + '=' + null;
