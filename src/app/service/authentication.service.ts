@@ -10,7 +10,7 @@ constructor() {}
 
   ngOnInit(): void {}
 
-  getUser(): string {
-    return document.cookie.split('=')[1];
+  getUser(): number | undefined {
+    return Number(document.cookie.split('=')[1]) != 0 ? Number(document.cookie.split('=')[1]) : undefined ;
   }
 }

@@ -26,8 +26,7 @@ export class NonAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let isAuthenticate = localStorage.getItem('isAuthenticate');
-    if (isAuthenticate && this.authenticationService.getUser()) {
+    if (JSON.parse(localStorage.getItem('isAuthenticate') as string) && this.authenticationService.getUser()) {
       this.router.navigateByUrl('dashboard');
       return false;
     }
