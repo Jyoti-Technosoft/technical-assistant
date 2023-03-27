@@ -4,9 +4,11 @@
       <div class="modal-header box-content">
         <h1 class="modal-title fs-5">{{ configData?.modelLabel }}</h1>
         <button
+          *ngIf="configData?.closeRightButton"
           type="button"
           class="btn-close cross-btn"
           data-bs-dismiss="modal"
+          (click)="activeModal.close(false)"
           (click)="activeModal.close(false)"
         ></button>
       </div>
@@ -43,6 +45,7 @@
           (click)="activeModal.close(false)"
         >
           {{ configData?.no }}
+          {{ configData?.no }}
         </button>
         <button
           *ngIf="configData?.yes"
@@ -50,6 +53,7 @@
           class="btn btn-success yes-btn"
           (click)="activeModal.close(true)"
         >
+          {{ configData?.yes }}
           {{ configData?.yes }}
         </button>
       </div>
