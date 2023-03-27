@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         Validators.compose([
           Validators.required,
           Validators.pattern(
-            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$'
           ),
         ]),
       ],
