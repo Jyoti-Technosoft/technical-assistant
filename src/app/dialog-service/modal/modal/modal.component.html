@@ -9,7 +9,6 @@
           class="btn-close cross-btn"
           data-bs-dismiss="modal"
           (click)="activeModal.close(false)"
-          (click)="activeModal.close(false)"
         ></button>
       </div>
       <div class="modal-body">
@@ -18,6 +17,7 @@
           <div *ngIf="configData?.image" class="d-flex justify-content-center">
             <img src="{{ configData?.image }}" alt="Company Image" />
           </div>
+
           <div *ngIf="configData?.type == 'aboutModel'" class="content text-center">
             <h1>{{ configData?.companyName }}</h1>
             <p>{{ configData?.visitorInfo }}</p>
@@ -45,7 +45,6 @@
           (click)="activeModal.close(false)"
         >
           {{ configData?.no }}
-          {{ configData?.no }}
         </button>
         <button
           *ngIf="configData?.yes"
@@ -53,7 +52,6 @@
           class="btn btn-success yes-btn"
           (click)="activeModal.close(true)"
         >
-          {{ configData?.yes }}
           {{ configData?.yes }}
         </button>
       </div>
