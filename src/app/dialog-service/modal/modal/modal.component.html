@@ -2,30 +2,56 @@
   <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12">
     <div class="modal-content confirmation-box">
       <div class="modal-header box-content">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Alert</h1>
+        <h1 class="modal-title fs-5">{{ configData?.modelLable }}</h1>
         <button
+          *ngIf="configData?.closeRightButton"
           type="button"
           class="btn-close cross-btn"
           data-bs-dismiss="modal"
+          (click)="activeModal.close(false)"
         ></button>
       </div>
       <div class="modal-body">
-        <p>{{ label }}</p>
+        <div class="container">
+          <p *ngIf="configData?.label">{{ configData?.label }}</p>
+          <div *ngIf="configData?.image" class="d-flex justify-content-center">
+            <img src="{{ configData?.image }}" alt="Company Image" />
+          </div>
+          <div *ngIf="configData?.companyDetails" class="content text-center">
+            <h1>{{ configData?.companyName }}</h1>
+            <p>{{ configData?.visitorInfo }}</p>
+            <div class="copyright">
+              &copy; {{ configData?.copyrightInfo }}
+              <strong
+                ><span>{{ configData?.companyName }}</span></strong
+              >
+              All Rights Reserved
+            </div>
+            <div class="credits">
+              Designed by
+              <a href="{{ configData?.companyLink }}" target="_blank">{{
+                configData?.companyName
+              }}</a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer footer-content">
         <button
+          *ngIf="configData?.no"
           type="button"
           class="btn btn-danger no-btn"
           (click)="activeModal.close(false)"
         >
-          {{ NoButtonLable }}
+          {{ configData?.no }}
         </button>
         <button
+          *ngIf="configData?.yes"
           type="button"
           class="btn btn-success yes-btn"
           (click)="activeModal.close(true)"
         >
-          {{ yesButtonLable }}
+          {{ configData?.yes }}
         </button>
       </div>
     </div>

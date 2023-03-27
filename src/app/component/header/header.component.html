@@ -1,22 +1,40 @@
-<div class="conatiner">
-  <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0">
-    <div class="container-fluid">
-      <a class="navbar-brand" routerLink="/dashboard">
-        <img class="col-1" src="assets/img/logo1.png" alt="Jyoti Techn" />
-        <span class="application">APPLICATION</span></a
-      >
-      <div class="navigation" *ngIf="userName">
-        <div ngbDropdown class="d-inline-block">
-          <a
-            type="button"
-            class="nav-link dropdown-toggle"
-            id="dropdownBasic1"
-            ngbDropdownToggle
-          >
-            {{ userName }}
-          </a>
+<nav
+  class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand h1 m-0" routerLink="/dashboard">
+      <img class="d-inline-block image" src="assets/img/logo1.png" />
+      <span class="header_left_txt">APPLICATION</span></a
+    >
+
+    <div class="navigation">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <img
+            src="assets/img/logo1.png"
+            alt="Company Logo"
+            class="img-responsive image"
+          />
+          <div ngbDropdown class="d-inline-block">
+            <a
+              type="button"
+              class="nav-link dropdown-toggle"
+              id="dropdownBasic1"
+              ngbDropdownToggle
+            >
+              {{ userName }}
+            </a>
+            <div
+              ngbDropdownMenu
+              class="dropdownInfo"
+              aria-labelledby="dropdown"
+            >
+              <button ngbDropdownItem (click)="openAboutDialog()">About</button>
+              <button ngbDropdownItem (click)="openSignOutDialog()">Sign Out</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </nav>
-</div>
+  </div>
+</nav>
