@@ -1,8 +1,24 @@
 * {
   font-family: Roboto;
 }
+.container {
+  position: sticky;
+  margin-left: 0;
+  max-width: 349rem;
+}
 
-.application {
+.logo {
+  width: 35px;
+  height: 30px;
+}
+
+.title {
   border-bottom: 3px solid green;
   font-size: 15px;
+}
+
+.dropdown {
+  margin-right: 15px;
+  cursor: pointer;
+  min-width: auto;
 }
