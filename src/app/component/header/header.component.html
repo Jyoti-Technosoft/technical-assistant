@@ -1,11 +1,10 @@
 <nav
-  class="navbar fixed-top navbar-expand-sm navbar-light bg-light"
-  style="padding: 0px"
+  class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0"
 >
   <div class="container-fluid">
-    <a class="navbar-brand h1" routerLink="/dashboard">
+    <a class="navbar-brand h1 m-0" routerLink="/dashboard">
       <img class="d-inline-block image" src="assets/img/logo1.png" />
-      <span>APPLICATION</span></a
+      <span class="header_left_txt">APPLICATION</span></a
     >
 
     <div class="navigation">
@@ -30,8 +29,8 @@
               class="dropdownInfo"
               aria-labelledby="dropdown"
             >
-              <button ngbDropdownItem (click)="about()">About</button>
-              <button ngbDropdownItem (click)="signout()">Sign Out</button>
+              <button ngbDropdownItem (click)="openAboutDialog()">About</button>
+              <button ngbDropdownItem (click)="openSignOutDialog()">Sign Out</button>
             </div>
           </div>
         </div>

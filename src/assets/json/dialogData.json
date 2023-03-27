@@ -13,6 +13,7 @@
     "label": "Are you sure you want to singout from quiz?",
     "yes": "Yes",
     "no": "No",
+    "closeRightButton" : true,
     "type":"signoutModel"
   },
   "aboutModel":

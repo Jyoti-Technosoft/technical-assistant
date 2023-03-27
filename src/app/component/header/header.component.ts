@@ -8,7 +8,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   userName: any;
@@ -33,12 +33,12 @@ export class HeaderComponent {
     )?.fullName;
   }
 
-  about() {
+  openAboutDialog() {
     let configData = this.dialogData.aboutModel;
     this.dialogService.openDialog(configData);
   }
 
-  signout() {
+  openSignOutDialog() {
     let configData = this.dialogData.signoutModel;
     this.dialogService.openDialog(configData).then((value) => {
       if (value) {
