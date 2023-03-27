@@ -6,7 +6,7 @@ import { QuestionService } from '../../service/question.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
   userName: any;
@@ -15,8 +15,6 @@ export class HeaderComponent {
 
   ngOnInit() {
     this.getData();
-    if (!this.userName) {
-    }
   }
 
   getData() {
