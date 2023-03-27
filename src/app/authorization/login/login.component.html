@@ -54,9 +54,10 @@
             </div>
             <div
               class="form-text text-danger"
-              *ngIf="(loginFormControl['password']?.errors?.['minlength'] || loginFormControl['password']?.errors?.['maxlength'] && (loginFormControl['password']?.dirty || loginFormControl['password']?.touched))"
+              *ngIf="(loginFormControl['password']?.errors?.['pattern'])"
             >
-              Password should be at least 6 and at the max 12 characters long
+              Password should be atleast 8 characters long and should contain
+              one number,one character and one special character.
             </div>
           </div>
         </div>
