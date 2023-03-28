@@ -7,7 +7,7 @@
       <span class="header_left_txt">APPLICATION</span></a
     >
 
-    <div class="navigation">
+    <div class="navigation"  *ngIf="userName">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
           <img
@@ -18,13 +18,14 @@
           <div ngbDropdown class="d-inline-block">
             <a
               type="button"
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown"
               id="dropdownBasic1"
               ngbDropdownToggle
             >
               {{ userName }}
             </a>
             <div
+              class="dropdown"
               ngbDropdownMenu
               class="dropdownInfo"
               aria-labelledby="dropdown"
