@@ -11,10 +11,10 @@ import { interval, Subscription, ReplaySubject, takeUntil } from 'rxjs';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
-import { QuestionService } from 'src/app/service/question.service';
-import quizData from 'src/assets/json/data.json';
-import dialogData from 'src/assets/json/dialogData.json';
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { AuthenticationService } from '@app/service/authentication.service';
+import quizData from '@assets/json/data.json';
+import dialogData from '@assets/json/dialogData.json';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 @Component({
   selector: 'app-questions',
@@ -46,7 +46,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private router: Router,
     private activeRouter: ActivatedRoute,
     private fb: FormBuilder,
-    private questionService: QuestionService,
+    private authenticationService: AuthenticationService,
     private dialogService: DialogService
   ) {
     this.quizForm = this.fb.group({
@@ -57,7 +57,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
-    this.mapJsonData();
+    this.getQuestionData();
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -65,10 +65,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
     let result;
     if (result) {
     }
-    event.returnValue = false; // stay on same page
+    event.returnValue = false;
   }
 
-  mapJsonData() {
+  getQuestionData() {
     const quizData:any = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
     );
@@ -92,14 +92,16 @@ export class Quizcomponent implements OnInit, OnDestroy {
     });
   }
 
-  get FormArray() {
+  get formArray() {
     return this.quizForm.controls['form'] as FormArray;
   }
 
   nextQuestion(questionIndex: number) {
     this.carousel.next();
-    const values = this.FormArray.controls[questionIndex].value.radioValue;
-    this.answer(questionIndex, values);
+    if (this.dialogService.hasModelOpen()) {
+      this.dialogService.destroy();
+    }
+    this.answer(questionIndex, this.formArray.controls[questionIndex].value.radioValue);
     this.disabledValuesAndForm();
     this.questionIndex = questionIndex + 1;
     if (this.questionIndex == this.question.length) {
@@ -122,7 +124,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuizType,
-      user: this.questionService.getUser(),
+      user: this.authenticationService.getUser(),
     };
     stringifyData.push(currentData);
 
@@ -130,46 +132,44 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('result');
   }
 
-  skipQuestion(questionIndex: number) {
-    let label = this.dialogData.skipModel.label;
-    let yesButtonLable = this.dialogData.skipModel.yesButtonLable;
-    let NoButtonLable = this.dialogData.skipModel.NoButtonLable;
+  skipQuestion(questionindex: number) {
+    let configData = this.dialogData.skipModel;
     this.dialogService
-      .openDialog(label, yesButtonLable, NoButtonLable)
+      .openDialog(configData)
       .then((value) => {
         if (value) {
-          this.questionIndex = questionIndex;
+          this.questionIndex = questionindex;
           this.nextQuestion(this.questionIndex);
         }
       });
   }
 
   disabledValuesAndForm() {
-    this.FormArray.controls
+    this.formArray.controls
       .at(this.questionIndex)
       ?.get('radioValue')
       ?.disable();
-    this.FormArray.controls.at(this.questionIndex)?.get('timer')?.disable();
-    this.FormArray.controls.at(this.questionIndex)?.markAsDirty();
+    this.formArray.controls.at(this.questionIndex)?.get('timer')?.disable();
+    this.formArray.controls.at(this.questionIndex)?.markAsDirty();
   }
 
   startCounter() {
     this.interval$ = interval(1000)
       .pipe(takeUntil(this.destroyed$))
       .subscribe((val) => {
-        const counterValue = this.FormArray.controls.at(this.questionIndex)
+        const counterValue = this.formArray.controls.at(this.questionIndex)
           ?.value.timer;
         if (
           Number(counterValue) != 0 &&
-          !this.FormArray.controls.at(this.questionIndex)?.get('timer')
+          !this.formArray.controls.at(this.questionIndex)?.get('timer')
             ?.disabled
         ) {
-          this.FormArray.controls
+          this.formArray.controls
             .at(this.questionIndex)
             ?.patchValue({ timer: counterValue - 1 });
         } else if (
           Number(counterValue) === 0 &&
-          !this.FormArray.controls.at(this.questionIndex)?.get('timer')
+          !this.formArray.controls.at(this.questionIndex)?.get('timer')
             ?.disabled
         ) {
           this.nextQuestion(this.questionIndex);
@@ -177,9 +177,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
       });
   }
 
-  answer(questionIndex: number, selectedOption: number) {
-    if (!this.FormArray.at(questionIndex).get('timer')?.disabled) {
-      if ((this.question[questionIndex].answer?.id == selectedOption)) {
+  answer(questionIndex: number, selectedOption: string) {
+    if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
+      if (this.question[questionIndex].answer?.id == selectedOption) {
         this.points = this.points += this.positivePoints;
         this.correctAnswer++;
       } else if (!(this.question[questionIndex].answer?.id == selectedOption)) {
