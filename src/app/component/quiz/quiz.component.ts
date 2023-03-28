@@ -15,6 +15,7 @@ import { QuestionService } from 'src/app/service/question.service';
 import quizData from 'src/assets/json/data.json';
 import dialogData from 'src/assets/json/dialogData.json';
 import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-questions',
@@ -99,7 +100,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   nextQuestion(questionIndex: number) {
     this.carousel.next();
     const values = this.FormArray.controls[questionIndex].value.radioValue;
-    this.submitAnswer(questionIndex, values);
+    this.answer(questionIndex, values);
     this.disabledValuesAndForm();
     this.questionIndex = questionIndex + 1;
     if (this.questionIndex == this.question.length) {
@@ -123,7 +124,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuizType,
       user: this.questionService.getUser(),
-      date: new Date().toISOString().slice(0, 10)
+      date:  Date.now()
     };
     stringifyData.push(currentData);
 
@@ -178,7 +179,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       });
   }
 
-  submitAnswer(questionIndex: number, selectedOption: number) {
+  answer(questionIndex: number, selectedOption: number) {
     if (!this.FormArray.at(questionIndex).get('timer')?.disabled) {
       if ((this.question[questionIndex].answer?.id == selectedOption)) {
         this.points = this.points += this.positivePoints;

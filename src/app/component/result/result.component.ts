@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { QuestionService } from '../../service/question.service';
 import { Params, Router } from '@angular/router';
+
+import { QuestionService } from '../../service/question.service';
 
 @Component({
   selector: 'app-result',
@@ -11,19 +12,16 @@ export class ResultComponent implements OnInit, OnDestroy {
   userName: any;
   allResultData: any;
 
-  constructor(
-    public questionService: QuestionService,
-    public router:Router
-    ) {}
+  constructor(public questionService: QuestionService, public router: Router) {}
 
   ngOnInit(): void {
     this.resultData();
     if (!this.userName) {
-      this.getData();
+      this.getUserData();
     }
   }
 
-  getData() {
+  getUserData() {
     let data: any = localStorage.getItem('registerUser');
     this.userName = JSON.parse(data).find((data: any) => {
       return data.id == this.questionService.getUser();
@@ -32,18 +30,23 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   resultData() {
     let data: any = localStorage.getItem('result');
-    this.allResultData = JSON.parse(data).filter((data: any) => {
+    data = JSON.parse(data).filter((data: any) => {
       return data?.user == this.questionService.getUser();
     });
-    this.allResultData = this.allResultData.splice(
-      this.allResultData.length - 1,
-      1
-    );
+    const sorter = (a: any, b: any) => {
+      return new Date(a.date) > new Date(b.date) ? a : b;
+    };
+    this.allResultData = data?.reduce(sorter);
   }
 
-  startQuizAgain(quizName:string){
+  startQuizAgain(quizName: string) {
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });
+  }
+
+  showAllQuiz() {
+    const queryParams: Params = { result: 'allresults' };
+    this.router.navigate(['/allresults'], { queryParams });
   }
 
   ngOnDestroy(): void {}

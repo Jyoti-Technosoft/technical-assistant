@@ -16,11 +16,11 @@ export class HeaderComponent {
   ngOnInit() {
     this.userName = this.questionService?.userName;
     if (!this.userName) {
-      this.getData();
+      this.getUserData();
     }
   }
 
-  getData() {
+  getUserData() {
     let data: any = localStorage.getItem('registerUser');
     this.userName = JSON.parse(data).find((data: any) => {
       return data.id == this.questionService.getUser();
