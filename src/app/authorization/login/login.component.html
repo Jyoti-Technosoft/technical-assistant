@@ -7,7 +7,7 @@
         class="rounded-4 mt-5 mb-5 bg-light"
       >
         <div class="col text-center p-3">
-          <img src="assets/img/login.png" class="image" />
+          <img src="assets/img/login.png" class="image" alt="loginLogo" />
           <br>
           <span class="fs-2">Login</span>
         </div>
@@ -54,9 +54,10 @@
             </div>
             <div
               class="form-text text-danger"
-              *ngIf="(loginFormControl['password']?.errors?.['minlength'] || loginFormControl['password']?.errors?.['maxlength'] && (loginFormControl['password']?.dirty || loginFormControl['password']?.touched))"
+              *ngIf="(loginFormControl['password']?.errors?.['pattern'])"
             >
-              Password should be at least 6 and at the max 12 characters long
+            Password should be at least 8 characters long , at most 15 characters and should contain
+            one number,one character and one special character.
             </div>
           </div>
         </div>
