@@ -9,7 +9,7 @@
       "numberOfQuestions": "3",
       "type": "radio",
       "title": "HTML-CSS Quiz",
-      "image": "assets\\img\\html-css1.png",
+      "image": "assets\\img\\html-css.png",
       "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages.",
       "questions": [
         {
@@ -386,8 +386,8 @@
       "negativePoints": 0.25,
       "numberOfQuestions": "3",
       "title": "JavaScript Quiz",
-      "image": "assets\\img\\javascript.jpg",
-      "description": "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.",
+      "image": "assets\\img\\javascript.png",
+      "description": "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.JavaScript is Easy to learn.",
       "questions": [
         {
           "question": "What is JavaScript?",
@@ -659,7 +659,7 @@
       "negativePoints": "0.25",
       "numberOfQuestions": "3",
       "title": "React JS Quiz",
-      "image": "assets\\img\\react-js.png",
+      "image": "assets\\img\\react.png",
       "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta.",
       "questions": [
         {
@@ -802,8 +802,8 @@
       "negativePoints": "0.25",
       "numberOfQuestions": "3",
       "title": "Angular Quiz",
-      "image": "assets\\img\\angular.jpg",
-      "description": "Angular is a development platform, built on TypeScript.component-based framework for building scalabel web applications.",
+      "image": "assets\\img\\javascript.png",
+      "description": "Angular is a framework.AngularJS extends HTML with new attributes.AngularJS is perfect for Single Page Applications.AngularJS is study to easy.",
       "questions": [
         {
           "question": "Which of the following statement is true for AngularJS?",
