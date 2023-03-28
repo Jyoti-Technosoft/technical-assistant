@@ -13,7 +13,7 @@ const routes: Routes = [
      component : FullLayoutComponent,
      canActivate:[AuthGuard],
      children : [
-        { path : 'dashboard' , component : DashboardComponent },
+        { path: 'dashboard' , component : DashboardComponent },
         { path: 'quizname', component:StartquizComponent},
         { path: 'quiz', component:Quizcomponent},
         { path: 'result', component:ResultComponent},
