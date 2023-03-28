@@ -1,4 +1,4 @@
-<div class="card shadow">
+<div class="card shadow w-25 mt-5 p-1">
   <div class="card-body">
     <form
       [formGroup]="loginForm"
@@ -23,12 +23,12 @@
           />
           <div class="form-text text-danger fixed-height">
             <span
-              *ngIf="loginFormValidator['email'].errors?.['required'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched)"
+              *ngIf="(loginFormValidator['email'].errors?.['required'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
             >
               Email is required.
             </span>
             <span
-              *ngIf="loginFormValidator['email'].errors?.['email'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched)"
+              *ngIf="(loginFormValidator['email'].errors?.['email'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
             >
               Email is Invalid.
             </span>
@@ -47,12 +47,12 @@
           />
           <div class="form-text text-danger fixed-height">
             <span
-              *ngIf="loginFormValidator['password'].errors?.['required'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched)"
+              *ngIf="(loginFormValidator['password'].errors?.['required'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched))"
             >
               Password is required.
             </span>
             <span
-              *ngIf="loginFormValidator['password'].errors?.['pattern'] || loginFormValidator['password'].errors?.['maxlength'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched)"
+              *ngIf="(loginFormValidator['password'].errors?.['pattern'] || loginFormValidator['password'].errors?.['maxlength'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched))"
             >
               Password should be atleast 8 characters long and should contain
               one number,one character and one special character.
@@ -77,7 +77,7 @@
       </div>
       <div class="text-center">
         <h6 class="mt-3">
-          Don't Have an Account ?<a href="/registration"> Register Now</a>
+          Don't Have an Account ?<a routerLink="/registration"> Register Now</a>
         </h6>
       </div>
     </form>

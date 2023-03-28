@@ -2,10 +2,6 @@
   font-family: Roboto;
 }
 
-.card.shadow {
-  width: 25rem;
-  margin-top: 80px;
-}
 .userlogo {
   width: 60px;
   height: 60px;
@@ -14,6 +10,11 @@
   color: rgb(41, 41, 231);
   font-weight: bold;
 }
+
+.fixed-height {
+  height: 10px;
+}
+
 .form-control {
   margin-top: 10px;
   width: 100%;
@@ -24,7 +25,6 @@
 }
 
 .card {
-  padding: 10px;
   margin: 0 auto;
   height: auto;
 }
