@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
-import { AuthenticationService } from '../../service/authentication.service';
-import quizData from 'src/assets/json/data.json';
+import { AuthenticationService } from '@app/service/authentication.service';
+import quizData from '@assets/json/data.json';
 
 @Component({
   selector: 'app-result',

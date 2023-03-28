@@ -9,8 +9,8 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ToastService } from 'src/app/toast.service';
-import dialogData from 'src/assets/json/dialogData.json';
+import { ToastService } from '@app/toast.service';
+import dialogData from '@assets/json/dialogData.json';
 
 @Component({
   selector: 'app-registration',

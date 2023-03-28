@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './authorization/login/login.component';
-import { RegistrationComponent } from './authorization/registration/registration.component';
-import { AuthGuard } from './authorization/auth-guard/auth.guard';
-import { NonAuthGuard } from './authorization/auth-guard/non-auth.guard';
+import { LoginComponent } from '@app/authorization/login/login.component';
+import { RegistrationComponent } from '@app/authorization/registration/registration.component';
+import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },

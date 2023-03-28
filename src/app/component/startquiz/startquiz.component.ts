@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import quizData from '../../../assets/json/data.json';
+import quizData from '@assets/json/data.json';
 
 @Component({
   selector: 'app-carddesign',

@@ -11,10 +11,10 @@ import { interval, Subscription, ReplaySubject, takeUntil } from 'rxjs';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import quizData from 'src/assets/json/data.json';
-import dialogData from 'src/assets/json/dialogData.json';
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { AuthenticationService } from '@app/service/authentication.service';
+import quizData from '@assets/json/data.json';
+import dialogData from '@assets/json/dialogData.json';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 @Component({
   selector: 'app-questions',

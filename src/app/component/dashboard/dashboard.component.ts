@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import quizData from '../../../assets/json/data.json';
+import quizData from '@assets/json/data.json';
 
 @Component({
   selector: 'app-dashboard',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { DialogService } from 'src/app/dialog-service/dialog.service';
-import dialogData from 'src/assets/json/dialogData.json';
-import { AuthenticationService } from 'src/app/service/authentication.service';
+import { DialogService } from '@app/dialog-service/dialog.service';
+import dialogData from '@assets/json/dialogData.json';
+import { AuthenticationService } from '@app/service/authentication.service';
 
 @Component({
   selector: 'app-header',
