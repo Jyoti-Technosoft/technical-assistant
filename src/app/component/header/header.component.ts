@@ -38,6 +38,12 @@ export class HeaderComponent {
     this.dialogService.openDialog(configData);
   }
 
+  signout() {
+    localStorage.removeItem('isAuthenticate');
+    document.cookie = 'userName' + '=' + null;
+    this.route.navigateByUrl('/login');
+  }
+
   openSignOutDialog() {
     let configData = this.dialogData.signoutModel;
     this.dialogService.openDialog(configData).then((value) => {
