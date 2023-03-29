@@ -7,11 +7,14 @@ import { AuthenticationService } from '@app/service/authentication.service';
 import { ToastService } from '@app/toast.service';
 import dialogData from '@assets/json/dialogData.json';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
+
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
