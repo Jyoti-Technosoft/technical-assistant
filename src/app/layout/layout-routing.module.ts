@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '@app/authorization/auth-guard/auth.guard';
 import { DashboardComponent } from '@app/component/dashboard/dashboard.component';
+import { PageNotFoundComponent } from '@app/component/page-not-found/page-not-found.component';
 import { Quizcomponent } from '@app/component/quiz/quiz.component';
 import { ResultComponent } from '@app/component/result/result.component';
 import { StartquizComponent } from '@app/component/startquiz/startquiz.component';
@@ -17,10 +18,10 @@ const routes: Routes = [
         { path: 'quizname', component:StartquizComponent},
         { path: 'quiz', component:Quizcomponent},
         { path: 'result', component:ResultComponent},
-
-     ]
-   }
-];
+        { path: '404Page', component:PageNotFoundComponent}
+      ]
+    }
+  ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -11,19 +11,24 @@ import quizData from '@assets/json/data.json';
 export class StartquizComponent implements OnInit {
   quizData = { ...quizData };
   instruction: any;
-  selectedQuizType!: string;
+  selectedQuizType!: string | null;
   
   constructor(private route: Router, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.getInstruction();
+    this.activeRoute.queryParamMap.subscribe((queryParams) => {
+      this.selectedQuizType = queryParams.get('quiz')
+      this.getInstruction()
+    })
   }
 
   getInstruction() {
-    this.selectedQuizType = this.activeRoute.snapshot.queryParams['quiz'];
     this.instruction = this.quizData?.quiz?.find(
       (data) => data?.quizId == this.selectedQuizType
     );
+    if (!this.instruction) {
+      this.route.navigateByUrl('quiz');
+    }
   }
 
   quiz() {

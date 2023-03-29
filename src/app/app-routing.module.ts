@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '@app/authorization/login/login.component';
 import { RegistrationComponent } from '@app/authorization/registration/registration.component';
 import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
+import { PageNotFoundComponent } from '@app/component/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const routes: Routes = [
         (m) => m.LayoutComponentModule
       ),
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent,  pathMatch: 'full'}
 ];
 
 @NgModule({

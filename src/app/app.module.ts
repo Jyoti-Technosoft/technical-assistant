@@ -20,7 +20,8 @@ import { AuthenticationService } from '@app/service/authentication.service';
         LoginComponent,
         ModalComponent,
         RegistrationComponent,
-        ToastComponent
+        ToastComponent,
+        
     ],
     imports: [
         BrowserModule,

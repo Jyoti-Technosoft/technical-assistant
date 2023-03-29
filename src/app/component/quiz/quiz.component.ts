@@ -58,6 +58,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
     this.getQuestionData();
+
+  
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -72,24 +74,28 @@ export class Quizcomponent implements OnInit, OnDestroy {
     const quizData:any = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
     );
-    this.question = [...quizData.questions];
-    this.question = this.question?.sort(() => Math.random() - 0.67).splice(0, quizData.numberOfQuestions);
-    this.options = this.question.map((question: any) =>
-      question.options.sort(() => Math.random() - 0.69)
-    );
-    this.timer = quizData?.timer;
-    this.positivePoints = quizData?.positivePoints;
-    this.negativePoints = quizData.negativePoints;
-
-    const formArray = this.quizForm.controls['form'] as FormArray;
-    this.question.forEach((item: any) => {
-      formArray.push(
-        this.fb.group({
-          radioValue: '',
-          timer: this.timer,
-        })
+    if (!quizData) {
+       this.router.navigateByUrl('404Page');
+    }else{
+      this.question = [...quizData.questions];
+      this.question = this.question?.sort(() => Math.random() - 0.67).splice(0, quizData.numberOfQuestions);
+      this.options = this.question.map((question: any) =>
+        question.options.sort(() => Math.random() - 0.69)
       );
-    });
+      this.timer = quizData?.timer;
+      this.positivePoints = quizData?.positivePoints;
+      this.negativePoints = quizData.negativePoints;
+  
+      const formArray = this.quizForm.controls['form'] as FormArray;
+      this.question.forEach((item: any) => {
+        formArray.push(
+          this.fb.group({
+            radioValue: '',
+            timer: this.timer,
+          })
+        );
+      });
+    }
   }
 
   get formArray() {

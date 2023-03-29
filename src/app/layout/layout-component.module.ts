@@ -13,7 +13,7 @@ import { CommonModule } from "@angular/common";
 import { StartquizComponent } from "@app/component/startquiz/startquiz.component";
 import { Quizcomponent } from "@app/component/quiz/quiz.component";
 import { ResultComponent } from "@app/component/result/result.component";
-
+import { PageNotFoundComponent } from "@app/component/page-not-found/page-not-found.component";
 
 
 @NgModule({
@@ -23,6 +23,7 @@ import { ResultComponent } from "@app/component/result/result.component";
         FooterComponent,
         StartquizComponent,
         Quizcomponent,
+        PageNotFoundComponent,
         ResultComponent,
         FullLayoutComponent
     ],
