@@ -2,7 +2,7 @@
   <div class="col-lg-5 col-md-7 col-sm-12 col-xs-12">
     <div class="modal-content confirmation-box">
       <div class="modal-header box-content">
-        <h1 class="modal-title fs-5">{{ configData?.modelLable }}</h1>
+        <h1 class="modal-title fs-5">{{ configData?.modelLabel }}</h1>
         <button
           *ngIf="configData?.closeRightButton"
           type="button"
@@ -17,7 +17,8 @@
           <div *ngIf="configData?.image" class="d-flex justify-content-center">
             <img src="{{ configData?.image }}" alt="Company Image" />
           </div>
-          <div *ngIf="configData?.companyDetails" class="content text-center">
+
+          <div *ngIf="configData?.type == 'aboutModel'" class="content text-center">
             <h1>{{ configData?.companyName }}</h1>
             <p>{{ configData?.visitorInfo }}</p>
             <div class="copyright">
