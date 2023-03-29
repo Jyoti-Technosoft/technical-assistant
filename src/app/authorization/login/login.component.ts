@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
-        value?.email == formValue?.emailId &&
+        value?.email == formValue?.email &&
         value?.password == formValue?.password
     );
 
