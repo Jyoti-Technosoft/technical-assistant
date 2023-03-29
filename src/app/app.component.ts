@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, ReplaySubject, takeUntil } from 'rxjs';
 
-import { increment, decrement, reset } from 'src/app/store/counter/counter.action';
 
 @Component({
   selector: 'app-root',

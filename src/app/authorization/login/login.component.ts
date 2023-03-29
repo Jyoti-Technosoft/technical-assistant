@@ -3,15 +3,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { DialogService } from 'src/app/dialog-service/dialog.service';
-import dialogData from 'src/assets/json/dialogData.json';
+
+import { AuthenticationService } from '@app/service/authentication.service';
+import { ToastService } from '@app/toast.service';
+import dialogData from '@assets/json/dialogData.json';
+
 import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
-import { doLogoin } from 'src/app/store/autentication/autentication.action';
 import { autenticationState, getStateSelector } from '../../store/autentication/autentication.state';
+import { doLogoin } from '@app/store/autentication/autentication.action';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
@@ -24,60 +27,51 @@ export class LoginComponent implements OnInit, OnDestroy {
   
   constructor(
     private route: Router,
-    private dialogService: DialogService,
     private fb:FormBuilder,
+    private authenticationService: AuthenticationService,
+    public toastService: ToastService,
     private store: Store<autenticationState>
   ) {
     this.state = this.store.select(getStateSelector);
   }
 
-  public formSubmitted(formValue:any) {
-    let userdata = this.userData?.find(
-      (value: any) => value?.email ==  formValue?.emailId && value?.password ==  formValue?.password 
-    );
-    if (userdata) {
-      document.cookie = 'username' + '=' + userdata.id;
-      localStorage.setItem('isAuthenticate', 'true');
-      this.route.navigateByUrl('dashboard');
-    } else {
-      let label = this.dialogData.loginModel.label;
-      let yesButtonLable = this.dialogData.loginModel.yesButtonLable;
-      let NoButtonLable = this.dialogData.loginModel.NoButtonLable;
-      this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
-        .then((value) => {
-          if (value) {
-            this.route.navigateByUrl('registration');
-          } else {
-            this.loginForm?.reset();
-          }
-        });
-    }
+  public formSubmitted(formValue: any) {
+    debugger
+    this.store.dispatch(doLogoin(formValue));
   }
 
   ngOnInit(): void {
     this.createForm();
-    if (localStorage.getItem('registerUser')?.length) {
-      let data: any = localStorage.getItem('registerUser');
-      this.userData = JSON.parse(data);
+    if (localStorage.getItem('registerUser')) {
+      this.userData = JSON.parse(
+        localStorage.getItem('registerUser') as string
+      );
     }
   }
 
   createForm() {
     this.loginForm = this.fb.group({
-      emailId: ['', Validators.compose([Validators.required, Validators.email])],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12)])]
+      emailId: [
+        '',
+        Validators.compose([Validators.required, Validators.email]),
+      ],
+      password: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$'
+          ),
+        ]),
+      ],
     });
 
     this.message$ = this.store.select((state:any) => {return state.authentication});
     this.message$.pipe(takeUntil(this.destroyer$),distinctUntilChanged()).subscribe(state => {console.log("in login component",state)});
   }
 
-  login() {
-    this.store.dispatch(doLogoin(this.loginForm.value));
-  }
 
-  get loginFormControl() {
+  get loginFormValidator() {
     return this.loginForm.controls;
   }
 
