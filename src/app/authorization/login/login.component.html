@@ -54,7 +54,7 @@
             <span
               *ngIf="(loginFormValidator['password'].errors?.['pattern'] || loginFormValidator['password'].errors?.['maxlength'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched))"
             >
-              Password should be atleast 8 characters long and should contain
+              Password should be at least 8 characters long , at most 15 characters and should contain
               one number,one character and one special character.
             </span>
           </div>
