@@ -15,22 +15,22 @@
       <div class="row">
         <div class="col-mb-3">
           <input
-            type="email"
-            placeholder="Email Address"
+            type="emailId"
+            placeholder="emailId Address"
             class="form-control"
-            id="email"
-            formControlName="email"
+            id="emailId"
+            formControlName="emailId"
           />
           <div class="form-text text-danger fixed-height">
             <span
-              *ngIf="(loginFormValidator['email'].errors?.['required'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
+              *ngIf="(loginFormValidator['emailId'].errors?.['required'] && (loginFormValidator['emailId'].dirty || loginFormValidator['emailId'].touched))"
             >
-              Email is required.
+              emailId is required.
             </span>
             <span
-              *ngIf="(loginFormValidator['email'].errors?.['email'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
+              *ngIf="(loginFormValidator['emailId'].errors?.['emailId'] && (loginFormValidator['emailId'].dirty || loginFormValidator['emailId'].touched))"
             >
-              Email is Invalid.
+              emailId is Invalid.
             </span>
           </div>
         </div>

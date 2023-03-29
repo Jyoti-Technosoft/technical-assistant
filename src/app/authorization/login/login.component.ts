@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DialogService } from '@app/dialog-service/dialog.service';
+import { Store } from '@ngrx/store';
 
-import { AuthenticationService } from '@app/service/authentication.service';
-import { ToastService } from '@app/toast.service';
 import dialogData from '@assets/json/dialogData.json';
 
+import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
+import { autenticationState, getStateSelector } from '../../store/autentication/autentication.state';
+import { doLogoin } from '@app/store/autentication/autentication.action';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 @Component({
   selector: 'app-login',
@@ -18,30 +20,22 @@ import dialogData from '@assets/json/dialogData.json';
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
-  loginForm!: FormGroup;
+  loginForm!:FormGroup;
+  message$: Observable<any> | undefined;
+  destroyer$:ReplaySubject<boolean> = new ReplaySubject;
+  state!: Observable<any>;
+  error: any;
+  
 
   constructor(
-    private route: Router,
     private fb:FormBuilder,
-    private authenticationService: AuthenticationService,
-    public toastService: ToastService,
-    private dialogService: DialogService,
-  ) {}
+    private store: Store<autenticationState>
+  ) {
+    this.state = this.store.select(getStateSelector);
+  }
 
   public formSubmitted(formValue: any) {
-    let userdata = this.userData?.find(
-      (value: any) =>
-        value?.email == formValue?.email &&
-        value?.password == formValue?.password
-    );
-
-    if (userdata) {
-      document.cookie = 'userName' + '=' + userdata.id;
-      localStorage.setItem('isAuthenticate', 'true');
-      this.route.navigateByUrl('dashboard');
-    } else {
-      this.toastService.showErrorMessage('Wrong Credential!');
-    }
+    this.store.dispatch(doLogoin(formValue));
   }
 
   ngOnInit(): void {
@@ -69,11 +63,18 @@ export class LoginComponent implements OnInit, OnDestroy {
         ]),
       ],
     });
+
   }
+
 
   get loginFormValidator() {
     return this.loginForm.controls;
   }
 
-  ngOnDestroy(): void {}
+
+  ngOnDestroy(): void {
+    
+  }
+
 }
+
