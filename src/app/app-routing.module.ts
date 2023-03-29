@@ -1,14 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from '@app/authorization/login/login.component';
-import { RegistrationComponent } from '@app/authorization/registration/registration.component';
-import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
-
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
-  { path: 'registration', component: RegistrationComponent },
   {
     path: '',
     loadChildren: () =>
@@ -21,6 +14,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
