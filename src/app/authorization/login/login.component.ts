@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 import { AuthenticationService } from '@app/service/authentication.service';
 import { ToastService } from '@app/toast.service';
@@ -28,10 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   public formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
-        value?.email == formValue?.email &&
-        value?.password == formValue?.password
-    );
-
+      value?.email == formValue?.email &&
+      value?.password == formValue?.password
+      );
     if (userdata) {
       document.cookie = 'Username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
@@ -52,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.loginForm = this.fb.group({
-      emailId: [
+      email: [
         '',
         Validators.compose([Validators.required, Validators.email]),
       ],
