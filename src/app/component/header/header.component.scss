@@ -1,10 +1,15 @@
-*{
-    font-family: Roboto;
+.navbar-brand{
+    margin: 0px;
 }
-.container {
-    position: sticky;
-    margin-left: 0;
-    max-width: 349rem;
+
+.image{
+    width: 35px;
+    height: 35px;
+}
+
+.dropdown-layout{
+    min-width: auto; 
+    border: none;
 }
 
 .img-responsive {
@@ -12,16 +17,27 @@
     width: 30px;
 }
 
-.navigation {
-    font-weight: bold;
-    color:rgb(116, 116, 116);
+.title {
+  border-bottom: 3px solid green;
+  font-size: 15px;
 }
 
-.navigation:hover {
-    color: rgb(0, 0, 0);
+.dropdown {
+  margin-right: 15px;
+  cursor: pointer;
+  min-width: auto;
 }
 
-span {
+.btn.btn-primary {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.btn.btn-secondary {
+  margin-left: 50%;
+  margin-bottom: 5px;
+}
+.companyname {
     border-bottom: 3px solid green;
     font-size: 15px;
 }
@@ -29,9 +45,19 @@ span {
 button:hover{
  background-color: rgba(119, 119, 119, 0.589);
 }
-.h4{
+
+.initial-letter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    font-size: 1rem;
+    color: #000000;
     text-align: center;
-}
-.modal .modal-header{
-    padding: 5px 1rem;
-}
+    line-height: 10rem;
+    background-color: rgb(213, 235, 235);
+    font-weight: 400;
+    margin-right: 5px;
+  }
