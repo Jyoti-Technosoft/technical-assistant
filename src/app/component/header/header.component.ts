@@ -10,6 +10,7 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent {
   userName: any;
   dialogData = { ...dialogData };
