@@ -4,7 +4,7 @@
       <div class="col-sm-12 col-lg-6 col-xl-4">
         <div class="card shadow card-result">
           <div class="container">
-            <ng-container *ngFor="let data of allResultData">
+            <ng-container >
               <div class="card-body">
                 <h2 class="card-title">Result</h2>
                 <div class="row d-flex">
@@ -26,32 +26,32 @@
                           <h5>Name : {{ userName }}</h5>
                         </span>
                         <span>
-                          <h5>Total Points : {{ data?.points }}</h5>
+                          <h5>Total Points : {{ allResultData?.points }}</h5>
                         </span>
                         <span>
-                          <h5>Correct Answers : {{ data?.correctAnswer }}</h5>
+                          <h5>Correct Answers : {{ allResultData?.correctAnswer }}</h5>
                         </span>
                         <span>
-                          <h5>Wrong Answers : {{ data?.inCorrectAnswer }}</h5>
+                          <h5>Wrong Answers : {{ allResultData?.inCorrectAnswer }}</h5>
                         </span>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="card-footer">
+              <div class="card-footer footer">
                 <div class="text-center p-3">
                   <button
                     type="button"
                     class="btn btn-success p-2 m-2"
-                    routerLink="/allresults"
+                    (click)="showAllQuiz()"
                   >
                     Show All Results
                   </button>
                   <button
                     type="button"
                     class="btn btn-success p-2"
-                    (click)="startQuizAgain(data.type)"
+                    (click)="startQuizAgain(allResultData?.type)"
                   >
                     Go Again To Quiz
                   </button>

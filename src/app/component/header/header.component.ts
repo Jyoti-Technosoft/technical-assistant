@@ -22,13 +22,14 @@ export class HeaderComponent {
   ) {}
 
   ngOnInit() {
-    this.getData();
+    this.getUserData();
   }
 
-  getData() {
+  getUserData() {
     let data: any = localStorage.getItem('registerUser');
     this.userData = JSON.parse(data);
     let userId: any = this.authenticationService.getUser();
+
     this.userName = this.userData?.find(
       (data: any) => data?.id == userId
     )?.fullName;
@@ -39,11 +40,6 @@ export class HeaderComponent {
     this.dialogService.openDialog(configData);
   }
 
-  signout() {
-    localStorage.removeItem('isAuthenticate');
-    document.cookie = 'userName' + '=' + null;
-    this.route.navigateByUrl('/login');
-  }
 
   openSignOutDialog() {
     let configData = this.dialogData.signoutModel;
@@ -51,7 +47,7 @@ export class HeaderComponent {
       if (value) {
         this.route.navigateByUrl('login');
         localStorage.removeItem('isAuthenticate');
-        document.cookie = 'username' + '=' + null;
+        document.cookie = 'userName' + '=' + null;
       }
     });
   }

@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit, OnDestroy {
   public formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
-      value?.email == formValue?.email &&
-      value?.password == formValue?.password
-      );
+        value?.email == formValue?.emailId &&
+        value?.password == formValue?.password
+    );
+
     if (userdata) {
-      document.cookie = 'Username' + '=' + userdata.id;
+      document.cookie = 'userName' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('dashboard');
     } else {

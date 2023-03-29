@@ -6,23 +6,24 @@ import { AuthenticationService } from '@app/service/authentication.service';
 @Component({
   selector: 'app-allresults',
   templateUrl: './allresults.component.html',
-  styleUrls: ['./allresults.component.scss'],
+  styleUrls: ['./allresults.component.scss']
 })
+
 export class AllresultsComponent {
   userName: any;
   initialData: number = 8;
-  allResultData: any[] | undefined;
+  allResultData: any[] = [];
 
   constructor(public authenticationService: AuthenticationService, public router: Router) {}
 
   ngOnInit(): void {
     this.resultData();
     if (!this.userName) {
-      this.getData();
+      this.getUserData();
     }
   }
 
-  getData() {
+  getUserData() {
     let data: any = localStorage.getItem('registerUser');
     this.userName = JSON.parse(data).find((data: any) => {
       return data.id == this.authenticationService.getUser();
@@ -47,9 +48,7 @@ export class AllresultsComponent {
     this.initialData = this.initialData + 8;
   }
 
-  checkDisable(): boolean {
-    return Number(this.allResultData?.length) <= this.initialData;
-  }
+  
   startQuizAgain(quizName: string) {
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });

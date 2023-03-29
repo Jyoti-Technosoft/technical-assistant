@@ -20,11 +20,11 @@ export class ResultComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.resultData();
     if (!this.userName) {
-      this.getData();
+      this.getUserData();
     }
   }
 
-  getData() {
+  getUserData() {
     let data: any = localStorage.getItem('registerUser');
     this.userName = JSON.parse(data).find((data: any) => {
       return data.id == this.authenticationService.getUser();
@@ -32,18 +32,25 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   resultData() {
-    this.allResultData = this.allResultData.filter((data: any) => {
+    let data: any = localStorage.getItem('result');
+    this.allResultData = JSON.parse(data).filter((data: any) => {
       return data?.user == this.authenticationService.getUser();
     });
-    this.allResultData = this.allResultData.splice(
-      this.allResultData.length - 1,
-      1
-    );
+    const sorter = (a: any, b: any) => {
+      console.log(a,b)
+      return new Date(a.date) > new Date(b.date) ? a : b;
+    };
+    this.allResultData = this.allResultData?.reduce(sorter);
   }
 
-  startQuizAgain(quizName:string){
+  startQuizAgain(quizName: string) {
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });
+  }
+
+  showAllQuiz() {
+    const queryParams: Params = { result: 'allresults' };
+    this.router.navigate(['/allresults'], { queryParams });
   }
 
   ngOnDestroy(): void {}
