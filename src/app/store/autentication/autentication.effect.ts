@@ -2,10 +2,10 @@ import { OnDestroy } from '@angular/core';
 import { Injectable, Pipe } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Actions, createEffect, Effect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { distinctUntilChanged, ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 import * as autenticationAction from './autentication.action';
@@ -17,6 +17,17 @@ export class AuthEffects implements OnDestroy {
 
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
+  getAllUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(autenticationAction.getAllUsers),
+      switchMap((payload) => {
+        return this.authSerivce
+          .getAllUsers()
+          .pipe(map((users) => autenticationAction.loadUserSuccess({ users })));
+      })
+    )
+  );
+
   doLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(autenticationAction.doLogoin),
@@ -24,7 +35,24 @@ export class AuthEffects implements OnDestroy {
         return this.authSerivce.getUser(payload).pipe(
           map((response: any) => autenticationAction.loginSuccess(response)),
           catchError((error: any) =>
-            of(autenticationAction.loginFail(error.message))
+            of(autenticationAction.handlErrors({ error }))
+          )
+        );
+      })
+    )
+  );
+
+  doRegister$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(autenticationAction.doRegistration),
+      distinctUntilChanged(),
+      switchMap((payload) => {
+        return this.authSerivce.registerUser(payload).pipe(
+          map((users: any) =>
+            autenticationAction.registrationSucess({ users })
+          ),
+          catchError((error: any) =>
+            of(autenticationAction.handlErrors({ error }))
           )
         );
       })
@@ -42,6 +70,17 @@ export class AuthEffects implements OnDestroy {
     )
   );
 
+  registerSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(autenticationAction.registrationSucess),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
+      tap((data) => {
+        this.authSerivce.routeToLogin();
+      })
+    )
+  );
+
   loginSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(autenticationAction.loginSuccess),
@@ -53,13 +92,13 @@ export class AuthEffects implements OnDestroy {
     )
   );
 
-  loginFail$ = createEffect(() =>
+  handleErrors$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(autenticationAction.loginFail),
+      ofType(autenticationAction.handlErrors),
       takeUntil(this.destroyer$),
       distinctUntilChanged(),
       tap((data) => {
-        this.authSerivce.loginFail();
+        this.authSerivce.loginFail(data.error);
       })
     )
   );

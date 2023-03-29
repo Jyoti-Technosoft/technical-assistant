@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public formSubmitted(formValue: any) {
-    debugger
     this.store.dispatch(doLogoin(formValue));
   }
 
@@ -63,8 +62,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       ],
     });
 
-    this.message$ = this.store.select((state:any) => {return state.authentication});
-    this.message$.pipe(takeUntil(this.destroyer$),distinctUntilChanged()).subscribe(state => {console.log("in login component",state)});
   }
 
 

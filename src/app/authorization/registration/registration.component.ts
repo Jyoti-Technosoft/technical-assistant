@@ -8,9 +8,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { ToastService } from '@app/toast.service';
 import dialogData from '@assets/json/dialogData.json';
+import { doRegistration } from '@app/store/autentication/autentication.action';
 
 @Component({
   selector: 'app-registration',
@@ -27,7 +29,8 @@ export class RegistrationComponent {
   
   constructor(private route: Router,
     private fb: FormBuilder,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
@@ -44,19 +47,16 @@ export class RegistrationComponent {
  }
 
   submitform(formValue: any) {
-    let findUser = this.registerUser?.find(
-      (value: any) => value.email == formValue.email
-    );
-    if (findUser) {
-      this.toastService.showErrorMessage('This email id is already registered');
-      setTimeout(() => {
-        this.email.nativeElement.focus();
-      });
-    } else {
-      this.toastService.showSuccessMessage('Registered Successfully');
-      this.registerUser.push(formValue);
-      localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
+    let registerUser = {
+      id: formValue.id,
+      fullName: formValue.fullName,
+      email: formValue?.email,
+      password: window.btoa(JSON.stringify(formValue?.confirmPassword)),
+      gender: formValue?.gender,
+      dateOfBirth: formValue?.dateOfBirth,
+      mobile: formValue?.mobile,
     }
+    this.store.dispatch(doRegistration(registerUser))
   }
 
   validateConfirmaPassword: ValidatorFn = (

@@ -4,6 +4,7 @@ import * as loginAction from './autentication.action';
 export const initialState: State = {
   userData: undefined,
   isUserLoggedIn: undefined,
+  allUsers: [],
 };
 
 export interface userData {
@@ -15,6 +16,7 @@ export interface userData {
 export interface State {
   userData: userData | undefined;
   isUserLoggedIn: boolean | undefined;
+  allUsers:any|[];
 }
 
 export function reducer(state: State | undefined, action: Action): any {
@@ -32,13 +34,17 @@ export const autenticationReducer = createReducer(
     userData: payload,
     isUserLoggedIn: true,
   })),
-  on(loginAction.loginFail, (state) => ({
+  on(loginAction.loadUserSuccess, (state, payload) => ({
     ...state,
-    isUserLoggedIn: false,
+    allUsers: payload
   })),
   on(loginAction.doLogout, (state) => ({
     ...state,
     userData:undefined,
     isUserLoggedIn: false,
+  })),
+  on(loginAction.registrationSucess, (state,payload) => ({
+    ...state,
+    allUsers: payload
   }))
 );

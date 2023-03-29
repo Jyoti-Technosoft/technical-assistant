@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, ReplaySubject, takeUntil } from 'rxjs';
+import { getAllUsers } from './store/autentication/autentication.action';
 
 
 @Component({
@@ -17,8 +18,7 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    // this.message$ = this.store.select();
-    // this.message$.pipe(takeUntil(this.destroyer$)).subscribe(state => {console.log(state)});
+    this.store.dispatch(getAllUsers());
   }
   
   
