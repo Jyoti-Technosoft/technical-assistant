@@ -1,16 +1,41 @@
-.image {
-  width: 4rem;
-  height: 4rem;
-}
-.form-label {
-  font-size: calc(70% + 1vh);
+* {
+  font-family: Roboto;
 }
 
-.form-text {
-  font-size: calc(70% + 1vh);
-  margin-left: 5px;
+.userlogo {
+  width: 60px;
+  height: 60px;
+}
+.fs-4 {
+  color: rgb(41, 41, 231);
+  font-weight: bold;
+}
+
+.fixed-height {
+  height: 10px;
 }
 
 .form-control {
-  font-size: calc(70% + 1vh);
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 1px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #d1d1d4 !important;
+}
+
+.card {
+  margin: 0 auto;
+  height: auto;
+}
+.d-grid {
+  margin-top: 20px;
+}
+.btn.btn-primary {
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  margin: 10px 40px;
+  border-radius: 50px;
+  font-size: 16px;
 }

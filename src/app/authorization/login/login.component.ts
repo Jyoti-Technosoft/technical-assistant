@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/dialog-service/dialog.service';
 
 import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
@@ -14,22 +15,23 @@ export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
   loginForm!: FormGroup;
-
+  
   constructor(
     private route: Router,
     public toastService: ToastService,
+    private dialogService: DialogService,
     private fb: FormBuilder
   ) {}
 
-  formSubmitted(formValue: any) {
+  public formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
-        value?.email == formValue?.emailId &&
+        value?.email == formValue?.email &&
         value?.password == formValue?.password
     );
+
     if (userdata) {
-      this.toastService.showSuccessMessage('Login Successfully!');
-      document.cookie = 'username' + '=' + userdata.id;
+      document.cookie = 'Username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('dashboard');
     } else {
@@ -47,22 +49,20 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.loginForm = this.fb.group({
-      emailId: [
-        '',
-        Validators.compose([Validators.required, Validators.email]),
-      ],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(12),
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+          ),
         ]),
       ],
     });
   }
 
-  get loginFormControl() {
+  get loginFormValidator() {
     return this.loginForm.controls;
   }
 
