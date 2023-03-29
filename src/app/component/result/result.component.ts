@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
-import { AuthenticationService } from '../../service/authentication.service';
+import { AuthenticationService } from '@app/service/authentication.service';
 
 @Component({
   selector: 'app-result',
