@@ -68,23 +68,11 @@
                 type="submit"
                 [disabled]="!loginForm.valid"
                 class="btn btn-primary fs-5"
+            (click)="login()"
+
               >
                 Log in
               </button>
-              <button
-              type="button"
-              class="btn btn-primary fs-5"
-              (click)="funciton()"
-            >
-              increment  
-            </button>
-            <button
-            type="button"
-            class="btn btn-primary fs-5"
-            (click)="unsubscribe()"
-          >
-            increment  
-          </button>
             </div>
           </div>
         </div>

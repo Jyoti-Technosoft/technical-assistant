@@ -18,9 +18,8 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    this.message$ = this.store.select((state:any) => {return state.count});
-    this.message$.pipe(takeUntil(this.destroyer$)).subscribe(state => {console.log(state)});
-    this.store.dispatch(increment({counter:2}));
+    // this.message$ = this.store.select();
+    // this.message$.pipe(takeUntil(this.destroyer$)).subscribe(state => {console.log(state)});
   }
   
   

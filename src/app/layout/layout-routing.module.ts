@@ -17,7 +17,6 @@ const routes: Routes = [
         { path: 'quizname', component:StartquizComponent},
         { path: 'quiz', component:Quizcomponent},
         { path: 'result', component:ResultComponent},
-
      ]
    }
 ];

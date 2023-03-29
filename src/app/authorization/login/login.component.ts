@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { DialogService } from 'src/app/dialog-service/dialog.service';
-import { increment } from 'src/app/store/counter/counter.action';
 import dialogData from 'src/assets/json/dialogData.json';
-import { AppComponent } from 'src/app/app.component';
-import { Observable, ReplaySubject, takeUntil } from 'rxjs';
-
+import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
+import { doLogoin } from 'src/app/store/autentication/autentication.action';
+import { autenticationState, getStateSelector } from '../../store/autentication/autentication.state';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,14 +19,17 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm!:FormGroup;
   message$: Observable<any> | undefined;
   destroyer$:ReplaySubject<boolean> = new ReplaySubject;
+  state!: Observable<any>;
+  error: any;
   
   constructor(
     private route: Router,
     private dialogService: DialogService,
     private fb:FormBuilder,
-    private store:Store,
-    private apComponent:AppComponent
-  ) {}
+    private store: Store<autenticationState>
+  ) {
+    this.state = this.store.select(getStateSelector);
+  }
 
   public formSubmitted(formValue:any) {
     let userdata = this.userData?.find(
@@ -55,8 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    if (localStorage.getItem('registeruser')?.length) {
-      let data: any = localStorage.getItem('registeruser');
+    if (localStorage.getItem('registerUser')?.length) {
+      let data: any = localStorage.getItem('registerUser');
       this.userData = JSON.parse(data);
     }
   }
@@ -67,8 +69,12 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(12)])]
     });
 
-    this.message$ = this.store.select((state:any) => {return state.count});
-    this.message$.pipe(takeUntil(this.destroyer$)).subscribe(state => {console.log("in login component",state)});
+    this.message$ = this.store.select((state:any) => {return state.authentication});
+    this.message$.pipe(takeUntil(this.destroyer$),distinctUntilChanged()).subscribe(state => {console.log("in login component",state)});
+  }
+
+  login() {
+    this.store.dispatch(doLogoin(this.loginForm.value));
   }
 
   get loginFormControl() {
@@ -78,13 +84,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     
   }
-  
-  funciton() {
-    this.store.dispatch(increment({counter:2}));
-  }
-
-  unsubscribe() { 
-    this.apComponent.ddestroy();
-  }
 
 }
+

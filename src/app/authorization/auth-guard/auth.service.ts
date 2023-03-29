@@ -6,16 +6,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService implements CanActivate {
+   loginIn: any;
 
    constructor(
     private router : Router
    ){}
    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    
     let isAuthenticate = localStorage.getItem('isAuthenticate')
     if(!isAuthenticate){
-      this.router.navigateByUrl('login');
-            
+      this.router.navigateByUrl('login');  
       return false;
     } 
     return true;
