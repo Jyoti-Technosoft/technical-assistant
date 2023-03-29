@@ -1,51 +1,37 @@
 <nav
-  class="navbar fixed-top navbar-expand-sm navbar-light bg-light"
-  style="padding: 0px"
+  class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0"
 >
   <div class="container-fluid">
-    <a class="navbar-brand h1" routerLink="/dashboard">
+    <a class="navbar-brand h1 m-0">
       <img class="d-inline-block image" src="assets/img/logo1.png" />
-      <span class="companyname">APPLICATION</span></a
+      <span class="header_left_txt">APPLICATION</span></a
     >
 
-    <div class="navigation">
+    <div class="navigation"  *ngIf="userName">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
-          <div class="initial-letter">
-            <div [innerHtml]="getUserLetter(userName)"></div>
-          </div>
+          <img
+            src="assets/img/logo1.png"
+            alt="Company Logo"
+            class="img-responsive image"
+          />
           <div ngbDropdown class="d-inline-block">
             <a
               type="button"
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown"
               id="dropdownBasic1"
               ngbDropdownToggle
             >
               {{ userName }}
             </a>
             <div
+              class="dropdown"
               ngbDropdownMenu
-              aria-labelledby="dropdownBasic1"
-              class="dropdown-layout"
+              class="dropdownInfo"
+              aria-labelledby="dropdown"
             >
-              <button
-                ngbDropdownItem
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                About
-              </button>
-              <button
-                ngbDropdownItem
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal1"
-              >
-                Sign Out
-              </button>
+              <button ngbDropdownItem (click)="openAboutDialog()">About</button>
+              <button ngbDropdownItem (click)="openSignOutDialog()">Sign Out</button>
             </div>
           </div>
         </div>
@@ -53,101 +39,3 @@
     </div>
   </div>
 </nav>
-
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">About</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="d-flex justify-content-center">
-            <img src="../../assets/img/logo1.png" alt="" />
-          </div>
-          <div class="content text-center">
-            <h1>Jyoti Technosoft LLP</h1>
-            <p>Visit Our Website at jyotitechnosoft for more updates</p>
-            <div class="copyright">
-              &copy; Copyright
-              <strong><span class="companyname">Jyoti Technosoft LLP</span></strong>
-
-              All Rights Reserved
-            </div>
-            <div class="credits">
-              Designed by
-              <a href="https://jyotitechnosoft.com/" target="_blank"
-                >Jyoti Technosoft LLP</a
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div
-  class="modal"
-  id="exampleModal1"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
-  style="align-items: center"
->
-  <div class="modal-dialog">
-    <div
-      class="modal-content"
-      style="width: 350px; position: absolute; right: 90px"
-    >
-      <div class="modal-header">
-        <h1 class="modal-title fs-5">Alert</h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <h6>Are you sure you want to singout from quiz?</h6>
-      </div>
-      <div class="footer">
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-dismiss="modal"
-          style="margin-bottom: 6px; margin-left: 20px"
-          (click)="signout()"
-        >
-          Yes
-        </button>
-        <button
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-          style="margin-left: 178px; margin-bottom: 6px"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-</div>

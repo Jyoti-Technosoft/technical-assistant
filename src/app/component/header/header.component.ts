@@ -1,44 +1,54 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { QuestionService } from '../../service/question.service';
+import { DialogService } from '@app/dialog-service/dialog.service';
+import dialogData from '@assets/json/dialogData.json';
+import { AuthenticationService } from '@app/service/authentication.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
+
 export class HeaderComponent {
   userName: any;
+  dialogData = { ...dialogData };
   userData: any;
-  constructor(private route: Router, public questionService: QuestionService) {}
+  constructor(
+    private route: Router,
+    public authenticationService: AuthenticationService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit() {
-    this.userName = this.questionService?.userName;
-    if (!this.userName) {
-      this.getUserData();
-    }
+    this.getUserData();
   }
 
   getUserData() {
     let data: any = localStorage.getItem('registerUser');
-    this.userName = JSON.parse(data).find((data: any) => {
-      return data.id == this.questionService.getUser();
-    })?.fullName;
+    this.userData = JSON.parse(data);
+    let userId: any = this.authenticationService.getUser();
+
+    this.userName = this.userData?.find(
+      (data: any) => data?.id == userId
+    )?.fullName;
   }
 
-  getUserLetter(userName: string) {
-    const intials = userName
-    .split(' ')
-    .map((name) => name[0])
-    .join('')
-    .toUpperCase();
-  return intials;
-}
+  openAboutDialog() {
+    let configData = this.dialogData.aboutModel;
+    this.dialogService.openDialog(configData);
+  }
 
-  signout() {
-    localStorage.removeItem('isAuthenticate');
-    document.cookie = 'username' + '=' + null;
-    this.route.navigateByUrl('/login');
+
+  openSignOutDialog() {
+    let configData = this.dialogData.signoutModel;
+    this.dialogService.openDialog(configData).then((value) => {
+      if (value) {
+        this.route.navigateByUrl('login');
+        localStorage.removeItem('isAuthenticate');
+        document.cookie = 'userName' + '=' + null;
+      }
+    });
   }
 }

@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
 import { AuthenticationService } from '@app/service/authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class NonAuthGuard implements CanActivate {
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService
@@ -22,13 +22,13 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
-    | boolean
-    | UrlTree
     | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
     let isAuthenticate = localStorage.getItem('isAuthenticate');
-    if (!isAuthenticate && this.authenticationService.getUser()) {
-      this.router.navigateByUrl('login');
+    if (isAuthenticate && this.authenticationService.getUser()) {
+      this.router.navigateByUrl('dashboard');
       return false;
     }
     return true;

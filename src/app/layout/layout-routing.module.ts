@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthService } from '../authorization/auth-guard/auth.service';
+import { AuthGuard } from '../authorization/auth-guard/auth.guard';
 import { DashboardComponent } from '../component/dashboard/dashboard.component';
 import { Quizcomponent } from '../component/quiz/quiz.component';
 import { ResultComponent } from '../component/result/result.component';
@@ -12,13 +12,13 @@ import { AllresultsComponent } from '../component/allresults/allresults.componen
 const routes: Routes = [
    { path:'',
      component : FullLayoutComponent,
-     canActivate:[AuthService],
+     canActivate:[AuthGuard],
      children : [
-        { path : 'dashboard' , component : DashboardComponent },
+        { path: 'dashboard' , component : DashboardComponent },
         { path: 'quizname', component:StartquizComponent},
         { path: 'quiz', component:Quizcomponent},
-        { path: 'result', component:ResultComponent},
-        { path: 'allresults', component:AllresultsComponent }
+        { path: 'result', component: ResultComponent},
+        { path: 'allresults', component: AllresultsComponent }
      ]
    }
 ];

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Params , Router } from '@angular/router';
-import { QuestionService } from 'src/app/service/question.service';
+import { Params, Router } from '@angular/router';
+import { AuthenticationService } from '@app/service/authentication.service';
+
 
 @Component({
   selector: 'app-allresults',
@@ -13,7 +14,7 @@ export class AllresultsComponent {
   initialData: number = 8;
   allResultData: any[] = [];
 
-  constructor(public questionService: QuestionService, public router: Router) {}
+  constructor(public authenticationService: AuthenticationService, public router: Router) {}
 
   ngOnInit(): void {
     this.resultData();
@@ -25,7 +26,7 @@ export class AllresultsComponent {
   getUserData() {
     let data: any = localStorage.getItem('registerUser');
     this.userName = JSON.parse(data).find((data: any) => {
-      return data.id == this.questionService.getUser();
+      return data.id == this.authenticationService.getUser();
     })?.fullName;
   }
 

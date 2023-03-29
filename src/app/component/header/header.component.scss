@@ -17,15 +17,26 @@
     width: 30px;
 }
 
-.navigation {
-    font-weight: bold;
-    color:rgb(116, 116, 116);
+.title {
+  border-bottom: 3px solid green;
+  font-size: 15px;
 }
 
-.navigation:hover {
-    color: rgb(0, 0, 0);
+.dropdown {
+  margin-right: 15px;
+  cursor: pointer;
+  min-width: auto;
 }
 
+.btn.btn-primary {
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+.btn.btn-secondary {
+  margin-left: 50%;
+  margin-bottom: 5px;
+}
 .companyname {
     border-bottom: 3px solid green;
     font-size: 15px;
