@@ -7,23 +7,25 @@ import { Quizcomponent } from '../component/quiz/quiz.component';
 import { ResultComponent } from '../component/result/result.component';
 import { StartquizComponent } from '../component/startquiz/startquiz.component';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
+import { ProfileComponent } from '../component/profile/profile.component';
 
 const routes: Routes = [
-   { path:'',
-     component : FullLayoutComponent,
-     canActivate:[AuthGuard],
-     children : [
-        { path : 'dashboard' , component : DashboardComponent },
-        { path: 'quizname', component:StartquizComponent},
-        { path: 'quiz', component:Quizcomponent},
-        { path: 'result', component:ResultComponent},
-
-     ]
-   }
+  {
+    path: '',
+    component: FullLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'quizname', component: StartquizComponent },
+      { path: 'quiz', component: Quizcomponent },
+      { path: 'result', component: ResultComponent },
+      { path: 'profile', component: ProfileComponent },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class LayoutRoutingModule { }
+export class LayoutRoutingModule {}
