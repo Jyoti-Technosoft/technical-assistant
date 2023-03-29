@@ -36,7 +36,7 @@ export class RegistrationComponent {
   }
 
   getRegistredUser() {
-    if (localStorage.getItem('registerUser'))  {
+    if (localStorage.getItem('registerUser')) {
       this.registerUser = JSON.parse(
         localStorage.getItem('registerUser') as string
       );

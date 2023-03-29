@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-
-import { AuthenticationService } from '@app/service/authentication.service';
-import { ToastService } from '@app/toast.service';
 import dialogData from '@assets/json/dialogData.json';
 
 import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
 import { autenticationState, getStateSelector } from '../../store/autentication/autentication.state';
 import { doLogoin } from '@app/store/autentication/autentication.action';
+import { DialogService } from '@app/dialog-service/dialog.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,11 +24,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   state!: Observable<any>;
   error: any;
   
+
   constructor(
-    private route: Router,
     private fb:FormBuilder,
-    private authenticationService: AuthenticationService,
-    public toastService: ToastService,
     private store: Store<autenticationState>
   ) {
     this.state = this.store.select(getStateSelector);
@@ -74,6 +71,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   get loginFormValidator() {
     return this.loginForm.controls;
   }
+
 
   ngOnDestroy(): void {
     
