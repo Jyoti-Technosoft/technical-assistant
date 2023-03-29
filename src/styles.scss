@@ -1,10 +1,11 @@
-*{
-    font-family: Roboto;
+$bg-colour: #fef9ff;
+* {
+  font-family: Roboto;
 }
 body {
-    background :#fef9ff
+  background: $bg-colour;
 }
-@font-face{
-    font-family: Roboto;
-    src:url(assets/fonts/Roboto-Regular.ttf) format('truetype');
+@font-face {
+  font-family: Roboto;
+  src: url(assets/fonts/Roboto-Regular.ttf) format("truetype");
 }
