@@ -14,7 +14,12 @@
 
 .img-responsive {
     border-radius: 50px;
-    width: 30px;
+    width: 37px;
+    height: 37px;
+    background-color: #ffff;
+}
+.dropdown-toggle::after {
+  vertical-align: middle;
 }
 
 .title {
@@ -23,7 +28,6 @@
 }
 
 .dropdown {
-  margin-right: 15px;
   cursor: pointer;
   min-width: auto;
 }

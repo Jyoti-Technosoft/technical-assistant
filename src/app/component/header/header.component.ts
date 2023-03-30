@@ -36,8 +36,8 @@ export class HeaderComponent {
 
     this.userName = this.userData?.find(
       (data: any) => data?.id == userId
-      )?.fullName;
-      this.userName = "abc";
+      )?.email;
+
     }
 
   openAboutDialog() {
