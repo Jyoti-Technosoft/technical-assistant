@@ -1,16 +1,38 @@
-.image {
-  width: 4rem;
-  height: 4rem;
-}
-.form-label {
-  font-size: calc(70% + 1vh);
+* {
+  font-family: Roboto;
 }
 
-.form-text {
-  font-size: calc(70% + 1vh);
-  margin-left: 5px;
+.userlogo {
+  width: 60px;
+  height: 60px;
+}
+
+.fixed-height {
+  height: 10px;
 }
 
 .form-control {
-  font-size: calc(70% + 1vh);
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 1px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #d1d1d4 !important;
+}
+.col-sm-10 {
+  max-width: 500px;
+}
+
+.d-grid {
+  margin-top: 20px;
+}
+
+.btn.btn-primary {
+  width: 100%;
+  font-weight: bold;
+  border: none;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border-radius: 50px;
+  font-size: 16px;
 }

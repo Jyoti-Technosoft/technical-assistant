@@ -1,37 +1,12 @@
-*{
-    font-family: Roboto;
+.header_left_txt {
+  border-bottom: 3px solid green;
+  font-size: 15px;
 }
-.container {
-    position: sticky;
-    margin-left: 0;
-    max-width: 349rem;
+.image {
+  width: 35px;
+  height: 35px;
 }
-
-.img-responsive {
-    border-radius: 50px;
-    width: 30px;
-}
-
-.navigation {
-    font-weight: bold;
-    color:rgb(116, 116, 116);
-}
-
-.navigation:hover {
-    color: rgb(0, 0, 0);
-}
-
-span {
-    border-bottom: 3px solid green;
-    font-size: 15px;
-}
-
-button:hover{
- background-color: rgba(119, 119, 119, 0.589);
-}
-.h4{
-    text-align: center;
-}
-.modal .modal-header{
-    padding: 5px 1rem;
+.dropdownInfo {
+  min-width: auto;
+  border: none;
 }
