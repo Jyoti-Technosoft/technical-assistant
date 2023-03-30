@@ -19,7 +19,7 @@ import { DialogService } from '@app/dialog-service/dialog.service';
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  styleUrls: ['./quiz.component.scss']
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };

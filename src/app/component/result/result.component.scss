@@ -1,23 +1,16 @@
-.cardContainer {
-  max-height: 380px !important;
-  min-height: 240px !important;
-}
-.img-content {
-  min-height: 140px;
-  max-height: 240px;
-}
-.text-content {
+.text-content{
   white-space: nowrap;
   text-overflow: ellipsis;
-  overflow: hidden;
+  overflow:hidden;
 }
-.btn-content {
-  background-color: #5555ff;
-  border-color: #5555ff;
-  border-radius: 8px;
+.btn-content{
+ background-color: #5555FF;
+ border-color: #5555FF ;
+ border-radius:8px;
 }
-.container {
-  .result-data {
+.container{
+  .result-data{
     margin-top: 50px;
   }
 }
+

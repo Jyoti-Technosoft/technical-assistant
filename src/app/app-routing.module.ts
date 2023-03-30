@@ -17,7 +17,7 @@ const routes: Routes = [
         (m) => m.LayoutComponentModule
       ),
   },
-  { path: '**', component: PageNotFoundComponent,  pathMatch: 'full'}
+  { path: '**', redirectTo:'404Page',  pathMatch: 'full'}
 ];
 
 @NgModule({

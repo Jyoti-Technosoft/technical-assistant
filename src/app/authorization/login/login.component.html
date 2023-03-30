@@ -8,7 +8,7 @@
       >
         <div class="col text-center p-3">
           <img src="assets/img/login.png" class="image" alt="loginLogo" />
-          <br>
+          <br />
           <span class="fs-2">Login</span>
         </div>
 
@@ -32,7 +32,7 @@
               class="form-text text-danger"
               *ngIf="(loginFormControl['emailId']?.errors?.['email'] && (loginFormControl['emailId']?.dirty || loginFormControl['emailId']?.touched))"
             >
-            Email is Invalid
+              Email is Invalid
             </div>
           </div>
         </div>
@@ -55,9 +55,9 @@
             <div
               class="form-text text-danger"
               *ngIf="(loginFormControl['password']?.errors?.['pattern'])"
-            >
-              Password should be atleast 8 characters long and should contain
-              one number,one character and one special character.
+              >
+              <li>Password should be atleast 8 characters long</li>
+              <li>Should contain one number,one character and one special character.</li>
             </div>
           </div>
         </div>
