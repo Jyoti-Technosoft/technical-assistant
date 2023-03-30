@@ -5,7 +5,8 @@ $bg-colour: #fef9ff;
 
 html,
 body {
-  height: 100%;
+  height: auto;
+  min-height: 100%;
 }
 
 body {

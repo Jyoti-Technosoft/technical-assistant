@@ -25,10 +25,11 @@
 }
 
 .card {
-  margin: 0 auto;
+  margin: auto;
   height: auto;
   position: absolute;
-  top: 18%;
+  top: 7%;
+  max-width: 480px !important;
 }
 .d-grid {
   margin-top: 20px;

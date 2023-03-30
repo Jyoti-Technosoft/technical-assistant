@@ -17,7 +17,7 @@
           <div class="col-mb-3">
             <input
               type="email"
-              placeholder="email Address"
+              placeholder="Email Address"
               class="form-control"
               id="email"
               formControlName="email"
@@ -26,12 +26,12 @@
               <span
                 *ngIf="(loginFormValidator['email'].errors?.['required'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
               >
-                email is required.
+                Email is required.
               </span>
               <span
                 *ngIf="(loginFormValidator['email'].errors?.['email'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
               >
-                email is Invalid.
+                Email is Invalid.
               </span>
             </div>
           </div>
