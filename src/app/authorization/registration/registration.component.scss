@@ -1,16 +1,8 @@
 * {
   font-family: Roboto;
 }
-
-.fs-3 {
-  font-weight: bold;
-  color: rgb(63, 63, 236);
-}
-.card {
-  padding: 10px;
-  margin: 0 auto;
-  margin-bottom: 0px;
-  height: auto;
+.mx-auto {
+  max-width: 500px;
 }
 
 .form-control {
@@ -22,7 +14,7 @@
   border: none;
 }
 
-.btn.btn-success {
+.btn.btn-primary {
   padding: 15px;
   font-size: 17px;
   margin: 10px 10px;
@@ -32,4 +24,3 @@
 .fixed-height {
   height: 25px;
 }
-
