@@ -1,17 +1,26 @@
-.registration-conatiner {
-  margin: 0 auto;
-  margin-bottom: 0px;
-  border-radius: 15px;
-  height: auto;
-  margin-top: 5rem;
-  margin-bottom: 4rem;
+* {
+  font-family: Roboto;
+}
+.mx-auto {
+  max-width: 500px;
 }
 
-/* to disable input field with number arrow */
-.number::-webkit-inner-spin-button,
-.number::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
+.form-control {
+  padding: 5px;
+  box-shadow: none;
+  border-radius: 1px;
+  width: 100%;
+  border-bottom: 2px solid #d1d1d4 !important;
+  border: none;
+}
+
+.btn.btn-primary {
+  padding: 15px;
+  font-size: 17px;
+  margin: 10px 10px;
+  border-radius: 50px;
+  margin-top: 10px;
+}
+.fixed-height {
+  height: 25px;
 }

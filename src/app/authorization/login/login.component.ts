@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/dialog-service/dialog.service';
 
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { ToastService } from 'src/app/toast.service';
@@ -15,23 +16,23 @@ export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
   loginForm!: FormGroup;
+  toastService: any;
 
   constructor(
     private route: Router,
-    private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
-    public toastService: ToastService
+    private dialogService: DialogService,
+    private fb: FormBuilder
   ) {}
 
-  formSubmitted(formValue: any) {
+  public formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
-        value?.email == formValue?.emailId &&
+        value?.email == formValue?.email &&
         value?.password == formValue?.password
     );
+
     if (userdata) {
-      this.toastService.showSuccessMessage('Login Successfully!');
-      document.cookie = 'username' + '=' + userdata.id;
+      document.cookie = 'Username' + '=' + userdata.id;
       localStorage.setItem('isAuthenticate', 'true');
       this.route.navigateByUrl('dashboard');
     } else {
@@ -41,31 +42,28 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    if (localStorage.getItem('registerUser')) {
-      this.userData = JSON.parse(
-        localStorage.getItem('registerUser') as string
-      );
+    if (localStorage.getItem('registerUser')?.length) {
+      let data: any = localStorage.getItem('registerUser');
+      this.userData = JSON.parse(data);
     }
   }
 
   createForm() {
     this.loginForm = this.fb.group({
-      emailId: [
-        '',
-        Validators.compose([Validators.required, Validators.email]),
-      ],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(12),
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+          ),
         ]),
       ],
     });
   }
 
-  get loginFormControl() {
+  get loginFormValidator() {
     return this.loginForm.controls;
   }
 
