@@ -17,7 +17,6 @@ export class ToastService {
   }
 
   showSuccessMessage(message: string) {
-    debugger
     this.show(message, { classname: 'bg-success text-light', delay: 10000 });
   }
 

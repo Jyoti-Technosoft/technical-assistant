@@ -25,11 +25,9 @@ export class RegistrationComponent {
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
-  @ViewChild('email') email!: ElementRef;
   
-  constructor(private route: Router,
+  constructor(
     private fb: FormBuilder,
-    private toastService: ToastService,
     private store: Store
   ) {}
 

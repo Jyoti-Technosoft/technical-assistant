@@ -59,6 +59,22 @@ export class AuthEffects implements OnDestroy {
     )
   );
 
+  validateSesion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(autenticationAction.validateSession),
+      distinctUntilChanged(),
+      switchMap((payload) => {
+        return this.authSerivce
+          .validateSession()
+          .pipe(
+            map((response) =>
+              autenticationAction.validateSessionSucess(response)
+            )
+          );
+      })
+    )
+  );
+
   doLogout$ = createEffect(() =>
     this.actions$.pipe(
       ofType(autenticationAction.doLogout),

@@ -7,8 +7,8 @@ import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
-  { path: 'registration', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent, canActivate:[NonAuthGuard] },
+  { path: 'registration', component: RegistrationComponent,  canActivate:[NonAuthGuard] },
   {
     path: '',
     loadChildren: () =>

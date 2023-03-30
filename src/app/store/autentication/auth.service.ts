@@ -32,24 +32,33 @@ export class AuthService implements OnInit {
       });
   }
 
+  validateSession(): Observable<any> {
+    if (!this.users) {
+      this.getUsers();
+    }
+    if (this.getUserId()) {
+      let findUser = this.users?.find((user: any) => 
+        this.decodeObj(this.getUserId()) == user.id
+      );
+      if(findUser) {
+        return this.getStateData(findUser);
+      }
+    }
+    return throwError(
+      () => new Error('No Token Found')
+    );
+  }
+
   getUser(payload: any): Observable<any> {
     if (!this.users) {
       this.getUsers();
     }
-    let findUser = this.users?.find(
-      (user: any) =>
-        this.decodeObj(user.password) == payload.password &&
+    let findUser = this.users?.find((user: any) =>
+      this.decodeObj(user.password) == payload.password &&
         user.email == payload.emailId
     );
     if (findUser) {
-      let loggedUser = {
-        fullName: findUser?.fullName,
-        email: findUser?.email,
-        dateOfBirth: findUser?.dateOfBirth,
-        mobile: findUser?.mobile,
-        gender: findUser?.gender,
-      };
-      return of(loggedUser);
+      return this.getStateData(findUser);
     }
     return throwError(
       () => new Error('No User Found With This Login credentical')
@@ -74,14 +83,13 @@ export class AuthService implements OnInit {
       );
     } else {
       let users = this.users;
-      users = [...users, userValue]
+      users = [...users, userValue];
       localStorage.setItem('registerUser', JSON.stringify(users));
       return of(users);
     }
   }
 
   routeToDashboard(data: any): void {
-    localStorage.setItem('isAuthenticate', 'true');
     this.cookieService.set('info_token', this.encodeObj(data.id), 1);
     this.router.navigateByUrl('dashboard');
     this.toastService.showSuccessMessage('Login Successfully');
@@ -99,13 +107,29 @@ export class AuthService implements OnInit {
     this.toastService.showErrorMessage(message);
   }
 
+  getUserId() {
+    let cookie = this.cookieService.get('info_token');
+    return cookie ?? this.decodeObj(cookie);
+  }
+
+  getStateData(user?: any): Observable<any> {
+    let loggedUser = {
+      fullName: user?.fullName,
+      email: user?.email,
+      dateOfBirth: user?.dateOfBirth,
+      mobile: user?.mobile,
+      gender: user?.gender,
+      id: user?.id,
+    };
+    return of(loggedUser);
+  }
+
   routeToLogin() {
     this.router.navigateByUrl('login');
     this.toastService.showSuccessMessage('User Registered');
   }
 
   logout() {
-    localStorage.setItem('isAuthenticate', 'false');
     this.toastService.showSuccessMessage('Logout Successfully');
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
