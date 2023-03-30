@@ -18,9 +18,6 @@ const routes: Routes = [
     component: FullLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] }, // new  module
-      { path: 'registration', component: RegistrationComponent }, // new module
       { path: 'dashboard', component: DashboardComponent },
       { path: 'quizname', component: StartquizComponent },
       { path: 'quiz', component: Quizcomponent },
@@ -28,6 +25,16 @@ const routes: Routes = [
       { path: 'allresults', component: AllresultsComponent }
     ],
   },
+  {
+    path: '',
+    component: FullLayoutComponent,
+    canActivate: [NonAuthGuard],
+    children: [
+      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: 'login', component: LoginComponent }, // new  module
+      { path: 'registration', component: RegistrationComponent }, // new module
+    ],
+  }
 ];
 
 @NgModule({

@@ -28,7 +28,7 @@ export class AuthService implements OnInit {
     this.state
       .select((state) => state.authentication)
       .subscribe((data: any) => {
-        this.users = data?.allUsers?.users;
+        this.users = data?.allUsers;
       });
   }
 
@@ -37,32 +37,34 @@ export class AuthService implements OnInit {
       this.getUsers();
     }
     if (this.getUserId()) {
-      let findUser = this.users?.find((user: any) => 
-        this.decodeObj(this.getUserId()) == user.id
+      console.log();
+      let findUser = this.users?.find(
+        (user: any) => this.decodeObj(this.getUserId()) == user.id
       );
-      if(findUser) {
+      console.log(findUser);
+      if (findUser) {
         return this.getStateData(findUser);
       }
     }
-    return throwError(
-      () => new Error('No Token Found')
-    );
+    return throwError(() => new Error('No Token Found'));
   }
 
   getUser(payload: any): Observable<any> {
     if (!this.users) {
       this.getUsers();
     }
-    let findUser = this.users?.find((user: any) =>
-      this.decodeObj(user.password) == payload.password &&
-        user.email == payload.emailId
+    let findUser = this.users?.find(
+      (user: any) =>
+        this.decodeObj(user.password) == payload.password &&
+        user.email == payload.email
     );
     if (findUser) {
       return this.getStateData(findUser);
+    } else {
+      return throwError(
+        () => new Error('No User Found With This Login credentical')
+      );
     }
-    return throwError(
-      () => new Error('No User Found With This Login credentical')
-    );
   }
 
   getAllUsers(): Observable<any> {
@@ -90,7 +92,7 @@ export class AuthService implements OnInit {
   }
 
   routeToDashboard(data: any): void {
-    this.cookieService.set('info_token', this.encodeObj(data.id), 1);
+    this.cookieService.set('info_token', this.encodeObj(data.userData.id), 1);
     this.router.navigateByUrl('dashboard');
     this.toastService.showSuccessMessage('Login Successfully');
   }

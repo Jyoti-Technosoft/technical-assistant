@@ -31,7 +31,7 @@ export const autenticationReducer = createReducer(
   initialState,
   on(loginAction.loginSuccess, (state, payload) => ({
     ...state,
-    userData: payload,
+    userData: payload.userData,
     isUserLoggedIn: true,
   })),
   on(loginAction.validateSessionSucess, (state, payload) => ({
@@ -41,7 +41,7 @@ export const autenticationReducer = createReducer(
   })),
   on(loginAction.loadUserSuccess, (state, payload) => ({
     ...state,
-    allUsers: payload
+    allUsers: payload.users
   })),
   on(loginAction.doLogout, (state) => ({
     ...state,
@@ -50,6 +50,6 @@ export const autenticationReducer = createReducer(
   })),
   on(loginAction.registrationSucess, (state,payload) => ({
     ...state,
-    allUsers: payload
+    allUsers: payload.users
   }))
 );

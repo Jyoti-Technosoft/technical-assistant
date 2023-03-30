@@ -20,10 +20,12 @@ export class AuthEffects implements OnDestroy {
   getAllUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(autenticationAction.getAllUsers),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
       switchMap((payload) => {
         return this.authSerivce
           .getAllUsers()
-          .pipe(map((users) => autenticationAction.loadUserSuccess({ users })));
+          .pipe(map((users) => { console.log(users);return autenticationAction.loadUserSuccess({ users })}));
       })
     )
   );
@@ -31,9 +33,11 @@ export class AuthEffects implements OnDestroy {
   doLogin$ = createEffect(() =>
     this.actions$.pipe(
       ofType(autenticationAction.doLogoin),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
       switchMap((payload) => {
         return this.authSerivce.getUser(payload).pipe(
-          map((response: any) => autenticationAction.loginSuccess(response)),
+          map((userData: any) => autenticationAction.loginSuccess({userData})),
           catchError((error: any) =>
             of(autenticationAction.handlErrors({ error }))
           )
@@ -62,6 +66,7 @@ export class AuthEffects implements OnDestroy {
   validateSesion$ = createEffect(() =>
     this.actions$.pipe(
       ofType(autenticationAction.validateSession),
+      takeUntil(this.destroyer$),
       distinctUntilChanged(),
       switchMap((payload) => {
         return this.authSerivce
@@ -91,7 +96,7 @@ export class AuthEffects implements OnDestroy {
       ofType(autenticationAction.registrationSucess),
       takeUntil(this.destroyer$),
       distinctUntilChanged(),
-      tap((data) => {
+      tap(() => {
         this.authSerivce.routeToLogin();
       })
     )
