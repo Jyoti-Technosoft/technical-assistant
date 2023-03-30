@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { distinctUntilChanged } from 'rxjs';
 
 import { ToastService } from 'src/app/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
@@ -17,15 +18,15 @@ import dialogData from 'src/assets/json/dialogData.json';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-
 export class RegistrationComponent {
-  todayDate: string | undefined = new Date().toISOString().slice(0,10);
+  todayDate: string | undefined = new Date().toISOString().slice(0, 10);
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
   @ViewChild('email') email!: ElementRef;
-  
-  constructor(private route: Router,
+
+  constructor(
+    private route: Router,
     private fb: FormBuilder,
     private toastService: ToastService
   ) {}
@@ -40,8 +41,8 @@ export class RegistrationComponent {
       this.registerUser = JSON.parse(
         localStorage.getItem('registerUser') as string
       );
-   }  
- }
+    }
+  }
 
   submitform(formValue: any) {
     let findUser = this.registerUser?.find(
@@ -59,14 +60,13 @@ export class RegistrationComponent {
     }
   }
 
-  validateConfirmaPassword: ValidatorFn = (
-    control: AbstractControl
-  ): ValidationErrors | null => {
+  validateConfirmaPassword() {
     const password = this.registrationForm?.controls['password'];
-    return password?.value !== control?.value
-      ? { validateConfirmaPassword: true }
-      : null;
-  };
+    const confirmPassword = this.registrationForm?.controls['confirmPassword'];
+    password?.value != confirmPassword?.value
+      ? confirmPassword?.setErrors({ pattern: true })
+      : confirmPassword?.setErrors(null);
+  }
 
   validateNumber: ValidatorFn = (
     control: AbstractControl
@@ -89,13 +89,7 @@ export class RegistrationComponent {
           ),
         ]),
       ],
-      confirmPassword: [
-        '',
-        Validators.compose([
-          Validators.required,
-          this.validateConfirmaPassword,
-        ]),
-      ],
+      confirmPassword: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       dateOfBirth: ['', Validators.compose([Validators.required])],
       mobile: [
@@ -104,13 +98,21 @@ export class RegistrationComponent {
       ],
       acceptTerms: [false, Validators.requiredTrue],
     });
+    this.registrationForm
+      .get('password')
+      ?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.validateConfirmaPassword();
+      });
+    this.registrationForm
+      .get('confirmPassword')
+      ?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.validateConfirmaPassword();
+      });
   }
 
   get registrationFormValidator() {
     return this.registrationForm.controls;
   }
 }
-
- 
-
- 

@@ -107,7 +107,7 @@
                     </div>
                     <div
                       class="form-text text-danger"
-                      *ngIf="(registrationFormValidator['confirmPassword']?.errors?.['validateConfirmaPassword'] && registrationFormValidator['confirmPassword']?.touched)"
+                      *ngIf="(registrationFormValidator['confirmPassword']?.errors?.['pattern'] && registrationFormValidator['confirmPassword']?.touched)"
                     >
                       Passsword and Confirm Password didn't match.
                     </div>
