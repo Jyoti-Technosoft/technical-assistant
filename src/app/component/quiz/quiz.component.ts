@@ -19,7 +19,7 @@ import { DialogService } from '@app/dialog-service/dialog.service';
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  styleUrls: ['./quiz.component.scss'],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
@@ -58,8 +58,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
     this.getQuestionData();
-
-  
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -71,21 +69,23 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   getQuestionData() {
-    const quizData:any = this.quizData.quiz.find(
+    const quizData: any = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
     );
     if (!quizData) {
-       this.router.navigateByUrl('404Page');
-    }else{
+      this.router.navigateByUrl('404Page');
+    } else {
       this.question = [...quizData.questions];
-      this.question = this.question?.sort(() => Math.random() - 0.67).splice(0, quizData.numberOfQuestions);
+      this.question = this.question
+        ?.sort(() => Math.random() - 0.67)
+        .splice(0, quizData.numberOfQuestions);
       this.options = this.question.map((question: any) =>
         question.options.sort(() => Math.random() - 0.69)
       );
       this.timer = quizData?.timer;
       this.positivePoints = quizData?.positivePoints;
-      this.negativePoints = quizData.negativePoints;
-  
+      this.negativePoints = quizData?.negativePoints;
+
       const formArray = this.quizForm.controls['form'] as FormArray;
       this.question.forEach((item: any) => {
         formArray.push(
@@ -107,7 +107,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
     if (this.dialogService.hasModelOpen()) {
       this.dialogService.destroy();
     }
-    this.answer(questionIndex, this.formArray.controls[questionIndex].value.radioValue);
+    this.answer(
+      questionIndex,
+      this.formArray.controls[questionIndex].value.radioValue
+    );
     this.disabledValuesAndForm();
     this.questionIndex = questionIndex + 1;
     if (this.questionIndex == this.question.length) {
@@ -140,14 +143,12 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   skipQuestion(questionindex: number) {
     let configData = this.dialogData.skipModel;
-    this.dialogService
-      .openDialog(configData)
-      .then((value) => {
-        if (value) {
-          this.questionIndex = questionindex;
-          this.nextQuestion(this.questionIndex);
-        }
-      });
+    this.dialogService.openDialog(configData).then((value) => {
+      if (value) {
+        this.questionIndex = questionindex;
+        this.nextQuestion(this.questionIndex);
+      }
+    });
   }
 
   disabledValuesAndForm() {
