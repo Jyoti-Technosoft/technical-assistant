@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, ReplaySubject, takeUntil } from 'rxjs';
-import { getAllUsers } from './store/autentication/autentication.action';
+import { getAllUsers, validateSession } from './store/autentication/autentication.action';
 
 
 @Component({
@@ -19,17 +19,7 @@ export class AppComponent {
 
   ngOnInit() {
     this.store.dispatch(getAllUsers());
-  }
-  
-  
-  public ddestroy(): void {
-    this.destroyer$.next(true);
-    this.destroyer$.unsubscribe();
+    this.store.dispatch(validateSession());
   }
 
-   
-  private public(): void {
-    this.destroyer$.next(true);
-    this.destroyer$.unsubscribe();
-  }
 }

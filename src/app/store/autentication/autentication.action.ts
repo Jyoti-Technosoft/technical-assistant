@@ -2,6 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import * as authenticationModel from './autentication.model';
 import { userData } from './autentication.reducer';
 
+export const validateSession = createAction('[Autentication] ValidateSession');
+export const validateSessionSucess = createAction('[Autentication] validateSessionSucess',props<userData>());
+
+
 export const getAllUsers = createAction('[Autentication] getAllUsers');
 export const loadUserSuccess = createAction('[Autentication] loadUserSuccess',props<{users:any}>());
 

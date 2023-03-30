@@ -19,6 +19,7 @@ import { AuthenticationService } from '@app/service/authentication.service';
 import { storeModule } from './store/store.module';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { NonAuthGuard } from './authorization/auth-guard/non-auth.guard';
 
 @NgModule({ 
     declarations: [
@@ -38,7 +39,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
         LayoutComponentModule,
         NgbToastModule
     ],
-    providers: [AuthGuard,AuthenticationService,CookieService],
+    providers: [AuthGuard, NonAuthGuard,AuthenticationService,CookieService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
