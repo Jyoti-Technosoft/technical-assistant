@@ -18,6 +18,7 @@ const routes: Routes = [
     component: FullLayoutComponent,
     canActivate: [AuthGuard],
     children: [
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'quizname', component: StartquizComponent },
       { path: 'quiz', component: Quizcomponent },
