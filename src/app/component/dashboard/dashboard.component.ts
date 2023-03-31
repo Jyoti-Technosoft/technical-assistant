@@ -10,6 +10,7 @@ import quizData from '@assets/json/data.json';
 export class DashboardComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
   quizs: any;
+  initialData: number = 8;
   
   constructor(private route: Router) {}
 

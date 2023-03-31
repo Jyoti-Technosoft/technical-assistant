@@ -25,7 +25,7 @@ export class AuthEffects implements OnDestroy {
       switchMap((payload) => {
         return this.authSerivce
           .getAllUsers()
-          .pipe(map((users) => { console.log(users);return autenticationAction.loadUserSuccess({ users })}));
+          .pipe(map((users) => autenticationAction.loadUserSuccess({ users })));
       })
     )
   );
@@ -73,7 +73,7 @@ export class AuthEffects implements OnDestroy {
           .validateSession()
           .pipe(
             map((response) =>
-              autenticationAction.validateSessionSucess(response)
+              autenticationAction.validateSessionSucess({userData:response})
             )
           );
       })

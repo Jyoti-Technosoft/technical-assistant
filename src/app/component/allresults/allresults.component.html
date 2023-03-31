@@ -48,14 +48,16 @@
         </div>
       </div>
     </div>
-    <button
-      type="button"
-      class="btn btn-outline-primary"
-      (click)="loadMoreData()"
-      [disabled]="allResultData.length <= initialData"
-    >
-      Show More
-    </button>
+    <div class="container-fluid d-flex justify-content-center mt-4">
+      <button
+        type="button"
+        class="col-lg-3 col-md-3 col-12 btn btn-none text-primary"
+        (click)="loadMoreData()"
+        *ngIf="allResultData.length > initialData"
+      >
+        Show More
+      </button>
+    </div>
   </div>
 </div>
 <div *ngIf="!allResultData?.length">

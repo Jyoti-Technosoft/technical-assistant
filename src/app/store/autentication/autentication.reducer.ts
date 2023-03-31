@@ -36,7 +36,7 @@ export const autenticationReducer = createReducer(
   })),
   on(loginAction.validateSessionSucess, (state, payload) => ({
     ...state,
-    userData: payload,
+    userData: payload.userData,
     isUserLoggedIn: true,
   })),
   on(loginAction.loadUserSuccess, (state, payload) => ({
