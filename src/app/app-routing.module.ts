@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RedirectGuard } from './authorization/redirect-guard/redirect.guard';
 
 const routes: Routes = [
   {
@@ -9,11 +10,19 @@ const routes: Routes = [
         (m) => m.LayoutComponentModule
       ),
   },
+  {
+    path: 'jyoti-web',
+    canActivate: [RedirectGuard],
+    component: RedirectGuard,
+    data: {
+      externalUrl: 'https://www.jyotitechnosoft.com/',
+    },
+  },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,15 +1,13 @@
 <div class="footer navbar-light bg-light">
   <ng-container *ngFor="let data of icons; let i = index">
-    <i class="fa fa-{{ data.icon }} icon" aria-hidden="true"></i>
+    <i class="fa-brands fa-{{data.icon}} icon"></i>
   </ng-container>
 
   <div class="credits">
     © 2023 Copyright
     <a
       class="footer-link"
-      href="https://www.jyotitechnosoft.com/"
-      rel="noopener noreferrer"
-      target="_blank"
+      routerLink="jyoti-web"
     >
       Jyoti Technosoft LLP
     </a>
