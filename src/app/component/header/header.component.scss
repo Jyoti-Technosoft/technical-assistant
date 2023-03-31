@@ -41,14 +41,7 @@
   margin-left: 50%;
   margin-bottom: 5px;
 }
-.companyname {
-    border-bottom: 3px solid green;
-    font-size: 15px;
-}
 
-button:hover{
- background-color: rgba(119, 119, 119, 0.589);
-}
 
 .initial-letter {
     display: flex;
@@ -65,3 +58,9 @@ button:hover{
     font-weight: 400;
     margin-right: 5px;
   }
+
+.btn-dropdown:hover { 
+  background-color: #cce5ff;
+  border: none;
+  border-radius: none;
+} 

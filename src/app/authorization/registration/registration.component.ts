@@ -7,13 +7,11 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { ToastService } from '@app/toast.service';
 import dialogData from '@assets/json/dialogData.json';
 import { doRegistration } from '@app/store/autentication/autentication.action';
-
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -25,10 +23,11 @@ export class RegistrationComponent {
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
-  
+  @ViewChild("datePicker") datePicker!: any 
   constructor(
     private fb: FormBuilder,
-    private store: Store
+    private store: Store,
+    public calendar: NgbCalendar
   ) {}
 
   ngOnInit(): void {
@@ -106,6 +105,11 @@ export class RegistrationComponent {
 
   get registrationFormValidator() {
     return this.registrationForm.controls;
+  }
+
+  setTodaysDate() {
+    this.registrationForm.controls['dateOfBirth'].patchValue(this.calendar.getToday()); 
+    this.datePicker?.close();
   }
 }
 
