@@ -7,7 +7,7 @@
       <span class="title">APPLICATION</span></a
     >
 
-    <div class="navigation"  *ngIf="userData?.fullName">
+    <div class="navigation"  *ngIf="userData?.email">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
           <img
@@ -22,7 +22,7 @@
               id="dropdownBasic1"
               ngbDropdownToggle
             >
-              {{ userData?.fullName}}
+              {{ userData?.email}}
             </a>
             <div
               class="dropdown"
