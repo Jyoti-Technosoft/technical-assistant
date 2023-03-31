@@ -1,6 +1,8 @@
 <div class="footer navbar-light bg-light">
   <ng-container *ngFor="let data of icons; let i = index">
-    <i class="fa-brands fa-{{data.icon}} icon"></i>
+    <a href="{{data?.link}}" target="_blank">
+      <i class="fa-brands fa-{{data.icon}} icon"></i>
+    </a>
   </ng-container>
 
   <div class="credits">

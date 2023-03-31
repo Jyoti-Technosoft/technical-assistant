@@ -6,12 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  icons: { icon: string }[] = [
-    { icon: 'facebook' },
-    { icon: 'twitter' },
-    { icon: 'linkedin' },
-    { icon: 'github' },
-    { icon: 'instagram' },
+  icons: { icon: string, link:string }[] = [
+    { icon: 'facebook', link: "https://www.facebook.com/info.jyotitechnosoft/?ref=py_c"},
+    { icon: 'twitter', link: "https://twitter.com/JyotiTechnosoft" },
+    { icon: 'linkedin', link: "https://in.linkedin.com/company/jyoti-technosoft" },
+    { icon: 'github',  link: "https://github.com/" }
   ];
 
   constructor() {}
