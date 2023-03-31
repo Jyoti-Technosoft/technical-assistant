@@ -7,14 +7,17 @@
           alt="logo"
           class="d-inline-block image"
         /><span class="title">APPLICATION</span></a
-      ><a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active ml-5 px-3 " 
-        routerLink="dashboard"
-        >Home</a
       >
-      <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active" 
-        routerLink="allresults"
-        >Results</a
-      >
+      <ng-container *ngIf="userData?.email">
+        <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active ml-5 px-3 " 
+          routerLink="dashboard"
+          >Home</a
+        >
+        <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active" 
+          routerLink="allresults"
+          >Results</a
+        >
+      </ng-container>
     </div>
     <div class="navigation" *ngIf="userData?.email">
       <div class="container-fluid">
