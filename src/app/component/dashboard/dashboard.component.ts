@@ -7,10 +7,12 @@ import quizData from '../../../assets/json/data.json';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
 export class DashboardComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
-  quizs: any;
-  
+  quizs: any[] = [];
+  cardData: number = 8;
+
   constructor(private route: Router) {}
 
   ngOnInit(): void {
@@ -22,6 +24,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.route.navigate(['/quizname'], { queryParams });
   }
 
+  loadMore() {
+    this.cardData = this.cardData + 8;
+  }
   ngOnDestroy() {}
-
 }

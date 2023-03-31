@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   formSubmitted(formValue: any) {
     let userdata = this.userData?.find(
       (value: any) =>
-        value?.email == formValue?.emailId &&
+        value?.email == formValue?.email &&
         value?.password == formValue?.password
     );
     if (userdata) {
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.loginForm = this.fb.group({
-      emailId: [
+      email: [
         '',
         Validators.compose([Validators.required, Validators.email]),
       ],

@@ -3,7 +3,9 @@
     <div class="d-flex align-items-center justify-content-center">
       <div class="row">
         <span class="fs-3 title-text font-weight-bold">Choose Quiz</span>
-        <ng-container *ngFor="let data of quizs; let i = index">
+        <ng-container
+          *ngFor="let data of quizs | slice : 0 : cardData; let i = index"
+        >
           <div class="col-lg-3 col-md-6 col-xs-12 p-3">
             <div class="card shadow mt-3 rounded-4 border-0 cardContainer">
               <img
@@ -29,6 +31,16 @@
             </div>
           </div>
         </ng-container>
+        <div class="text-center">
+          <button
+            type="button"
+            class="btn btn-primary mb-2 btn-content"
+            *ngIf="cardData < quizs.length"
+            (click)="loadMore()"
+          >
+            Load More
+          </button>
+        </div>
       </div>
     </div>
   </div>
