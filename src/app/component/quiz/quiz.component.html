@@ -17,39 +17,39 @@
             >
               <ng-container [formGroupName]="i">
                 <div class="m-3">
-                  <div class="card quiz_card h-auto">
+                  <div class="card quiz-card h-auto">
                     <div
-                      class="card-header header_txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
+                      class="card-header header-txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
                     >
-                      <div class="header_title user-select-none">
+                      <div class="header-title user-select-none">
                         {{ selectedQuizType }}
                       </div>
                       <div
                         class="timer d-flex align-items-center justify-content-between rounded-2 px-2 py-0"
                       >
-                        <div class="timer_left_txt user-select-none">
+                        <div class="timer-left-txt user-select-none">
                           Time Left
                         </div>
                         <div
-                          class="timer_sec user-select-none text-center rounded-2"
+                          class="timer-sec user-select-none text-center rounded-2"
                         >
                           {{ formArray.controls.at(i)?.value?.timer }}
                         </div>
                       </div>
                     </div>
 
-                    <div class="card-body que_txt d-inline-block rounded-2 p-3">
+                    <div class="card-body que-txt d-inline-block rounded-2 p-3">
                       <div class="que_data user-select-none">
                         {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
                       </div>
 
-                      <div class="option_list">
+                      <div class="option-list">
                         <ng-container
                           *ngFor="
                             let card of question[questionIndex].options
                           "
                         >
-                          <div class="form_check">
+                          <div class="form-option">
                             <label
                               class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
                               *ngIf="card.type == 'checkbox'"
@@ -90,18 +90,18 @@
                     </div>
 
                     <div
-                      class="card-footer footer_txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
+                      class="card-footer footer-txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
                     >
-                      <div class="total_que">
+                      <div class="total-que">
                         <p
-                          class="footer_right_txt py-0 px-1 text-center user-select-none m-0"
+                          class="footer-right-txt py-0 px-1 text-center user-select-none m-0"
                         >
                           <strong>{{ i + 1 }}</strong> Of
                           <strong>{{ question.length }}</strong> Questions
                         </p>
                       </div>
 
-                      <div class="form_btn">
+                      <div class="form-btn">
                         <button
                           [disabled]="i == 0"
                           data-slide="previous"

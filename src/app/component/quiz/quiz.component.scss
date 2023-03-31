@@ -1,8 +1,7 @@
-
-.header_txt {
+.header-txt {
   z-index: 1;
   height: 70px;
-  .header_title {
+  .header-title {
     font-size: 25px;
     font-weight: 600;
   }
@@ -14,11 +13,11 @@
   border: 1px solid #b8daff;
   height: 45px;
   width: 145px;
-  .timer_left_txt {
+  .timer-left-txt {
     font-size: 17px;
     font-weight: 600;
   }
-  .timer_sec {
+  .timer-sec {
     font-size: 18px;
     font-weight: 500;
     height: 30px;
@@ -30,10 +29,10 @@
   }
 }
 
-.que_txt {
+.que-txt {
   font-size: 20px;
   box-sizing: border-box;
-  .que_data {
+  .que-data {
     font-size: 20px;
     font-weight: 600;
   }
@@ -52,9 +51,23 @@
   font-weight: 600;
 }
 
-.footer_txt {
-  z-index: 1;
-  height: 70px;
+@media (max-width: 470px) {
+  .footer-right-txt{     
+      margin: 10px;
+      text-align: center !important;
+  }
+  .total-que {
+    margin-top: 5px;
+  }
+  .form-btn{
+      text-align: center !important;
+      margin: 5px;
+  }
+  .footer-txt {
+    flex-direction:column;
+  }
 }
-
-
+.footer-txt {
+  z-index: 1;
+  height: 75px;
+}
