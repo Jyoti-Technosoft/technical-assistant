@@ -1,13 +1,22 @@
-<nav
-  class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0"
->
+<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0">
   <div class="container-fluid">
-    <a class="navbar-brand py-2">
-      <img class="d-inline-block image" src="assets/img/logo1.png" alt="logo" />
-      <span class="title">APPLICATION</span></a
-    >
-
-    <div class="navigation"  *ngIf="userData?.email">
+    <div class="d-flex">
+      <a _ngcontent-guv-c108="" class="navbar-brand py-2"
+        ><img
+          src="assets/img/logo1.png"
+          alt="logo"
+          class="d-inline-block image"
+        /><span class="title">APPLICATION</span></a
+      ><a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active ml-5 px-3 " 
+        routerLink="dashboard"
+        >Home</a
+      >
+      <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active" 
+        routerLink="allresults"
+        >Results</a
+      >
+    </div>
+    <div class="navigation" *ngIf="userData?.email">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
           <img
@@ -22,7 +31,7 @@
               id="dropdownBasic1"
               ngbDropdownToggle
             >
-              {{ userData?.email}}
+              {{ userData?.email }}
             </a>
             <div
               class="dropdown"
@@ -30,8 +39,20 @@
               class="dropdownInfo"
               aria-labelledby="dropdown"
             >
-              <button class="btn btn-dropdown" ngbDropdownItem (click)="openAboutDialog()">About</button>
-              <button class="btn btn-dropdown" ngbDropdownItem (click)="openSignOutDialog()">Sign Out</button>
+              <button
+                class="btn btn-dropdown"
+                ngbDropdownItem
+                (click)="openAboutDialog()"
+              >
+                About
+              </button>
+              <button
+                class="btn btn-dropdown"
+                ngbDropdownItem
+                (click)="openSignOutDialog()"
+              >
+                Sign Out
+              </button>
             </div>
           </div>
         </div>
