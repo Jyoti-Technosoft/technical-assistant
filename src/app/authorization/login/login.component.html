@@ -14,23 +14,23 @@
 
         <div class="row p-3">
           <div class="col-md-12">
-            <label for="emailId" class="form-label">Email Address</label>
+            <label for="email" class="form-label">Email Address</label>
             <input
               type="text"
               class="form-control"
-              id="emailId"
-              formControlName="emailId"
+              id="email"
+              formControlName="email"
             />
             <div
               class="form-text text-danger"
-              *ngIf="(loginFormControl['emailId']?.errors?.['required'] && (loginFormControl['emailId']?.dirty ||  loginFormControl['emailId']?.touched))"
+              *ngIf="(loginFormControl['email']?.errors?.['required'] && (loginFormControl['email']?.dirty ||  loginFormControl['email']?.touched))"
             >
               Email is required
             </div>
 
             <div
               class="form-text text-danger"
-              *ngIf="(loginFormControl['emailId']?.errors?.['email'] && (loginFormControl['emailId']?.dirty || loginFormControl['emailId']?.touched))"
+              *ngIf="(loginFormControl['email']?.errors?.['email'] && (loginFormControl['email']?.dirty || loginFormControl['email']?.touched))"
             >
             Email is Invalid
             </div>
