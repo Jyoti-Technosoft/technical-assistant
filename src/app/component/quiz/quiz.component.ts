@@ -57,7 +57,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
-    this.mapJsonData();
+    this.getQuestionData();
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -65,10 +65,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
     let result;
     if (result) {
     }
-    event.returnValue = false; // stay on same page
+    event.returnValue = false;
   }
 
-  mapJsonData() {
+  getQuestionData() {
     const quizData:any = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
     );
@@ -132,15 +132,13 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('result');
   }
 
-  skipQuestion(questionIndex: number) {
-    let label = this.dialogData.skipModel.label;
-    let yesButtonLable = this.dialogData.skipModel.yesButtonLable;
-    let NoButtonLable = this.dialogData.skipModel.NoButtonLable;
+  skipQuestion(questionindex: number) {
+    let configData = this.dialogData.skipModel;
     this.dialogService
-      .openDialog(label, yesButtonLable, NoButtonLable)
+      .openDialog(configData)
       .then((value) => {
         if (value) {
-          this.questionIndex = questionIndex;
+          this.questionIndex = questionindex;
           this.nextQuestion(this.questionIndex);
         }
       });

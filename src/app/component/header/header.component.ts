@@ -1,25 +1,27 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from '../../service/authentication.service';
+import { DialogService } from 'src/app/dialog-service/dialog.service';
+import dialogData from 'src/assets/json/dialogData.json';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-
 export class HeaderComponent {
   userName: any;
+  dialogData = { ...dialogData };
   userData: any;
   constructor(
     private route: Router,
-    public authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit() {
-    if (!this.userName) {
-    }
+    this.getData();
   }
 
   getData() {
@@ -30,9 +32,20 @@ export class HeaderComponent {
       (data: any) => data?.id == userId
     )?.fullName;
   }
-  signout() {
-    localStorage.removeItem('isAuthenticate');
-    document.cookie = 'username' + '=' + null;
-    this.route.navigateByUrl('/login');
+
+  openAboutDialog() {
+    let configData = this.dialogData.aboutModel;
+    this.dialogService.openDialog(configData);
+  }
+
+  openSignOutDialog() {
+    let configData = this.dialogData.signoutModel;
+    this.dialogService.openDialog(configData).then((value) => {
+      if (value) {
+        this.route.navigateByUrl('login');
+        localStorage.removeItem('isAuthenticate');
+        document.cookie = 'username' + '=' + null;
+      }
+    });
   }
 }
