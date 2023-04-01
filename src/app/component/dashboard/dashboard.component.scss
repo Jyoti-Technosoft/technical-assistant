@@ -22,8 +22,45 @@ $btn-primary: #5555ff;
     -webkit-box-orient: vertical;
   }
 }
+
 .btn-content {
   background-color: $btn-primary;
   border-color: $btn-primary;
   border-radius: 8px;
+}
+
+.input-box {
+  position: relative;
+}
+
+.input-box i {
+  position: absolute;
+  right: 13px;
+  top: 10px;
+  color: #ced4da;
+}
+
+.field-content {
+  height: auto;
+  background: transparent;
+}
+.icon {
+  font-size: medium;
+}
+
+.field-content:focus {
+  background-color: #eeeeee69;
+  box-shadow: none;
+  border-color: #eee;
+}
+@media (min-width: 369px) {
+  .responsive-font-example {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .responsive-font-example {
+    font-size: 30px;
+  }
 }

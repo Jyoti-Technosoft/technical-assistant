@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
   quizs: any[] = [];
   cardData: number = 8;
+  searchText = '';
 
   constructor(private route: Router) {}
 
