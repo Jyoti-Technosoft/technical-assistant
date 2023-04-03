@@ -23,7 +23,7 @@ const routes: Routes = [
       { path: 'quizname', component: StartquizComponent },
       { path: 'quiz', component: Quizcomponent },
       { path: 'result', component: ResultComponent },
-      { path: 'allresults', component: AllresultsComponent }
+      { path: 'allresults', component: AllresultsComponent },
     ],
   },
   {
@@ -31,15 +31,15 @@ const routes: Routes = [
     component: FullLayoutComponent,
     canActivate: [NonAuthGuard],
     children: [
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent }, // new  module
       { path: 'registration', component: RegistrationComponent }, // new module
     ],
-  }
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class LayoutRoutingModule {}
