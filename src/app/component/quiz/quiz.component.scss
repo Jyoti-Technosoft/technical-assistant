@@ -1,6 +1,4 @@
 .header-txt {
-  z-index: 1;
-  height: 70px;
   .header-title {
     font-size: 25px;
     font-weight: 600;
@@ -52,24 +50,24 @@
 }
 
 @media (max-width: 470px) {
-  .footer-right-txt{     
-      margin: 10px;
-      text-align: center !important;
+  .footer-right-txt {
+    margin: 10px;
+    text-align: center !important;
   }
   .total-que {
     margin-top: 5px;
   }
-  .form-btn{
-      text-align: center !important;
-      margin: 5px;
+  .form-btn {
+    text-align: center !important;
+    margin: 5px;
   }
   .footer-txt {
-    flex-direction:column;
+    flex-direction: column;
   }
 }
-.footer-txt {
-  z-index: 1;
-  height: 75px;
+
+@media (max-width: 350px) {
+  .header-txt {
+    flex-direction: column;
+  }
 }
-
-
