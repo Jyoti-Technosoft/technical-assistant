@@ -38,7 +38,11 @@ const routes: Routes = [
       { path: '**', redirectTo: '404Page', pathMatch: 'full' },
     ],
   },
-  { path: '404Page', component: PageNotFoundComponent },
+  {
+    path: '',
+    component: FullLayoutComponent,
+    children: [{ path: '404Page', component: PageNotFoundComponent }],
+  },
   { path: '**', redirectTo: '404Page', pathMatch: 'full' },
 ];
 
