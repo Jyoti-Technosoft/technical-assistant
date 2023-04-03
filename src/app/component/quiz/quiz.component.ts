@@ -65,6 +65,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getUserData();
+    this.getUserData();
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
     // this.getQuizData();
@@ -156,7 +157,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuizType,
       user: this.authenticationService.getUser(),
-      date: new Date().toISOString().slice(0, 10),
+      date: new Date().toISOString().slice(0, 10)
     };
     stringifyData.push(currentData);
 
