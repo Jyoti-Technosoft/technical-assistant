@@ -1,55 +1,67 @@
 <div class="container">
-  <div class="row mx-auto align-items-center mx-0">
-        <span class="fs-4 title-text font-weight-bold mx-3 mt-5">Result</span>
-        <div class="row mx-0" *ngIf="submittedData?.length">
-          <ng-container *ngFor="let data of submittedData">
-            <div class="col-12 col-md-4 col-lg-3">
-              <div class="card shadow mt-3 rounded-4 border-0 card-container">
-                <img
-                  class="img-fluid p-2 img-content"
-                  src="{{ data.image }}"
-                  alt="quiz-logo"
-                />
-                <div class="card-body text-content">
-                  <h4 class="card-title font-weight-bolder">{{ data.type }}</h4>
-        
-                  <span
-                    ><p class="card-text">User Name : {{ userName }}</p>
-                  </span>
-        
-                  <span
-                    ><p class="card-text">Total Points : {{ data.points }}</p>
-                  </span>
-        
-                  <span
-                    ><p class="card-text">
-                      Correct Answers : {{ data.correctAnswer }}
-                    </p>
-                  </span>
-        
-                  <span
-                    ><p class="card-text">
-                      Wrong Answers : {{ data.inCorrectAnswer }}
-                    </p>
-                  </span>
-        
-                  <div class="text-center mt-2">
-                    <button
-                      type="button"
-                      class="btn btn-primary btn-sm float-end btn-content"
-                      (click)="startQuizAgain(data.type)"
+  <div class="row min-vh-100">
+    <div class="d-flex align-items-center justify-content-center">
+      <div class="col-sm-12 w-auto w-auto d-flex justify-content-center">
+        <div class="card shadow result-card">
+          <div class="container ">
+            <ng-container >
+              <div class="card-body">
+                <h2 class="card-title">Result</h2>
+                <div class="row d-flex">
+                  <div class="col-sm-12 col-lg-6">
+                    <div class="container d-flex justify-content-center">
+                      <img
+                        class="img-fluid"
+                        src="assets\img\logo1.png"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-lg-6 d-flex justify-content-center">
+                    <div
+                      class="d-flex align-items-center justify-content-between"
                     >
-                      Go Again To Quiz
-                    </button>
+                      <div class="field">
+                        <span>
+                          <h5>Name : {{ userData.fullName }}</h5>
+                        </span>
+                        <span>
+                          <h5>Total Points : {{ allResultData?.points }}</h5>
+                        </span>
+                        <span>
+                          <h5>Correct Answers : {{ allResultData?.correctAnswer }}</h5>
+                        </span>
+                        <span>
+                          <h5>Wrong Answers : {{ allResultData?.inCorrectAnswer }}</h5>
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
+              <div class="card-footer footer">
+                <div class="text-center p-3">
+                  <button
+                    type="button"
+                    class="btn btn-success p-2 m-2"
+                    (click)="showAllQuiz()"
+                  >
+                    Show All Results
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success p-2"
+                    (click)="startQuizAgain(allResultData?.type)"
+                  >
+                    Go Again To Quiz
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </div>
         </div>
-        <div *ngIf="!submittedData?.length" class="mt-5">
-              <span class="fs-4 title-text font-weight-bold mx-3">No Quiz Played Yet</span> 
-        </div>
+      </div>
+    </div>
   </div>
 </div>
 

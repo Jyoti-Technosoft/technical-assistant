@@ -12,7 +12,7 @@ export class DialogService {
 
   openDialog(configData: any): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(ModalComponent);
+      const modalRef = this.modalService.open(ModalComponent, { centered: true  });
       modalRef.componentInstance.configData = configData;
       modalRef.result.then((data) => {
         resolve(<boolean>data);
