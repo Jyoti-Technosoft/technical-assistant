@@ -1,0 +1,65 @@
+<div class="col text-center result-layout mb-3">
+  <span class="fs-3">Result</span>
+</div>
+
+<div class="container" *ngIf="allResultData?.length">
+  <div class="row">
+    <div
+      class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+      *ngFor="let data of allResultData | slice : 0 : initialData"
+    >
+      <div class="card card-margin">
+        <div class="card-header">
+          <h5 class="card-title">{{ data?.type }}</h5>
+        </div>
+        <div class="card-body pt-0">
+          <div class="all-result">
+            <div class="title-wrapper">
+              <div class="initial-letter">
+                <div>{{ avatarName }}</div>
+              </div>
+              <div class="quiz-info">
+                <span class="username">User Name : {{avatarName}}</span>
+                <span class="widget-49-meeting-time"></span>
+              </div>
+            </div>
+            <ul class="quiz-points">
+              <li class="points">
+                <span>Date : {{ data?.date | date: 'dd/MM/yyyy' }}</span>
+              </li>
+              <li class="points">
+                <span>Total Points : {{ data?.points }}</span>
+              </li>
+              <li class="points">
+                <span>Correct Answers : {{ data?.correctAnswer }}</span>
+              </li>
+              <li class="points">
+                <span>Wrong Answers : {{ data?.inCorrectAnswer }}</span>
+              </li>
+            </ul>
+            <div class="quiz-action">
+              <a
+                class="btn btn-sm btn-flash-border-primary"
+                (click)="startQuizAgain(data.type)"
+                >Start Quiz Again</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-center mt-4">
+      <button
+        type="button"
+        class="col-lg-3 col-md-3 col-12 btn btn-none text-primary"
+        (click)="loadMoreData()"
+        *ngIf="allResultData.length > initialData"
+      >
+        Show More
+      </button>
+    </div>
+  </div>
+</div>
+<div *ngIf="!allResultData?.length">
+  <h1>No Quiz Played yet</h1>
+</div>
