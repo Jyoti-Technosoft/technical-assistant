@@ -3,24 +3,16 @@ $btn-primary: #5555ff;
   max-height: 380px !important;
   min-height: 240px !important;
 }
-
 .img-content {
   min-height: 140px;
   max-height: 240px;
 }
 .text-content {
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-
-  @supports (-webkit-line-clamp: 4) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: initial;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-  }
+  text-overflow: ellipsis;
 }
 .btn-content {
   background-color: $btn-primary;
