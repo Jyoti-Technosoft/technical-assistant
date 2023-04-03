@@ -7,13 +7,7 @@ import {
 } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  interval,
-  Subscription,
-  ReplaySubject,
-  takeUntil,
-  distinctUntilChanged,
-} from 'rxjs';
+import { interval, Subscription, ReplaySubject, takeUntil, Observable, distinctUntilChanged } from 'rxjs';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
@@ -51,6 +45,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
   negativePoints!: number;
   numberOfQuestions!: string | undefined;
   selectedQuiz: any;
+  loggedInUser$: Observable<any> | undefined;
+  userData: any;
+  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
     private router: Router,
@@ -67,6 +64,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getUserData();
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
     // this.getQuizData();
@@ -220,6 +218,16 @@ export class Quizcomponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  getUserData() {
+    this.loggedInUser$ = this.store.select(
+      (state: any) => state.authentication);
+      this.loggedInUser$
+      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
+      .subscribe((state) => {
+        this.userData = state?.userData;
+      });
+    }
 
   ngOnDestroy() {
     this.destroyed$.next(true);

@@ -1,33 +1,44 @@
 import { Component } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
-
+import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { autenticationState } from '@app/store/autentication/autentication.state';
 
 @Component({
   selector: 'app-allresults',
   templateUrl: './allresults.component.html',
   styleUrls: ['./allresults.component.scss']
 })
-
 export class AllresultsComponent {
-  userName: any;
   initialData: number = 8;
   allResultData: any[] = [];
+  loggedInUser$: Observable<any> | undefined;
+  userData: any;
+  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
+  avatarName!:string;
 
-  constructor(public authenticationService: AuthenticationService, public router: Router) {}
+  constructor(
+    public authenticationService: AuthenticationService,
+    public router: Router,
+    private store: Store<autenticationState>
+  ) {}
 
   ngOnInit(): void {
     this.resultData();
-    if (!this.userName) {
-      this.getUserData();
-    }
+    this.getUserData();
   }
 
   getUserData() {
-    let data: any = localStorage.getItem('registerUser');
-    this.userName = JSON.parse(data).find((data: any) => {
-      return data.id == this.authenticationService.getUser();
-    })?.fullName;
+    this.loggedInUser$ = this.store.select(
+      (state: any) => state.authentication
+    );
+    this.loggedInUser$
+      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
+      .subscribe((state) => {
+        this.userData = state?.userData;
+        this.avatarName = this.getUserLetter(this.userData?.fullName);
+      });
   }
 
   resultData() {
@@ -48,11 +59,13 @@ export class AllresultsComponent {
     this.initialData = this.initialData + 8;
   }
 
-  
   startQuizAgain(quizName: string) {
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
+  }
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { CookieService } from 'ngx-cookie-service';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -38,6 +38,7 @@ import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard'
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
     LayoutComponentModule,
     NgbToastModule,
+    NgbDatepickerModule
   ],
   providers: [
     AuthGuard,

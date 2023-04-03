@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { NgbCarouselModule, NgbDropdownModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbCarouselModule, NgbDatepickerModule, NgbDropdownModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { FooterComponent } from "@app/component/footer/footer.component";
 import { HeaderComponent } from "@app/component/header/header.component";
@@ -33,9 +33,11 @@ import { ResultComponent } from "@app/component/result/result.component";
         CommonModule,
         FormsModule,
         RouterModule,
+        NgbModule, 
         ReactiveFormsModule,
         NgbCarouselModule,
-        LayoutRoutingModule
+        LayoutRoutingModule,
+        NgbDatepickerModule
     ],
     exports:[
         HeaderComponent,

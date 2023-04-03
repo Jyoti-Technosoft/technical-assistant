@@ -1,22 +1,22 @@
-.navbar-brand{
-    margin: 0px;
+.navbar-brand {
+  margin: 0px;
 }
 
-.image{
-    width: 35px;
-    height: 35px;
+.image {
+  width: 35px;
+  height: 35px;
 }
 
-.dropdown-layout{
-    min-width: auto; 
-    border: none;
+.dropdown-layout {
+  min-width: auto;
+  border: none;
 }
 
 .img-responsive {
-    border-radius: 50px;
-    width: 37px;
-    height: 37px;
-    background-color: #ffff;
+  border-radius: 50px;
+  width: 37px;
+  height: 37px;
+  background-color: #ffff;
 }
 .dropdown-toggle::after {
   vertical-align: middle;
@@ -41,27 +41,39 @@
   margin-left: 50%;
   margin-bottom: 5px;
 }
-.companyname {
-    border-bottom: 3px solid green;
-    font-size: 15px;
-}
-
-button:hover{
- background-color: rgba(119, 119, 119, 0.589);
-}
 
 .initial-letter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    font-size: 1rem;
-    color: #000000;
-    text-align: center;
-    line-height: 10rem;
-    background-color: rgb(213, 235, 235);
-    font-weight: 400;
-    margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  color: #000000;
+  text-align: center;
+  line-height: 10rem;
+  background-color: rgb(213, 235, 235);
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+.btn-dropdown {
+  &:hover {
+    background-color: #cce5ff;
+    border: none;
+    border-radius: none;
   }
+}
+
+.ml-5 {
+  margin-left: 5rem;
+}
+
+.navbar-menu {
+  color: #5555ff;
+  font-weight: 500;
+  &:hover {
+    font-weight: 900;
+  }
+}
