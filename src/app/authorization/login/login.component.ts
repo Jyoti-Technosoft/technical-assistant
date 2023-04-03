@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { ToastService } from 'src/app/toast.service';
+import { ToastService } from 'src/app/component/toast/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 
 @Component({

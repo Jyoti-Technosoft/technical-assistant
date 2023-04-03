@@ -7,7 +7,7 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './authorization/registration/registration.component';
 import { LoginComponent } from './authorization/login/login.component';
-import { ToastComponent } from './toast/toast.component';
+import { ToastComponent } from './component/toast/toast.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LayoutComponentModule } from './layout/layout-component.module';
 import { ModalComponent } from './dialog-service/modal/modal/modal.component';
