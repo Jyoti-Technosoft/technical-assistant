@@ -7,10 +7,10 @@ import { Quizcomponent } from '../component/quiz/quiz.component';
 import { ResultComponent } from '../component/result/result.component';
 import { StartquizComponent } from '../component/startquiz/startquiz.component';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
-import { AllresultsComponent } from '../component/allresults/allresults.component';
+import { AllresultsComponent } from '@app/component/allresults/allresults.component';
+import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 import { LoginComponent } from '@app/authorization/login/login.component';
 import { RegistrationComponent } from '@app/authorization/registration/registration.component';
-import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 
 const routes: Routes = [
   {
@@ -40,6 +40,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class LayoutRoutingModule {}

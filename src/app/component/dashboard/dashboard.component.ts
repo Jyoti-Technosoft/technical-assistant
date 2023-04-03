@@ -1,28 +1,44 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
+import { ReplaySubject, distinctUntilChanged, takeUntil } from 'rxjs';
+
 import quizData from '@assets/json/data.json';
+import { Store } from '@ngrx/store';
+import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
+  destroy$:ReplaySubject<boolean> = new ReplaySubject();
   quizs: any;
   initialData: number = 8;
-  
-  constructor(private route: Router) {}
+
+  constructor(private route: Router, private store: Store) {}
 
   ngOnInit(): void {
-    this.quizs = this.quizData.quiz;
+    this.store
+      .select((state: any) => state.quiz)
+      .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.quizs = data?.allQuiz;
+      });
+    if (!this.quizs?.length) {
+      this.store.dispatch(getAllQuiz());
+    }
   }
 
   startQuiz(title: string) {
+    this.store.dispatch(selectQuiz({ quizId: title }));
     const queryParams: Params = { quiz: title };
     this.route.navigate(['/quizname'], { queryParams });
   }
 
-  ngOnDestroy() {}
-
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 }

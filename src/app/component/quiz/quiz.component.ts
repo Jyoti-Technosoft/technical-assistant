@@ -15,13 +15,14 @@ import { AuthenticationService } from '@app/service/authentication.service';
 import quizData from '@assets/json/data.json';
 import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
-import { Store } from '@ngrx/store';
-import { autenticationState } from '@app/store/autentication/autentication.state';
+import { State, Store } from '@ngrx/store';
+import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
+import { quizState } from '@app/store/quiz/quiz.state';
 
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+  styleUrls: ['./quiz.component.scss'],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
@@ -43,6 +44,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   positivePoints!: number;
   negativePoints!: number;
   numberOfQuestions!: string | undefined;
+  selectedQuiz: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
@@ -53,7 +55,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authenticationService: AuthenticationService,
     private dialogService: DialogService,
-    private store: Store<autenticationState>
+    private store: Store,
+    private state: State<quizState>
   ) {
     this.quizForm = this.fb.group({
       form: this.fb.array([]),
@@ -64,6 +67,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.getUserData();
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
+    // this.getQuizData();
     this.getQuestionData();
   }
 
@@ -75,10 +79,27 @@ export class Quizcomponent implements OnInit, OnDestroy {
     event.returnValue = false;
   }
 
+  getQuizData() {
+    if (!this.state.getValue().quiz.allQuiz) {
+      this.store.dispatch(getAllQuiz());
+    }
+    this.store
+      .select((state: any) => state.quiz.selectedQuiz)
+      .pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.selectedQuiz = data;
+        this.getQuestionData();
+      });
+    if (!this.selectedQuiz?.length) {
+      this.store.dispatch(selectQuiz({ quizId: this.selectedQuizType }));
+    }
+  }
+
   getQuestionData() {
     const quizData:any = this.quizData.quiz.find(
       (data) => data.quizId == this.selectedQuizType
     );
+    console.log(quizData)
     this.question = [...quizData.questions];
     this.question = this.question?.sort(() => Math.random() - 0.67).splice(0, quizData.numberOfQuestions);
     this.options = this.question.map((question: any) =>
@@ -108,7 +129,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
     if (this.dialogService.hasModelOpen()) {
       this.dialogService.destroy();
     }
-    this.answer(questionIndex, this.formArray.controls[questionIndex].value.radioValue);
+    this.answer(
+      questionIndex,
+      this.formArray.controls[questionIndex].value.radioValue
+    );
     this.disabledValuesAndForm();
     this.questionIndex = questionIndex + 1;
     if (this.questionIndex == this.question.length) {
@@ -142,14 +166,12 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   skipQuestion(questionindex: number) {
     let configData = this.dialogData.skipModel;
-    this.dialogService
-      .openDialog(configData)
-      .then((value) => {
-        if (value) {
-          this.questionIndex = questionindex;
-          this.nextQuestion(this.questionIndex);
-        }
-      });
+    this.dialogService.openDialog(configData).then((value) => {
+      if (value) {
+        this.questionIndex = questionindex;
+        this.nextQuestion(this.questionIndex);
+      }
+    });
   }
 
   disabledValuesAndForm() {
@@ -162,27 +184,27 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   startCounter() {
-    this.interval$ = interval(1000)
-      .pipe(takeUntil(this.destroyed$))
-      .subscribe((val) => {
-        const counterValue = this.formArray.controls.at(this.questionIndex)
-          ?.value.timer;
-        if (
-          Number(counterValue) != 0 &&
-          !this.formArray.controls.at(this.questionIndex)?.get('timer')
-            ?.disabled
-        ) {
-          this.formArray.controls
-            .at(this.questionIndex)
-            ?.patchValue({ timer: counterValue - 1 });
-        } else if (
-          Number(counterValue) === 0 &&
-          !this.formArray.controls.at(this.questionIndex)?.get('timer')
-            ?.disabled
-        ) {
-          this.nextQuestion(this.questionIndex);
-        }
-      });
+    // this.interval$ = interval(1000)
+    //   .pipe(takeUntil(this.destroyed$))
+    //   .subscribe((val) => {
+    //     const counterValue = this.formArray.controls.at(this.questionIndex)
+    //       ?.value.timer;
+    //     if (
+    //       Number(counterValue) != 0 &&
+    //       !this.formArray.controls.at(this.questionIndex)?.get('timer')
+    //         ?.disabled
+    //     ) {
+    //       this.formArray.controls
+    //         .at(this.questionIndex)
+    //         ?.patchValue({ timer: counterValue - 1 });
+    //     } else if (
+    //       Number(counterValue) === 0 &&
+    //       !this.formArray.controls.at(this.questionIndex)?.get('timer')
+    //         ?.disabled
+    //     ) {
+    //       this.nextQuestion(this.questionIndex);
+    //     }
+    //   });
   }
 
   answer(questionIndex: number, selectedOption: string) {
@@ -206,6 +228,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.userData = state?.userData;
       });
     }
+
 
   ngOnDestroy() {
     this.destroyed$.next(true);
