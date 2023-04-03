@@ -7,14 +7,16 @@ import {
 } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { interval, Subscription, ReplaySubject, takeUntil } from 'rxjs';
+import { interval, Subscription, ReplaySubject, takeUntil, Observable, distinctUntilChanged } from 'rxjs';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import quizData from 'src/assets/json/data.json';
-import dialogData from 'src/assets/json/dialogData.json';
-import { DialogService } from 'src/app/dialog-service/dialog.service';
+import { AuthenticationService } from '@app/service/authentication.service';
+import quizData from '@assets/json/data.json';
+import dialogData from '@assets/json/dialogData.json';
+import { DialogService } from '@app/dialog-service/dialog.service';
+import { Store } from '@ngrx/store';
+import { autenticationState } from '@app/store/autentication/autentication.state';
 
 @Component({
   selector: 'app-questions',
@@ -41,13 +43,17 @@ export class Quizcomponent implements OnInit, OnDestroy {
   positivePoints!: number;
   negativePoints!: number;
   numberOfQuestions!: string | undefined;
+  loggedInUser$: Observable<any> | undefined;
+  userData: any;
+  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
     private router: Router,
     private activeRouter: ActivatedRoute,
     private fb: FormBuilder,
     private authenticationService: AuthenticationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private store: Store<autenticationState>
   ) {
     this.quizForm = this.fb.group({
       form: this.fb.array([]),
@@ -55,6 +61,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.getUserData();
     this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
     this.getQuestionData();
@@ -124,7 +131,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuizType,
-      user: this.authenticationService.getUser(),
+      user: this.userData.id,
+      date: new Date().toISOString().slice(0, 10)
     };
     stringifyData.push(currentData);
 
@@ -188,6 +196,16 @@ export class Quizcomponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  getUserData() {
+    this.loggedInUser$ = this.store.select(
+      (state: any) => state.authentication);
+      this.loggedInUser$
+      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
+      .subscribe((state) => {
+        this.userData = state?.userData;
+      });
+    }
 
   ngOnDestroy() {
     this.destroyed$.next(true);
