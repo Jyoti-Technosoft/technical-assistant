@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { ToastService } from 'src/app/toast.service';
+import { ToastService } from 'src/app/component/toast/toast.service';
 import dialogData from 'src/assets/json/dialogData.json';
 
 @Component({

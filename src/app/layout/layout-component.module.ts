@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 import { StartquizComponent } from '../component/startquiz/startquiz.component';
 import { Quizcomponent } from '../component/quiz/quiz.component';
 import { ResultComponent } from '../component/result/result.component';
-import { FilterPipe } from '../component/dashboard/filter.pipe';
+import { FilterPipe } from '../component/pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { FilterPipe } from '../component/dashboard/filter.pipe';
     Quizcomponent,
     ResultComponent,
     FullLayoutComponent,
-    FilterPipe,
+    FilterPipe
   ],
   imports: [
     NgbDropdownModule,
@@ -36,7 +36,7 @@ import { FilterPipe } from '../component/dashboard/filter.pipe';
     RouterModule,
     ReactiveFormsModule,
     NgbCarouselModule,
-    LayoutRoutingModule,
+    LayoutRoutingModule
   ],
   exports: [HeaderComponent, FooterComponent, FilterPipe],
 })
