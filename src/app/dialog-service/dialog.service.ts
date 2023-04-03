@@ -1,35 +1,32 @@
 import { Injectable } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from './modal/modal/modal.component';
-import dialogData from '../../assets/json/dialogData.json';
-import { Router } from '@angular/router';
 
+import { ModalComponent } from './modal/modal/modal.component';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DialogService {
-  adminform: any;
-  
-  constructor(
-    private modalService:NgbModal,
-    private route:Router
-  ) {}
+  constructor(private modalService: NgbModal) {}
 
-  dialogData = {...dialogData};
-
-  openDialog(label:string, yesButtonLable:string, NoButtonLable:string):Promise<boolean>{
+  openDialog(configData: any): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(ModalComponent);
-      modalRef.componentInstance.label = label;
-      modalRef.componentInstance.yesButtonLable = yesButtonLable;
-      modalRef.componentInstance.NoButtonLable = NoButtonLable;
-      
+      const modalRef = this.modalService.open(ModalComponent, {
+        centered: true,
+      });
+      modalRef.componentInstance.configData = configData;
       modalRef.result.then((data) => {
-        resolve(<boolean> data)
-      }); 
-    })
+        resolve(<boolean>data);
+      });
+    });
   }
-    
- }
+
+  hasModelOpen() {
+    return this.modalService.hasOpenModals();
+  }
+
+  destroy() {
+    this.modalService.dismissAll(false);
+  }
+}
