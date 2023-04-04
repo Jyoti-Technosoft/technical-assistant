@@ -11,14 +11,15 @@ import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
+
 export class DashboardComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
   destroy$:ReplaySubject<boolean> = new ReplaySubject();
-  quizs: any;
-  initialData: number = 8;
+  quizs: any[] = [];
+  cardData: number = 8;
 
   constructor(private route: Router, private store: Store) {}
-
+ 
   ngOnInit(): void {
     this.store
       .select((state: any) => state.quiz)
@@ -37,8 +38,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.route.navigate(['/quizname'], { queryParams });
   }
 
-  ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+  loadMore() {
+    this.cardData = this.cardData + 8;
   }
+  ngOnDestroy() {}
 }
