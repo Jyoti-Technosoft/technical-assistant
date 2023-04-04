@@ -10,6 +10,7 @@ import {
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
+import { ToastService } from '@app/toast.service';
 
 @Component({
   selector: 'app-result',
@@ -17,7 +18,6 @@ import { autenticationState } from '@app/store/autentication/autentication.state
   styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit, OnDestroy {
-  allResultData: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
@@ -25,7 +25,8 @@ export class ResultComponent implements OnInit, OnDestroy {
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
-    private store: Store<autenticationState>
+    private store: Store<any>,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -34,14 +35,16 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   resultData() {
-    let data: any = localStorage.getItem('result');
-    this.allResultData = JSON.parse(data).filter((data: any) => {
-      return data?.user == this.userData.id;
-    });
-    const sorter = (a: any, b: any) => {
-      return new Date(a.date) > new Date(b.date) ? a : b;
-    };
-    this.allResultData = this.allResultData?.reduce(sorter);
+    this.store
+      .select((state: any) => state.quiz.latestQuizResult)
+      .pipe(distinctUntilChanged(),takeUntil(this.destroyer$))
+      .subscribe((data) => {
+        this.userData = data;
+      });
+    if (!this.userData) {
+      this.router.navigateByUrl('dashbaord');
+      this.toastService.showErrorMessage('No Quiz Played Yet')
+    }
   }
 
   startQuizAgain(quizName: string) {
@@ -50,8 +53,7 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   showAllQuiz() {
-    const queryParams: Params = { result: 'allresults' };
-    this.router.navigate(['/allresults'], { queryParams });
+    this.router.navigateByUrl('/allresults');
   }
 
   getLoggedUser() {
