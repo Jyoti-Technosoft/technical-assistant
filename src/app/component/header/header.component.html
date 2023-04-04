@@ -1,36 +1,61 @@
-<nav
-  class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0"
->
+<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0">
   <div class="container-fluid">
-    <a class="navbar-brand h1 m-0" routerLink="/dashboard">
-      <img class="d-inline-block image" src="assets/img/logo1.png" />
-      <span class="header_left_txt">APPLICATION</span></a
-    >
-
-    <div class="navigation">
+    <div class="d-flex">
+      <a _ngcontent-guv-c108="" class="navbar-brand py-2"
+        ><img
+          src="assets/img/logo.svg"
+          alt="logo"
+          class="d-inline-block image"
+        /><span class="title">APPLICATION</span></a
+      >
+      <ng-container *ngIf="userData?.email">
+        <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active ml-5 px-3 " 
+          routerLink="dashboard"
+          >Home</a
+        >
+        <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active" 
+          routerLink="allresults"
+          >Results</a
+        >
+      </ng-container>
+    </div>
+    <div class="navigation" *ngIf="userData?.email">
       <div class="container-fluid">
         <div class="collapse navbar-collapse">
           <img
-            src="assets/img/logo1.png"
+            src="assets/img/profilephoto.svg"
             alt="Company Logo"
-            class="img-responsive image"
+            class="img-responsive image rounded-circle mx-2"
           />
           <div ngbDropdown class="d-inline-block">
             <a
               type="button"
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown"
               id="dropdownBasic1"
               ngbDropdownToggle
             >
-              {{ userName }}
+              {{ userData?.email }}
             </a>
             <div
+              class="dropdown"
               ngbDropdownMenu
               class="dropdownInfo"
               aria-labelledby="dropdown"
             >
-              <button ngbDropdownItem (click)="openAboutDialog()">About</button>
-              <button ngbDropdownItem (click)="openSignOutDialog()">Sign Out</button>
+              <button
+                class="btn btn-dropdown"
+                ngbDropdownItem
+                (click)="openAboutDialog()"
+              >
+                About
+              </button>
+              <button
+                class="btn btn-dropdown"
+                ngbDropdownItem
+                (click)="openSignOutDialog()"
+              >
+                Sign Out
+              </button>
             </div>
           </div>
         </div>
