@@ -32,7 +32,7 @@ import { quizState } from '@app/store/quiz/quiz.state';
   styleUrls: ['./quiz.component.scss'],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
-  quizData = { ...quizData };
+  quizData:any = { ...quizData };
   @ViewChild('carousel')
   carousel!: NgbCarousel;
   quizForm!: FormGroup;
@@ -122,20 +122,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
           timer: this.timer,
         })
       );
-      this.timer = quizData?.timer;
-      this.positivePoints = quizData?.positivePoints;
-      this.negativePoints = quizData?.negativePoints;
-
-      const formArray = this.quizForm.controls['form'] as FormArray;
-      this.question.forEach((item: any) => {
-        formArray.push(
-          this.fb.group({
-            radioValue: '',
-            timer: this.timer,
-          })
-        );
-      });
-    }
+      this.timer = this.quizData?.timer;
+      this.positivePoints = this.quizData?.positivePoints;
+      this.negativePoints = this.quizData?.negativePoints;
+    })
   }
 
   get formArray() {
