@@ -45,3 +45,35 @@
       background-color: none !important;
       border-bottom: 2px solid #d1d1d4 !important;
   }
+
+
+.tel::-webkit-outer-spin-button,
+.tel::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.login-hover{
+  display: inline-block;
+  position: relative;
+  color: #0087ca;
+  text-decoration: none;
+}
+.login-hover:after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #0087ca;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.login-hover:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

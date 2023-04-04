@@ -23,7 +23,7 @@ export class RegistrationComponent {
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
-  @ViewChild("datePicker") datePicker!: any 
+  @ViewChild("datePicker") datePicker!: any
   constructor(
     private fb: FormBuilder,
     private store: Store,
@@ -40,7 +40,7 @@ export class RegistrationComponent {
       this.registerUser = JSON.parse(
         localStorage.getItem('registerUser') as string
       );
-   }  
+   }
  }
 
   submitform(formValue: any) {
@@ -108,11 +108,11 @@ export class RegistrationComponent {
   }
 
   setTodaysDate() {
-    this.registrationForm.controls['dateOfBirth'].patchValue(this.calendar.getToday()); 
+    this.registrationForm.controls['dateOfBirth'].patchValue(this.calendar.getToday());
     this.datePicker?.close();
   }
 }
 
- 
 
- 
+
+
