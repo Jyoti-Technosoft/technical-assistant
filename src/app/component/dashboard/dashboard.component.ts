@@ -9,7 +9,7 @@ import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  styleUrls: ['./dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {
