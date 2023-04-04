@@ -1,0 +1,66 @@
+.card-margin {
+  margin-bottom: 1.875rem;
+  margin: 10px;
+}
+.result-layout {
+  margin-top: 50px;
+}
+.card-header {
+  background: none;
+  padding: 0 0.9375rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  min-height: 50px;
+  border: 0;
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.initial-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #000000;
+  text-align: center;
+  line-height: 10rem;
+  background-color: rgb(213, 235, 235);
+}
+
+.quiz-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+}
+
+.username {
+  color: #3c4142;
+  font-size: 14px;
+}
+
+.all-result-meeting-time {
+  color: #b1bac5;
+  font-size: 13px;
+}
+
+.quiz-points {
+  font-weight: 400;
+  font-size: 13px;
+  margin-top: 0.5rem;
+}
+
+.points {
+  display: list-item;
+  color: #727686;
+}
+
+.quiz-action {
+  text-align: right;
+}
