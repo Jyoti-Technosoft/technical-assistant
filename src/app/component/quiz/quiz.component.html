@@ -19,7 +19,7 @@
                 <div class="m-3">
                   <div class="card quiz-card h-auto">
                     <div
-                      class="card-header header-txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
+                      class="card-header header-txt py-3 px-3 d-flex align-items-center justify-content-between position-relative"
                     >
                       <div class="header-title user-select-none">
                         {{ selectedQuizType }}
@@ -37,17 +37,13 @@
                         </div>
                       </div>
                     </div>
-
                     <div class="card-body que-txt d-inline-block rounded-2 p-3">
-                      <div class="que_data user-select-none">
+                      <div class="que-data user-select-none">
                         {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
                       </div>
-
                       <div class="option-list">
                         <ng-container
-                          *ngFor="
-                            let card of question[questionIndex].options
-                          "
+                          *ngFor="let card of question[questionIndex].options"
                         >
                           <div class="form-option">
                             <label
@@ -67,7 +63,6 @@
                               />
                               {{ card.lable }}
                             </label>
-
                             <label
                               class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
                               *ngIf="card.type == 'radio'"
@@ -90,17 +85,16 @@
                     </div>
 
                     <div
-                      class="card-footer footer-txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
+                      class="card-footer footer-txt py-3 px-3 d-flex align-items-center justify-content-between position-relative"
                     >
                       <div class="total-que">
                         <p
-                          class="footer-right-txt py-0 px-1 text-center user-select-none m-0"
+                          class="footer-right-txt py-0 text-center user-select-none m-0"
                         >
                           <strong>{{ i + 1 }}</strong> Of
                           <strong>{{ question.length }}</strong> Questions
                         </p>
                       </div>
-
                       <div class="form-btn">
                         <button
                           [disabled]="i == 0"
@@ -111,7 +105,6 @@
                         >
                           Previous
                         </button>
-
                         <button
                           [disabled]="formArray.controls[i].dirty"
                           data-slide="skip"
@@ -121,7 +114,6 @@
                         >
                           Skip
                         </button>
-
                         <button
                           [disabled]="!formArray.controls[i].dirty"
                           data-slide="next"

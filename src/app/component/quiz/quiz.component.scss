@@ -1,12 +1,9 @@
 .header-txt {
-  z-index: 1;
-  height: 70px;
   .header-title {
     font-size: 25px;
     font-weight: 600;
   }
 }
-
 .timer {
   color: #004085;
   background: #cce5ff;
@@ -37,14 +34,12 @@
     font-weight: 600;
   }
 }
-
 .option {
   background: rgb(222, 239, 255);
   border: 1px solid #84c5fe;
   font-size: 17px;
   cursor: pointer;
 }
-
 .hightlight-selected {
   background: rgb(133, 190, 255) !important;
   border: 1px solid #4a98ff !important;
@@ -52,24 +47,24 @@
 }
 
 @media (max-width: 470px) {
-  .footer-right-txt{     
-      margin: 10px;
-      text-align: center !important;
+  .footer-right-txt {
+    margin: 10px;
+    text-align: center !important;
   }
   .total-que {
     margin-top: 5px;
   }
-  .form-btn{
-      text-align: center !important;
-      margin: 5px;
+  .form-btn {
+    text-align: center !important;
+    margin: 5px;
   }
   .footer-txt {
-    flex-direction:column;
+    flex-direction: column;
   }
 }
-.footer-txt {
-  z-index: 1;
-  height: 75px;
+
+@media (max-width: 350px) {
+  .header-txt {
+    flex-direction: column;
+  }
 }
-
-
