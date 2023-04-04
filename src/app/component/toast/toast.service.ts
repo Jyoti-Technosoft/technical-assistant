@@ -1,4 +1,5 @@
 import { Injectable, TemplateRef } from '@angular/core';
+import { toastMessage } from '../shared/shared.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +17,17 @@ export class ToastService {
     this.toast = this.toast.filter((t) => t !== toast);
   }
 
-  showSuccessMessage(message: string) {
-    this.show(message, { classname: 'bg-success text-light', delay: 10000 });
+  showSuccessMessage(message: toastMessage) {
+    this.show(message.label, {
+      classname: 'bg-success text-light',
+      delay: 10000,
+    });
   }
 
-  showErrorMessage(message: string) {
-    this.show(message, { classname: 'bg-danger text-light', delay: 15000 });
+  showErrorMessage(message: toastMessage) {
+    this.show(message.label, {
+      classname: 'bg-danger text-light',
+      delay: 15000,
+    });
   }
 }

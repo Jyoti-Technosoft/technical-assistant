@@ -11,12 +11,14 @@ import {
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
 import { ToastService } from '@app/component/toast/toast.service';
+import { RESULT_QUIZ } from '../shared/shared.enum';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss'],
+  styleUrls: ['./result.component.scss']
 })
+
 export class ResultComponent implements OnInit, OnDestroy {
   loggedInUser$: Observable<any> | undefined;
   userData: any;
@@ -37,13 +39,13 @@ export class ResultComponent implements OnInit, OnDestroy {
   resultData() {
     this.store
       .select((state: any) => state.quiz.latestQuizResult)
-      .pipe(distinctUntilChanged(),takeUntil(this.destroyer$))
+      .pipe(distinctUntilChanged(), takeUntil(this.destroyer$))
       .subscribe((data) => {
         this.userData = data;
       });
     if (!this.userData) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.showErrorMessage('No Quiz Played Yet')
+      this.toastService.showErrorMessage(RESULT_QUIZ);
     }
   }
 

@@ -11,10 +11,12 @@ import { State, Store } from '@ngrx/store';
 import QuizData from '@assets/json/data.json';
 import { ToastService } from '@app/component/toast/toast.service';
 import { quizState } from './quiz.state';
+import { NO_QUIZ } from '@app/component/shared/shared.enum';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class QuizService {
   allQuiz: any;
   constructor(
@@ -36,6 +38,6 @@ export class QuizService {
   }
 
   showError(message: string) {
-    this.toastService.showErrorMessage(message);
+    this.toastService.showErrorMessage(NO_QUIZ);
   }
 }
