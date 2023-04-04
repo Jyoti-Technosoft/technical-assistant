@@ -10,7 +10,7 @@ import {
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 
 @Component({
   selector: 'app-result',
