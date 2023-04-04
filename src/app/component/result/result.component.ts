@@ -19,6 +19,7 @@ import { ToastService } from '@app/toast.service';
 })
 export class ResultComponent implements OnInit, OnDestroy {
   loggedInUser$: Observable<any> | undefined;
+  recentResult: any;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
@@ -37,13 +38,14 @@ export class ResultComponent implements OnInit, OnDestroy {
   resultData() {
     this.store
       .select((state: any) => state.quiz.latestQuizResult)
-      .pipe(distinctUntilChanged(),takeUntil(this.destroyer$))
+      .pipe(distinctUntilChanged(), takeUntil(this.destroyer$))
       .subscribe((data) => {
-        this.userData = data;
+        this.recentResult = data;
       });
-    if (!this.userData) {
+
+    if (!this.recentResult) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.showErrorMessage('No Quiz Played Yet')
+      this.toastService.showErrorMessage('No Quiz Played Yet');
     }
   }
 
