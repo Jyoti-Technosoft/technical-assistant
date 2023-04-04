@@ -11,18 +11,19 @@ import {
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
 import { ToastService } from '@app/toast.service';
+import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss'],
+  styleUrls: ['./result.component.scss']
 })
+
 export class ResultComponent implements OnInit, OnDestroy {
   loggedInUser$: Observable<any> | undefined;
-  recentResult: any;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-
+  recentResult: any;
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
@@ -45,7 +46,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
     if (!this.recentResult) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.showErrorMessage('No Quiz Played Yet');
+      this.toastService.toastMessage(RESULT_QUIZ, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
     }
   }
 
