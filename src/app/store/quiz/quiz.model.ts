@@ -11,3 +11,12 @@ export interface quiz {
   description: string;
   questions: any[];
 }
+
+export interface quizResult {
+  points: number,
+  correctAnswer: number,
+  inCorrectAnswer: number,
+  type: string,
+  user: number,
+  date: string,
+} 
