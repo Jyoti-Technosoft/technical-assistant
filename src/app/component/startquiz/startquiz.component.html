@@ -3,11 +3,11 @@
     <div class="card shadow card-layout">
       <div class="card-body">
         <div class="container">
-        <img class="card-img-top" src="assets\img\rules.png" alt="Rules-image" />
+        <img class="card-img-top" src="assets\img\rules.svg" alt="Rules-image" />
         </div>
         <h2 class="card-title text-center">Welcome to Quiz App</h2>
         <h4 class="card-subtitle">Rules:</h4>
-        <ol [innerHTML]="instruction.rules"></ol>
+        <ol [innerHTML]="instruction?.rules"></ol>
         <div class="text-center">
           <button class="btn btn-primary btn-lg" (click)="quiz()">
             Start Quiz
