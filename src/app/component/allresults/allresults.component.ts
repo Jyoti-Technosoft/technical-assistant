@@ -34,7 +34,7 @@ export class AllresultsComponent {
       (state: any) => state.authentication
     );
     this.loggedInUser$
-      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
+      ?.pipe(takeUntil(this.destroyer$), distinctUntilChanged())
       .subscribe((state) => {
         this.userData = state?.userData;
         this.avatarName = this.getUserLetter(this.userData?.fullName);
@@ -44,6 +44,8 @@ export class AllresultsComponent {
   resultData() {
     let data: any = localStorage.getItem('result');
     this.allResultData = JSON.parse(data).reverse();
+    console.log(data);
+
   }
 
   getUserLetter(userName: string) {
