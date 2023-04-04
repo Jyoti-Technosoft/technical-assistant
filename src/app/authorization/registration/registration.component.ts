@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { distinctUntilChanged } from 'rxjs';
+import { ReplaySubject, distinctUntilChanged } from 'rxjs';
 
 import dialogData from '@assets/json/dialogData.json';
 import { doRegistration } from '@app/store/autentication/autentication.action';
@@ -24,6 +24,7 @@ export class RegistrationComponent {
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
+  destroyer$:ReplaySubject<boolean> = new ReplaySubject;
   @ViewChild("datePicker") datePicker!: any 
   constructor(
     private fb: FormBuilder,
@@ -107,6 +108,11 @@ export class RegistrationComponent {
       .subscribe((data) => {
         this.validateConfirmaPassword();
       });
+  }
+
+  ngOnDestroy(){
+   this.destroyer$.next(true);
+   this.destroyer$.unsubscribe();
   }
 
   get registrationFormValidator() {
