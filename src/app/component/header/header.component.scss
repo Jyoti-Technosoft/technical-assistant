@@ -6,7 +6,139 @@
   width: 35px;
   height: 35px;
 }
-.dropdownInfo {
-  min-width: auto;
-  border: none;
+
+.height {
+  height: 1px;
+}
+.nav-text {
+  transition: all 0.4s ease;
+  pointer-events: none;
+  color: #a10070;
+}
+
+.initial-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #000000;
+  text-align: center;
+  line-height: 10rem;
+  background-color: rgb(213, 235, 235);
+  font-weight: 400;
+}
+
+nav.sidebar,
+.container-main {
+  -webkit-transition: margin 0.6s ease-out;
+  -moz-transition: margin 0.6s ease-out;
+  -o-transition: margin 0.6s ease-out;
+  transition: margin 0.6s ease-out;
+}
+
+.navbar-m2p {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+.navbar-m2p a {
+  color: #a10070;
+}
+.active .dropdown-toggle {
+  background-color: #a10070;
+  border-color: #a10070;
+}
+.navbar-toggle {
+  background-color: transparent;
+  border: 1px solid #a10070;
+}
+.navbar-toggle .icon-bar,
+.navbar-toggle .icon-bar + .icon-bar {
+  background-color: #a10070;
+}
+
+nav:hover .forAnimate {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+  }
+  .align-content{
+    position: absolute;
+    top: 0;
+  }
+
+  .container-main {
+    position: absolute;
+    width: calc(100% - 40px);
+    margin-left: 40px;
+    float: right;
+  }
+
+  nav.sidebar:hover{
+    margin-left: 300px;
+  }
+  .navbar-header {
+    width: 100%;
+    margin-left: 0px;
+    font-size: 25px;
+    line-height: 27px;
+  }
+  .navbar-collapse,
+  .container-fluid {
+    padding: 0 0px 0 0px;
+  }
+
+  nav.sidebar {
+    width: 160px;
+    height: 100vh;
+    margin-left: -110px;
+    float: left;
+    margin-bottom: 0px;
+    margin-right: 50px;
+    .image{
+      position: fixed;
+      left:6px;
+    }
+    .icon{
+      position: fixed;
+      left: 8px;
+    }
+    .nav-text{
+      margin-left: 15px;
+      opacity: 0;
+    }
+    .header_left_txt{
+      margin-left: 40px;
+      opacity: 0;
+    }
+    .initial-letter{
+      position: fixed;
+      left: 6px;
+    }
+  }
+
+  nav.sidebar li {
+    width: 100%;
+  }
+
+  nav.sidebar:hover {
+    margin-left: 0px;
+    .nav-text {
+      opacity: 1;
+      transition: 1s;
+    }
+    .header_left_txt {
+      opacity: 1;
+      transition: 1s;
+    }
+  }
 }

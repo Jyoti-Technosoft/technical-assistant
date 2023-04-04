@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, Renderer2, ViewChild } from "@angular/core";
 import { Router } from '@angular/router';
 
 import { DialogService } from 'src/app/dialog-service/dialog.service';
@@ -14,10 +14,13 @@ export class HeaderComponent {
   userName: any;
   dialogData = { ...dialogData };
   userData: any;
+  @ViewChild('rowExpand') rowExpand:any ;
+  isRowExpand!: boolean;
   constructor(
     private route: Router,
     public authenticationService: AuthenticationService,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private elemenRef : Renderer2
   ) {}
 
   ngOnInit() {
@@ -38,7 +41,27 @@ export class HeaderComponent {
     this.dialogService.openDialog(configData);
   }
 
+  expandRow() {
+    if(this.isRowExpand) {
+      this.isRowExpand = false;
+      this.elemenRef.removeClass(this.rowExpand.nativeElement, 'in');
+    } else {
+      this.isRowExpand = true;
+      this.elemenRef.addClass(this.rowExpand.nativeElement, 'in');
+    } 
+  }
+
+  getUserLetter(userName: string) {
+    const intials = userName
+      .split(' ')
+      .map((name) => name[0])
+      .join('')
+      .toUpperCase();
+    return intials;
+  }
+
   openSignOutDialog() {
+    debugger
     let configData = this.dialogData.signoutModel;
     this.dialogService.openDialog(configData).then((value) => {
       if (value) {
