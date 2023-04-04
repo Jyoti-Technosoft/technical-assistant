@@ -10,7 +10,7 @@
       "numberOfQuestions": 3,
       "type": "radio",
       "title": "HTML-CSS Quiz",
-      "image": "assets\\img\\html-css.png",
+      "image": "assets\\img\\html-css.svg",
       "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages.",
       "questions": [
         {
@@ -388,7 +388,7 @@
       "negativePoints": 0.25,
       "numberOfQuestions": 3,
       "title": "JavaScript Quiz",
-      "image": "assets\\img\\javascript.png",
+      "image": "assets\\img\\javascript.svg",
       "description": "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.JavaScript is Easy to learn.",
       "questions": [
         {
@@ -662,7 +662,7 @@
       "negativePoints": 0.25,
       "numberOfQuestions": 3,
       "title": "React JS Quiz",
-      "image": "assets\\img\\react.png",
+      "image": "assets\\img\\react.svg",
       "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta.",
       "questions": [
         {
@@ -806,7 +806,7 @@
       "negativePoints": 0.25,
       "numberOfQuestions": 3,
       "title": "Angular Quiz",
-      "image": "assets\\img\\javascript.png",
+      "image": "assets\\img\\javascript.svg",
       "description": "Angular is a framework.AngularJS extends HTML with new attributes.AngularJS is perfect for Single Page Applications.AngularJS is study to easy.",
       "questions": [
         {
