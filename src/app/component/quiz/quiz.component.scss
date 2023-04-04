@@ -1,8 +1,8 @@
 
-.header_txt {
+.header-txt {
   z-index: 1;
   height: 70px;
-  .header_title {
+  .header-title {
     font-size: 25px;
     font-weight: 600;
   }
@@ -13,27 +13,27 @@
   background: #cce5ff;
   border: 1px solid #b8daff;
   height: 45px;
-  width: 145px;
-  .timer_left_txt {
+  .timer-left-txt {
     font-size: 17px;
     font-weight: 600;
   }
-  .timer_sec {
+  .timer-sec {
     font-size: 18px;
     font-weight: 500;
-    height: 30px;
-    width: 40px;
+    height: auto;
+    width: auto;
     color: #fff;
     line-height: 30px;
     background: #343a40;
     border: 1px solid #343a40;
+    padding: 0vh 2vh;
   }
 }
 
-.que_txt {
+.que-txt {
   font-size: 20px;
   box-sizing: border-box;
-  .que_data {
+  .que-data {
     font-size: 20px;
     font-weight: 600;
   }
@@ -52,9 +52,25 @@
   font-weight: 600;
 }
 
-.footer_txt {
+.footer-txt {
   z-index: 1;
   height: 70px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .card-footer {
+    display: flex !important;
+    flex-direction: column;
+    padding: 0.75rem;
+    height: fit-content; 
+    .total-que  {
+      margin-top: 1rem;
+    }
+    .form-btn {
+      margin: 1rem;
+     }
+  } 
 }
 
 
