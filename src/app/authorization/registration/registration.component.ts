@@ -7,11 +7,11 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { ToastService } from '@app/toast.service';
 import dialogData from '@assets/json/dialogData.json';
-
+import { doRegistration } from '@app/store/autentication/autentication.action';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -23,11 +23,11 @@ export class RegistrationComponent {
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
-  @ViewChild('email') email!: ElementRef;
-  
-  constructor(private route: Router,
+  @ViewChild("datePicker") datePicker!: any 
+  constructor(
     private fb: FormBuilder,
-    private toastService: ToastService
+    private store: Store,
+    public calendar: NgbCalendar
   ) {}
 
   ngOnInit(): void {
@@ -44,19 +44,16 @@ export class RegistrationComponent {
  }
 
   submitform(formValue: any) {
-    let findUser = this.registerUser?.find(
-      (value: any) => value.email == formValue.email
-    );
-    if (findUser) {
-      this.toastService.showErrorMessage('This email id is already registered');
-      setTimeout(() => {
-        this.email.nativeElement.focus();
-      });
-    } else {
-      this.toastService.showSuccessMessage('Registered Successfully');
-      this.registerUser.push(formValue);
-      localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
+    let registerUser = {
+      id: formValue.id,
+      fullName: formValue.fullName,
+      email: formValue?.email,
+      password: window.btoa(JSON.stringify(formValue?.confirmPassword)),
+      gender: formValue?.gender,
+      dateOfBirth: formValue?.dateOfBirth,
+      mobile: formValue?.mobile,
     }
+    this.store.dispatch(doRegistration(registerUser))
   }
 
   validateConfirmaPassword: ValidatorFn = (
@@ -85,7 +82,7 @@ export class RegistrationComponent {
         Validators.compose([
           Validators.required,
           Validators.pattern(
-            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$'
           ),
         ]),
       ],
@@ -108,6 +105,11 @@ export class RegistrationComponent {
 
   get registrationFormValidator() {
     return this.registrationForm.controls;
+  }
+
+  setTodaysDate() {
+    this.registrationForm.controls['dateOfBirth'].patchValue(this.calendar.getToday()); 
+    this.datePicker?.close();
   }
 }
 

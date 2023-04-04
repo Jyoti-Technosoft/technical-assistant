@@ -1,27 +1,10 @@
-
-.cardContainer {
-  max-height: 380px !important;
-  min-height: 240px !important;
+.footer{
+    background-color: white;
 }
 
-.img-content {
-  min-height: 140px;
-  max-height: 240px;
+@media only screen and (max-width: 620px) {
+    /* For mobile phones: */
+    .result-card {
+        max-width: 80%;
+    }
 }
-.text-content{
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow:hidden;
-  
-}
-.btn-content{
- background-color: #5555FF;
- border-color: #5555FF ;
- border-radius:8px;
-}
-.container{
-  .result-data{
-    margin-top: 50px;
-  }
-}
-

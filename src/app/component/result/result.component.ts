@@ -2,59 +2,71 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
 import { AuthenticationService } from '@app/service/authentication.service';
-import quizData from '@assets/json/data.json';
+import {
+  distinctUntilChanged,
+  Observable,
+  ReplaySubject,
+  takeUntil,
+} from 'rxjs';
+import { Store } from '@ngrx/store';
+import { autenticationState } from '@app/store/autentication/autentication.state';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit, OnDestroy {
-  quizData = { ...quizData };
-  userName: any;
+  allResultData: any;
+  loggedInUser$: Observable<any> | undefined;
   userData: any;
-  submittedData: any;
+  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
     public authenticationService: AuthenticationService,
-    public router:Router
-    ) {}
+    public router: Router,
+    private store: Store<autenticationState>
+  ) {}
 
   ngOnInit(): void {
+    this.getLoggedUser();
     this.resultData();
-    if (!this.userName) {
-      this.getData();
-    }
-  }
-
-  getData() {
-    let data: any = localStorage.getItem('registerUser');
-    this.userData = JSON.parse(data);
-    this.userName = this.userData.find((data: any) => {
-      return data.id == this.authenticationService.getUser();
-    })?.fullName;
   }
 
   resultData() {
     let data: any = localStorage.getItem('result');
-    this.submittedData = JSON.parse(data);
-    this.submittedData = this.submittedData.filter((data: any) => {
-      return data?.user == this.authenticationService.getUser();
+    this.allResultData = JSON.parse(data).filter((data: any) => {
+      return data?.user == this.userData.id;
     });
-    this.submittedData = this.submittedData.map((data: any) => {
-      const message = this.quizData?.quiz?.find((quizData: any) => {
-        return quizData.quizId == data.type;
-      });
-      data.image = message?.image;
-      return data;
-    });
-    this.submittedData = this.submittedData?.reverse();
+    const sorter = (a: any, b: any) => {
+      return new Date(a.date) > new Date(b.date) ? a : b;
+    };
+    this.allResultData = this.allResultData?.reduce(sorter);
   }
 
-  startQuizAgain(quizName:string){
+  startQuizAgain(quizName: string) {
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });
   }
 
-  ngOnDestroy(): void {}
+  showAllQuiz() {
+    const queryParams: Params = { result: 'allresults' };
+    this.router.navigate(['/allresults'], { queryParams });
+  }
+
+  getLoggedUser() {
+    this.loggedInUser$ = this.store.select(
+      (state: any) => state.authentication
+    );
+    this.loggedInUser$
+      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
+      .subscribe((state) => {
+        this.userData = state?.userData;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
+  }
 }
