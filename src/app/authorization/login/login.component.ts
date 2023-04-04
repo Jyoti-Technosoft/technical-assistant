@@ -1,42 +1,47 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { AuthenticationService } from 'src/app/service/authentication.service';
-import { ToastService } from 'src/app/component/toast/toast.service';
-import dialogData from 'src/assets/json/dialogData.json';
+import dialogData from '@assets/json/dialogData.json';
+
+import {
+  distinctUntilChanged,
+  Observable,
+  ReplaySubject,
+  takeUntil,
+} from 'rxjs';
+import {
+  autenticationState,
+  getStateSelector,
+} from '../../store/autentication/autentication.state';
+import { doLogoin } from '@app/store/autentication/autentication.action';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
+
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
   dialogData = { ...dialogData };
   loginForm!: FormGroup;
+  message$: Observable<any> | undefined;
+  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
+  state!: Observable<any>;
+  error: any;
 
   constructor(
-    private route: Router,
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
-    public toastService: ToastService
-  ) {}
+    private store: Store<autenticationState>
+  ) {
+    this.state = this.store.select(getStateSelector);
+  }
 
-  formSubmitted(formValue: any) {
-    let userdata = this.userData?.find(
-      (value: any) =>
-        value?.email == formValue?.email &&
-        value?.password == formValue?.password
-    );
-    if (userdata) {
-      this.toastService.showSuccessMessage('Login Successfully!');
-      document.cookie = 'username' + '=' + userdata.id;
-      localStorage.setItem('isAuthenticate', 'true');
-      this.route.navigateByUrl('dashboard');
-    } else {
-      this.toastService.showErrorMessage('Wrong Credential!');
-    }
+  public formSubmitted(formValue: any) {
+    this.store.dispatch(doLogoin(formValue));
   }
 
   ngOnInit(): void {
@@ -50,24 +55,25 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   createForm() {
     this.loginForm = this.fb.group({
-      email: [
-        '',
-        Validators.compose([Validators.required, Validators.email]),
-      ],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
       password: [
         '',
         Validators.compose([
           Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(12),
+          Validators.pattern(
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$'
+          ),
         ]),
       ],
     });
   }
 
-  get loginFormControl() {
+  get loginFormValidator() {
     return this.loginForm.controls;
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
+  }
 }

@@ -9,18 +9,11 @@ $btn-primary: #5555ff;
   max-height: 240px;
 }
 .text-content {
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-
-  @supports (-webkit-line-clamp: 4) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: initial;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-  }
+  text-overflow: ellipsis;
 }
 .btn-content {
   background-color: $btn-primary;
@@ -47,4 +40,18 @@ $btn-primary: #5555ff;
   background-color: #eeeeee69;
   box-shadow: none;
   border-color: #eee;
+}
+
+.max-width {
+  max-width: 450px;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .row {
+    &.justify-content {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }
