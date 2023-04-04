@@ -7,27 +7,29 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+import { ReplaySubject, distinctUntilChanged } from 'rxjs';
 
-import { DialogService } from 'src/app/dialog-service/dialog.service';
-import dialogData from 'src/assets/json/dialogData.json';
-
+import dialogData from '@assets/json/dialogData.json';
+import { doRegistration } from '@app/store/autentication/autentication.action';
+import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
   todayDate: string | undefined = new Date().toISOString().slice(0, 10);
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
-  @ViewChild('email') email!: ElementRef;
-
+  destroyer$:ReplaySubject<boolean> = new ReplaySubject;
+  @ViewChild("datePicker") datePicker!: any 
   constructor(
-    private route: Router,
     private fb: FormBuilder,
-    private dialogService: DialogService
+    private store: Store,
+    public calendar: NgbCalendar
   ) {}
 
   ngOnInit(): void {
@@ -37,7 +39,6 @@ export class RegistrationComponent {
 
   getRegistredUser() {
     if (localStorage.getItem('registerUser')) {
-    } else {
       this.registerUser = JSON.parse(
         localStorage.getItem('registerUser') as string
       );
@@ -45,37 +46,25 @@ export class RegistrationComponent {
   }
 
   submitform(formValue: any) {
-    let findUser = this.registerUser?.find(
-      (value: any) => value.email == formValue.email
-    );
-    if (findUser) {
-      let label = this.dialogData.emailModal.label;
-      let yesButtonLable = this.dialogData.emailModal.yesButtonLable;
-      let NoButtonLable = this.dialogData.emailModal.NoButtonLable;
-      this.dialogService
-        .openDialog(label, yesButtonLable, NoButtonLable)
-        .then((value) => {
-          if (value) {
-            setTimeout(() => {
-              this.email.nativeElement.focus();
-            });
-          }
-        });
-    } else {
-      this.registerUser.push(formValue);
-      localStorage.setItem('registerUser', JSON.stringify(this.registerUser));
-      this.route.navigateByUrl('login');
+    let registerUser = {
+      id: formValue.id,
+      fullName: formValue.fullName,
+      email: formValue?.email,
+      password: window.btoa(JSON.stringify(formValue?.confirmPassword)),
+      gender: formValue?.gender,
+      dateOfBirth: formValue?.dateOfBirth,
+      mobile: formValue?.mobile,
     }
+    this.store.dispatch(doRegistration(registerUser))
   }
 
-  validateConfirmaPassword: ValidatorFn = (
-    control: AbstractControl
-  ): ValidationErrors | null => {
+  validateConfirmaPassword() {
     const password = this.registrationForm?.controls['password'];
-    return password?.value !== control?.value
-      ? { validateConfirmaPassword: true }
-      : null;
-  };
+    const confirmPassword = this.registrationForm?.controls['confirmPassword'];
+    password?.value != confirmPassword?.value
+      ? confirmPassword?.setErrors({ pattern: true })
+      : confirmPassword?.setErrors(null);
+  }
 
   validateNumber: ValidatorFn = (
     control: AbstractControl
@@ -83,7 +72,7 @@ export class RegistrationComponent {
     const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
     return regex.test(control.value) ? null : { pattern: true };
   };
-  
+
   createForm() {
     this.registrationForm = this.fb.group({
       id: [Date.now()],
@@ -94,17 +83,11 @@ export class RegistrationComponent {
         Validators.compose([
           Validators.required,
           Validators.pattern(
-            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,}$'
+            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$'
           ),
         ]),
       ],
-      confirmPassword: [
-        '',
-        Validators.compose([
-          Validators.required,
-          this.validateConfirmaPassword,
-        ]),
-      ],
+      confirmPassword: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       dateOfBirth: ['', Validators.compose([Validators.required])],
       mobile: [
@@ -113,9 +96,31 @@ export class RegistrationComponent {
       ],
       acceptTerms: [false, Validators.requiredTrue],
     });
+    this.registrationForm
+      .get('password')
+      ?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.validateConfirmaPassword();
+      });
+    this.registrationForm
+      .get('confirmPassword')
+      ?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.validateConfirmaPassword();
+      });
+  }
+
+  ngOnDestroy(){
+   this.destroyer$.next(true);
+   this.destroyer$.unsubscribe();
   }
 
   get registrationFormValidator() {
     return this.registrationForm.controls;
+  }
+
+  setTodaysDate() {
+    this.registrationForm.controls['dateOfBirth'].patchValue(this.calendar.getToday()); 
+    this.datePicker?.close();
   }
 }
