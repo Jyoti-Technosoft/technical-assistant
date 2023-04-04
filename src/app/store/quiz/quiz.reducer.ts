@@ -1,15 +1,17 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import * as counteAction from './quiz.action';
-import { quiz } from './quiz.model';
+import * as quizAction from './quiz.action';
+import { quiz,quizResult } from './quiz.model';
 
 export const initialState: State = {
   allQuiz: undefined,
   selectedQuiz: undefined,
+  latestQuizResult : undefined
 };
 
 export interface State {
   allQuiz: quiz[] | undefined;
   selectedQuiz: quiz | undefined;
+  latestQuizResult: quizResult | undefined;
 }
 
 export function reducer(state: State | undefined, action: Action): any {
@@ -22,12 +24,20 @@ export const state = (state: State) => {
 
 export const quizReducer = createReducer(
   initialState,
-  on(counteAction.AllQuizSucess, (state, payload) => ({
-    ...state,
+  on(quizAction.AllQuizSucess, (state, payload) => ({
+    ...state,     
     allQuiz: payload.quizes,
   })),
-  on(counteAction.selectQuizSucess, (state, payload) => ({
+  on(quizAction.selectQuizSucess, (state, payload) => ({
     ...state,
     selectedQuiz: payload.quiz,
+  })),
+  on(quizAction.successQuizPlay, (state, payload) => ({
+    ...state,
+    latestQuizResult: payload.result,
+  })),
+  on(quizAction.emptyQuizPlay, (state, payload) => ({
+    ...state,
+    latestQuizResult: undefined,
   }))
 );
