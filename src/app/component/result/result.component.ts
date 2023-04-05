@@ -8,20 +8,23 @@ import {
   ReplaySubject,
   takeUntil,
 } from 'rxjs';
+
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
 import { ToastService } from '@app/component/toast/toast.service';
+import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss'],
+  styleUrls: ['./result.component.scss']
 })
+
 export class ResultComponent implements OnInit, OnDestroy {
   loggedInUser$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-
+  recentResult: any;
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
@@ -37,13 +40,14 @@ export class ResultComponent implements OnInit, OnDestroy {
   resultData() {
     this.store
       .select((state: any) => state.quiz.latestQuizResult)
-      .pipe(distinctUntilChanged(),takeUntil(this.destroyer$))
+      .pipe(distinctUntilChanged(), takeUntil(this.destroyer$))
       .subscribe((data) => {
-        this.userData = data;
+        this.recentResult = data;
       });
-    if (!this.userData) {
+
+    if (!this.recentResult) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.showErrorMessage('No Quiz Played Yet')
+      this.toastService.toastMessage(RESULT_QUIZ, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
     }
   }
 

@@ -39,27 +39,23 @@ export class Quizcomponent implements OnInit, OnDestroy {
   question!: any;
   title!: any;
   dialogData = { ...dialogData };
-  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  private destroyer$: ReplaySubject<boolean> = new ReplaySubject(1);
   questionIndex: number = 0;
   interval$!: Subscription;
   points: number = 0;
   correctAnswer: number = 0;
   inCorrectAnswer: number = 0;
   timer: number | undefined;
-  selectedQuizType!: string;
   positivePoints!: number;
   negativePoints!: number;
-  numberOfQuestions!: string | undefined;
   selectedQuiz: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
-  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
     private router: Router,
     private activeRouter: ActivatedRoute,
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
     private dialogService: DialogService,
     private store: Store,
     private state: State<quizState>
@@ -71,7 +67,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getUserData();
-    this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
     this.getQuizData();
   }
@@ -96,7 +91,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.selectedQuiz = data;
       });
     if (!this.selectedQuiz) {
-      this.store.dispatch(selectQuiz({ quizId: this.selectedQuizType }));
+      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get('quiz') as string;
+      this.store.dispatch(selectQuiz({ quizId:  selectedQuizId}));
     }
   }
 
@@ -159,8 +155,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
       points: this.points,
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
-      type: this.selectedQuizType,
+      type: this.selectedQuiz?.quizId,
       user: this.userData.id,
+      quizTypeImage : this.selectedQuiz?.image, 
       date: new Date().toISOString().slice(0, 10)
     };
     this.store.dispatch(successQuizPlay({result:currentData}))
@@ -191,7 +188,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   startCounter() {
     this.interval$ = interval(1000)
-      .pipe(takeUntil(this.destroyed$))
+      .pipe(takeUntil(this.destroyer$))
       .subscribe((val) => {
         const counterValue = this.formArray.controls.at(this.questionIndex)
           ?.value.timer;
@@ -238,7 +235,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.unsubscribe();
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
   }
 }

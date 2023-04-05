@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ToastService } from '../toast/toast.service';
 
@@ -12,10 +12,12 @@ import { ToastService } from '../toast/toast.service';
       [delay]="toast.delay || 5000"
       (hidden)="toastService.remove(toast)"
     >
-      <ng-template [ngIf]="isTemplate(toast)" [ngIfElse]="text">
-        <ng-template [ngTemplateOutlet]="toast.textOrTpl"></ng-template>
-      </ng-template>
-      <ng-template #text>{{ toast.textOrTpl }}</ng-template>
+        <span>
+          <i class="fa-brands fa-{{ toast?.icon }} icon"></i>
+        </span>
+        <span>
+          {{ toast?.textOrTpl }}
+        </span>
     </ngb-toast>
   `,
   host: {
@@ -23,11 +25,7 @@ import { ToastService } from '../toast/toast.service';
     style: 'z-index: 1200',
   },
 })
-
 export class ToastComponent {
-  constructor(public toastService: ToastService) {}
-
-  isTemplate(toast: { textOrTpl: any }) {
-    return toast.textOrTpl instanceof TemplateRef;
+  constructor(public toastService: ToastService) {
   }
 }
