@@ -1,23 +1,31 @@
 import { Component } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
-import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
+import {
+  distinctUntilChanged,
+  Observable,
+  ReplaySubject,
+  takeUntil
+} from 'rxjs';
 import { Store } from '@ngrx/store';
 import { resultState } from '@app/store/result/result.state';
 import { getAllResults } from '@app/store/result/result.action';
+import { Result } from '@app/store/result/result.model';
 
 @Component({
   selector: 'app-allresults',
   templateUrl: './allresults.component.html',
   styleUrls: ['./allresults.component.scss']
 })
+
 export class AllresultsComponent {
   initialData: number = 12;
-  allResultData: any[] = [];
+  allResultData: Result[] = [];
   loggedInUser$: Observable<any> | undefined;
+  resultData$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-  avatarName!:string;
+  avatarName!: string;
 
   constructor(
     public authenticationService: AuthenticationService,
@@ -43,7 +51,15 @@ export class AllresultsComponent {
   }
 
   resultData() {
-    this.store.dispatch(getAllResults());
+    this.resultData$ = this.store.select((state: any) => state.result);
+    this.resultData$
+      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
+      .subscribe((state) => {
+        this.allResultData = state?.results;
+        if (!this.allResultData) {
+          this.store.dispatch(getAllResults());
+        }
+      });
   }
 
   getUserLetter(userName: string) {

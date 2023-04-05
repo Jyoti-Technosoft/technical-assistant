@@ -3,11 +3,11 @@ import * as resultAction from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
 
 export const initialState: State = {
-    results:[]
+    results: undefined
 };
 
 export interface State {
-    results: Result[]
+    results: Result[] | undefined;
 }
 
 export function reducer(state: State | undefined, action: Action): any {
