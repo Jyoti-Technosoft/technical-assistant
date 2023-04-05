@@ -1,4 +1,6 @@
 $btn-primary: #5555ff;
+$bg-colour: #eeeeee69;
+$border-colour: #eee;
 .card-container {
   max-height: 380px !important;
   min-height: 240px !important;
@@ -37,9 +39,9 @@ $btn-primary: #5555ff;
   font-size: medium;
 }
 .field-content:focus {
-  background-color: #eeeeee69;
+  background-color: $bg-colour;
   box-shadow: none;
-  border-color: #eee;
+  border-color: $border-colour;
 }
 
 .max-width {

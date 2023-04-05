@@ -14,14 +14,14 @@ import {
 import {
   autenticationState,
   getStateSelector,
-} from '../../store/autentication/autentication.state';
+} from '@app/store/autentication/autentication.state';
 import { doLogoin } from '@app/store/autentication/autentication.action';
 import { DialogService } from '@app/dialog-service/dialog.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['./login.component.scss']
 })
 
 export class LoginComponent implements OnInit, OnDestroy {
