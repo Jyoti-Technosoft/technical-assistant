@@ -1,16 +1,44 @@
-.image {
-  width: 4rem;
-  height: 4rem;
+.userlogo {
+  width: 60px;
+  height: 60px;
 }
-.form-label {
-  font-size: calc(70% + 1vh);
+.fs-4 {
+  color: rgb(41, 41, 231);
+  font-weight: bold;
 }
 
-.form-text {
-  font-size: calc(70% + 1vh);
-  margin-left: 5px;
+.fixed-height {
+  height: 10px;
 }
 
 .form-control {
-  font-size: calc(70% + 1vh);
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 1px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 1px solid #d1d1d4 !important;
+}
+
+.card {
+  margin: auto;
+  height: auto;
+  position: absolute;
+  top: 7%;
+  max-width: 480px !important;
+}
+.d-grid {
+  margin-top: 20px;
+}
+.btn.btn-primary {
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  margin: 10px 40px;
+  border-radius: 50px;
+  font-size: 16px;
+}
+
+.login-section {
+  height: 90% !important;
 }

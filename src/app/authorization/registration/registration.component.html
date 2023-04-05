@@ -1,237 +1,255 @@
-<div class="container registration-conatiner">
-  <div class="card shadow">
-    <div class="card-body">
-      <form
-        [formGroup]="registrationForm"
-        (ngSubmit)="submitform(registrationForm.value)"
-        class="p-3"
-      >
-        <div class="row">
-          <div class="col text-center p-2 mb-3">
-            <span class="fs-3">User Registration</span>
+<div class="card shadow col-md-6 col-lg-4 col-sm-6 col-9 col-sm-4">
+  <div class="card-body">
+    <form
+      [formGroup]="registrationForm"
+      (ngSubmit)="submitform(registrationForm.value)"
+      class="p-3"
+    >
+      <div class="row g-0">
+        <div class="col text-center">
+          <span class="fs-3"> Registration Form</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-mb-3">
+          <input
+            type="text"
+            placeholder="Full Name"
+            class="form-control"
+            id="fullName"
+            formControlName="fullName"
+          />
+
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="registrationFormValidator['fullName'].errors?.['required'] && (registrationFormValidator['fullName'].touched || registrationFormValidator['fullName'].dirty)"
+            >
+              Name is required.
+            </span>
           </div>
         </div>
-        <div class="row">
-          <div class="form-container">
-            <div class="col">
-              <label for="fullName" class="form-label"
-                >Full Name (FirstName , LastName)</label
-              >
-              <input
-                type="text"
-                class="form-control"
-                id="fullName"
-                formControlName="fullName"
-              />
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['fullName'].errors?.['required'] && (registrationFormValidator['fullName']?.touched || registrationFormValidator['fullName']?.dirty))"
-              >
-                Name is required.
-              </div>
+      </div>
+
+      <div class="row">
+        <div class="col-mb-3">
+          <input
+            type="email"
+            placeholder="Email Address"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="registrationFormValidator['email'].errors?.['required'] && (registrationFormValidator['email'].dirty || registrationFormValidator['email'].touched)"
+            >
+              Email is required.
+            </span>
+            <span
+              *ngIf="registrationFormValidator['email'].errors?.['email'] && (registrationFormValidator['email'].dirty || registrationFormValidator['email'].touched)"
+            >
+              Email is Invalid.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-mb-3">
+          <input
+            type="password"
+            placeholder="Password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+          />
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="registrationFormValidator['password'].errors?.['required'] && (registrationFormValidator['password'].dirty || registrationFormValidator['password'].touched)"
+            >
+              Password is required.
+            </span>
+            <span
+              *ngIf="registrationFormValidator['password'].errors?.['pattern'] || registrationFormValidator['password'].errors?.['maxlength'] && (registrationFormValidator['password'].dirty || registrationFormValidator['password'].touched)"
+            >
+              Password should be atleast 8 characters long and should contain
+              one number,one character and one special character.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-mb-3">
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            class="form-control"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+          />
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="registrationFormValidator['confirmPassword']?.errors?.['required'] && (registrationFormValidator['confirmPassword']?.dirty || registrationFormValidator['confirmPassword']?.touched)"
+            >
+              Confirm password is Required.
+            </span>
+
+            <span
+              *ngIf="registrationFormValidator['confirmPassword'].errors?.['validateConfirmaPassword'] && registrationFormValidator['confirmPassword']?.touched && registrationFormValidator['confirmPassword'].value"
+            >
+              Passsword and Confirm Password didn't match.
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="gender px-3">
+          <div class="wrapper px-0 ml-2">
+            <div class="form-check form-check-inline px-0 pl-2 ml-2">
+              Gender
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-container">
-            <div class="col">
-              <label for="email" class="form-label">Email Address</label>
+            <div class="form-check form-check-inline">
               <input
-                #email
-                type="text"
-                class="form-control"
-                id="email"
-                formControlName="email"
+                type="radio"
+                class="form-check-input"
+                value="male"
+                id="male"
+                formControlName="gender"
               />
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['email']?.errors?.['required'] && (registrationFormValidator['email'].dirty || registrationFormValidator['email']?.touched))"
-              >
-                Email is required.
-              </div>
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['email']?.errors?.['email'] && (registrationFormValidator['email']?.dirty || registrationFormValidator ['email']?.touched))"
-              >
-                Email is Invalid.
-              </div>
+              <label class="form-check-label" for="male">Male</label>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-container">
-            <div class="col">
-              <label for="password" class="form-label">Password</label>
+            <div class="form-check form-check-inline">
               <input
-                type="password"
-                class="form-control"
-                id="password"
-                formControlName="password"
+                type="radio"
+                class="form-check-input"
+                value="female"
+                id="female"
+                formControlName="gender"
               />
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['password']?.errors?.['required'] && (registrationFormValidator['password']?.dirty || registrationFormValidator['password']?.touched))"
-              >
-                Password is required.
-              </div>
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['password']?.errors?.['pattern'])"
-              >
-                Password should be atleast 8 characters long and should contain
-                one number,one character and one special character.
-              </div>
+              <label class="form-check-label" for="female">Female</label>
             </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="form-container">
-              <label for="confirmPassword" class="form-label"
-                >Confirm Password</label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="confirmPassword"
-                formControlName="confirmPassword"
-              />
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['confirmPassword']?.errors?.['required'] && (registrationFormValidator['confirmPassword']?.dirty || registrationFormValidator['confirmPassword']?.touched))"
-              >
-                confirmnpassword password is Required..
-              </div>
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['confirmPassword']?.errors?.['validateConfirmaPassword'] && registrationFormValidator['confirmPassword']?.touched)"
-              >
-                Passsword and Confirm Password didn't match.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="form-container">
-            <div class="m-1">Gender</div>
-            <div class="wrapper">
-              <div class="form-check form-check-inline">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  value="male"
-                  id="male"
-                  formControlName="gender"
-                />
-                <label class="form-check-label" for="male">Male</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  value="female"
-                  id="female"
-                  formControlName="gender"
-                />
-                <label class="form-check-label" for="female">Female</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  value="other"
-                  id="other"
-                  formControlName="gender"
-                />
-                <label class="form-check-label" for="other">Other</label>
-              </div>
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['gender']?.errors?.['required'] && (registrationFormValidator['gender']?.dirty || registrationFormValidator['gender']?.touched))"
+
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="registrationFormValidator['gender'].errors?.['required'] && (registrationFormValidator['gender'].dirty || registrationFormValidator['gender'].touched)"
               >
                 Gender is required.
-              </div>
+              </span>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="row">
-          <div class="col">
-            <div class="form-container">
-              <label for="birthday" class="form-label"> Date Of Birth :</label>
-              <input
-                type="date"
-                class="form-control input-sm"
-                formControlName="dateOfBirth"
-                [max]="todayDate"
-                (keydown)="(false)"
-              />
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['dateOfBirth']?.errors?.['required'] && (registrationFormValidator['dateOfBirth']?.dirty || registrationFormValidator['dateOfBirth']?.touched))"
-              >
-                Birthday is required.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col">
-            <div class="form-container">
-              <label for="mobile" class="form-label">Mobile Number</label>
-              <input
-                type="number"
-                class="form-control number"
-                id="mobile"
-                formControlName="mobile"
-              />
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['mobile']?.errors?.['required'] && (registrationFormValidator['mobile']?.dirty || registrationFormValidator['mobile']?.touched))"
-              >
-                Number is required.
-              </div>
-              <div
-                class="form-text text-danger"
-                *ngIf="(registrationFormValidator['mobile']?.errors?.['pattern'] && registrationFormValidator['mobile']?.touched && !registrationFormValidator['mobile']?.errors?.['required'])"
-              >
-                Please insert a valid Mobile number.
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group form-check">
-          <div class="form-container">
+      <div class="row">
+        <div class="col-mb-3">
+          <div class="input-group">
             <input
-              type="checkbox"
-              formControlName="acceptTerms"
-              class="form-check-input"
+              type="text"
+              class="form-control w-75"
+              placeholder="yyyy-mm-dd"
+              name="dp"
+              formControlName="dateOfBirth"
+              ngbDatepicker
+              [footerTemplate]="footerTemplate"
+              #datePicker="ngbDatepicker"
             />
-            <label for="acceptTerms" class="form-check-label"
-              >Accept Terms & Conditions</label
+            <span class="date-picker" #datePicker (click)="datePicker.toggle()"
+              ><i class="fa-regular fa-calendar-days"></i
+            ></span>
+          </div>
+          <ng-template #footerTemplate>
+            <hr class="my-0" />
+            <button
+              class="btn btn-primary btn-sm m-2 float-start"
+              (click)="setTodaysDate()"
             >
+              Today
+            </button>
+            <button
+              class="btn btn-secondary btn-sm m-2 float-end"
+              (click)="datePicker.close()"
+            >
+              Close
+            </button>
+          </ng-template>
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="registrationFormValidator['dateOfBirth'].errors?.['required'] && (registrationFormValidator['dateOfBirth'].dirty || registrationFormValidator['dateOfBirth'].touched)"
+            >
+              Birthday is required.
+            </span>
           </div>
         </div>
-        <div class="row">
-          <div class="form-container">
-            <div class="col">
-              <div class="d-grid">
-                <button
-                  type="submit"
-                  [disabled]="!registrationForm.valid"
-                  class="btn btn-success"
-                >
-                  Register Now
-                </button>
-                <p class="text-center mt-2">
-                  Already have an account? <a routerLink="/login">Log In</a>
-                </p>
-              </div>
-            </div>
+      </div>
+
+      <div class="row">
+        <div class="col-mb-3">
+          <input
+            type="tel"
+            placeholder="Mobile Number"
+            class="form-control"
+            id="mobile"
+            formControlName="mobile"
+          />
+          <div class="form-text text-danger fixed-height">
+            <span
+              *ngIf="registrationFormValidator['mobile'].errors?.['required'] && (registrationFormValidator['mobile'].dirty || registrationFormValidator['mobile'].touched)"
+            >
+              Number is required.
+            </span>
+            <span
+              *ngIf="registrationFormValidator['mobile'].errors?.['pattern'] && (registrationFormValidator['mobile'].dirty || registrationFormValidator['mobile'].touched)"
+            >
+              Number is Invalid.
+            </span>
+
+            <span
+              *ngIf="registrationFormValidator['mobile'].errors?.['maxlength'] && (registrationFormValidator['mobile'].dirty || registrationFormValidator['mobile'].touched)"
+            >
+              Number is 10 Digits.
+            </span>
+            <span
+              *ngIf="registrationFormValidator['mobile'].errors?.['minlength'] && (registrationFormValidator['mobile'].dirty || registrationFormValidator['mobile'].touched)"
+            >
+              Number is not 10 Digits.
+            </span>
           </div>
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="form-group form-check">
+        <div class="form-container">
+          <input
+            type="checkbox"
+            formControlName="acceptTerms"
+            class="form-check-input"
+          />
+          <label for="acceptTerms" class="form-check-label"
+            >Accept Terms & Conditions</label
+          >
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-mb-3">
+          <div class="d-grid">
+            <button
+              type="submit"
+              [disabled]="!registrationForm.valid"
+              class="btn btn-success"
+            >
+              Register Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <h6 class="mt-3">
+          Already have an account?<a routerLink="/login"> Login</a>
+        </h6>
+      </div>
+    </form>
   </div>
 </div>
