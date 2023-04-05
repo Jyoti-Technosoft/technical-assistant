@@ -45,7 +45,7 @@ export class ResultComponent implements OnInit, OnDestroy {
       });
     if (!this.userData) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.showErrorMessage(RESULT_QUIZ);
+      this.toastService.toastMessage(RESULT_QUIZ,'fa-solid fa-triangle-exclamation');
     }
   }
 

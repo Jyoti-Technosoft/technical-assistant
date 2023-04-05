@@ -19,7 +19,6 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService implements OnInit {
   users: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
@@ -99,7 +98,7 @@ export class AuthService implements OnInit {
   routeToDashboard(data: any): void {
     this.cookieService.set('info_token', this.encodeObj(data.userData.id), 1);
     this.router.navigateByUrl('dashboard');
-    this.toastService.showSuccessMessage(LOGIN_SUCCESSFULLY);
+    this.toastService.toastMessage(LOGIN_SUCCESSFULLY, 'bg-success text-light');
   }
 
   encodeObj(obj: any) {
@@ -111,7 +110,10 @@ export class AuthService implements OnInit {
   }
 
   loginFail(message: string) {
-    this.toastService.showErrorMessage({ label: message, icon: 'error' });
+    this.toastService.toastMessage(
+      { label: message, icon: 'fa-solid fa-triangle-exclamation' },
+      'bg-danger text-light'
+    );
   }
 
   getUserId() {
@@ -133,11 +135,17 @@ export class AuthService implements OnInit {
 
   routeToLogin() {
     this.router.navigateByUrl('login');
-    this.toastService.showSuccessMessage(REGISTERED_SUCCESSFULLY);
+    this.toastService.toastMessage(
+      REGISTERED_SUCCESSFULLY,
+      'bg-success text-light'
+    );
   }
 
   logout() {
-    this.toastService.showSuccessMessage(LOGOUT_SUCCESSFULLY);
+    this.toastService.toastMessage(
+      LOGOUT_SUCCESSFULLY,
+      'bg-success text-light'
+    );
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
   }

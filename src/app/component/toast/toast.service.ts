@@ -9,7 +9,8 @@ export class ToastService {
 
   constructor() {}
 
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
+  show(textOrTpl: any | TemplateRef<any>, options: any = {}) {
+    console.log(this.toast);
     this.toast.push({ textOrTpl, ...options });
   }
 
@@ -17,16 +18,9 @@ export class ToastService {
     this.toast = this.toast.filter((t) => t !== toast);
   }
 
-  showSuccessMessage(message: toastMessage) {
-    this.show(message.label, {
-      classname: 'bg-success text-light',
-      delay: 10000,
-    });
-  }
-
-  showErrorMessage(message: toastMessage) {
-    this.show(message.label, {
-      classname: 'bg-danger text-light',
+  toastMessage(message: toastMessage, className: string) {
+    this.show(message, {
+      classname: className,
       delay: 15000,
     });
   }

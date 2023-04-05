@@ -13,10 +13,10 @@ import { ToastService } from '../toast/toast.service';
       (hidden)="toastService.remove(toast)"
     >
       <span>
-        <i class="fa-brands fa-{{ toast?.icon }} icon"></i>
+        <i class="{{ toast?.textOrTpl?.icon }}"></i>
       </span>
       <span>
-        {{ toast?.textOrTpl }}
+        {{ toast?.textOrTpl?.label }}
       </span>
     </ngb-toast>
   `,
@@ -25,7 +25,6 @@ import { ToastService } from '../toast/toast.service';
     style: 'z-index: 1200',
   },
 })
-
 export class ToastComponent {
   constructor(public toastService: ToastService) {
     console.log(this.toastService.toast);
