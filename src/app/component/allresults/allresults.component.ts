@@ -3,7 +3,8 @@ import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { autenticationState } from '@app/store/autentication/autentication.state';
+import { resultState } from '@app/store/result/result.state';
+import { getAllResults } from '@app/store/result/result.action';
 
 @Component({
   selector: 'app-allresults',
@@ -21,7 +22,7 @@ export class AllresultsComponent {
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
-    private store: Store<autenticationState>
+    private store: Store<resultState>
   ) {}
 
   ngOnInit(): void {
@@ -42,8 +43,7 @@ export class AllresultsComponent {
   }
 
   resultData() {
-    let data: any = localStorage.getItem('result');
-    this.allResultData = JSON.parse(data).reverse();
+    this.store.dispatch(getAllResults());
   }
 
   getUserLetter(userName: string) {
