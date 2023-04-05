@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ToastService } from '../toast/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 
 @Component({
   selector: 'app-toast',
@@ -13,10 +13,10 @@ import { ToastService } from '../toast/toast.service';
       (hidden)="toastService.remove(toast)"
     >
       <span>
-        <i class="{{ toast?.textOrTpl?.icon }}"></i>
+        <i class="fa-brands fa-{{ toast?.icon }} icon"></i>
       </span>
       <span>
-        {{ toast?.textOrTpl?.label }}
+        {{ toast?.textOrTpl }}
       </span>
     </ngb-toast>
   `,
@@ -26,7 +26,5 @@ import { ToastService } from '../toast/toast.service';
   },
 })
 export class ToastComponent {
-  constructor(public toastService: ToastService) {
-    console.log(this.toastService.toast);
-  }
+  constructor(public toastService: ToastService) {}
 }
