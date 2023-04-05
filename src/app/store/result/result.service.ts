@@ -27,7 +27,7 @@ export class ResultService {
     return of(currentData)
   }
 
-  getResultFailed(message: any) {
+  failedResult(message: any) {
     this.toastService.toastMessage(
       { label: message, icon: 'fa-solid fa-xmark' },
       TOAST_BG_COLOR.TOAST_ERROR_COLOR

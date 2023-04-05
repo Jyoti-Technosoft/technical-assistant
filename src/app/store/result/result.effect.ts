@@ -57,7 +57,7 @@ export class ResultEffects implements OnDestroy {
       takeUntil(this.destroyer$),
       distinctUntilChanged(),
       tap((data) => {
-        this.resultService.getResultFailed(data);
+        this.resultService.failedResult(data);
       })
     )
   );
