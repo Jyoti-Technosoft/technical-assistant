@@ -79,7 +79,6 @@ export class HeaderComponent implements OnDestroy {
   }
 
   openSignOutDialog() {
-    debugger
     let configData = this.dialogData.signoutModel;
     this.dialogService.openDialog(configData).then((value) => {
       if (value) {

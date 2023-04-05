@@ -1,63 +1,52 @@
-<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0">
+<nav class="navbar navbar-m2p sidebar"  role="navigation">
   <div class="container-fluid">
-    <div class="d-flex">
-      <a _ngcontent-guv-c108="" class="navbar-brand py-2"
-        ><img
-          src="assets/img/logo.svg"
-          alt="logo"
-          class="d-inline-block image"
-        /><span class="title">APPLICATION</span></a
-      >
-      <ng-container *ngIf="userData?.email">
-        <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active ml-5 px-3 " 
-          routerLink="dashboard"
-          >Home</a
-        >
-        <a aria-current="page" class="navbar-menu align-items-center d-flex nav-link active" 
-          routerLink="allresults"
-          >Results</a
-        >
-      </ng-container>
-    </div>
-    <div class="navigation" *ngIf="userData?.email">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse">
-          <img
-            src="assets/img/profilephoto.svg"
-            alt="Company Logo"
-            class="img-responsive image rounded-circle mx-2"
-          />
-          <div ngbDropdown class="d-inline-block">
-            <a
-              type="button"
-              class="nav-link dropdown"
-              id="dropdownBasic1"
-              ngbDropdownToggle
-            >
-              {{ userData?.email }}
+    <div class="container-fluid align-content">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" (click)="expandRow()">
+              <span class="sr-only">Toggle navigation</span>
+              <i class="fa fa-bars fa-lg"></i>
+          </button>
+          <a class="h1" routerLink="/dashboard">
+            <img class="d-inline-block image" src="assets/img/logo.svg" />
+            <span class="title">APPLICATION</span>
             </a>
-            <div
-              class="dropdown"
-              ngbDropdownMenu
-              class="dropdownInfo"
-              aria-labelledby="dropdown"
-            >
-              <button
-                class="btn btn-dropdown"
-                ngbDropdownItem
-                (click)="openAboutDialog()"
-              >
-                About
-              </button>
-              <button
-                class="btn btn-dropdown"
-                ngbDropdownItem
-                (click)="openSignOutDialog()"
-              >
-                Sign Out
-              </button>
-            </div>
-          </div>
+      </div>
+
+        <div class="collapse navbar-collapse" #rowExpand id="bs-sidebar-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                  <a routerLink="/dashboard" class="nav-link m-3">
+                    <i class="fa fa-home icon fa-lg m-2"></i>
+                    <span class="nav-text">Dashboard</span>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="allresults" class="nav-link m-3">
+                    <i class="fa fa-th-large icon fa-lg m-2"></i>
+                    <span class="nav-text">All Results</span>
+                  </a>
+                </li>
+                <li>
+                  <a routerLink="/dashboard" class="nav-link m-3">
+                    <i class="fa fa-user icon fa-lg m-2"></i>
+                    <span class="nav-text">Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="nav-link m-3">
+                    <i class="fa fa-sign-out icon fa-lg m-2"></i>
+                    <span class="nav-text">Sign Out</span>
+                  </a>
+                </li>
+                <!-- <li class="dropdown d-flex">
+                  <div class="initial-letter">
+                    <div [innerHtml]="getUserLetter(userName)"></div>
+                  </div>
+                  <a class="nav-link">
+                    <span class="nav-text">{{ userName }}</span>
+                  </a>
+                </li> -->
+            </ul>
         </div>
       </div>
   </div>
