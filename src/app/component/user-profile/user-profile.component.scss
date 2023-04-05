@@ -12,9 +12,11 @@
     line-height: 10rem;
     background-color: rgb(213, 235, 235);
   }
-//   .input-detail {
-//     box-shadow: none;
-//     border-radius: 1px;
-//     width: 100%;
-//     border: none;
-//   }
+
+.form-control{
+  border:none;
+}
+
+.fixed-height {
+  height: 10px;
+}

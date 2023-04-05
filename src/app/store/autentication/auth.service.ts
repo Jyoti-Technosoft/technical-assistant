@@ -21,9 +21,9 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService implements OnInit {
   users: any;
+  LoggedInUsers: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
@@ -40,6 +40,11 @@ export class AuthService implements OnInit {
       .select((state) => state.authentication)
       .subscribe((data: any) => {
         this.users = data?.allUsers;
+      });
+    this.state
+      .select((state) => state.authentication)
+      .subscribe((data: any) => {
+        this.LoggedInUsers = data?.userData;
       });
   }
 
@@ -76,6 +81,25 @@ export class AuthService implements OnInit {
     }
   }
 
+  updateUserDetails(payload: any): Observable<any> {
+    if (!this.users) {
+      this.getUsers();
+    }
+
+    if (this.LoggedInUsers.id == payload?.id) {
+      const newState = this.users?.map((user: any) => {
+        if (user?.id == payload?.id) {
+          user = payload;
+        }
+        return user;
+      });
+      localStorage.setItem('registerUser', JSON.stringify(newState));
+      return of(payload);
+    } else {
+      return throwError(() => new Error(LOGIN_WRONG_CREDENTIAL));
+    }
+  }
+
   getAllUsers(): Observable<any> {
     let users = JSON.parse(localStorage.getItem('registerUser') as string);
     return users ? of(users) : of([]);
@@ -101,7 +125,10 @@ export class AuthService implements OnInit {
   routeToDashboard(data: any): void {
     this.cookieService.set('info_token', this.encodeObj(data.userData.id), 1);
     this.router.navigateByUrl('dashboard');
-    this.toastService.toastMessage(LOGIN_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
+    this.toastService.toastMessage(
+      LOGIN_SUCCESSFULLY,
+      TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
+    );
   }
 
   encodeObj(obj: any) {
@@ -113,7 +140,10 @@ export class AuthService implements OnInit {
   }
 
   loginFail(message: string) {
-    this.toastService.toastMessage({ label: message, icon: 'fa-solid fa-xmark' }, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
+    this.toastService.toastMessage(
+      { label: message, icon: 'fa-solid fa-xmark' },
+      TOAST_BG_COLOR.TOAST_ERROR_COLOR
+    );
   }
 
   getUserId() {
@@ -135,11 +165,17 @@ export class AuthService implements OnInit {
 
   routeToLogin() {
     this.router.navigateByUrl('login');
-    this.toastService.toastMessage(REGISTERED_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
+    this.toastService.toastMessage(
+      REGISTERED_SUCCESSFULLY,
+      TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
+    );
   }
 
   logout() {
-    this.toastService.toastMessage(LOGOUT_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
+    this.toastService.toastMessage(
+      LOGOUT_SUCCESSFULLY,
+      TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
+    );
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
   }

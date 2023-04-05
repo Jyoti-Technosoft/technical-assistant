@@ -8,6 +8,8 @@ export const validateSessionSucess = createAction('[Autentication] validateSessi
 
 export const getAllUsers = createAction('[Autentication] getAllUsers');
 export const loadUserSuccess = createAction('[Autentication] loadUserSuccess',props<{users:any}>());
+export const updateUserDetails = createAction('[Autentication] updateUserDetails',props<{users:any}>());
+export const updateUserDetailsSucess = createAction('[Autentication] updateUserDetailsSucess',props<{users:any}>());
 
 
 export const doLogoin = createAction('[Autentication] DoLogin',  props<authenticationModel.LoginPayload>());
