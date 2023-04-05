@@ -6,7 +6,7 @@ export interface autenticationState {
 }
 
 export const reducers: ActionReducerMap<any> = {
-    counter: autenticationReducer.reducer,
+    authentication: autenticationReducer.reducer,
 };
 
 export const getStateSelector = createSelector(
