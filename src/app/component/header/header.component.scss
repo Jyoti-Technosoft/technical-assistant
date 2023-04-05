@@ -1,37 +1,79 @@
-*{
-    font-family: Roboto;
+.navbar-brand {
+  margin: 0px;
 }
-.container {
-    position: sticky;
-    margin-left: 0;
-    max-width: 349rem;
+
+.image {
+  width: 35px;
+  height: 35px;
+}
+
+.dropdown-layout {
+  min-width: auto;
+  border: none;
 }
 
 .img-responsive {
-    border-radius: 50px;
-    width: 30px;
+  border-radius: 50px;
+  width: 37px;
+  height: 37px;
+  background-color: #ffff;
+}
+.dropdown-toggle::after {
+  vertical-align: middle;
 }
 
-.navigation {
-    font-weight: bold;
-    color:rgb(116, 116, 116);
+.title {
+  border-bottom: 3px solid green;
+  font-size: 15px;
 }
 
-.navigation:hover {
-    color: rgb(0, 0, 0);
+.dropdown {
+  cursor: pointer;
+  min-width: auto;
 }
 
-span {
-    border-bottom: 3px solid green;
-    font-size: 15px;
+.btn.btn-primary {
+  margin-left: 10px;
+  margin-bottom: 5px;
 }
 
-button:hover{
- background-color: rgba(119, 119, 119, 0.589);
+.btn.btn-secondary {
+  margin-left: 50%;
+  margin-bottom: 5px;
 }
-.h4{
-    text-align: center;
+
+.initial-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1rem;
+  color: #000000;
+  text-align: center;
+  line-height: 10rem;
+  background-color: rgb(213, 235, 235);
+  font-weight: 400;
+  margin-right: 5px;
 }
-.modal .modal-header{
-    padding: 5px 1rem;
+
+.btn-dropdown {
+  &:hover {
+    background-color: #cce5ff;
+    border: none;
+    border-radius: none;
+  }
+}
+
+.ml-5 {
+  margin-left: 5rem;
+}
+
+.navbar-menu {
+  color: #5555ff;
+  font-weight: 500;
+  &:hover {
+    font-weight: 900;
+  }
 }
