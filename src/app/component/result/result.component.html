@@ -3,8 +3,8 @@
     <div class="d-flex align-items-center justify-content-center">
       <div class="col-sm-12 w-auto w-auto d-flex justify-content-center">
         <div class="card shadow result-card">
-          <div class="container ">
-            <ng-container >
+          <div class="container">
+            <ng-container>
               <div class="card-body">
                 <h2 class="card-title">Result</h2>
                 <div class="row d-flex">
@@ -12,7 +12,7 @@
                     <div class="container d-flex justify-content-center">
                       <img
                         class="img-fluid"
-                        src="assets\img\logo1.png"
+                        src="{{ recentResult?.quizTypeImage }}"
                         alt=""
                       />
                     </div>
@@ -22,18 +22,13 @@
                       class="d-flex align-items-center justify-content-between"
                     >
                       <div class="field">
-                        <span>
-                          <h5>Name : {{ userData?.fullName }}</h5>
-                        </span>
-                        <span>
-                          <h5>Total Points : {{ userData?.points }}</h5>
-                        </span>
-                        <span>
-                          <h5>Correct Answers : {{ userData?.correctAnswer }}</h5>
-                        </span>
-                        <span>
-                          <h5>Wrong Answers : {{ userData?.inCorrectAnswer }}</h5>
-                        </span>
+                        <h5>Total Points : {{ recentResult?.points }}</h5>
+                        <h5>
+                          Correct Answers : {{ recentResult?.correctAnswer }}
+                        </h5>
+                        <h5>
+                          Wrong Answers : {{ recentResult?.inCorrectAnswer }}
+                        </h5>
                       </div>
                     </div>
                   </div>
@@ -51,7 +46,7 @@
                   <button
                     type="button"
                     class="btn btn-success p-2"
-                    (click)="startQuizAgain(userData?.type)"
+                    (click)="startQuizAgain(recentResult?.type)"
                   >
                     Go Again To Quiz
                   </button>

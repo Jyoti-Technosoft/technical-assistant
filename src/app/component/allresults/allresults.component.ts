@@ -11,7 +11,7 @@ import { autenticationState } from '@app/store/autentication/autentication.state
   styleUrls: ['./allresults.component.scss']
 })
 export class AllresultsComponent {
-  initialData: number = 8;
+  initialData: number = 12;
   allResultData: any[] = [];
   loggedInUser$: Observable<any> | undefined;
   userData: any;
@@ -56,7 +56,7 @@ export class AllresultsComponent {
   }
 
   loadMoreData() {
-    this.initialData = this.initialData + 8;
+    this.initialData = this.initialData + 12;
   }
 
   startQuizAgain(quizName: string) {
