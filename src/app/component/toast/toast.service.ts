@@ -1,5 +1,5 @@
 import { Injectable, TemplateRef } from '@angular/core';
-import { toastMessage } from '../shared/shared.enum';
+import { toastMessage } from '@app/shared/toast.enum';
 
 @Injectable({
   providedIn: 'root',
