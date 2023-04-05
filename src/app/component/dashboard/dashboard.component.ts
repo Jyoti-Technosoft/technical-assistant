@@ -14,7 +14,7 @@ import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
 
 export class DashboardComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
-  destroy$: ReplaySubject<boolean> = new ReplaySubject();
+  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
   quizs: any[] = [];
   cardData: number = 8;
   searchText = '';
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store
       .select((state: any) => state.quiz)
-      .pipe(distinctUntilChanged(), takeUntil(this.destroy$))
+      .pipe(distinctUntilChanged(), takeUntil(this.destroyer$))
       .subscribe((data) => {
         this.quizs = data?.allQuiz;
       });
@@ -42,5 +42,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
   loadMore() {
     this.cardData = this.cardData + 8;
   }
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
+  }
 }

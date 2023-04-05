@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { OnInit } from '@angular/core';
 
 import { ToastService } from '@app/component/toast/toast.service';
+
 import {
   LOGIN_WRONG_CREDENTIAL,
   LOGOUT_SUCCESSFULLY,
@@ -14,11 +15,13 @@ import {
   LOGIN_SUCCESSFULLY,
   ALREADY_REGISTERED_EMAIL,
   TOKEN,
-} from '@app/component/shared/shared.enum';
+  TOAST_BG_COLOR,
+} from '@app/shared/toast.enum';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService implements OnInit {
   users: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
@@ -98,7 +101,7 @@ export class AuthService implements OnInit {
   routeToDashboard(data: any): void {
     this.cookieService.set('info_token', this.encodeObj(data.userData.id), 1);
     this.router.navigateByUrl('dashboard');
-    this.toastService.toastMessage(LOGIN_SUCCESSFULLY, 'bg-success text-light');
+    this.toastService.toastMessage(LOGIN_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
   }
 
   encodeObj(obj: any) {
@@ -110,10 +113,7 @@ export class AuthService implements OnInit {
   }
 
   loginFail(message: string) {
-    this.toastService.toastMessage(
-      { label: message, icon: 'fa-solid fa-triangle-exclamation' },
-      'bg-danger text-light'
-    );
+    this.toastService.toastMessage({ label: message, icon: 'fa-solid fa-xmark' }, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
   }
 
   getUserId() {
@@ -135,17 +135,11 @@ export class AuthService implements OnInit {
 
   routeToLogin() {
     this.router.navigateByUrl('login');
-    this.toastService.toastMessage(
-      REGISTERED_SUCCESSFULLY,
-      'bg-success text-light'
-    );
+    this.toastService.toastMessage(REGISTERED_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
   }
 
   logout() {
-    this.toastService.toastMessage(
-      LOGOUT_SUCCESSFULLY,
-      'bg-success text-light'
-    );
+    this.toastService.toastMessage(LOGOUT_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
   }

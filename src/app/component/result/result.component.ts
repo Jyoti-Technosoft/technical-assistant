@@ -8,10 +8,11 @@ import {
   ReplaySubject,
   takeUntil,
 } from 'rxjs';
+
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
 import { ToastService } from '@app/component/toast/toast.service';
-import { RESULT_QUIZ } from '../shared/shared.enum';
+import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 @Component({
   selector: 'app-result',
@@ -23,7 +24,7 @@ export class ResultComponent implements OnInit, OnDestroy {
   loggedInUser$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-
+  recentResult: any;
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
@@ -41,11 +42,12 @@ export class ResultComponent implements OnInit, OnDestroy {
       .select((state: any) => state.quiz.latestQuizResult)
       .pipe(distinctUntilChanged(), takeUntil(this.destroyer$))
       .subscribe((data) => {
-        this.userData = data;
+        this.recentResult = data;
       });
-    if (!this.userData) {
+
+    if (!this.recentResult) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.toastMessage(RESULT_QUIZ,'fa-solid fa-triangle-exclamation');
+      this.toastService.toastMessage(RESULT_QUIZ, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
     }
   }
 
