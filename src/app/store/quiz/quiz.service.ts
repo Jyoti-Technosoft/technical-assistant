@@ -11,10 +11,12 @@ import { State, Store } from '@ngrx/store';
 import QuizData from '@assets/json/data.json';
 import { ToastService } from '@app/toast.service';
 import { quizState } from './quiz.state';
+import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class QuizService {
   allQuiz: any;
   constructor(
@@ -36,6 +38,9 @@ export class QuizService {
   }
 
   showError(message: string) {
-    this.toastService.showErrorMessage(message);
+    this.toastService.toastMessage(
+      { label: message, icon: 'error' },
+      TOAST_BG_COLOR.TOAST_ERROR_COLOR
+    );
   }
 }
