@@ -1,19 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import {
-  ModalDismissReasons,
-  NgbDatepickerModule,
-  NgbModal,
-} from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+  dataSource: any;
   userData: any;
   closeResult = '';
+  registrationForm: any;
+  currentIndex: any;
 
   constructor(
     public questionService: AuthenticationService,
@@ -25,6 +24,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getData() {
+    console.log(this.questionService.getUser());
+    console.log(JSON.parse(localStorage.getItem('registerUser') as string));
     let data: any = localStorage.getItem('registerUser');
     this.userData = JSON.parse(data).find((data: any) => {
       return data.id == this.questionService.getUser();
@@ -47,26 +48,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
   open(content: any) {
     this.modalService
       .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then(
-        (result) => {
-          this.closeResult = `Closed with: ${result}`;
-        },
-        (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        }
-      );
+      .result.then();
   }
 
   ngOnDestroy(): void {}
 
-  edit() {}
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+  Update() {
+    let data = JSON.parse(localStorage.getItem('registerUser') as string);
+    const updatedData = data?.map((value: any) => {
+      if (value?.id == this.userData?.id) {
+        data = this.userData;
+      }
+      return data;
+    });
+    localStorage.setItem('registerUser', JSON.stringify(updatedData));
   }
 }

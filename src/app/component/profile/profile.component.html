@@ -17,7 +17,6 @@
       <div class="col-lg-8">
         <div class="card">
           <div class="card-body">
-            <div class="row"></div>
             <div class="row">
               <div class="col-sm-3">
                 <h6 class="fw-bold">FullName</h6>
@@ -75,57 +74,91 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+    <h4 class="modal-title" id="modal-basic-title">Profile Update</h4>
     <button
       type="button"
       class="btn-close"
       aria-label="Close"
-      (click)="modal.dismiss('Cross click')"
+      (click)="modal.close('Cross click')"
     ></button>
   </div>
+
   <div class="modal-body">
     <form>
       <div class="mb-3">
         <label for="fullName">FullName</label>
-        <div class="input-group">
+        <div class="col-mb-3">
           <input
-            id="dateOfBirth"
-            class="form-control"
+            type="text"
             placeholder="Full Name"
-            name="dp"
-            ngbDatepicker
-            #dp=""
+            class="form-control"
+            id="fullName"
+            name="fullName"
+            [(ngModel)]="userData.fullName"
           />
-          <button
-            class="btn btn-outline-secondary bi bi-calendar3"
-            type="button"
-          ></button>
         </div>
       </div>
       <div class="mb-3">
-        <label for="fullName">FullName</label>
-        <div class="input-group">
+        <label for="email">Email</label>
+        <div class="col-mb-3">
           <input
-            id="dateOfBirth"
+            type="email"
+            placeholder="Email Address"
             class="form-control"
-            placeholder="Full Name"
-            name="dp"
-            ngbDatepicker
-            #dp=""
+            id="email"
+            name="email"
+            [(ngModel)]="userData.email"
           />
-          <button
-            class="btn btn-outline-secondary bi bi-calendar3"
-            type="button"
-          ></button>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="password">Password</label>
+        <div class="col-mb-3">
+          <input
+            type="password"
+            placeholder="Password"
+            class="form-control"
+            id="password"
+            name="password"
+            [(ngModel)]="userData.password"
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="dateOfBirth">Date of Birth</label>
+        <div class="col-mb-3">
+          <input
+            type="date"
+            class="form-control"
+            (keydown)="(false)"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            [(ngModel)]="userData.dateOfBirth"
+          />
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="mobile">Mobile no</label>
+        <div class="col-mb-3">
+          <input
+            type="number"
+            placeholder="Mobile Number"
+            class="form-control"
+            id="mobile"
+            name="mobile"
+            [(ngModel)]="userData.mobile"
+          />
         </div>
       </div>
     </form>
   </div>
-  <div class="modal-footer">
+
+  <div class="button-footer">
     <button
       type="button"
-      class="btn btn-success"
-      (click)="modal.close('Save click')"
+      data-dismiss="modal"
+      class="btn btn-primary"
+      (click)="Update()"
     >
       Update
     </button>

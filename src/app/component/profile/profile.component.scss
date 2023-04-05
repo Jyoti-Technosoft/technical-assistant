@@ -1,0 +1,21 @@
+.initial-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #edf1fc;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  font-size: 5rem;
+  color: #000000;
+  text-align: center;
+  line-height: 5rem;
+}
+.button-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 12px;
+  margin-bottom: 17px;
+}
