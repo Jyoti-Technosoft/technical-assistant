@@ -23,8 +23,14 @@ import quizData from '@assets/json/data.json';
 import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
 import { State, Store } from '@ngrx/store';
-import { getAllQuiz, selectQuiz, successQuizPlay } from '@app/store/quiz/quiz.action';
+import {
+  getAllQuiz,
+  selectQuiz,
+  successQuizPlay
+} from '@app/store/quiz/quiz.action';
 import { quizState } from '@app/store/quiz/quiz.state';
+import { addResults } from '@app/store/result/result.action';
+import { Result } from '@app/store/result/result.model';
 
 @Component({
   selector: 'app-questions',
@@ -91,8 +97,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.selectedQuiz = data;
       });
     if (!this.selectedQuiz) {
-      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get('quiz') as string;
-      this.store.dispatch(selectQuiz({ quizId:  selectedQuizId}));
+      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get(
+        'quiz'
+      ) as string;
+      this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
     }
   }
 
@@ -147,23 +155,18 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   submitQuiz() {
-    let data: any = localStorage.getItem('result')
-      ? localStorage.getItem('result')
-      : [];
-    let stringifyData = data.length == 0 ? data : JSON.parse(data);
-    let currentData = {
+    let result: Result = {
       points: this.points,
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuiz?.quizId,
       user: this.userData.id,
-      quizTypeImage : this.selectedQuiz?.image, 
+      quizTypeImage: this.selectedQuiz?.image,
       date: new Date().toISOString().slice(0, 10)
     };
-    this.store.dispatch(successQuizPlay({result:currentData}))
-    stringifyData.push(currentData);
-     
-    localStorage.setItem('result', JSON.stringify(stringifyData));
+    this.store.dispatch(addResults({ result }));
+    this.store.dispatch(successQuizPlay({ result: result }));
+
     this.router.navigateByUrl('result');
   }
 
@@ -232,7 +235,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.userData = state?.userData;
       });
   }
-
 
   ngOnDestroy() {
     this.destroyer$.next(true);

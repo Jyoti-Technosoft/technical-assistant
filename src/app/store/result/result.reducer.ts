@@ -23,4 +23,7 @@ export const resultReducer = createReducer(
   on(resultAction.getAllResultsSuccess, (state, { result }) => ({
     ...state, results:result
   })),
+  on(resultAction.addResultsSuccess, (state, { result }) => ({
+    ...state, results: state.results?.concat(result)  
+  }))
 );

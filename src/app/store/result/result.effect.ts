@@ -35,6 +35,22 @@ export class ResultEffects implements OnDestroy {
     )
   );
 
+  addNewResult$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(resultAction.addResults),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
+      switchMap((payload) => {
+        return this.resultService.addNewResult(payload.result).pipe(
+          map((result) => {
+            return resultAction.addResultsSuccess({ result });
+          }),
+          catchError((error) => of(resultAction.handlErrors({ error })))
+        );
+      })
+    )
+  );
+
   handleErrors$ = createEffect(() =>
     this.actions$.pipe(
       ofType(resultAction.handlErrors),

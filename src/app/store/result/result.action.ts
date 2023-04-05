@@ -7,6 +7,16 @@ export const getAllResultsSuccess = createAction(
   props<{ result: Result[] }>()
 );
 
+// add new results 
+export const addResults = createAction(
+  '[RESULT] ADD NEW RESULT',
+  props<{ result: Result }>()
+);
+export const addResultsSuccess = createAction(
+  '[RESULT] ADD NEW RESULT SUCCESS',
+  props<{ result: Result[] }>()
+);
+
 //handle error message
 export const handlErrors = createAction(
   '[Result] HANDLE ERROR',
