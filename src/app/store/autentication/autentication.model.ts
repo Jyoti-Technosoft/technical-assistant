@@ -12,3 +12,14 @@ export interface RegisteredPayload {
   dateOfBirth: string;
   mobile: Number;
 }
+
+export interface updateDetailsPayload {
+  id: string;
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword:string;
+  gender: string;
+  dateOfBirth: string;
+  mobile: Number;
+}

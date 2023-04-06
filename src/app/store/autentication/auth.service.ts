@@ -56,7 +56,6 @@ export class AuthService {
       let findUser = this.users?.find(
         (user: any) => this.decodeObj(this.getUserId()) == user.id
       );
-      console.log(findUser);
       if (findUser) {
         return this.getStateData(findUser);
       }
@@ -84,7 +83,6 @@ export class AuthService {
     if (!this.users) {
       this.getUsers();
     }
-
     if (this.LoggedInUsers.id == payload?.id) {
       if (
         payload.password &&
@@ -93,19 +91,22 @@ export class AuthService {
         return throwError(() => new Error('Please enter Correct Password'));
       }
 
+      payload =  Object.assign({}, payload, {password : payload?.newPassword ? this.encodeObj(payload?.newPassword) : this.LoggedInUsers?.password})
+      delete payload.newPassword;
+      delete payload.confirmPassword;
       const newState = this.users?.map((user: any) => {
         if (user?.id == payload?.id) {
-          user = this.newStateData(payload, this.LoggedInUsers);
+          user = payload;
         }
         return user;
       });
-      
+
       localStorage.setItem('registerUser', JSON.stringify(newState));
       this.toastService.toastMessage(
         USER_DETAILS_UPDATE_SUCCESSFULLY,
         TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
       );
-      return of(this.newStateData(payload,this.LoggedInUsers));
+      return of(payload);
     } else {
       return throwError(() => new Error(LOGIN_WRONG_CREDENTIAL));
     }
@@ -175,30 +176,6 @@ export class AuthService {
     return of(loggedUser);
   }
 
-  newStateData(updatedDetails: any, currentDetails: any) {
-    let loggedUser = {
-      fullName: updatedDetails?.fullName
-        ? updatedDetails?.fullName
-        : currentDetails?.fullName,
-      email: updatedDetails?.email
-        ? updatedDetails?.email
-        : currentDetails?.email,
-      password: updatedDetails?.newPassword
-        ? this.encodeObj(updatedDetails?.newPassword)
-        : currentDetails?.password,
-      dateOfBirth: updatedDetails?.dateOfBirth
-        ? updatedDetails?.dateOfBirth
-        : currentDetails?.dateOfBirth,
-      mobile: updatedDetails?.mobile
-        ? updatedDetails?.mobile
-        : currentDetails?.mobile,
-      gender: updatedDetails?.gender
-        ? updatedDetails?.gender
-        : currentDetails?.gender,
-      id: this.LoggedInUsers?.id,
-    };
-    return loggedUser;
-  }
 
   routeToLogin() {
     this.router.navigateByUrl('login');

@@ -52,7 +52,7 @@ export class AuthEffects implements OnDestroy {
       takeUntil(this.destroyer$),
       distinctUntilChanged(),
       switchMap((payload) => {
-        return this.authSerivce.updateUserDetails(payload).pipe(
+        return this.authSerivce.updateUserDetails(payload.user).pipe(
           map((users: any) => autenticationAction.updateUserDetailsSucess({users})),
           catchError((error: any) =>
             of(autenticationAction.handlErrors({ error }))

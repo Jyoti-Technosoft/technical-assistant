@@ -1,5 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import * as loginAction from './autentication.action';
+import { RegisteredPayload } from './autentication.model';
 
 export const initialState: State = {
   userData: undefined,
@@ -7,14 +8,9 @@ export const initialState: State = {
   allUsers: [],
 };
 
-export interface userData {
-  emailId: string | undefined;
-  userName: string | undefined;
-  id: string | undefined;
-}
 
 export interface State {
-  userData: userData | undefined;
+  userData: RegisteredPayload | undefined;
   isUserLoggedIn: boolean | undefined;
   allUsers:any|[];
 }

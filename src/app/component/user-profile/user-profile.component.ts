@@ -24,8 +24,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
   userData: any;
   profilePageForm!: FormGroup;
-  editMode!: boolean;
-  show !: boolean;
+  editMode: boolean = false;
+  showPasswordField: boolean = false;
 
   constructor(
     public authenticationService: AuthenticationService,
@@ -90,7 +90,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       id: [data?.id || ''],
       mobile: [data?.mobile || '',Validators.compose([Validators.required,this.validateNumber])],
     });
-    if(this.show) {
+    if(this.showPasswordField) {
       this.appendFormFieldForPassword();
     }
   }
@@ -107,7 +107,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 
   onHideShow() {
     this.appendFormFieldForPassword();
-    this.show = true;
+    this.showPasswordField = true;
   }
   
   appendFormFieldForPassword() {
@@ -131,12 +131,13 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   }
 
   updateUserDetails() {
-    this.store.dispatch(updateUserDetails(this.profilePageForm?.value));
+    console.log(this.profilePageForm?.value)
+    this.store.dispatch(updateUserDetails({user : this.profilePageForm?.value}));
   }
   cancelUpdate() {
     this.profilePageForm.disable();
     this.deleteFormFieldForPassword()
-    this.show = false;
+    this.showPasswordField = false;
   }
 
   editUserdetails() {
