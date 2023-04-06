@@ -3,7 +3,6 @@ $btn-primary: #5555ff;
   max-height: 380px !important;
   min-height: 240px !important;
 }
-
 .img-content {
   min-height: 140px;
   max-height: 240px;
@@ -27,31 +26,37 @@ $btn-primary: #5555ff;
   position: absolute;
   right: 13px;
   top: 10px;
-  color: #ced4da;
 }
 .field-content {
   height: auto;
-  background: transparent;
+  width: 259px;
+  ::placeholder {
+    color: $btn-primary;
+  }
+}
+.search-content {
+  color: $btn-primary;
+  cursor: pointer;
+  border-color: $btn-primary;
 }
 .icon {
   font-size: medium;
+  color: $btn-primary;
 }
-.field-content:focus {
-  background-color: #eeeeee69;
-  box-shadow: none;
-  border-color: #eee;
-}
-
 .max-width {
   max-width: 450px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 414px) {
   /* For mobile phones: */
-  .row {
-    &.justify-content {
-      display: flex;
-      justify-content: center;
+  .search-card {
+    .title-text {
+      flex-direction: column;
+
+      .field-content {
+        width: 100%;
+        padding-top: 5px;
+      }
     }
   }
 }
