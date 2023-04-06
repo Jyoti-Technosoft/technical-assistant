@@ -24,6 +24,6 @@ export const resultReducer = createReducer(
     ...state, results:result
   })),
   on(resultAction.addResultsSuccess, (state, { result }) => ({
-    ...state, results: state.results?.concat(result)  
+    ...state, results: state?.results ?  [result,...state?.results] : [result]
   }))
 );

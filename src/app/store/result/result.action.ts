@@ -14,7 +14,7 @@ export const addResults = createAction(
 );
 export const addResultsSuccess = createAction(
   '[RESULT] ADD NEW RESULT SUCCESS',
-  props<{ result: Result[] }>()
+  props<{ result: Result }>()
 );
 
 //handle error message
