@@ -1,18 +1,15 @@
-
 .header-txt {
-  z-index: 1;
-  height: 70px;
   .header-title {
     font-size: 25px;
     font-weight: 600;
   }
 }
-
 .timer {
   color: #004085;
   background: #cce5ff;
   border: 1px solid #b8daff;
   height: 45px;
+  width: 145px;
   .timer-left-txt {
     font-size: 17px;
     font-weight: 600;
@@ -20,13 +17,12 @@
   .timer-sec {
     font-size: 18px;
     font-weight: 500;
-    height: auto;
-    width: auto;
+    height: 30px;
+    width: 40px;
     color: #fff;
     line-height: 30px;
     background: #343a40;
     border: 1px solid #343a40;
-    padding: 0vh 2vh;
   }
 }
 
@@ -38,39 +34,37 @@
     font-weight: 600;
   }
 }
-
 .option {
   background: rgb(222, 239, 255);
   border: 1px solid #84c5fe;
   font-size: 17px;
   cursor: pointer;
 }
-
 .hightlight-selected {
   background: rgb(133, 190, 255) !important;
   border: 1px solid #4a98ff !important;
   font-weight: 600;
 }
 
-.footer-txt {
-  z-index: 1;
-  height: 70px;
-}
-
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: */
-  .card-footer {
-    display: flex !important;
+@media (max-width: 470px) {
+  .footer-right-txt {
+    margin: 10px;
+    text-align: center !important;
+  }
+  .total-que {
+    margin-top: 5px;
+  }
+  .form-btn {
+    text-align: center !important;
+    margin: 5px;
+  }
+  .footer-txt {
     flex-direction: column;
-    padding: 0.75rem;
-    height: fit-content; 
-    .total-que  {
-      margin-top: 1rem;
-    }
-    .form-btn {
-      margin: 1rem;
-     }
-  } 
+  }
 }
 
-
+@media (max-width: 350px) {
+  .header-txt {
+    flex-direction: column;
+  }
+}
