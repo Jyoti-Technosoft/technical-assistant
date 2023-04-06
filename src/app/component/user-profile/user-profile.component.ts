@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   Observable,
   ReplaySubject,
@@ -9,13 +9,14 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { autenticationState } from '@app/store/autentication/autentication.state';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { updateUserDetails } from '@app/store/autentication/autentication.action';
+import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
+  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit, AfterViewInit {
   avatarName!: string;
@@ -24,13 +25,18 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   userData: any;
   profilePageForm!: FormGroup;
   editMode!: boolean;
+  show !: boolean;
 
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
     private store: Store<autenticationState>,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public calendar: NgbCalendar
   ) {}
+
+  @ViewChild("datePicker") datePicker!: any 
+
   ngAfterViewInit(): void {
     this.profilePageForm.disable();
   }
@@ -52,8 +58,29 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       });
   }
 
-  
+  validateConfirmaPassword() {
+    const password = this.profilePageForm?.controls['newPassword'];
+    const confirmPassword = this.profilePageForm?.controls['confirmPassword']
+     password?.value !== confirmPassword?.value
+      ? confirmPassword?.setErrors({ validateConfirmaPassword: true })
+      : confirmPassword?.setErrors(null);
+  };
 
+  validateNewPassword() {
+    const password = this.profilePageForm?.controls['password'];
+    const newPassword = this.profilePageForm?.controls['newPassword']
+     password?.value == newPassword?.value
+      ? newPassword?.setErrors({ duplicatePassword: true })
+      : newPassword?.setErrors(null);
+  };
+
+  validateNumber: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
+    return regex.test(control.value) ? null : { pattern: true };
+  };
+  
   initForm(data?:any) {
     this.profilePageForm = this.fb.group({
       dateOfBirth: [data?.dateOfBirth || '',Validators.compose([Validators.required])],
@@ -61,9 +88,14 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       fullName: [data?.fullName || '',Validators.compose([Validators.required])],
       gender: [data?.gender || '',Validators.compose([Validators.required])],
       id: [data?.id || ''],
-      mobile: [data?.mobile || '',Validators.compose([Validators.required])],
+      mobile: [data?.mobile || '',Validators.compose([Validators.required,this.validateNumber])],
     });
+    if(this.show) {
+      this.appendFormFieldForPassword();
+    }
   }
+
+
   getUserLetter(userName: string) {
     const intials = userName
       .split(' ')
@@ -73,15 +105,39 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     return intials;
   }
 
+  onHideShow() {
+    this.appendFormFieldForPassword();
+    this.show = true;
+  }
+  appendFormFieldForPassword() {
+    this.profilePageForm.addControl('password',this.fb.control('',Validators.compose([Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$')])));
+    this.profilePageForm.addControl('newPassword',this.fb.control('',Validators.compose([Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$')])));
+    this.profilePageForm.addControl('confirmPassword',this.fb.control('',Validators.compose([Validators.required])));
+
+    this.profilePageForm?.get('newPassword')?.valueChanges?.subscribe((data)=>{
+      this.validateConfirmaPassword();
+      this.validateNewPassword();
+    })
+    this.profilePageForm?.get('confimrPassword')?.valueChanges?.subscribe((data)=>{
+      this.validateConfirmaPassword();
+    })
+  }
+
   updateUserDetails() {
     this.store.dispatch(updateUserDetails(this.profilePageForm?.value));
   }
   cancelUpdate() {
     this.profilePageForm.disable();
+    this.show = false;
   }
 
   editUserdetails() {
     this.profilePageForm.enable();
+  }
+
+  setTodaysDate() {
+    this.profilePageForm.controls['dateOfBirth'].patchValue(this.calendar.getToday()); 
+    this.datePicker?.close();
   }
 
   get profilePageFormController() {

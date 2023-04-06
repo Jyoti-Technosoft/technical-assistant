@@ -16,12 +16,12 @@ import {
   ALREADY_REGISTERED_EMAIL,
   TOKEN,
   TOAST_BG_COLOR,
+  USER_DETAILS_UPDATE_SUCCESSFULLY,
 } from '@app/shared/toast.enum';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   users: any;
   LoggedInUsers: any;
@@ -86,14 +86,26 @@ export class AuthService {
     }
 
     if (this.LoggedInUsers.id == payload?.id) {
+      if (
+        payload.password &&
+        payload?.password != this.decodeObj(this.LoggedInUsers?.password)
+      ) {
+        return throwError(() => new Error('Please enter Correct Password'));
+      }
+
       const newState = this.users?.map((user: any) => {
         if (user?.id == payload?.id) {
-          user = payload;
+          user = this.newStateData(payload, this.LoggedInUsers);
         }
         return user;
       });
+      
       localStorage.setItem('registerUser', JSON.stringify(newState));
-      return of(payload);
+      this.toastService.toastMessage(
+        USER_DETAILS_UPDATE_SUCCESSFULLY,
+        TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
+      );
+      return of(this.newStateData(payload,this.LoggedInUsers));
     } else {
       return throwError(() => new Error(LOGIN_WRONG_CREDENTIAL));
     }
@@ -154,12 +166,38 @@ export class AuthService {
     let loggedUser = {
       fullName: user?.fullName,
       email: user?.email,
+      password: user?.password,
       dateOfBirth: user?.dateOfBirth,
       mobile: user?.mobile,
       gender: user?.gender,
       id: user?.id,
     };
     return of(loggedUser);
+  }
+
+  newStateData(updatedDetails: any, currentDetails: any) {
+    let loggedUser = {
+      fullName: updatedDetails?.fullName
+        ? updatedDetails?.fullName
+        : currentDetails?.fullName,
+      email: updatedDetails?.email
+        ? updatedDetails?.email
+        : currentDetails?.email,
+      password: updatedDetails?.newPassword
+        ? this.encodeObj(updatedDetails?.newPassword)
+        : currentDetails?.password,
+      dateOfBirth: updatedDetails?.dateOfBirth
+        ? updatedDetails?.dateOfBirth
+        : currentDetails?.dateOfBirth,
+      mobile: updatedDetails?.mobile
+        ? updatedDetails?.mobile
+        : currentDetails?.mobile,
+      gender: updatedDetails?.gender
+        ? updatedDetails?.gender
+        : currentDetails?.gender,
+      id: this.LoggedInUsers?.id,
+    };
+    return loggedUser;
   }
 
   routeToLogin() {
@@ -178,7 +216,6 @@ export class AuthService {
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
   }
-
 
   ngOnDestroy() {
     this.destroyer$.next(true);
