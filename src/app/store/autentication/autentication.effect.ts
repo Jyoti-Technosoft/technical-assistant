@@ -1,6 +1,5 @@
 import { OnDestroy } from '@angular/core';
-import { Injectable, Pipe } from '@angular/core';
-import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { distinctUntilChanged, ReplaySubject } from 'rxjs';
@@ -8,8 +7,8 @@ import { takeUntil } from 'rxjs';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
-import * as autenticationAction from './autentication.action';
-import { AuthService } from './auth.service';
+import * as autenticationAction from '@app/store/autentication/autentication.action';
+import { AuthService } from '@app/store/autentication/auth.service';
 
 @Injectable()
 export class AuthEffects implements OnDestroy {

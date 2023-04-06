@@ -21,7 +21,8 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnInit {
+
+export class AuthService {
   users: any;
   LoggedInUsers: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
@@ -32,8 +33,6 @@ export class AuthService implements OnInit {
     private cookieService: CookieService,
     private state: Store<any>
   ) {}
-
-  ngOnInit(): void {}
 
   private getUsers() {
     this.state
@@ -178,5 +177,11 @@ export class AuthService implements OnInit {
     );
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
+  }
+
+
+  ngOnDestroy() {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
   }
 }
