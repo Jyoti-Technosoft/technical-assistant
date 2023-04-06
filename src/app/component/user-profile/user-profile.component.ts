@@ -109,6 +109,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     this.appendFormFieldForPassword();
     this.show = true;
   }
+  
   appendFormFieldForPassword() {
     this.profilePageForm.addControl('password',this.fb.control('',Validators.compose([Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$')])));
     this.profilePageForm.addControl('newPassword',this.fb.control('',Validators.compose([Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$')])));
@@ -123,11 +124,18 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     })
   }
 
+  deleteFormFieldForPassword() {
+    this.profilePageForm.removeControl('password');
+    this.profilePageForm.removeControl('newPassword');
+    this.profilePageForm.removeControl('confirmPassword');
+  }
+
   updateUserDetails() {
     this.store.dispatch(updateUserDetails(this.profilePageForm?.value));
   }
   cancelUpdate() {
     this.profilePageForm.disable();
+    this.deleteFormFieldForPassword()
     this.show = false;
   }
 
