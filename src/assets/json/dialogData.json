@@ -14,7 +14,7 @@
     "type": "signoutModel"
   },
   "aboutModel": {
-    "image": "assets\\img\\logo1.png",
+    "image": "assets\\img\\logo.svg",
     "companyName": "Jyoti Technosoft LLP",
     "visitorInfo": "Visit Our Website at jyotitechnosoft for more updates",
     "copyrightInfo": "Copyright",

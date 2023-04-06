@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { OnInit } from '@angular/core';
 
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 
 import {
   LOGIN_WRONG_CREDENTIAL,
