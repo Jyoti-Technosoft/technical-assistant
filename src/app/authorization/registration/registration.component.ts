@@ -8,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { ReplaySubject, distinctUntilChanged } from 'rxjs';
 
 import dialogData from '@assets/json/dialogData.json';
 import { doRegistration } from '@app/store/autentication/autentication.action';
@@ -17,12 +19,12 @@ import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-
 export class RegistrationComponent {
-  todayDate: string | undefined = new Date().toISOString().slice(0,10);
+  todayDate: string | undefined = new Date().toISOString().slice(0, 10);
   registerUser: any[] = [];
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
+  destroyer$:ReplaySubject<boolean> = new ReplaySubject;
   @ViewChild("datePicker") datePicker!: any 
   constructor(
     private fb: FormBuilder,
@@ -40,8 +42,8 @@ export class RegistrationComponent {
       this.registerUser = JSON.parse(
         localStorage.getItem('registerUser') as string
       );
-   }  
- }
+    }
+  }
 
   submitform(formValue: any) {
     let registerUser = {
@@ -56,14 +58,13 @@ export class RegistrationComponent {
     this.store.dispatch(doRegistration(registerUser))
   }
 
-  validateConfirmaPassword: ValidatorFn = (
-    control: AbstractControl
-  ): ValidationErrors | null => {
+  validateConfirmaPassword() {
     const password = this.registrationForm?.controls['password'];
-    return password?.value !== control?.value
-      ? { validateConfirmaPassword: true }
-      : null;
-  };
+    const confirmPassword = this.registrationForm?.controls['confirmPassword'];
+    password?.value != confirmPassword?.value
+      ? confirmPassword?.setErrors({ pattern: true })
+      : confirmPassword?.setErrors(null);
+  }
 
   validateNumber: ValidatorFn = (
     control: AbstractControl
@@ -86,13 +87,7 @@ export class RegistrationComponent {
           ),
         ]),
       ],
-      confirmPassword: [
-        '',
-        Validators.compose([
-          Validators.required,
-          this.validateConfirmaPassword,
-        ]),
-      ],
+      confirmPassword: ['', Validators.compose([Validators.required])],
       gender: ['', Validators.compose([Validators.required])],
       dateOfBirth: ['', Validators.compose([Validators.required])],
       mobile: [
@@ -101,6 +96,23 @@ export class RegistrationComponent {
       ],
       acceptTerms: [false, Validators.requiredTrue],
     });
+    this.registrationForm
+      .get('password')
+      ?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.validateConfirmaPassword();
+      });
+    this.registrationForm
+      .get('confirmPassword')
+      ?.valueChanges.pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.validateConfirmaPassword();
+      });
+  }
+
+  ngOnDestroy(){
+   this.destroyer$.next(true);
+   this.destroyer$.unsubscribe();
   }
 
   get registrationFormValidator() {
@@ -112,7 +124,3 @@ export class RegistrationComponent {
     this.datePicker?.close();
   }
 }
-
- 
-
- 
