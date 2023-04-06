@@ -9,7 +9,7 @@ export class ToastService {
 
   constructor() {}
 
-  show(textOrTpl: string | TemplateRef<any>, options: any = {}) {
+  show(textOrTpl: any | TemplateRef<any>, options: any = {}) {
     this.toast.push({ textOrTpl, ...options });
   }
 
@@ -17,11 +17,11 @@ export class ToastService {
     this.toast = this.toast.filter((t) => t !== toast);
   }
 
-  toastMessage(message: toastMessage, className:string) {
+  toastMessage(message: toastMessage, className: string) {
     this.show(message?.label, {
       classname: className,
-      delay: 10000,
-      icon: message?.icon
+      delay: 15000,
+      icon : message?.icon
     });
   }
 }

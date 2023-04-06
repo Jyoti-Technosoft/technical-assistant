@@ -1,5 +1,7 @@
 $btn-primary: #5555ff;
-.cardContainer {
+$bg-colour: #eeeeee69;
+$border-colour: #eee;
+.card-container {
   max-height: 380px !important;
   min-height: 240px !important;
 }
@@ -9,23 +11,37 @@ $btn-primary: #5555ff;
   max-height: 240px;
 }
 .text-content {
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-
-  @supports (-webkit-line-clamp: 4) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: initial;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-  }
+  text-overflow: ellipsis;
 }
 .btn-content {
   background-color: $btn-primary;
   border-color: $btn-primary;
   border-radius: 8px;
+}
+.input-box {
+  position: relative;
+}
+.input-box i {
+  position: absolute;
+  right: 13px;
+  top: 10px;
+  color: #ced4da;
+}
+.field-content {
+  height: auto;
+  background: transparent;
+}
+.icon {
+  font-size: medium;
+}
+.field-content:focus {
+  background-color: $bg-colour;
+  box-shadow: none;
+  border-color: $border-colour;
 }
 
 .max-width {

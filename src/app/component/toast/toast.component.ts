@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ToastService } from '../toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 
 @Component({
   selector: 'app-toast',
@@ -12,12 +12,12 @@ import { ToastService } from '../toast.service';
       [delay]="toast.delay || 5000"
       (hidden)="toastService.remove(toast)"
     >
-        <span>
-          <i class="fa-brands fa-{{ toast?.icon }} icon"></i>
-        </span>
-        <span>
-          {{ toast?.textOrTpl }}
-        </span>
+      <span>
+        <i class="fa-brands fa-{{ toast?.icon }} icon"></i>
+      </span>
+      <span>
+        {{ toast?.textOrTpl }}
+      </span>
     </ngb-toast>
   `,
   host: {
@@ -26,6 +26,5 @@ import { ToastService } from '../toast.service';
   },
 })
 export class ToastComponent {
-  constructor(public toastService: ToastService) {
-  }
+  constructor(public toastService: ToastService) {}
 }
