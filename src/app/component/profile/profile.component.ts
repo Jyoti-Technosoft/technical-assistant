@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/service/authentication.service';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { DialogService } from 'src/app/dialog-service/dialog.service';
+import dialogData from 'src/assets/json/dialogData.json';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profile',
@@ -8,25 +12,23 @@ import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
-  dataSource: any;
+  dialogData = { ...dialogData };
   userData: any;
-  closeResult = '';
-  registrationForm: any;
-  currentIndex: any;
 
   constructor(
     public questionService: AuthenticationService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private dialogService: DialogService
   ) {}
+
   ngOnInit(): void {
     this.resultData();
     this.getData();
   }
 
   getData() {
-    console.log(this.questionService.getUser());
     console.log(JSON.parse(localStorage.getItem('registerUser') as string));
-    let data: any = localStorage.getItem('registerUser');
+    const data: any = localStorage.getItem('registerUser');
     this.userData = JSON.parse(data).find((data: any) => {
       return data.id == this.questionService.getUser();
     });
@@ -45,22 +47,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
     return intials;
   }
 
-  open(content: any) {
-    this.modalService
-      .open(content, { ariaLabelledBy: 'modal-basic-title' })
-      .result.then();
+  openEditDialog() {
+    let configData: any = {};
+    configData['userData'] = this.userData;
+    this.dialogService.openDialog(configData);
   }
-
   ngOnDestroy(): void {}
-
-  Update() {
-    let data = JSON.parse(localStorage.getItem('registerUser') as string);
-    const updatedData = data?.map((value: any) => {
-      if (value?.id == this.userData?.id) {
-        data = this.userData;
-      }
-      return data;
-    });
-    localStorage.setItem('registerUser', JSON.stringify(updatedData));
-  }
 }
