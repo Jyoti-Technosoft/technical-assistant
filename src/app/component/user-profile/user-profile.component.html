@@ -2,8 +2,8 @@
   <div class="d-flex align-items-center min-vh-100">
     <div class="container mx-auto">
       <div class="row">
-        <div class="col-md-4 pt-4">
-          <div class="card user-card shadow border-0 h-100 rounded-4">
+        <div class="col-md-4 pt-5">
+          <div class="card mt-1 user-card shadow border-0 h-100 rounded-4">
             <div class="card-body">
               <div
                 class="d-flex justify-content-center flex-column align-items-center h-100"
@@ -18,14 +18,14 @@
             </div>
           </div>
         </div>
-        <div class="col-md-8 pt-4">
+        <div class="col-md-8 pt-5">
           <form [formGroup]="profilePageForm">
             <div
-              class="card edit-detail-card shadow border-0 rounded-4 user-details"
+              class="card mt-2 edit-detail-card shadow border-0 rounded-4 user-details"
             >
               <div class="card-body">
-                <div class="row my-auto">
-                  <div class="col-sm-3 fw-bold">Full name</div>
+                <div class="row">
+                  <div class="col-sm-3 mt-1 fw-bold">Full name</div>
                   <div
                     class="col-sm-9 d-flex justify-content-center flex-column h-100"
                   >
@@ -46,7 +46,7 @@
                 <hr class="my-2 pb-2" />
 
                 <div class="row">
-                  <div class="col-sm-3 fw-bold">Email</div>
+                  <div class="col-sm-3 mt-1 fw-bold">Email</div>
                   <div
                     class="col-sm-9 d-flex justify-content-center flex-column h-100"
                   >
@@ -72,7 +72,7 @@
                 <hr class="my-2 pb-2" />
 
                 <div class="row">
-                  <div class="col-sm-3 fw-bold">Phone</div>
+                  <div class="col-sm-3 mt-1 fw-bold">Phone</div>
                   <div
                     class="col-sm-9 d-flex justify-content-center flex-column h-100"
                   >
@@ -109,30 +109,32 @@
                 <hr class="my-2 pb-2" />
 
                 <div class="row">
-                  <div class="col-sm-3 fw-bold">Gender</div>
-                  <div
-                    class="col-sm-9 px-3 wrapper h-100"
-                  >
-                  <div class="form-check form-check-inline">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      value="male"
-                      id="male"
-                      formControlName="gender"
-                    />
-                    <label class="form-check-label" for="male">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      type="radio"
-                      class="form-check-input"
-                      value="female"
-                      id="female"
-                      formControlName="gender"
-                    />
-                    <label class="form-check-label" for="female">Female</label>
-                  </div>
+                  <div class="col-sm-3 mt-1 fw-bold">Gender</div>
+                  <div class="col-sm-9 px-3 wrapper h-100">
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        value="male"
+                        id="male"
+                        formControlName="gender"
+                      />
+                      <label class="form-check-label mt-1" for="male"
+                        >Male</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        value="female"
+                        id="female"
+                        formControlName="gender"
+                      />
+                      <label class="form-check-label mt-1" for="female"
+                        >Female</label
+                      >
+                    </div>
                     <div class="form-text text-danger fixed-height">
                       <span
                         *ngIf="profilePageFormController['gender'].errors?.['required'] && (profilePageFormController['gender'].touched || profilePageFormController['gender'].dirty)"
@@ -145,11 +147,14 @@
                 <hr class="my-2 pb-2" />
 
                 <div class="row">
-                  <div class="col-sm-3 fw-bold">Date of Birth</div>
+                  <div class="col-sm-3 mt-1 fw-bold">Date of Birth</div>
                   <div
                     class="col-sm-9 d-flex justify-content-center flex-column h-100"
                   >
-                    <div class="input-group calander" [class.calander-enable]="!profilePageForm.disabled">
+                    <div
+                      class="input-group calander"
+                      [class.calander-enable]="!profilePageForm.disabled"
+                    >
                       <input
                         type="text"
                         class="form-control text-secondary py-1 calander-div"
@@ -196,10 +201,10 @@
                 <hr class="my-2" />
 
                 <ng-container *ngIf="show">
-                  <div class="row my-auto">
-                    <div class="col-sm-3 fw-bold">Current Password</div>
+                  <div class="row">
+                    <div class="col-sm-3 mt-1 fw-bold">Current Password</div>
                     <div
-                      class="col-sm-9 d-flex justify-content-center flex-column h-100"
+                      class="col-sm-9 mt-1 d-flex justify-content-center flex-column h-100"
                     >
                       <input
                         type="password"
@@ -208,23 +213,24 @@
                       />
                       <div class="form-text text-danger fixed-height">
                         <span
-                        *ngIf="profilePageFormController['password'].errors?.['required'] && (profilePageFormController['password'].dirty || profilePageFormController['password'].touched)"
-                      >
-                        Password is required.
-                      </span>
-                      <span
-                        *ngIf="profilePageFormController['password'].errors?.['pattern'] || profilePageFormController['password'].errors?.['maxlength'] && (profilePageFormController['password'].dirty || profilePageFormController['password'].touched)"
-                      >
-                        Password should be atleast 8 characters long and should contain
-                        one number,one character and one special character.
-                      </span>
+                          *ngIf="profilePageFormController['password'].errors?.['required'] && (profilePageFormController['password'].dirty || profilePageFormController['password'].touched)"
+                        >
+                          Password is required.
+                        </span>
+                        <span
+                          *ngIf="profilePageFormController['password'].errors?.['pattern'] || profilePageFormController['password'].errors?.['maxlength'] && (profilePageFormController['password'].dirty || profilePageFormController['password'].touched)"
+                        >
+                          Password should be atleast 8 characters long and
+                          should contain one number,one character and one
+                          special character.
+                        </span>
                       </div>
                     </div>
                   </div>
                   <hr class="my-2 pb-2" />
-  
-                  <div class="row my-auto">
-                    <div class="col-sm-3 fw-bold">New Password</div>
+
+                  <div class="row">
+                    <div class="col-sm-3 mt-1 fw-bold">New Password</div>
                     <div
                       class="col-sm-9 d-flex justify-content-center flex-column h-100"
                     >
@@ -235,28 +241,29 @@
                       />
                       <div class="form-text text-danger fixed-height">
                         <span
-                        *ngIf="profilePageFormController['newPassword'].errors?.['required'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
-                      >
-                        Password is required.
-                      </span>
-                      <span
-                        *ngIf="profilePageFormController['newPassword'].errors?.['pattern'] || profilePageFormController['newPassword'].errors?.['maxlength'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
-                      >
-                        Password should be atleast 8 characters long and should contain
-                        one number,one character and one special character.
-                      </span>
-                      <span
-                        *ngIf="profilePageFormController['newPassword'].errors?.['duplicatePassword'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
-                      >
-                        New Password should not be same as current Password
-                      </span>
+                          *ngIf="profilePageFormController['newPassword'].errors?.['required'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
+                        >
+                          Password is required.
+                        </span>
+                        <span
+                          *ngIf="profilePageFormController['newPassword'].errors?.['pattern'] || profilePageFormController['newPassword'].errors?.['maxlength'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
+                        >
+                          Password should be atleast 8 characters long and
+                          should contain one number,one character and one
+                          special character.
+                        </span>
+                        <span
+                          *ngIf="profilePageFormController['newPassword'].errors?.['duplicatePassword'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
+                        >
+                          New Password should not be same as current Password
+                        </span>
                       </div>
                     </div>
                   </div>
                   <hr class="my-2 pb-2" />
-  
+
                   <div class="row my-auto">
-                    <div class="col-sm-3 fw-bold">Confirm Password</div>
+                    <div class="col-sm-3 mt-1 fw-bold">Confirm Password</div>
                     <div
                       class="col-sm-9 d-flex justify-content-center flex-column h-100"
                     >
@@ -267,16 +274,16 @@
                       />
                       <div class="form-text text-danger fixed-height">
                         <span
-                        *ngIf="profilePageFormController['confirmPassword']?.errors?.['required'] && (profilePageFormController['confirmPassword']?.dirty || profilePageFormController['confirmPassword']?.touched)"
-                      >
-                        Confirm password is Required.
-                      </span>
+                          *ngIf="profilePageFormController['confirmPassword']?.errors?.['required'] && (profilePageFormController['confirmPassword']?.dirty || profilePageFormController['confirmPassword']?.touched)"
+                        >
+                          Confirm password is Required.
+                        </span>
 
-                      <span
-                        *ngIf="profilePageFormController['confirmPassword'].errors?.['validateConfirmaPassword'] && profilePageFormController['confirmPassword']?.touched && profilePageFormController['confirmPassword'].value"
-                      >
-                        Passsword and Confirm Password didn't match.
-                      </span>
+                        <span
+                          *ngIf="profilePageFormController['confirmPassword'].errors?.['validateConfirmaPassword'] && profilePageFormController['confirmPassword']?.touched && profilePageFormController['confirmPassword'].value"
+                        >
+                          Passsword and Confirm Password didn't match.
+                        </span>
                       </div>
                     </div>
                   </div>
