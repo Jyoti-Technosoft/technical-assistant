@@ -23,11 +23,7 @@ import quizData from '@assets/json/data.json';
 import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
 import { State, Store } from '@ngrx/store';
-import {
-  getAllQuiz,
-  selectQuiz,
-  successQuizPlay,
-} from '@app/store/quiz/quiz.action';
+import { getAllQuiz, selectQuiz, successQuizPlay } from '@app/store/quiz/quiz.action';
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
@@ -38,7 +34,7 @@ import { Result } from '@app/store/result/result.model';
   styleUrls: ['./quiz.component.scss'],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
-  quizData = { ...quizData };
+  quizData:any = { ...quizData };
   @ViewChild('carousel')
   carousel!: NgbCarousel;
   quizForm!: FormGroup;
