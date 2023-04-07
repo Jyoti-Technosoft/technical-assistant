@@ -1,90 +1,86 @@
-<div class="container-fluid">
-  <div class="row align-items-center min-vh-100">
-    <div class="mx-auto col-sm-5 col-md-6 col-lg-5 col-xl-4 col-xxl-3">
+<div class="container m-auto login-section d-flex justify-content-center">
+  <div class="card shadow col-md-6 col-lg-4 col-sm-6 col-9 mt-5 p-1">
+    <div class="card-body">
       <form
         [formGroup]="loginForm"
         (ngSubmit)="formSubmitted(loginForm.value)"
-        class="rounded-4 mt-5 mb-5 bg-light"
+        class="p-3"
       >
-        <div class="col text-center p-3">
-          <img src="assets/img/login.png" class="image" />
-          <br>
-          <span class="fs-2">Login</span>
+        <div class="row g-0">
+          <div class="col text-center">
+            <img class="userlogo" src="assets/img/login.svg" alt="logo" />
+            <br />
+            <span class="fs-4">Login</span>
+          </div>
         </div>
-
-        <div class="row p-3">
-          <div class="col-md-12">
-            <label for="emailId" class="form-label">Email Address</label>
+        <div class="row">
+          <div class="col-mb-3">
             <input
-              type="text"
+              type="email"
+              placeholder="Email Address"
               class="form-control"
-              id="emailId"
-              formControlName="emailId"
+              id="email"
+              formControlName="email"
             />
-            <div
-              class="form-text text-danger"
-              *ngIf="(loginFormControl['emailId']?.errors?.['required'] && (loginFormControl['emailId']?.dirty ||  loginFormControl['emailId']?.touched))"
-            >
-              Email is required
-            </div>
-
-            <div
-              class="form-text text-danger"
-              *ngIf="(loginFormControl['emailId']?.errors?.['email'] && (loginFormControl['emailId']?.dirty || loginFormControl['emailId']?.touched))"
-            >
-            Email is Invalid
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="(loginFormValidator['email'].errors?.['required'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
+              >
+                Email is required.
+              </span>
+              <span
+                *ngIf="(loginFormValidator['email'].errors?.['email'] && (loginFormValidator['email'].dirty || loginFormValidator['email'].touched))"
+              >
+                Email is Invalid.
+              </span>
             </div>
           </div>
         </div>
 
-        <div class="row p-3">
-          <div class="col-md-12">
-            <label for="password" class="form-label">Password</label>
+        <div class="row">
+          <div class="col-mb-3">
             <input
               type="password"
+              placeholder="Password"
               class="form-control"
               id="password"
               formControlName="password"
             />
-            <div
-              class="form-text text-danger"
-              *ngIf="(loginFormControl['password']?.errors?.['required'] && (loginFormControl['password']?.dirty || loginFormControl['password']?.touched))"
-            >
-              Password is required
-            </div>
-            <div
-              class="form-text text-danger"
-              *ngIf="(loginFormControl['password']?.errors?.['minlength'] || loginFormControl['password']?.errors?.['maxlength'] && (loginFormControl['password']?.dirty || loginFormControl['password']?.touched))"
-            >
-              Password should be at least 6 and at the max 12 characters long
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="(loginFormValidator['password'].errors?.['required'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched))"
+              >
+                Password is required.
+              </span>
+              <span
+                *ngIf="(loginFormValidator['password'].errors?.['pattern'] || loginFormValidator['password'].errors?.['maxlength'] && (loginFormValidator['password'].dirty || loginFormValidator['password'].touched))"
+              >
+                <li>Password should be at least 8 characters long , at most 15 characters</li>
+                <li>Should contain one number,one character and one special character</li>
+              </span>
             </div>
           </div>
         </div>
 
-        <div class="row p-3">
-          <div class="col-md-12">
+        <div class="row">
+          <div class="col-mb-3">
             <div class="d-grid">
               <button
                 type="submit"
                 [disabled]="!loginForm.valid"
-                class="btn btn-primary fs-5"
+                class="btn btn-primary"
               >
                 Log in
               </button>
             </div>
           </div>
         </div>
-
-        <div class="row p-3">
-          <div class="col-md-12">
-            <div class="text-center">
-              <label>
-                Don't Have an Account ?<a routerLink="/registration">
-                  Register Now</a
-                >
-              </label>
-            </div>
-          </div>
+        <div class="text-center">
+          <h6 class="mt-3">
+            Don't Have an Account ?<a routerLink="/registration">
+              Register Now</a
+            >
+          </h6>
         </div>
       </form>
     </div>

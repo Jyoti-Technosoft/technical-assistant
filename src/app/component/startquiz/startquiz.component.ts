@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { State, Store } from '@ngrx/store';
+import { distinctUntilChanged } from 'rxjs';
 
-import quizData from '../../../assets/json/data.json';
+import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
+import { getallQuix, quizState } from '@app/store/quiz/quiz.state';
+import quizData from '@assets/json/data.json';
+
 
 @Component({
   selector: 'app-carddesign',
@@ -11,19 +16,40 @@ import quizData from '../../../assets/json/data.json';
 export class StartquizComponent implements OnInit {
   quizData = { ...quizData };
   instruction: any;
-  selectedQuizType!: string;
-  
-  constructor(private route: Router, private activeRoute: ActivatedRoute) {}
+  selectedQuiz!: number | null;
+
+  constructor(
+    private route: Router,
+    private activeRoute: ActivatedRoute,
+    private store: Store,
+    private state: State<quizState>
+  ) {}
 
   ngOnInit(): void {
-    this.mapJsonData();
+    if(!this.state.getValue().quiz.allQuiz) {
+      this.store.dispatch(getAllQuiz())
+    }
+    this.activeRoute.queryParamMap.subscribe((queryParams:any) => {
+      this.selectedQuiz = queryParams.get('quiz')
+      this.getInstruction()
+    })
   }
 
-  mapJsonData() {
-    this.selectedQuizType = this.activeRoute.snapshot.queryParams['quiz'];
-    this.instruction = this.quizData?.quiz?.find(
-      (data) => data?.quizId == this.selectedQuizType
-    );
+  getInstruction() {
+    this.selectedQuiz = this.activeRoute.snapshot.queryParams['quiz'];
+    this.store
+      .select((state: any) => state.quiz)
+      .pipe(distinctUntilChanged())
+      .subscribe((data) => {
+        this.instruction = data?.selectedQuiz;
+      });
+      this.instruction = this.quizData?.quiz?.find(
+        (data) => data?.quizId == this.selectedQuiz
+      );
+      if(!this.instruction) {
+         this.store.dispatch(selectQuiz({quizId:this.selectedQuiz}))
+         this.route.navigateByUrl('quiz');
+      }
   }
 
   quiz() {
