@@ -15,18 +15,22 @@ import {
   Observable,
   distinctUntilChanged,
 } from 'rxjs';
+import { State, Store } from '@ngrx/store';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthenticationService } from '@app/service/authentication.service';
-import quizData from '@assets/json/data.json';
-import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
-import { State, Store } from '@ngrx/store';
-import { getAllQuiz, selectQuiz, successQuizPlay } from '@app/store/quiz/quiz.action';
+import {
+  getAllQuiz,
+  selectQuiz,
+  successQuizPlay
+} from '@app/store/quiz/quiz.action';
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
+
+import quizData from '@assets/json/data.json';
+import dialogData from '@assets/json/dialogData.json';
 
 @Component({
   selector: 'app-questions',
@@ -63,7 +67,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private state: State<quizState>
   ) {
     this.quizForm = this.fb.group({
-      form: this.fb.array([]),
+      form: this.fb.array([])
     });
   }
 
