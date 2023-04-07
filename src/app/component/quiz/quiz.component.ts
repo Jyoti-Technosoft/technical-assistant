@@ -19,7 +19,9 @@ import { State, Store } from '@ngrx/store';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
+import { AuthenticationService } from '@app/service/authentication.service';
 import { DialogService } from '@app/dialog-service/dialog.service';
+
 import {
   getAllQuiz,
   selectQuiz,
@@ -67,7 +69,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private state: State<quizState>
   ) {
     this.quizForm = this.fb.group({
-      form: this.fb.array([])
+      form: this.fb.array([]),
     });
   }
 
@@ -97,7 +99,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.selectedQuiz = data;
       });
     if (!this.selectedQuiz) {
-      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get(
+      const selectedQuizId:any  = this.activeRouter.snapshot.queryParamMap.get(
         'quiz'
       ) as string;
       this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
@@ -158,6 +160,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuiz?.quizId,
+      title: this.selectedQuiz?.title,
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
       date: new Date().toISOString().slice(0, 10),

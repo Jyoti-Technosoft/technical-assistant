@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
+import { State, Store } from '@ngrx/store';
+import { distinctUntilChanged } from 'rxjs';
 
 import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
 import { getallQuix, quizState } from '@app/store/quiz/quiz.state';
 import quizData from '@assets/json/data.json';
-import { State, Store } from '@ngrx/store';
-import { distinctUntilChanged } from 'rxjs';
+
 
 @Component({
   selector: 'app-carddesign',
   templateUrl: './startquiz.component.html',
-  styleUrls: ['./startquiz.component.scss'],
+  styleUrls: ['./startquiz.component.scss']
 })
 export class StartquizComponent implements OnInit {
   quizData = { ...quizData };
   instruction: any;
-  selectedQuiz!: string | null;
+  selectedQuiz!: number | null;
 
   constructor(
     private route: Router,
@@ -29,7 +29,7 @@ export class StartquizComponent implements OnInit {
     if(!this.state.getValue().quiz.allQuiz) {
       this.store.dispatch(getAllQuiz())
     }
-    this.activeRoute.queryParamMap.subscribe((queryParams) => {
+    this.activeRoute.queryParamMap.subscribe((queryParams:any) => {
       this.selectedQuiz = queryParams.get('quiz')
       this.getInstruction()
     })

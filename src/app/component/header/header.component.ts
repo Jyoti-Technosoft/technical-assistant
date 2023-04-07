@@ -1,27 +1,28 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-
-import { DialogService } from '@app/dialog-service/dialog.service';
-import dialogData from '@assets/json/dialogData.json';
-import { AuthenticationService } from '@app/service/authentication.service';
-import {
-  autenticationState,
-  getStateSelector,
-} from '@app/store/autentication/autentication.state';
-import { doLogout } from '@app/store/autentication/autentication.action';
+import { OnDestroy } from '@angular/core';
 import {
   distinctUntilChanged,
   Observable,
   ReplaySubject,
   takeUntil,
 } from 'rxjs';
-import { OnDestroy } from '@angular/core';
+
+import { DialogService } from '@app/dialog-service/dialog.service';
+import { AuthenticationService } from '@app/service/authentication.service';
+import {
+  autenticationState,
+  getStateSelector,
+} from '@app/store/autentication/autentication.state';
+import { doLogout } from '@app/store/autentication/autentication.action';
+
+import dialogData from '@assets/json/dialogData.json';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnDestroy {
   dialogData = { ...dialogData };
