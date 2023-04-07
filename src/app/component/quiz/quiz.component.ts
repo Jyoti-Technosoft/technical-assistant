@@ -7,7 +7,14 @@ import {
 } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { interval, Subscription, ReplaySubject, takeUntil, Observable, distinctUntilChanged } from 'rxjs';
+import {
+  interval,
+  Subscription,
+  ReplaySubject,
+  takeUntil,
+  Observable,
+  distinctUntilChanged,
+} from 'rxjs';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
@@ -16,8 +23,14 @@ import quizData from '@assets/json/data.json';
 import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
 import { State, Store } from '@ngrx/store';
-import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
+import {
+  getAllQuiz,
+  selectQuiz,
+  successQuizPlay,
+} from '@app/store/quiz/quiz.action';
 import { quizState } from '@app/store/quiz/quiz.state';
+import { addResults } from '@app/store/result/result.action';
+import { Result } from '@app/store/result/result.model';
 
 @Component({
   selector: 'app-questions',
@@ -30,30 +43,25 @@ export class Quizcomponent implements OnInit, OnDestroy {
   carousel!: NgbCarousel;
   quizForm!: FormGroup;
   question!: any;
-  options!: any[];
   title!: any;
   dialogData = { ...dialogData };
-  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+  private destroyer$: ReplaySubject<boolean> = new ReplaySubject(1);
   questionIndex: number = 0;
   interval$!: Subscription;
   points: number = 0;
   correctAnswer: number = 0;
   inCorrectAnswer: number = 0;
   timer: number | undefined;
-  selectedQuizType!: string;
   positivePoints!: number;
   negativePoints!: number;
-  numberOfQuestions!: string | undefined;
   selectedQuiz: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
-  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
     private router: Router,
     private activeRouter: ActivatedRoute,
     private fb: FormBuilder,
-    private authenticationService: AuthenticationService,
     private dialogService: DialogService,
     private store: Store,
     private state: State<quizState>
@@ -65,10 +73,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getUserData();
-    this.selectedQuizType = this.activeRouter.snapshot.queryParams['quiz'];
     this.startCounter();
-    // this.getQuizData();
-    this.getQuestionData();
+    this.getQuizData();
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -87,34 +93,30 @@ export class Quizcomponent implements OnInit, OnDestroy {
       .select((state: any) => state.quiz.selectedQuiz)
       .pipe(distinctUntilChanged())
       .subscribe((data) => {
+        this.getQuestionData(data);
         this.selectedQuiz = data;
-        this.getQuestionData();
       });
-    if (!this.selectedQuiz?.length) {
-      this.store.dispatch(selectQuiz({ quizId: this.selectedQuizType }));
+    if (!this.selectedQuiz) {
+      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get(
+        'quiz'
+      ) as string;
+      this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
     }
   }
 
-  getQuestionData() {
-    const quizData: any = this.quizData.quiz.find(
-      (data) => data.quizId == this.selectedQuizType
-    );
-    if (!quizData) {
-      this.router.navigateByUrl('404Page');
-    } else {
-      this.question = [...quizData.questions];
+  getQuestionData(data: any) {
+    if (data) {
+      this.timer = data?.timer;
+      this.positivePoints = data?.positivePoints;
+      this.negativePoints = data?.negativePoints;
+      const arrCopy: any = [...data?.questions];
+      this.question = arrCopy;
       this.question = this.question
         ?.sort(() => Math.random() - 0.67)
-        .splice(0, quizData.numberOfQuestions);
-      this.options = this.question.map((question: any) =>
-        question.options.sort(() => Math.random() - 0.69)
-      );
-      this.timer = quizData?.timer;
-      this.positivePoints = quizData?.positivePoints;
-      this.negativePoints = quizData?.negativePoints;
+        .splice(0, data?.numberOfQuestions);
 
       const formArray = this.quizForm.controls['form'] as FormArray;
-      this.question.forEach((item: any) => {
+      this.question?.forEach((item: any) => {
         formArray.push(
           this.fb.group({
             radioValue: '',
@@ -151,21 +153,18 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   submitQuiz() {
-    let data: any = localStorage.getItem('result')
-      ? localStorage.getItem('result')
-      : [];
-    let stringifyData = data.length == 0 ? data : JSON.parse(data);
-    let currentData = {
+    let result: Result = {
       points: this.points,
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
-      type: this.selectedQuizType,
+      type: this.selectedQuiz?.quizId,
       user: this.userData.id,
-      date: new Date().toISOString().slice(0, 10)
+      quizTypeImage: this.selectedQuiz?.image,
+      date: new Date().toISOString().slice(0, 10),
     };
-    stringifyData.push(currentData);
+    this.store.dispatch(addResults({ result }));
+    this.store.dispatch(successQuizPlay({ result: result }));
 
-    localStorage.setItem('result', JSON.stringify(stringifyData));
     this.router.navigateByUrl('result');
   }
 
@@ -189,27 +188,27 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   startCounter() {
-    // this.interval$ = interval(1000)
-    //   .pipe(takeUntil(this.destroyed$))
-    //   .subscribe((val) => {
-    //     const counterValue = this.formArray.controls.at(this.questionIndex)
-    //       ?.value.timer;
-    //     if (
-    //       Number(counterValue) != 0 &&
-    //       !this.formArray.controls.at(this.questionIndex)?.get('timer')
-    //         ?.disabled
-    //     ) {
-    //       this.formArray.controls
-    //         .at(this.questionIndex)
-    //         ?.patchValue({ timer: counterValue - 1 });
-    //     } else if (
-    //       Number(counterValue) === 0 &&
-    //       !this.formArray.controls.at(this.questionIndex)?.get('timer')
-    //         ?.disabled
-    //     ) {
-    //       this.nextQuestion(this.questionIndex);
-    //     }
-    //   });
+    this.interval$ = interval(1000)
+      .pipe(takeUntil(this.destroyer$))
+      .subscribe((val) => {
+        const counterValue = this.formArray.controls.at(this.questionIndex)
+          ?.value.timer;
+        if (
+          Number(counterValue) != 0 &&
+          !this.formArray.controls.at(this.questionIndex)?.get('timer')
+            ?.disabled
+        ) {
+          this.formArray.controls
+            .at(this.questionIndex)
+            ?.patchValue({ timer: counterValue - 1 });
+        } else if (
+          Number(counterValue) === 0 &&
+          !this.formArray.controls.at(this.questionIndex)?.get('timer')
+            ?.disabled
+        ) {
+          this.nextQuestion(this.questionIndex);
+        }
+      });
   }
 
   answer(questionIndex: number, selectedOption: string) {
@@ -226,17 +225,17 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   getUserData() {
     this.loggedInUser$ = this.store.select(
-      (state: any) => state.authentication);
-      this.loggedInUser$
+      (state: any) => state.authentication
+    );
+    this.loggedInUser$
       .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
       .subscribe((state) => {
         this.userData = state?.userData;
       });
-    }
-
+  }
 
   ngOnDestroy() {
-    this.destroyed$.next(true);
-    this.destroyed$.unsubscribe();
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
   }
 }

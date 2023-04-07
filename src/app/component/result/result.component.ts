@@ -10,22 +10,25 @@ import {
 } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
+import { ToastService } from '@app/toast.service';
+import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss'],
+  styleUrls: ['./result.component.scss']
 })
+
 export class ResultComponent implements OnInit, OnDestroy {
-  allResultData: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-
+  recentResult: any;
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
-    private store: Store<autenticationState>
+    private store: Store<any>,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -34,14 +37,17 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   resultData() {
-    let data: any = localStorage.getItem('result');
-    this.allResultData = JSON.parse(data).filter((data: any) => {
-      return data?.user == this.userData.id;
-    });
-    const sorter = (a: any, b: any) => {
-      return new Date(a.date) > new Date(b.date) ? a : b;
-    };
-    this.allResultData = this.allResultData?.reduce(sorter);
+    this.store
+      .select((state: any) => state.quiz.latestQuizResult)
+      .pipe(distinctUntilChanged(), takeUntil(this.destroyer$))
+      .subscribe((data) => {
+        this.recentResult = data;
+      });
+
+    if (!this.recentResult) {
+     this.showAllQuiz();
+      this.toastService.toastMessage(RESULT_QUIZ, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
+    }
   }
 
   startQuizAgain(quizName: string) {
@@ -50,8 +56,7 @@ export class ResultComponent implements OnInit, OnDestroy {
   }
 
   showAllQuiz() {
-    const queryParams: Params = { result: 'allresults' };
-    this.router.navigate(['/allresults'], { queryParams });
+    this.router.navigateByUrl('/allresults');
   }
 
   getLoggedUser() {

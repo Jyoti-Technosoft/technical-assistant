@@ -8,10 +8,21 @@ import { OnInit } from '@angular/core';
 
 import { ToastService } from '@app/toast.service';
 
+import {
+  LOGIN_WRONG_CREDENTIAL,
+  LOGOUT_SUCCESSFULLY,
+  REGISTERED_SUCCESSFULLY,
+  LOGIN_SUCCESSFULLY,
+  ALREADY_REGISTERED_EMAIL,
+  TOKEN,
+  TOAST_BG_COLOR,
+} from '@app/shared/toast.enum';
+
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnInit {
+
+export class AuthService {
   users: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
@@ -21,8 +32,6 @@ export class AuthService implements OnInit {
     private cookieService: CookieService,
     private state: Store<any>
   ) {}
-
-  ngOnInit(): void {}
 
   private getUsers() {
     this.state
@@ -46,7 +55,7 @@ export class AuthService implements OnInit {
         return this.getStateData(findUser);
       }
     }
-    return throwError(() => new Error('No Token Found'));
+    return throwError(() => new Error(TOKEN));
   }
 
   getUser(payload: any): Observable<any> {
@@ -61,9 +70,7 @@ export class AuthService implements OnInit {
     if (findUser) {
       return this.getStateData(findUser);
     } else {
-      return throwError(
-        () => new Error('No User Found With This Login credentical')
-      );
+      return throwError(() => new Error(LOGIN_WRONG_CREDENTIAL));
     }
   }
 
@@ -80,9 +87,7 @@ export class AuthService implements OnInit {
       (value: any) => value.email == userValue.email
     );
     if (findUser) {
-      return throwError(
-        () => new Error('User with this email already registered')
-      );
+      return throwError(() => new Error(ALREADY_REGISTERED_EMAIL));
     } else {
       let users = this.users;
       users = [...users, userValue];
@@ -94,7 +99,7 @@ export class AuthService implements OnInit {
   routeToDashboard(data: any): void {
     this.cookieService.set('info_token', this.encodeObj(data.userData.id), 1);
     this.router.navigateByUrl('dashboard');
-    this.toastService.showSuccessMessage('Login Successfully');
+    this.toastService.toastMessage(LOGIN_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
   }
 
   encodeObj(obj: any) {
@@ -106,7 +111,7 @@ export class AuthService implements OnInit {
   }
 
   loginFail(message: string) {
-    this.toastService.showErrorMessage(message);
+    this.toastService.toastMessage({ label: message, icon: 'fa-solid fa-xmark' }, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
   }
 
   getUserId() {
@@ -128,12 +133,18 @@ export class AuthService implements OnInit {
 
   routeToLogin() {
     this.router.navigateByUrl('login');
-    this.toastService.showSuccessMessage('User Registered');
+    this.toastService.toastMessage(REGISTERED_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
   }
 
   logout() {
-    this.toastService.showSuccessMessage('Logout Successfully');
+    this.toastService.toastMessage(LOGOUT_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
+  }
+
+
+  ngOnDestroy() {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
   }
 }

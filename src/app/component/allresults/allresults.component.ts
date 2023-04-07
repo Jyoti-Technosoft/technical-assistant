@@ -1,27 +1,36 @@
 import { Component } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
-import { distinctUntilChanged, Observable, ReplaySubject, takeUntil } from 'rxjs';
+import {
+  distinctUntilChanged,
+  Observable,
+  ReplaySubject,
+  takeUntil
+} from 'rxjs';
 import { Store } from '@ngrx/store';
-import { autenticationState } from '@app/store/autentication/autentication.state';
+import { resultState } from '@app/store/result/result.state';
+import { getAllResults } from '@app/store/result/result.action';
+import { Result } from '@app/store/result/result.model';
 
 @Component({
   selector: 'app-allresults',
   templateUrl: './allresults.component.html',
   styleUrls: ['./allresults.component.scss']
 })
+
 export class AllresultsComponent {
-  initialData: number = 8;
-  allResultData: any[] = [];
+  initialData: number = 12;
+  allResultData: Result[] = [];
   loggedInUser$: Observable<any> | undefined;
+  resultData$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-  avatarName!:string;
+  avatarName!: string;
 
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
-    private store: Store<autenticationState>
+    private store: Store<resultState>
   ) {}
 
   ngOnInit(): void {
@@ -42,8 +51,15 @@ export class AllresultsComponent {
   }
 
   resultData() {
-    let data: any = localStorage.getItem('result');
-    this.allResultData = JSON.parse(data).reverse();
+    this.resultData$ = this.store.select((state: any) => state.result);
+    this.resultData$
+      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
+      .subscribe((state) => {
+        this.allResultData = state?.results;
+        if (!this.allResultData) {
+          this.store.dispatch(getAllResults());
+        }
+      });
   }
 
   getUserLetter(userName: string) {
@@ -56,7 +72,7 @@ export class AllresultsComponent {
   }
 
   loadMoreData() {
-    this.initialData = this.initialData + 8;
+    this.initialData = this.initialData + 12;
   }
 
   startQuizAgain(quizName: string) {

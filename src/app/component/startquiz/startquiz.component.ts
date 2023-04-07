@@ -16,7 +16,7 @@ import { distinctUntilChanged } from 'rxjs';
 export class StartquizComponent implements OnInit {
   quizData = { ...quizData };
   instruction: any;
-  selectedQuizType!: string | null;
+  selectedQuiz!: string | null;
 
   constructor(
     private route: Router,
@@ -30,13 +30,13 @@ export class StartquizComponent implements OnInit {
       this.store.dispatch(getAllQuiz())
     }
     this.activeRoute.queryParamMap.subscribe((queryParams) => {
-      this.selectedQuizType = queryParams.get('quiz')
+      this.selectedQuiz = queryParams.get('quiz')
       this.getInstruction()
     })
   }
 
   getInstruction() {
-    this.selectedQuizType = this.activeRoute.snapshot.queryParams['quiz'];
+    this.selectedQuiz = this.activeRoute.snapshot.queryParams['quiz'];
     this.store
       .select((state: any) => state.quiz)
       .pipe(distinctUntilChanged())
@@ -44,10 +44,10 @@ export class StartquizComponent implements OnInit {
         this.instruction = data?.selectedQuiz;
       });
       this.instruction = this.quizData?.quiz?.find(
-        (data) => data?.quizId == this.selectedQuizType
+        (data) => data?.quizId == this.selectedQuiz
       );
       if(!this.instruction) {
-         this.store.dispatch(selectQuiz({quizId:this.selectedQuizType}))
+         this.store.dispatch(selectQuiz({quizId:this.selectedQuiz}))
          this.route.navigateByUrl('quiz');
       }
   }
