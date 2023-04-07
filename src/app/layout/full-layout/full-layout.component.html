@@ -1,18 +1,5 @@
 <app-header></app-header>
-
-<div class="container">
-    <div class="sidebar close navbar-light bg-light" appHover remove-class="close">
-        <ul class="nav-links mt-5 py-0">
-          <li class="menu-item" *ngFor="let item of menuItem" >
-            <a class="item-link" routerLink="{{ item?.link }}">
-              <i class="fa {{ item?.icon }} icon"></i>
-              <span class="link-name">{{ item?.label }}</span>
-            </a>
-          </li>
-        </ul>
-    </div>
-</div>
-<div class="layout-container">
+<!-- <div class="layout-container">
     <router-outlet></router-outlet>
-</div>
+</div> -->
 <app-footer></app-footer>

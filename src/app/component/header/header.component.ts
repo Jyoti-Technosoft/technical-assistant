@@ -18,6 +18,8 @@ import {
 } from 'rxjs';
 import { OnDestroy } from '@angular/core';
 
+interface menuItem { label:string, icon: string, link?:string }
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -28,6 +30,13 @@ export class HeaderComponent implements OnDestroy {
   userData: any;
   loggedInUser$: Observable<any> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
+
+  menuItem: menuItem[] = [
+    { label: 'Dashboard', icon: 'fa-home', link: 'dashboard' },
+    { label: 'All Results', icon: 'fa-th-large', link: 'allresults' },
+    { label: 'Profile', icon: 'fa-user', link: 'Profile' },
+    { label: 'Sign Out', icon: 'fa-sign-out' }
+  ]
 
   constructor(
     public authenticationService: AuthenticationService,
