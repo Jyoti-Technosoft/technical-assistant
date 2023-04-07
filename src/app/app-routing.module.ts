@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RedirectGuard } from './authorization/redirect-guard/redirect.guard';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,6 @@ const routes: Routes = [
       externalUrl: 'https://www.jyotitechnosoft.com/',
     },
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -15,14 +15,13 @@ import {
   Observable,
   distinctUntilChanged,
 } from 'rxjs';
+import { State, Store } from '@ngrx/store';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthenticationService } from '@app/service/authentication.service';
-import quizData from '@assets/json/data.json';
-import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
-import { State, Store } from '@ngrx/store';
+
 import {
   getAllQuiz,
   selectQuiz,
@@ -32,13 +31,16 @@ import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
 
+import quizData from '@assets/json/data.json';
+import dialogData from '@assets/json/dialogData.json';
+
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  styleUrls: ['./quiz.component.scss']
 })
 export class Quizcomponent implements OnInit, OnDestroy {
-  quizData = { ...quizData };
+  quizData:any = { ...quizData };
   @ViewChild('carousel')
   carousel!: NgbCarousel;
   quizForm!: FormGroup;
@@ -97,7 +99,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.selectedQuiz = data;
       });
     if (!this.selectedQuiz) {
-      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get(
+      const selectedQuizId:any  = this.activeRouter.snapshot.queryParamMap.get(
         'quiz'
       ) as string;
       this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
@@ -105,28 +107,26 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   getQuestionData(data: any) {
-    if (!data) {
-      return;
+    if (data) {
+      this.timer = data?.timer;
+      this.positivePoints = data?.positivePoints;
+      this.negativePoints = data?.negativePoints;
+      const arrCopy: any = [...data?.questions];
+      this.question = arrCopy;
+      this.question = this.question
+        ?.sort(() => Math.random() - 0.67)
+        .splice(0, data?.numberOfQuestions);
+
+      const formArray = this.quizForm.controls['form'] as FormArray;
+      this.question?.forEach((item: any) => {
+        formArray.push(
+          this.fb.group({
+            radioValue: '',
+            timer: this.timer,
+          })
+        );
+      });
     }
-
-    this.timer = data?.timer;
-    this.positivePoints = data?.positivePoints;
-    this.negativePoints = data?.negativePoints;
-    const arrCopy: any = [...data?.questions];
-    this.question = arrCopy;
-    this.question = this.question
-      ?.sort(() => Math.random() - 0.67)
-      .splice(0, data?.numberOfQuestions);
-
-    const formArray = this.quizForm.controls['form'] as FormArray;
-    this.question?.forEach((item: any) => {
-      formArray.push(
-        this.fb.group({
-          radioValue: '',
-          timer: this.timer,
-        })
-      );
-    });
   }
 
   get formArray() {
@@ -160,9 +160,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuiz?.quizId,
+      title: this.selectedQuiz?.title,
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
-      date: new Date().toISOString().slice(0, 10)
+      date: new Date().toISOString().slice(0, 10),
     };
     this.store.dispatch(addResults({ result }));
     this.store.dispatch(successQuizPlay({ result: result }));

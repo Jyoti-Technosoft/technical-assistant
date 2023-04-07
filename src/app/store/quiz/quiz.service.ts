@@ -12,6 +12,7 @@ import QuizData from '@assets/json/data.json';
 import { ToastService } from '@app/toast.service';
 import { quizState } from './quiz.state';
 import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,8 @@ export class QuizService {
   constructor(
     private store: Store,
     private toastService: ToastService,
-    private state: State<quizState>
+    private state: State<quizState>,
+    private router:Router
   ) {}
 
   getAllQuiz(): Observable<any> {
@@ -32,6 +34,9 @@ export class QuizService {
   getSelectedQuiz(id: any): Observable<any> {
     let allQuiz = this.state.getValue().quiz.allQuiz;
     let findQuiz = allQuiz?.find((data: any) => data?.quizId == id);
+    if(!findQuiz) {
+      this.router.navigateByUrl('404Page');
+    }
     return findQuiz
       ? of(findQuiz)
       : throwError(() => new Error('No Quiz Found'));

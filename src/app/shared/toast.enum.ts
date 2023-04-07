@@ -21,7 +21,7 @@ export const LOGIN_SUCCESSFULLY: toastMessage = {
     icon: 'fa-regular fa-triangle-exclamation',
   };
   export const RESULT_QUIZ = {
-    label: 'No Quiz Played Yet',
+    label: 'No Quiz Played Recently',
     icon: 'fa-regular fa-triangle-exclamation',
   };
   export const TOKEN = 'No Token Found';

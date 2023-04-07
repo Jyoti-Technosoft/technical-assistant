@@ -45,7 +45,7 @@ export class ResultComponent implements OnInit, OnDestroy {
       });
 
     if (!this.recentResult) {
-      this.router.navigateByUrl('dashbaord');
+     this.showAllQuiz();
       this.toastService.toastMessage(RESULT_QUIZ, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
     }
   }
