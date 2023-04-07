@@ -1,36 +1,28 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {
-  Observable,
-  ReplaySubject,
-  distinctUntilChanged,
-  takeUntil,
-} from 'rxjs';
+import { Observable, ReplaySubject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
+
+import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+
 import { AuthenticationService } from '@app/service/authentication.service';
 import { autenticationState } from '@app/store/autentication/autentication.state';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
 import { updateUserDetails } from '@app/store/autentication/autentication.action';
-import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { RegisteredPayload } from '@app/store/autentication/autentication.model';
+
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
+  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit, AfterViewInit {
-  loggedInUser$: Observable<any> | undefined;
+  loggedInUser$: Observable<RegisteredPayload> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
   profilePageForm!: FormGroup;
-  editMode: boolean = false;
   showPasswordField: boolean = false;
+  userData:RegisteredPayload | undefined; 
 
   constructor(
     public authenticationService: AuthenticationService,
@@ -52,12 +44,13 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 
   getUserData() {
     this.loggedInUser$ = this.store.select(
-      (state: any) => state.authentication
+      (state: any) => state.authentication.userData
     );
     this.loggedInUser$
       .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
       .subscribe((state) => {
-        this.initForm(state?.userData);
+        this.userData = state;
+        this.initForm(state);
       });
   }
 
@@ -174,12 +167,12 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   }
 
   updateUserDetails() {
-    console.log(this.profilePageForm?.value);
     this.store.dispatch(
       updateUserDetails({ user: this.profilePageForm?.value })
     );
   }
   cancelUpdate() {
+    this.initForm(this.userData);
     this.profilePageForm.disable();
     this.deleteFormFieldForPassword();
     this.showPasswordField = false;
