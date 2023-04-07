@@ -11,6 +11,7 @@ import { AllresultsComponent } from '@app/component/allresults/allresults.compon
 import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 import { LoginComponent } from '@app/authorization/login/login.component';
 import { RegistrationComponent } from '@app/authorization/registration/registration.component';
+import { UserProfileComponent } from '@app/component/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
       { path: 'quizname', component: StartquizComponent },
       { path: 'quiz', component: Quizcomponent },
       { path: 'result', component: ResultComponent },
-      { path: 'allresults', component: AllresultsComponent }
+      { path: 'allresults', component: AllresultsComponent },
+      { path:'userprofile', component:UserProfileComponent}
     ],
   },
   {
