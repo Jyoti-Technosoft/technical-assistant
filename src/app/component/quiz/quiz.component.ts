@@ -160,6 +160,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuiz?.quizId,
+      title: this.selectedQuiz?.title,
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
       date: new Date().toISOString().slice(0, 10)

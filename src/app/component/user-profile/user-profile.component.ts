@@ -6,10 +6,13 @@ import { Router } from '@angular/router';
 
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 
+import { DialogService } from '@app/dialog-service/dialog.service';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { autenticationState } from '@app/store/autentication/autentication.state';
 import { updateUserDetails } from '@app/store/autentication/autentication.action';
 import { RegisteredPayload } from '@app/store/autentication/autentication.model';
+
+import dialogData from '@assets/json/dialogData.json';
 
 
 @Component({
@@ -18,14 +21,16 @@ import { RegisteredPayload } from '@app/store/autentication/autentication.model'
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit, AfterViewInit {
+  dialogData = { ...dialogData };
   loggedInUser$: Observable<RegisteredPayload> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
   profilePageForm!: FormGroup;
   showPasswordField: boolean = false;
   userData:RegisteredPayload | undefined; 
-
+  
   constructor(
     public authenticationService: AuthenticationService,
+    private dialogService: DialogService,
     public router: Router,
     private store: Store<autenticationState>,
     private fb: FormBuilder,
@@ -51,6 +56,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       .subscribe((state) => {
         this.userData = state;
         this.initForm(state);
+        this.cancelUpdate();
       });
   }
 
@@ -171,11 +177,24 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
       updateUserDetails({ user: this.profilePageForm?.value })
     );
   }
+   openCancelDialog() {
+    if(this.profilePageForm.dirty){
+      let configData = this.dialogData.cancelModel;
+       this.dialogService.openDialog(configData).then((value) => {
+        if(value) {
+          this.cancelUpdate();
+        }
+      });
+    } else {
+      this.cancelUpdate();
+    }
+  }
+  
   cancelUpdate() {
-    this.initForm(this.userData);
+    this.initForm(this.userData); 
     this.profilePageForm.disable();
-    this.deleteFormFieldForPassword();
     this.showPasswordField = false;
+    this.deleteFormFieldForPassword();
   }
 
   editUserdetails() {

@@ -2,9 +2,9 @@
   <div class="d-flex align-items-center min-vh-100">
     <div class="container mx-auto">
       <div class="row">
-        <div class="col-md-4 col-lg-4 col-xl-4 pt-4">
-          <div class="card user-card shadow border-0 h-100 rounded-4">
-            <div class="card-body">
+        <div class="col-md-4 col-lg-4 col-xl-4 py-4 my-auto">
+          <div class="card shadow border-0 rounded-4">
+            <div class="card-body p-5">
               <div
                 class="d-flex justify-content-center flex-column align-items-center h-100"
               >
@@ -20,14 +20,14 @@
             </div>
           </div>
         </div>
-        <div class="col-md-8 col-lg-8 col-xl-8 pt-4">
+        <div class="col-md-8 col-lg-8 col-xl-8 my-auto">
           <form [formGroup]="profilePageForm">
             <div
               class="card edit-detail-card shadow border-0 rounded-4 user-details"
             >
               <div class="card-body">
                 <div class="row my-auto">
-                  <div class="col-4 fw-bold">Full name</div>
+                  <div class="col-4 fw-bold">Full Name</div>
                   <div
                     class="col-8 d-flex justify-content-center flex-column h-100"
                   >
@@ -161,6 +161,7 @@
                         placeholder="yyyy-mm-dd"
                         formControlName="dateOfBirth"
                         ngbDatepicker
+                        [maxDate]="calendar.getToday()"
                         [footerTemplate]="footerTemplate"
                         #datePicker="ngbDatepicker"
                       />
@@ -218,16 +219,15 @@
                           Password is required.
                         </span>
                         <span
-                          *ngIf="profilePageFormController['password'].errors?.['pattern'] || profilePageFormController['password'].errors?.['maxlength'] && (profilePageFormController['password'].dirty || profilePageFormController['password'].touched)"
+                          *ngIf="(profilePageFormController['password'].errors?.['pattern'] || profilePageFormController['password'].errors?.['maxlength']) && profilePageFormController['password'].touched"
                         >
-                          Password should be atleast 8 characters long and
-                          should contain one number,one character and one
-                          special character.
+                          <li>Password should be atleast 8 characters long</li>
+                          <li>Should contain one number,one character and one special character</li>
                         </span>
                       </div>
                     </div>
                   </div>
-                  <hr class="my-2 pb-2" />
+                  <hr class="my-3 pb-2" />
 
                   <div class="row my-auto">
                     <div class="col-4 fw-bold">New Password</div>
@@ -246,7 +246,7 @@
                           Password is required.
                         </span>
                         <span
-                          *ngIf="profilePageFormController['newPassword'].errors?.['pattern'] || profilePageFormController['newPassword'].errors?.['maxlength'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
+                          *ngIf="(profilePageFormController['newPassword'].errors?.['pattern'] || profilePageFormController['newPassword'].errors?.['maxlength']) && profilePageFormController['newPassword'].touched"
                         >
                           Password should be atleast 8 characters long and
                           should contain one number,one character and one
@@ -260,7 +260,7 @@
                       </div>
                     </div>
                   </div>
-                  <hr class="my-2 pb-2" />
+                  <hr class="my-3 pb-2" />
 
                   <div class="row my-auto">
                     <div class="col-4 fw-bold">Confirm Password</div>
@@ -280,7 +280,7 @@
                         </span>
 
                         <span
-                          *ngIf="profilePageFormController['confirmPassword'].errors?.['validateConfirmaPassword'] && profilePageFormController['confirmPassword']?.touched && profilePageFormController['confirmPassword'].value"
+                          *ngIf="(profilePageFormController['confirmPassword'].errors?.['validateConfirmaPassword'] && profilePageFormController['confirmPassword']?.touched) && profilePageFormController['confirmPassword'].value"
                         >
                           Passsword and Confirm Password didn't match.
                         </span>
@@ -291,43 +291,64 @@
                 </ng-container>
 
                 <div class="row">
-                  <div class="col-sm-12 d-flex justify-content-between">
+                  <div class="col-12 d-flex justify-content-between">
                     <div
-                      class="col-sm-3 d-flex justify-content-between bottom-left-btn"
+                      class="col-3 d-flex bottom-left-btn"
                     >
                       <button
                         type="button"
                         *ngIf="profilePageForm?.disabled"
+                        placement="right"
+                        ngbTooltip="Edit"
                         class="btn btn-success text-white edit-btn"
                         (click)="editUserdetails()"
                       >
-                        Edit
+                      <span class="d-none d-md-block"> Edit </span>
+                      <span class="d-md-none">
+                        <i class="fa-sharp fa-solid fa-user-pen"></i>
+                      </span>
                       </button>
                       <button
                         type="button"
                         *ngIf="!profilePageForm?.disabled"
                         [disabled]="!profilePageForm.valid"
-                        class="btn btn-success text-white save-btn"
+                        placement="bottom"
+                        ngbTooltip="Save"
+                        class="btn btn-success text-white save-btn "
                         (click)="updateUserDetails()"
                       >
-                        Save
+                      <span class="d-none d-md-block"> Save </span>
+                      <span class="d-md-none">
+                        <i class="fa-solid fa-check"></i>
+                      </span>
                       </button>
                       <button
                         type="button"
                         *ngIf="!profilePageForm?.disabled"
-                        class="btn btn-danger text-white cancel-btn"
-                        (click)="cancelUpdate()"
+                        placement="bottom"
+                        ngbTooltip="Cancel"
+                        class="btn btn-danger text-white cancel-btn mx-2"
+                        (click)="openCancelDialog()"
                       >
-                        Cancel
+                      <span class="d-none d-md-block"> Cancel </span>
+                      <span class="d-md-none">
+                        <i class="fa-solid fa-xmark"></i>
+                      </span>
                       </button>
                     </div>
                     <button
                       type="button"
                       *ngIf="!profilePageForm?.disabled && !showPasswordField"
+                      placement="bottom"
+                      ngbTooltip="Change Password"
                       class="btn btn-primary text-white justify-content-end"
                       (click)="onHideShow()"
                     >
-                      Change Password
+                    <span class="d-none d-md-block"> Change Password </span>
+                    <span class="d-md-none">
+                      <i class="fa-sharp fa-solid fa-key-skeleton"></i>
+                    </span>
+                      
                     </button>
                   </div>
                 </div>
