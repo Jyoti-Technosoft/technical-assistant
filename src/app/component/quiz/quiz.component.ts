@@ -15,14 +15,11 @@ import {
   Observable,
   distinctUntilChanged,
 } from 'rxjs';
+import { State, Store } from '@ngrx/store';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 
-import { AuthenticationService } from '@app/service/authentication.service';
-import quizData from '@assets/json/data.json';
-import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
-import { State, Store } from '@ngrx/store';
 import {
   getAllQuiz,
   selectQuiz,
@@ -32,10 +29,13 @@ import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
 
+import quizData from '@assets/json/data.json';
+import dialogData from '@assets/json/dialogData.json';
+
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  styleUrls: ['./quiz.component.scss']
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
@@ -57,6 +57,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
   selectedQuiz: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
+  quizinstruction: string | undefined;
+  isInstruction: boolean = true;
 
   constructor(
     private router: Router,
@@ -109,6 +111,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.quizinstruction =data?.rules;
     this.timer = data?.timer;
     this.positivePoints = data?.positivePoints;
     this.negativePoints = data?.negativePoints;
@@ -160,6 +163,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuiz?.quizId,
+      title: this.selectedQuiz?.title,
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
       date: new Date().toISOString().slice(0, 10)

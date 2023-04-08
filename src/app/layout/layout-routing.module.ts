@@ -5,12 +5,12 @@ import { AuthGuard } from '../authorization/auth-guard/auth.guard';
 import { DashboardComponent } from '../component/dashboard/dashboard.component';
 import { Quizcomponent } from '../component/quiz/quiz.component';
 import { ResultComponent } from '../component/result/result.component';
-import { StartquizComponent } from '../component/startquiz/startquiz.component';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
 import { AllresultsComponent } from '@app/component/allresults/allresults.component';
 import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 import { LoginComponent } from '@app/authorization/login/login.component';
 import { RegistrationComponent } from '@app/authorization/registration/registration.component';
+import { UserProfileComponent } from '@app/component/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -20,10 +20,10 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'quizname', component: StartquizComponent },
       { path: 'quiz', component: Quizcomponent },
       { path: 'result', component: ResultComponent },
-      { path: 'allresults', component: AllresultsComponent }
+      { path: 'allresults', component: AllresultsComponent },
+      { path:'userprofile', component:UserProfileComponent}
     ],
   },
   {

@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { ReplaySubject, distinctUntilChanged, takeUntil } from 'rxjs';
-
-import quizData from '@assets/json/data.json';
 import { Store } from '@ngrx/store';
+
 import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
+import quizData from '@assets/json/data.json';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  styleUrls: ['./dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {
@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   startQuiz(title: string) {
     this.store.dispatch(selectQuiz({ quizId: title }));
     const queryParams: Params = { quiz: title };
-    this.route.navigate(['/quizname'], { queryParams });
+    this.route.navigate(['/quiz'], { queryParams });
   }
 
   loadMore() {
