@@ -55,7 +55,7 @@
   </div>
 </nav> -->
 <div>
-  <nav class="navbar navbar-light bg-light justify-content-between">
+  <nav class="navbar navbar-light navbar-expand-lg  bg-light justify-content-between">
     <a class="navbar-brand py-2"
       ><img
         src="assets/img/logo.svg"
@@ -72,7 +72,7 @@
       <div ngbDropdown class="d-inline-block">
         <a
           type="button"
-          class="nav-link dropdown"
+          class="nav-link email-content dropdown"
           id="dropdownBasic1"
           ngbDropdownToggle
         >
@@ -101,25 +101,34 @@
         </div>
       </div>
     </div>
-  </nav>
-  <div class="container-fluid">
-    <div class="row flex-nowrap">
-      <div
-        class="sidebar close navbar-light bg-light"
-        appHover
-        remove-class="close"
-      >
-        <ul class="nav-links mt-5 py-0">
+
+    <button class="navbar-toggler navbar-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="nav-links py-0 toggle-content">
           <li class="menu-item" *ngFor="let item of menuItem">
+            <a class="item-link toggle-item" routerLink="{{ item?.link }}">
+              <i class="fa {{ item?.icon }} icon toggle-icon"></i>
+              <span class="link-name toggle-name">{{ item?.label }}</span>
+             <hr> 
+            </a>
+          </li>
+      </ul>
+    </div>
+  </nav>
+<div class="container">
+    <div class="sidebar close navbar-light bg-light navbar-content" appHover remove-class="close">
+        <ul class="nav-links mt-5 py-0">
+          <li class="menu-item" *ngFor="let item of menuItem" >
             <a class="item-link" routerLink="{{ item?.link }}">
               <i class="fa {{ item?.icon }} icon"></i>
               <span class="link-name">{{ item?.label }}</span>
             </a>
           </li>
         </ul>
-      </div>
     </div>
-  </div>
+</div>
   <div class="col py-3">
     <router-outlet></router-outlet>
 </div>
