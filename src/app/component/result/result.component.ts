@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
-import { AuthenticationService } from '@app/service/authentication.service';
 import {
   distinctUntilChanged,
   Observable,
@@ -9,7 +8,8 @@ import {
   takeUntil,
 } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { autenticationState } from '@app/store/autentication/autentication.state';
+
+import { AuthenticationService } from '@app/service/authentication.service';
 import { ToastService } from '@app/toast.service';
 import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
@@ -52,7 +52,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   startQuizAgain(quizName: string) {
     const queryParams: Params = { quiz: quizName };
-    this.router.navigate(['/quizname'], { queryParams });
+    this.router.navigate(['/quiz'], { queryParams });
   }
 
   showAllQuiz() {

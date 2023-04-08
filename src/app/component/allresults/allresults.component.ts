@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import { AuthenticationService } from '@app/service/authentication.service';
 import {
   distinctUntilChanged,
   Observable,
@@ -8,6 +7,8 @@ import {
   takeUntil
 } from 'rxjs';
 import { Store } from '@ngrx/store';
+
+import { AuthenticationService } from '@app/service/authentication.service';
 import { resultState } from '@app/store/result/result.state';
 import { getAllResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
@@ -77,7 +78,7 @@ export class AllresultsComponent {
 
   startQuizAgain(quizName: string) {
     const queryParams: Params = { quiz: quizName };
-    this.router.navigate(['/quizname'], { queryParams });
+    this.router.navigate(['/quiz'], { queryParams });
   }
 
   ngOnDestroy(): void {

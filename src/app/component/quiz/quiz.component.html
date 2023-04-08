@@ -1,140 +1,146 @@
-<form [formGroup]="quizForm">
-  <div formArrayName="form">
-    <div class="container-fluid">
-      <div class="d-flex align-items-center min-vh-100">
-        <div class="container mx-auto">
-          <ngb-carousel
-            #carousel
-            *ngIf="question?.length"
-            [showNavigationArrows]="false"
-            [showNavigationIndicators]="false"
-            [interval]="0"
-            [keyboard]="false"
-          >
-            <ng-template
-              ngbSlide
-              *ngFor="let arrayloop of formArray.controls; let i = index"
+<ng-template [ngIf]="isInstruction" [ngIfElse]="quizContainer">
+  <app-startquiz [instruction]="quizinstruction" (startQuiz)="isInstruction = false"></app-startquiz>
+</ng-template>
+
+<ng-template #quizContainer>
+  <form [formGroup]="quizForm">
+    <div formArrayName="form">
+      <div class="container-fluid">
+        <div class="d-flex align-items-center min-vh-100">
+          <div class="container mx-auto">
+            <ngb-carousel
+              #carousel
+              *ngIf="question?.length"
+              [showNavigationArrows]="false"
+              [showNavigationIndicators]="false"
+              [interval]="0"
+              [keyboard]="false"
             >
-              <ng-container [formGroupName]="i">
-                <div class="m-3">
-                  <div class="card quiz-card h-auto">
-                    <div
-                      class="card-header header-txt p-3 d-flex align-items-center justify-content-between position-relative"
-                    >
-                      <div class="header-title user-select-none col-md-3 col-lg-3 col-sm-3">
-                        {{ selectedQuiz?.title }}
-                      </div>
+              <ng-template
+                ngbSlide
+                *ngFor="let arrayloop of formArray.controls; let i = index"
+              >
+                <ng-container [formGroupName]="i">
+                  <div class="m-3">
+                    <div class="card quiz-card h-auto">
                       <div
-                        class="timer d-flex align-items-center justify-content-between rounded-2 px-2 py-0"
+                        class="card-header header-txt p-3 d-flex align-items-center justify-content-between position-relative"
                       >
-                        <div class="timer-left-txt user-select-none">
-                          Time Left
+                        <div class="header-title user-select-none col-md-3 col-lg-3 col-sm-3">
+                          {{ selectedQuiz?.title }}
                         </div>
                         <div
-                          class="timer-sec user-select-none text-center rounded-2"
+                          class="timer d-flex align-items-center justify-content-between rounded-2 px-2 py-0"
                         >
-                          {{ formArray.controls.at(i)?.value?.timer }}
+                          <div class="timer-left-txt user-select-none">
+                            Time Left
+                          </div>
+                          <div
+                            class="timer-sec user-select-none text-center rounded-2"
+                          >
+                            {{ formArray.controls.at(i)?.value?.timer }}
+                          </div>
                         </div>
                       </div>
-                    </div>
-
-                    <div class="card-body que-txt d-inline-block rounded-2 p-3">
-                      <div class="que-data user-select-none">
-                        {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
-                      </div>
-
-                      <div class="option-list">
-                        <ng-container
-                          *ngFor="let card of question[questionIndex].options"
-                        >
-                          <div class="form-option">
-                            <label
-                              class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
-                              *ngIf="card.type == 'checkbox'"
-                              [class.hightlight-selected]="
-                                formArray.controls.at(i)?.value.radioValue ==
-                                card.id
-                              "
-                            >
+  
+                      <div class="card-body que-txt d-inline-block rounded-2 p-3">
+                        <div class="que-data user-select-none">
+                          {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
+                        </div>
+  
+                        <div class="option-list">
+                          <ng-container
+                            *ngFor="let card of question[questionIndex].options"
+                          >
+                            <div class="form-option">
+                              <label
+                                class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
+                                *ngIf="card.type == 'checkbox'"
+                                [class.hightlight-selected]="
+                                  formArray.controls.at(i)?.value.radioValue ==
+                                  card.id
+                                "
                               >
-                              <input
-                                type="checkbox"
-                                class="form-check-input d-none"
-                                formControlName="radioValue"
-                                value="{{ card.id }}"
-                              />
-                              {{ card.lable }}
-                            </label>
-                            <label
-                              class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
-                              *ngIf="card.type == 'radio'"
-                              [class.hightlight-selected]="
-                                formArray.controls.at(i)?.value.radioValue ==
-                                card.id
-                              "
-                            >
-                              <input
-                                type="radio"
-                                class="form-check-input d-none"
-                                formControlName="radioValue"
-                                value="{{ card.id }}"
-                              />
-                              {{ card.label }}
-                            </label>
-                          </div>
-                        </ng-container>
+                                >
+                                <input
+                                  type="checkbox"
+                                  class="form-check-input d-none"
+                                  formControlName="radioValue"
+                                  value="{{ card.id }}"
+                                />
+                                {{ card.lable }}
+                              </label>
+                              <label
+                                class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
+                                *ngIf="card.type == 'radio'"
+                                [class.hightlight-selected]="
+                                  formArray.controls.at(i)?.value.radioValue ==
+                                  card.id
+                                "
+                              >
+                                <input
+                                  type="radio"
+                                  class="form-check-input d-none"
+                                  formControlName="radioValue"
+                                  value="{{ card.id }}"
+                                />
+                                {{ card.label }}
+                              </label>
+                            </div>
+                          </ng-container>
+                        </div>
                       </div>
-                    </div>
-
-                    <div
-                      class="card-footer footer-txt p-3 d-flex align-items-center justify-content-between position-relative"
-                    >
-                      <div class="total-que">
-                        <p
-                          class="footer-right-txt py-0 text-center user-select-none m-0"
-                        >
-                          <strong>{{ i + 1 }}</strong> Of
-                          <strong>{{ question.length }}</strong> Questions
-                        </p>
-                      </div>
-
-                      <div class="form-btn">
-                        <button
-                          [disabled]="i == 0"
-                          data-slide="previous"
-                          (click)="previousQuestion(i)"
-                          type="button"
-                          class="btn btn-primary"
-                        >
-                          Previous
-                        </button>
-                        <button
-                          [disabled]="formArray.controls[i].dirty"
-                          data-slide="skip"
-                          type="button"
-                          (click)="skipQuestion(i)"
-                          class="btn btn-dark my-0 mx-2"
-                        >
-                          Skip
-                        </button>
-                        <button
-                          [disabled]="!formArray.controls[i].dirty"
-                          data-slide="next"
-                          type="button"
-                          (click)="nextQuestion(i)"
-                          class="btn btn-success"
-                        >
-                          {{ question.length != i + 1 ? "Next" : "Submit" }}
-                        </button>
+  
+                      <div
+                        class="card-footer footer-txt p-3 d-flex align-items-center justify-content-between position-relative"
+                      >
+                        <div class="total-que">
+                          <p
+                            class="footer-right-txt py-0 text-center user-select-none m-0"
+                          >
+                            <strong>{{ i + 1 }}</strong> Of
+                            <strong>{{ question.length }}</strong> Questions
+                          </p>
+                        </div>
+  
+                        <div class="form-btn">
+                          <button
+                            [disabled]="i == 0"
+                            data-slide="previous"
+                            (click)="previousQuestion(i)"
+                            type="button"
+                            class="btn btn-primary"
+                          >
+                            Previous
+                          </button>
+                          <button
+                            [disabled]="formArray.controls[i].dirty"
+                            data-slide="skip"
+                            type="button"
+                            (click)="skipQuestion(i)"
+                            class="btn btn-dark my-0 mx-2"
+                          >
+                            Skip
+                          </button>
+                          <button
+                            [disabled]="!formArray.controls[i].dirty"
+                            data-slide="next"
+                            type="button"
+                            (click)="nextQuestion(i)"
+                            class="btn btn-success"
+                          >
+                            {{ question.length != i + 1 ? "Next" : "Submit" }}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </ng-container>
-            </ng-template>
-          </ngb-carousel>
+                </ng-container>
+              </ng-template>
+            </ngb-carousel>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</form>
+  </form>
+</ng-template>
