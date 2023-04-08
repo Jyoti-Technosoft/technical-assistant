@@ -45,6 +45,23 @@ export class AuthEffects implements OnDestroy {
     )
   );
 
+  
+  updateUserDetails$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(autenticationAction.updateUserDetails),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
+      switchMap((payload) => {
+        return this.authSerivce.updateUserDetails(payload.user).pipe(
+          map((users: any) => autenticationAction.updateUserDetailsSucess({users})),
+          catchError((error: any) =>
+            of(autenticationAction.handlErrors({ error }))
+          )
+        );
+      })
+    )
+  );
+
   doRegister$ = createEffect(() =>
     this.actions$.pipe(
       ofType(autenticationAction.doRegistration),

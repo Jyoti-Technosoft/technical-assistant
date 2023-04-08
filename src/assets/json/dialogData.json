@@ -22,5 +22,12 @@
     "no": "Cancel",
     "modelLabel": "About",
     "type": "aboutModel"
+  },
+  "cancelModel": {
+    "modelLabel": "Alert",
+    "label": "Are you sure you want to discard the changes?",
+    "yes": "Yes",
+    "no": "No",
+    "type": "cancelModel"
   }
 }

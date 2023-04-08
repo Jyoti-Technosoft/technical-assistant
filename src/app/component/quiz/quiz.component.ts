@@ -35,7 +35,7 @@ import { Result } from '@app/store/result/result.model';
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  styleUrls: ['./quiz.component.scss']
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
@@ -160,6 +160,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuiz?.quizId,
+      title: this.selectedQuiz?.title,
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
       date: new Date().toISOString().slice(0, 10)
