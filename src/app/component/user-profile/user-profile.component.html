@@ -1,0 +1,362 @@
+<div class="container-fluid">
+  <div class="d-flex align-items-center min-vh-100">
+    <div class="container mx-auto">
+      <div class="row">
+        <div class="col-md-4 col-lg-4 col-xl-4 py-4 my-auto">
+          <div class="card shadow border-0 rounded-4">
+            <div class="card-body p-5">
+              <div
+                class="d-flex justify-content-center flex-column align-items-center h-100"
+              >
+                <div class="initial-letter shadow">
+                  {{ getUserLetter(profilePageFormController["fullName"].value) }}
+                </div>
+                <div class="mt-3">
+                  <h4 class="username">
+                    {{ profilePageFormController["fullName"].value }}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8 col-lg-8 col-xl-8 my-auto">
+          <form [formGroup]="profilePageForm">
+            <div
+              class="card edit-detail-card shadow border-0 rounded-4 user-details"
+            >
+              <div class="card-body">
+                <div class="row my-auto">
+                  <div class="col-4 fw-bold">Full Name</div>
+                  <div
+                    class="col-8 d-flex justify-content-center flex-column h-100"
+                  >
+                    <input
+                      type="text"
+                      class="form-control text-secondary py-1"
+                      formControlName="fullName"
+                    />
+                    <div class="form-text text-danger fixed-height">
+                      <span
+                        *ngIf="profilePageFormController['fullName'].errors?.['required'] && (profilePageFormController['fullName'].touched || profilePageFormController['fullName'].dirty)"
+                      >
+                        Name is required.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-2 pb-2" />
+
+                <div class="row">
+                  <div class="col-4 fw-bold">Email</div>
+                  <div
+                    class="col-8 d-flex justify-content-center flex-column h-100"
+                  >
+                    <input
+                      type="email"
+                      class="form-control text-secondary py-1"
+                      formControlName="email"
+                    />
+                    <div class="form-text text-danger fixed-height">
+                      <span
+                        *ngIf="profilePageFormController['email'].errors?.['required'] && (profilePageFormController['email'].dirty || profilePageFormController['email'].touched)"
+                      >
+                        Email is required.
+                      </span>
+                      <span
+                        *ngIf="profilePageFormController['email'].errors?.['email'] && (profilePageFormController['email'].dirty || profilePageFormController['email'].touched)"
+                      >
+                        Email is Invalid.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-2 pb-2" />
+
+                <div class="row">
+                  <div class="col-4 fw-bold">Phone</div>
+                  <div
+                    class="col-8 d-flex justify-content-center flex-column h-100"
+                  >
+                    <input
+                      type="tel"
+                      class="form-control text-secondary py-1"
+                      formControlName="mobile"
+                    />
+                    <div class="form-text text-danger fixed-height">
+                      <span
+                        *ngIf="(profilePageFormController['mobile'].errors?.['required'] && (profilePageFormController['mobile'].dirty || profilePageFormController['mobile'].touched))"
+                      >
+                        Number is required.
+                      </span>
+                      <span
+                        *ngIf="(profilePageFormController['mobile'].errors?.['pattern'] && (profilePageFormController['mobile'].dirty || profilePageFormController['mobile'].touched) && profilePageFormController['mobile'].value)"
+                      >
+                        Number is Invalid.
+                      </span>
+
+                      <span
+                        *ngIf="(profilePageFormController['mobile'].errors?.['maxlength'] && (profilePageFormController['mobile'].dirty || profilePageFormController['mobile'].touched))"
+                      >
+                        Number is 10 Digits.
+                      </span>
+                      <span
+                        *ngIf="(profilePageFormController['mobile'].errors?.['minlength'] && (profilePageFormController['mobile'].dirty || profilePageFormController['mobile'].touched))"
+                      >
+                        Number is not 10 Digits.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-2 pb-2" />
+
+                <div class="row">
+                  <div class="col-4 fw-bold">Gender</div>
+                  <div class="col-8 px-3 wrapper h-100">
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        value="male"
+                        id="male"
+                        formControlName="gender"
+                      />
+                      <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        type="radio"
+                        class="form-check-input"
+                        value="female"
+                        id="female"
+                        formControlName="gender"
+                      />
+                      <label class="form-check-label" for="female"
+                        >Female</label
+                      >
+                    </div>
+                    <div class="form-text text-danger fixed-height">
+                      <span
+                        *ngIf="profilePageFormController['gender'].errors?.['required'] && (profilePageFormController['gender'].touched || profilePageFormController['gender'].dirty)"
+                      >
+                        Gender is required.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-2 pb-2" />
+
+                <div class="row">
+                  <div class="col-4 fw-bold">Date of Birth</div>
+                  <div
+                    class="col-8 d-flex justify-content-center flex-column h-100"
+                  >
+                    <div
+                      class="input-group calander"
+                      [class.calander-enable]="!profilePageForm.disabled"
+                    >
+                      <input
+                        type="text"
+                        class="form-control text-secondary py-1 calander-div"
+                        placeholder="yyyy-mm-dd"
+                        formControlName="dateOfBirth"
+                        ngbDatepicker
+                        [maxDate]="calendar.getToday()"
+                        [footerTemplate]="footerTemplate"
+                        #datePicker="ngbDatepicker"
+                      />
+                      <span
+                        class="date-picker"
+                        #datePicker
+                        (click)="
+                          !profilePageForm.disabled ? datePicker.toggle() : ''
+                        "
+                        ><i class="fa-regular fa-calendar-days"></i>
+                      </span>
+                    </div>
+
+                    <ng-template #footerTemplate>
+                      <hr class="my-0" />
+                      <button
+                        class="btn btn-primary btn-sm m-2 float-start"
+                        (click)="setTodaysDate()"
+                      >
+                        Today
+                      </button>
+                      <button
+                        class="btn btn-secondary btn-sm m-2 float-end"
+                        (click)="datePicker.close()"
+                      >
+                        Close
+                      </button>
+                    </ng-template>
+                    <div class="form-text text-danger fixed-height">
+                      <span
+                        *ngIf="profilePageFormController['dateOfBirth'].errors?.['required'] && (profilePageFormController['dateOfBirth'].touched || profilePageFormController['dateOfBirth'].dirty)"
+                      >
+                        Birth Date is required.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-2" />
+
+                <ng-container *ngIf="showPasswordField">
+                  <div class="row my-auto">
+                    <div class="col-4 fw-bold">Current Password</div>
+                    <div
+                      class="col-8 d-flex justify-content-center flex-column h-100"
+                    >
+                      <input
+                        type="password"
+                        class="form-control text-secondary py-1"
+                        formControlName="password"
+                      />
+                      <div class="form-text text-danger fixed-height">
+                        <span
+                          *ngIf="profilePageFormController['password'].errors?.['required'] && (profilePageFormController['password'].dirty || profilePageFormController['password'].touched)"
+                        >
+                          Password is required.
+                        </span>
+                        <span
+                          *ngIf="(profilePageFormController['password'].errors?.['pattern'] || profilePageFormController['password'].errors?.['maxlength']) && profilePageFormController['password'].touched"
+                        >
+                          <li>Password should be atleast 8 characters long</li>
+                          <li>Should contain one number,one character and one special character</li>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="my-3 pb-2" />
+
+                  <div class="row my-auto">
+                    <div class="col-4 fw-bold">New Password</div>
+                    <div
+                      class="col-8 d-flex justify-content-center flex-column h-100"
+                    >
+                      <input
+                        type="password"
+                        class="form-control text-secondary py-1"
+                        formControlName="newPassword"
+                      />
+                      <div class="form-text text-danger fixed-height">
+                        <span
+                          *ngIf="profilePageFormController['newPassword'].errors?.['required'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
+                        >
+                          Password is required.
+                        </span>
+                        <span
+                          *ngIf="(profilePageFormController['newPassword'].errors?.['pattern'] || profilePageFormController['newPassword'].errors?.['maxlength']) && profilePageFormController['newPassword'].touched"
+                        >
+                          Password should be atleast 8 characters long and
+                          should contain one number,one character and one
+                          special character.
+                        </span>
+                        <span
+                          *ngIf="profilePageFormController['newPassword'].errors?.['duplicatePassword'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
+                        >
+                          New Password should not be same as current Password
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="my-3 pb-2" />
+
+                  <div class="row my-auto">
+                    <div class="col-4 fw-bold">Confirm Password</div>
+                    <div
+                      class="col-8 d-flex justify-content-center flex-column h-100"
+                    >
+                      <input
+                        type="password"
+                        class="form-control text-secondary py-1"
+                        formControlName="confirmPassword"
+                      />
+                      <div class="form-text text-danger fixed-height">
+                        <span
+                          *ngIf="profilePageFormController['confirmPassword']?.errors?.['required'] && (profilePageFormController['confirmPassword']?.dirty || profilePageFormController['confirmPassword']?.touched)"
+                        >
+                          Confirm password is Required.
+                        </span>
+
+                        <span
+                          *ngIf="(profilePageFormController['confirmPassword'].errors?.['validateConfirmaPassword'] && profilePageFormController['confirmPassword']?.touched) && profilePageFormController['confirmPassword'].value"
+                        >
+                          Passsword and Confirm Password didn't match.
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="my-2" />
+                </ng-container>
+
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-between">
+                    <div
+                      class="col-3 d-flex bottom-left-btn"
+                    >
+                      <button
+                        type="button"
+                        *ngIf="profilePageForm?.disabled"
+                        placement="right"
+                        ngbTooltip="Edit"
+                        class="btn btn-success text-white edit-btn"
+                        (click)="editUserdetails()"
+                      >
+                      <span class="d-none d-md-block"> Edit </span>
+                      <span class="d-md-none">
+                        <i class="fa-sharp fa-solid fa-user-pen"></i>
+                      </span>
+                      </button>
+                      <button
+                        type="button"
+                        *ngIf="!profilePageForm?.disabled"
+                        [disabled]="!profilePageForm.valid"
+                        placement="bottom"
+                        ngbTooltip="Save"
+                        class="btn btn-success text-white save-btn "
+                        (click)="updateUserDetails()"
+                      >
+                      <span class="d-none d-md-block"> Save </span>
+                      <span class="d-md-none">
+                        <i class="fa-solid fa-check"></i>
+                      </span>
+                      </button>
+                      <button
+                        type="button"
+                        *ngIf="!profilePageForm?.disabled"
+                        placement="bottom"
+                        ngbTooltip="Cancel"
+                        class="btn btn-danger text-white cancel-btn mx-2"
+                        (click)="openCancelDialog()"
+                      >
+                      <span class="d-none d-md-block"> Cancel </span>
+                      <span class="d-md-none">
+                        <i class="fa-solid fa-xmark"></i>
+                      </span>
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      *ngIf="!profilePageForm?.disabled && !showPasswordField"
+                      placement="bottom"
+                      ngbTooltip="Change Password"
+                      class="btn btn-primary text-white justify-content-end"
+                      (click)="onHideShow()"
+                    >
+                    <span class="d-none d-md-block"> Change Password </span>
+                    <span class="d-md-none">
+                      <i class="fa-sharp fa-solid fa-key-skeleton"></i>
+                    </span>
+                      
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
