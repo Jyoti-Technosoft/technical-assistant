@@ -1,135 +1,89 @@
-<!-- <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0">
-  <div class="container-fluid">
-    <div class="d-flex">
-      <a _ngcontent-guv-c108="" class="navbar-brand py-2"
-        ><img
-          src="assets/img/logo.svg"
-          alt="logo"
-          class="d-inline-block image"
-        /><span class="title">APPLICATION</span></a
+<nav
+  class="navbar navbar-light navbar-expand-lg bg-light justify-content-between"
+>
+  <a class="navbar-brand py-2"
+    ><img
+      src="assets/img/logo.svg"
+      alt="logo"
+      class="d-inline-block image logo-content"
+    /><span class="title">APPLICATION</span></a
+  >
+  <div class="ml-2">
+    <img
+      src="assets/img/profilephoto.svg"
+      alt="Company Logo"
+      class="img-responsive image rounded-circle mx-2"
+    />
+    <div ngbDropdown class="d-inline-block">
+      <a
+        type="button"
+        class="nav-link email-content dropdown"
+        id="dropdownBasic1"
+        ngbDropdownToggle
       >
-    </div>
-    <div class="navigation" *ngIf="userData?.email">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse">
-          <img
-            src="assets/img/profilephoto.svg"
-            alt="Company Logo"
-            class="img-responsive image rounded-circle mx-2"
-          />
-          <div ngbDropdown class="d-inline-block">
-            <a
-              type="button"
-              class="nav-link dropdown"
-              id="dropdownBasic1"
-              ngbDropdownToggle
-            >
-              {{ userData?.email }}
-            </a>
-            <div
-              class="dropdown"
-              ngbDropdownMenu
-              class="dropdownInfo"
-              aria-labelledby="dropdown"
-            >
-              <button
-                class="btn btn-dropdown"
-                ngbDropdownItem
-                (click)="openAboutDialog()"
-              >
-                About
-              </button>
-              <button
-                class="btn btn-dropdown"
-                ngbDropdownItem
-                (click)="openSignOutDialog()"
-              >
-                Sign Out
-              </button>
-            </div>
-          </div>
-        </div>
+        {{ userData?.email }}
+      </a>
+      <div
+        class="dropdown"
+        ngbDropdownMenu
+        class="dropdownInfo"
+        aria-labelledby="dropdown"
+      >
+        <button
+          class="btn btn-dropdown"
+          ngbDropdownItem
+          (click)="openAboutDialog()"
+        >
+          About
+        </button>
+        <button
+          class="btn btn-dropdown"
+          ngbDropdownItem
+          (click)="openSignOutDialog()"
+        >
+          Sign Out
+        </button>
       </div>
     </div>
-
   </div>
-</nav> -->
-<div>
-  <nav class="navbar navbar-light navbar-expand-lg  bg-light justify-content-between">
-    <a class="navbar-brand py-2"
-      ><img
-        src="assets/img/logo.svg"
-        alt="logo"
-        class="d-inline-block image"
-      /><span class="title">APPLICATION</span></a
-    >
-    <div class="ml-2">
-      <img
-        src="assets/img/profilephoto.svg"
-        alt="Company Logo"
-        class="img-responsive image rounded-circle mx-2"
-      />
-      <div ngbDropdown class="d-inline-block">
-        <a
-          type="button"
-          class="nav-link email-content dropdown"
-          id="dropdownBasic1"
-          ngbDropdownToggle
-        >
-          {{ userData?.email }}
+  <button class="navbar-toggler navbar-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav-links py-0 toggle-content">
+        <li class="menu-item" *ngFor="let item of menuItem">
+          <a class="item-link toggle-item" routerLink="{{ item?.link }}">
+            <i class="fa {{ item?.icon }} icon toggle-icon"></i>
+            <span class="link-name toggle-name">{{ item?.label }}</span>
+          </a>
+        </li>
+      </ul>
+  </div>
+</nav>
+<div class="wrapper toggled-2">
+  <!-- Sidebar -->
+  <div class="sidebar-wrapper navbar-content">
+    <ul class="nav-links mt-1 px-0">
+      <li class="menu-item " *ngFor="let item of menuItem">
+        <div class="p-2 px-4">
+        <a class="item-link" routerLink="{{ item?.link }}">
+          <i class="fa {{ item?.icon }} icon"></i>
+          <span class="link-name">{{ item?.label }}</span>
         </a>
-        <div
-          class="dropdown"
-          ngbDropdownMenu
-          class="dropdownInfo"
-          aria-labelledby="dropdown"
-        >
-          <button
-            class="btn btn-dropdown"
-            ngbDropdownItem
-            (click)="openAboutDialog()"
-          >
-            About
-          </button>
-          <button
-            class="btn btn-dropdown"
-            ngbDropdownItem
-            (click)="openSignOutDialog()"
-          >
-            Sign Out
-          </button>
-        </div>
+      </div>
+      </li>
+    </ul>
+    <ul class="sidebar-nav nav-pills nav-stacked"></ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
+  <!-- Page Content -->
+  <div class="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <router-outlet></router-outlet>
       </div>
     </div>
-
-    <button class="navbar-toggler navbar-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="nav-links py-0 toggle-content">
-          <li class="menu-item" *ngFor="let item of menuItem">
-            <a class="item-link toggle-item" routerLink="{{ item?.link }}">
-              <i class="fa {{ item?.icon }} icon toggle-icon"></i>
-              <span class="link-name toggle-name">{{ item?.label }}</span>
-             <hr> 
-            </a>
-          </li>
-      </ul>
-    </div>
-  </nav>
-<div class="container">
-    <div class="sidebar close navbar-light bg-light navbar-content" appHover remove-class="close">
-        <ul class="nav-links mt-5 py-0">
-          <li class="menu-item" *ngFor="let item of menuItem" >
-            <a class="item-link" routerLink="{{ item?.link }}">
-              <i class="fa {{ item?.icon }} icon"></i>
-              <span class="link-name">{{ item?.label }}</span>
-            </a>
-          </li>
-        </ul>
-    </div>
-</div>
-  <div class="col py-3">
-    <router-outlet></router-outlet>
-</div>
+    <app-footer></app-footer>
+  </div>
+  <!-- /#page-content-wrapper -->
 </div>
