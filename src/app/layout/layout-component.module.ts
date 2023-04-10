@@ -14,7 +14,7 @@ import { AllresultsComponent } from "@app/component/allresults/allresults.compon
 import { StartquizComponent } from "@app/component/startquiz/startquiz.component";
 import { Quizcomponent } from "@app/component/quiz/quiz.component";
 import { ResultComponent } from "@app/component/result/result.component";
-
+import { UserProfileComponent } from '@app/component/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -26,7 +26,8 @@ import { ResultComponent } from "@app/component/result/result.component";
         Quizcomponent,
         ResultComponent,
         FullLayoutComponent,
-        AllresultsComponent
+        AllresultsComponent,
+        UserProfileComponent
     ],
     imports:[
         NgbDropdownModule,
