@@ -8,9 +8,10 @@ import {
   ReplaySubject,
   takeUntil,
 } from 'rxjs';
+
 import { Store } from '@ngrx/store';
 import { autenticationState } from '@app/store/autentication/autentication.state';
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 @Component({

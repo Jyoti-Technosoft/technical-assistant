@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { OnInit } from '@angular/core';
 
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 
 import {
   LOGIN_WRONG_CREDENTIAL,
@@ -22,7 +22,7 @@ import {
   providedIn: 'root',
 })
 
-export class AuthService implements OnInit {
+export class AuthService {
   users: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
@@ -32,8 +32,6 @@ export class AuthService implements OnInit {
     private cookieService: CookieService,
     private state: Store<any>
   ) {}
-
-  ngOnInit(): void {}
 
   private getUsers() {
     this.state
@@ -142,5 +140,11 @@ export class AuthService implements OnInit {
     this.toastService.toastMessage(LOGOUT_SUCCESSFULLY, TOAST_BG_COLOR.TOAST_SUCCESS_COLOR);
     this.cookieService.delete('info_token');
     this.router.navigateByUrl('login');
+  }
+
+
+  ngOnDestroy() {
+    this.destroyer$.next(true);
+    this.destroyer$.unsubscribe();
   }
 }
