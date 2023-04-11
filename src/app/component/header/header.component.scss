@@ -65,7 +65,6 @@ $color_2: #f3f1f6;
     border-radius: none;
   }
 }
-
 // sidebar content css
 .item-link {
   display: flex;
@@ -82,7 +81,6 @@ $color_2: #f3f1f6;
     margin-left: 27px;
   }
 }
-
 .menu-item {
   position: relative;
   list-style: none;
@@ -91,23 +89,15 @@ $color_2: #f3f1f6;
     background: $color_2;
   }
 }
-// @media (max-width: 400px) {
-//   .sidebar {
-//     width: 78px;
-//   }
-
-//   .sidebar.close {
-//     width: 0;
-//   }
-// }
-
+.navbar-content {
+  white-space: nowrap;
+}
 // navbar toggle button //
 @media (min-width: 987px) {
   .navbar-collapse {
     display: none !important;
   }
 }
-
 //For navbar hide email and image content
 @media (max-width: 987px) {
   .img-responsive {
@@ -116,33 +106,31 @@ $color_2: #f3f1f6;
   .toggle-name {
     display: contents !important;
     padding: 5px;
-   }
+  }
   .email-content {
     display: none !important;
   }
 }
-
 @media (max-width: 987px) {
   .navbar-content {
     display: none !important;
   }
-  .menu-item{
+  .menu-item {
     border-bottom: 1px solid grey;
   }
-  .menu-item:last-child{
+  .menu-item:last-child {
     border-bottom: none;
     display: block;
-   }
-   .toggle-item{
-    padding:6px;
-   }
+    min-height: 16px;
+  }
+  .toggle-item {
+    padding: 6px;
+  }
 }
-
 //For navbar toaggle content
 .toggle-item {
   font-size: larger;
   margin-left: 5px;
- 
   &:any-link {
     text-decoration: none;
   }
@@ -159,10 +147,12 @@ $color_2: #f3f1f6;
 .menu-item {
   list-style-type: none;
   padding: 0px;
-  // border-bottom: 1px solid grey	;
-
 }
-
+@media (max-width: 987px) {
+  .header-content {
+    max-height: 160px;
+  }
+}
 .navbar-btn {
   margin-right: 10px;
 }
@@ -214,4 +204,3 @@ $color_2: #f3f1f6;
     width: auto;
   }
 }
-
