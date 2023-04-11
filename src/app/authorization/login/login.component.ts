@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
 
 import dialogData from '@assets/json/dialogData.json';
 
@@ -19,6 +20,7 @@ import { DialogService } from '@app/dialog-service/dialog.service';
 
 export class LoginComponent implements OnInit, OnDestroy {
   userData: any;
+  users = "http://localhost:3000/user";
   dialogData = { ...dialogData };
   loginForm!:FormGroup;
   message$: Observable<any> | undefined;
@@ -29,7 +31,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb:FormBuilder,
-    private store: Store<autenticationState>
+    private store: Store<autenticationState>,
+    private http: HttpClient
   ) {
     this.state = this.store.select(getStateSelector);
   }
@@ -40,11 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createForm();
-    if (localStorage.getItem('registerUser')) {
-      this.userData = JSON.parse(
-        localStorage.getItem('registerUser') as string
-      );
-    }
+    this.http.get(this.users);
   }
 
   createForm() {

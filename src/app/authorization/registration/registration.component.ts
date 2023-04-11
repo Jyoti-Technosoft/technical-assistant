@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
 
 import dialogData from '@assets/json/dialogData.json';
 import { doRegistration } from '@app/store/autentication/autentication.action';
@@ -20,14 +21,15 @@ import { NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 export class RegistrationComponent {
   todayDate: string | undefined = new Date().toISOString().slice(0,10);
-  registerUser: any[] = [];
+  registerUser = "http://localhost:3000/user";
   registrationForm!: FormGroup;
   dialogData = { ...dialogData };
   @ViewChild("datePicker") datePicker!: any 
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    public calendar: NgbCalendar
+    public calendar: NgbCalendar,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -36,11 +38,7 @@ export class RegistrationComponent {
   }
 
   getRegistredUser() {
-    if (localStorage.getItem('registerUser')) {
-      this.registerUser = JSON.parse(
-        localStorage.getItem('registerUser') as string
-      );
-   }  
+      this.http.get(this.registerUser);
  }
 
   submitform(formValue: any) {
@@ -54,6 +52,7 @@ export class RegistrationComponent {
       mobile: formValue?.mobile,
     }
     this.store.dispatch(doRegistration(registerUser))
+    return this.http.post(`${this.registerUser}`, this.registerUser);
   }
 
   validateConfirmaPassword: ValidatorFn = (

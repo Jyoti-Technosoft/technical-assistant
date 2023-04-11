@@ -16,18 +16,18 @@ export class AuthEffects implements OnDestroy {
 
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
-  getAllUsers$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(autenticationAction.getAllUsers),
-      takeUntil(this.destroyer$),
-      distinctUntilChanged(),
-      switchMap((payload) => {
-        return this.authSerivce
-          .getAllUsers()
-          .pipe(map((users) => autenticationAction.loadUserSuccess({ users })));
-      })
-    )
-  );
+  // getAllUsers$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(autenticationAction.getAllUsers),
+  //     takeUntil(this.destroyer$),
+  //     distinctUntilChanged(),
+  //     switchMap((payload) => {
+  //       return this.authSerivce
+  //         .getAllUsers()
+  //         .pipe(map((users) => autenticationAction.loadUserSuccess({ users })));
+  //     })
+  //   )
+  // );
 
   doLogin$ = createEffect(() =>
     this.actions$.pipe(
@@ -36,7 +36,7 @@ export class AuthEffects implements OnDestroy {
       distinctUntilChanged(),
       switchMap((payload) => {
         return this.authSerivce.getUser(payload).pipe(
-          map((userData: any) => autenticationAction.loginSuccess({userData})),
+          map((userData: any) => autenticationAction.loginSuccess({userData:userData[0]})),
           catchError((error: any) =>
             of(autenticationAction.handlErrors({ error }))
           )

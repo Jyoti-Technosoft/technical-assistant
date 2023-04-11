@@ -5,6 +5,7 @@ import { ReplaySubject, distinctUntilChanged, takeUntil } from 'rxjs';
 import quizData from '@assets/json/data.json';
 import { Store } from '@ngrx/store';
 import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
+import { QuizService } from '@app/store/quiz/quiz.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,8 +18,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   destroy$:ReplaySubject<boolean> = new ReplaySubject();
   quizs: any[] = [];
   cardData: number = 8;
+  getAllQuiz: any;
 
-  constructor(private route: Router, private store: Store) {}
+  constructor(
+    private route: Router,
+    private store: Store,
+    ) {
+    }
  
   ngOnInit(): void {
     this.store

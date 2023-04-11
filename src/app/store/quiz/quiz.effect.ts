@@ -25,7 +25,7 @@ export class quizEffects implements OnDestroy {
       switchMap(() => {
         return this.quizService
           .getAllQuiz()
-          .pipe(map((quizes) => quizAction.AllQuizSucess({ quizes })));
+          .pipe(map((quizes) =>{ return quizAction.AllQuizSucess({ quizes })}));
       })
     )
   );

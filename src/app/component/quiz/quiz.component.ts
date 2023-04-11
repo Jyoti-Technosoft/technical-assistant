@@ -14,6 +14,7 @@ import {
   takeUntil,
   Observable,
   distinctUntilChanged,
+  debounceTime,
 } from 'rxjs';
 
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
@@ -31,6 +32,7 @@ import {
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
+import { QuizService } from '@app/store/quiz/quiz.service';
 
 @Component({
   selector: 'app-questions',
@@ -57,6 +59,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   selectedQuiz: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
+  getAllQuiz: any;
 
   constructor(
     private router: Router,
@@ -75,7 +78,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.getUserData();
     this.startCounter();
     this.getQuizData();
-  }
+  } 
 
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event) {
@@ -86,9 +89,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   getQuizData() {
-    if (!this.state.getValue().quiz.allQuiz) {
-      this.store.dispatch(getAllQuiz());
-    }
     this.store
       .select((state: any) => state.quiz.selectedQuiz)
       .pipe(distinctUntilChanged())
@@ -96,12 +96,12 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.getQuestionData(data);
         this.selectedQuiz = data;
       });
-    if (!this.selectedQuiz) {
-      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get(
-        'quiz'
-      ) as string;
-      this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
-    }
+      if (!this.selectedQuiz) {
+        const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get(
+          'quiz'
+        ) as string;
+        this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
+      }
   }
 
   getQuestionData(data: any) {
