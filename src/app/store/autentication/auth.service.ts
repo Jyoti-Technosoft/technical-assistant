@@ -9,11 +9,9 @@ import { HttpClient } from '@angular/common/http';
 import { ToastService } from '@app/toast.service';
 
 import {
-  LOGIN_WRONG_CREDENTIAL,
   LOGOUT_SUCCESSFULLY,
   REGISTERED_SUCCESSFULLY,
   LOGIN_SUCCESSFULLY,
-  ALREADY_REGISTERED_EMAIL,
   TOKEN,
   TOAST_BG_COLOR,
 } from '@app/shared/toast.enum';
@@ -30,24 +28,22 @@ export class AuthService {
     private router: Router,
     private toastService: ToastService,
     private cookieService: CookieService,
-    private state: Store<any>,
     private http: HttpClient
   ) {}
 
   validateSession(): Observable<any> {
-    if(this.decodeObj(this.getUserId()).id) {
+    if(this.decodeObj(this.getUserId())?.id) {
       return of(this.decodeObj(this.getUserId()))
     }
     return throwError(() => new Error(TOKEN));
   }
 
   getUser(payload: any): Observable<any> {
-    const value = this.http.get(this.usersUrl+`?email=${payload.email}&password=${this.encodeObj(payload.password)}`);
-    return value
+    return  this.http.get(this.usersUrl+`?email=${payload.email}&password=${this.encodeObj(payload.password)}`);
   }
 
   registerUser(userValue: any): Observable<any> {
-    return this.http.post(`${this.usersUrl}`, userValue);
+      return this.http.post(`${this.usersUrl}`, userValue);
   }
 
   routeToDashboard(data: any): void {

@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  Observable,
-  distinctUntilChanged,
-  of,
-  takeUntil,
-  throwError,
+  Observable
 } from 'rxjs';
 import { State, Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
 
-import QuizData from '@assets/json/data.json';
 import { ToastService } from '@app/toast.service';
 import { quizState } from './quiz.state';
 import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
@@ -22,9 +17,7 @@ export class QuizService {
   allQuiz: any;
   allQuizUrl = "http://localhost:3000/quiz";
   constructor(
-    private store: Store,
     private toastService: ToastService,
-    private state: State<quizState>,
     private http: HttpClient
   ) {}
 

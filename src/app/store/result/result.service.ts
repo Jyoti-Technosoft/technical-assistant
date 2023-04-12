@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ResultService {
-  result = "http://localhost:3000/results";
+  resultUrl = "http://localhost:3000/results";
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
@@ -18,18 +18,11 @@ export class ResultService {
     ) {}
 
   getResult(): Observable<any> {
-    let allResult = JSON.parse(localStorage.getItem('result') as string).reverse();
-    return of(allResult);
+    return this.http.get(this.resultUrl);
   }
 
   addNewResult(currentData:Result): Observable<any> {
-     let data: any = localStorage.getItem('result')
-      ? localStorage.getItem('result')
-      : [];
-    let stringifyData = data.length == 0 ? data : JSON.parse(data);
-     stringifyData.push(currentData);
-     console.log(stringifyData)
-     return this.http.post(`${this.result}`, data);
+     return this.http.post(`${this.resultUrl}`, currentData);
   }
 
   failedResult(message: any) {
