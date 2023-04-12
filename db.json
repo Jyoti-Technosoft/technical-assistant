@@ -1659,9 +1659,10 @@
   ],
   "results": [
     {
-      "points": 30,
-      "correctAnswer": 3,
-      "inCorrectAnswer": 0,
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
       "type": "Html/CSS",
       "user": 1681131500385,
       "quizTypeImage": "assets\\img\\html-css.svg",
@@ -1669,19 +1670,21 @@
       "id": 1
     },
     {
-      "points": 1.75,
-      "correctAnswer": 2,
-      "inCorrectAnswer": 1,
-      "type": "javascript",
+      "points": 30,
+      "correctAnswer": 3,
+      "inCorrectAnswer": 0,
+      "quizId": 1,
+      "type": "Html/CSS",
       "user": 1681131500385,
-      "quizTypeImage": "assets\\img\\javascript.svg",
+      "quizTypeImage": "assets\\img\\html-css.svg",
       "date": "2023-04-12",
       "id": 2
     },
     {
-      "points": 30,
-      "correctAnswer": 3,
-      "inCorrectAnswer": 0,
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
       "type": "Html/CSS",
       "user": 1681131500385,
       "quizTypeImage": "assets\\img\\html-css.svg",
@@ -1689,19 +1692,21 @@
       "id": 3
     },
     {
-      "points": 0.5,
-      "correctAnswer": 1,
-      "inCorrectAnswer": 2,
-      "type": "javascript",
+      "points": -0.75,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 6,
+      "type": "reactJS",
       "user": 1681131500385,
-      "quizTypeImage": "assets\\img\\javascript.svg",
+      "quizTypeImage": "assets\\img\\react.svg",
       "date": "2023-04-12",
       "id": 4
     },
     {
-      "points": 19,
-      "correctAnswer": 2,
-      "inCorrectAnswer": 1,
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
       "type": "Html/CSS",
       "user": 1681131500385,
       "quizTypeImage": "assets\\img\\html-css.svg",
@@ -1712,6 +1717,7 @@
       "points": 30,
       "correctAnswer": 3,
       "inCorrectAnswer": 0,
+      "quizId": 5,
       "type": "Html/CSS",
       "user": 1681131500385,
       "quizTypeImage": "assets\\img\\html-css.svg",
@@ -1719,12 +1725,13 @@
       "id": 6
     },
     {
-      "points": 30,
+      "points": 3,
       "correctAnswer": 3,
       "inCorrectAnswer": 0,
-      "type": "Html/CSS",
+      "quizId": 2,
+      "type": "javascript",
       "user": 1681131500385,
-      "quizTypeImage": "assets\\img\\html-css.svg",
+      "quizTypeImage": "assets\\img\\javascript.svg",
       "date": "2023-04-12",
       "id": 7
     },
@@ -1732,11 +1739,34 @@
       "points": -3,
       "correctAnswer": 0,
       "inCorrectAnswer": 3,
+      "quizId": 1,
       "type": "Html/CSS",
       "user": 1681131500385,
       "quizTypeImage": "assets\\img\\html-css.svg",
       "date": "2023-04-12",
       "id": 8
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-12",
+      "id": 9
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-12",
+      "id": 10
     }
   ]
 }

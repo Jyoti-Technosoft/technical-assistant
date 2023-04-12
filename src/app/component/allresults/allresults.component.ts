@@ -76,6 +76,7 @@ export class AllresultsComponent {
   }
 
   startQuizAgain(quizName: string | undefined) {
+    debugger
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });
   }
