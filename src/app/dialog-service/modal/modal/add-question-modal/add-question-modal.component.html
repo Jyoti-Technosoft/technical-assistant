@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add Question</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.close(false)"
+  ></button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="mb-3">
+      <label for="question" class="fw-bold">Question</label>
+      <div class="input-group">
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="option" class="fw-bold">Option</label>
+      <div class="input-group">
+        <input type="text" class="form-control" />
+      </div>
+      <div class="my-2">
+        <input type="text" class="form-control" />
+      </div>
+      <div class="my-2">
+        <input type="text" class="form-control" />
+      </div>
+      <div>
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="correct-answer" class="fw-bold">Correct Answer</label>
+      <div class="input-group">
+        <input type="text" class="form-control" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer d-flex justify-content-end">
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="activeModal.close(false)"
+  >
+    Add Question
+  </button>
+</div>
