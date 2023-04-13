@@ -24,6 +24,14 @@ export const LOGIN_SUCCESSFULLY: toastMessage = {
     label: 'No Quiz Played Yet',
     icon: 'fa-regular fa-triangle-exclamation',
   };
+  export const DELETE_SUCCESSFULLY: toastMessage = {
+    label: 'Deleted Quiz Successfully',
+    icon: 'fa-solid fa-check',
+  };
+  export const CREATED_QUIZ_SUCCESSFULLY: toastMessage = {
+    label: 'Quiz Created Successfully',
+    icon: 'fa-solid fa-check',
+  };
   export const TOKEN = 'No Token Found';
   
   export interface toastMessage {

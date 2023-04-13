@@ -1,0 +1,198 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add Quiz</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.close(false)"
+  ></button>
+</div>
+
+<div class="modal-body">
+  <div [formGroup]="addNewForm" (ngSubmit)="saveQuiz()">
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="text"
+          placeholder="Quiz Name"
+          class="form-control form-data"
+          id="quizname"
+          formControlName="quizId"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['quizId'].errors?.['required'] && (addQuizFormValidator['quizId'].touched || addQuizFormValidator['quizId'].dirty)"
+          >
+            Quiz Name is required
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="text"
+          placeholder="Rules"
+          class="form-control form-data"
+          id="rules"
+          formControlName="rules"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['rules'].errors?.['required'] && (addQuizFormValidator['rules'].touched || addQuizFormValidator['rules'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="text"
+          placeholder="Image"
+          class="form-control form-data"
+          id="rules"
+          formControlName="image"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['image'].errors?.['required'] && (addQuizFormValidator['image'].touched || addQuizFormValidator['image'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="number"
+          placeholder="Timer"
+          class="form-control form-data"
+          id="timer"
+          formControlName="timer"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['timer'].errors?.['required'] && (addQuizFormValidator['timer'].touched || addQuizFormValidator['timer'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="number"
+          placeholder="Positive Points"
+          class="form-control form-data"
+          id="positivePoints"
+          formControlName="positivePoints"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['positivePoints'].errors?.['required'] && (addQuizFormValidator['positivePoints'].touched || addQuizFormValidator['positivePoints'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="number"
+          placeholder="Negative Points"
+          class="form-control form-data"
+          id="negativePoints"
+          formControlName="negativePoints"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['negativePoints'].errors?.['required'] && (addQuizFormValidator['negativePoints'].touched || addQuizFormValidator['negativePoints'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="number"
+          placeholder="Number of Questions"
+          class="form-control form-data"
+          id="numberOfQuestions"
+          formControlName="numberOfQuestions"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['numberOfQuestions'].errors?.['required'] && (addQuizFormValidator['numberOfQuestions'].touched || addQuizFormValidator['numberOfQuestions'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <input
+          type="text"
+          placeholder="Title"
+          class="form-control form-data"
+          id="title"
+          formControlName="title"
+        />
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['title'].errors?.['required'] && (addQuizFormValidator['title'].touched || addQuizFormValidator['title'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-mb-3">
+        <textarea
+          class="form-control form-data"
+          id="Textarea"
+          placeholder="Description"
+          rows="3"
+          formControlName="description"
+        ></textarea>
+        <div class="form-text text-danger fixed-height">
+          <span
+            *ngIf="addQuizFormValidator['description'].errors?.['required'] && (addQuizFormValidator['description'].touched || addQuizFormValidator['description'].dirty)"
+          >
+            Please Fill the field
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer d-flex justify-content-end">
+  <button
+    type="button"
+    class="btn btn-success"
+    (click)="saveQuiz()"
+  >
+    Add Quiz
+  </button>
+
+  <button type="submit" class="btn btn-success" (click)="openDialog()">
+    Add Questions
+  </button>
+</div>

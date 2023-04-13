@@ -36,6 +36,18 @@ export const quizReducer = createReducer(
     ...state,
     latestQuizResult: payload.result,
   })),
+  on(quizAction.deleteQuizSucess, (state, payload) => ({
+    ...state,
+    allQuiz : state?.allQuiz?.filter((item:any)=>item.id != payload?.id),
+  })),
+  on(quizAction.addQuizSucess, (state, payload) => ({
+    ...state,
+    allQuiz : state?.allQuiz?.concat(payload.quiz),
+  })),
+  on(quizAction.addQuestionSuccess, (state, payload) => ({
+    ...state,
+    allQuiz : state?.allQuiz?.concat(payload.question),
+  })),
   on(quizAction.emptyQuizPlay, (state, payload) => ({
     ...state,
     latestQuizResult: undefined,

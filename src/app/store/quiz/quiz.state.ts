@@ -15,7 +15,7 @@ export const getStateSelector = createSelector(
     quizReducer.state
 );
 
-export const getallQuix = createSelector(
+export const getallQuiz = createSelector(
     createFeatureSelector('Autentication'),
     quizReducer.state
 );

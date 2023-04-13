@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 
 import {
   LOGOUT_SUCCESSFULLY,

@@ -3,7 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
-import { getallQuix, quizState } from '@app/store/quiz/quiz.state';
+import { getallQuiz, quizState } from '@app/store/quiz/quiz.state';
 import quizData from '@assets/json/data.json';
 import { State, Store } from '@ngrx/store';
 import { distinctUntilChanged } from 'rxjs';

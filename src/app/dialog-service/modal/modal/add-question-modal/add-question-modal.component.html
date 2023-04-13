@@ -1,0 +1,99 @@
+
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Add Question</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.close(false)"
+  ></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="addNewQuestionForm">
+        <div class="mb-3">
+          <label for="question" class="fw-bold">Question</label>
+            <input type="text" class="form-control" formControlName="question" />
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="addQestionFormValidator['question'].errors?.['required'] && (addQestionFormValidator['question'].touched || addQestionFormValidator['question'].dirty)"
+              >
+                Fill this field
+              </span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="option" class="fw-bold">Option</label>
+            <div class="mb-3">
+            <input type="text" class="form-control" formControlName="option" />
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="addQestionFormValidator['option'].errors?.['required'] && (addQestionFormValidator['option'].touched || addQestionFormValidator['option'].dirty)"
+              >
+                Fill this field
+              </span>
+            </div>
+            </div>
+
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="option1" />
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="addQestionFormValidator['option1'].errors?.['required'] && (addQestionFormValidator['option1'].touched || addQestionFormValidator['option1'].dirty)"
+              >
+                Fill this field
+              </span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="option2" />
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="addQestionFormValidator['option2'].errors?.['required'] && (addQestionFormValidator['option2'].touched || addQestionFormValidator['option2'].dirty)"
+              >
+                Fill this field
+              </span>
+            </div>
+          </div>
+        
+          <div class="mb-3">
+            <input type="text" class="form-control" formControlName="option3" />
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="addQestionFormValidator['option3'].errors?.['required'] && (addQestionFormValidator['option3'].touched || addQestionFormValidator['option3'].dirty)"
+              >
+                Fill this field
+              </span>
+            </div>
+          </div>
+        </div>
+    
+        <div class="mb-3">
+          <label for="correct-answer" class="fw-bold">Correct Answer</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="correctAnswer"
+            />
+            <div class="form-text text-danger fixed-height">
+              <span
+                *ngIf="addQestionFormValidator['correctAnswer'].errors?.['required'] && (addQestionFormValidator['correctAnswer'].touched || addQestionFormValidator['correctAnswer'].dirty)"
+              >
+                Fill this field
+              </span>
+            </div>
+        </div>
+  </form>
+</div>
+    
+<div class="modal-footer d-flex justify-content-end">
+  <button
+    type="button"
+    class="btn btn-success"
+    [disabled]="!addNewQuestionForm.valid"
+    (click)="addQuestions()"
+  >
+    Add Question
+  </button>
+</div>

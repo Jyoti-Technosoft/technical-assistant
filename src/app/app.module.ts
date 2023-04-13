@@ -10,7 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from '@app/app.component';
 import { RegistrationComponent } from '@app/authorization/registration/registration.component';
 import { LoginComponent } from '@app/authorization/login/login.component';
-import { ToastComponent } from '@app/toast/toast.component';
+import { ToastComponent } from '@app/component/toast/toast.component';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { ModalComponent } from '@app/dialog-service/modal/modal/modal.component';
 import { AuthGuard } from '@app/authorization/auth-guard/auth.guard';

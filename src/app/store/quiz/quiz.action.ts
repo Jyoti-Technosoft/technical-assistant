@@ -11,3 +11,12 @@ export const selectQuizError = createAction('[Quiz] selectQuizError', props<{err
 
 export const successQuizPlay = createAction('[Quiz] successQuizPlay', props<{result:any}>());
 export const emptyQuizPlay = createAction('[Quiz] emptyQuizPlay');
+
+export const deleteQuiz = createAction('[Quiz] DELETEQUIZ', props<{id:number}>());
+export const deleteQuizSucess = createAction('[Quiz] DELETEQUIZSUCESS',props<{id:number}>());
+
+export const addQuiz = createAction('[Quiz] addQuiz', props<{quiz:any}>());
+export const addQuizSucess = createAction('[Quiz] addQuizSucess',props<{quiz:any}>());
+
+export const addQuestion = createAction('[Quiz] addQuestion', props<{question:any}>());
+export const addQuestionSuccess = createAction('[Quiz] addQuestionSuccess', props<{question:any}>());
