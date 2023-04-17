@@ -1,12 +1,12 @@
-$btn-primary: #5555ff;
-.cardContainer {
+$color: #5555ff;
+
+.card-container {
   max-height: 380px !important;
   min-height: 240px !important;
-}
-
-.img-content {
-  min-height: 140px;
-  max-height: 240px;
+  .img-content {
+    min-height: 140px;
+    max-height: 240px;
+  }
 }
 .text-content {
   white-space: nowrap;
@@ -22,9 +22,15 @@ $btn-primary: #5555ff;
     -webkit-box-orient: vertical;
   }
 }
+.badge-content {
+  border: 1px solid $color;
+  color: $color;
+  font-size: 10px;
+  cursor: pointer;
+}
 .btn-content {
-  background-color: $btn-primary;
-  border-color: $btn-primary;
+  background-color: $color;
+  border-color: $color;
   border-radius: 8px;
 }
 
