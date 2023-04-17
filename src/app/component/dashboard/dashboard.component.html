@@ -2,7 +2,7 @@
   <div class="row min-vh-100">
     <div class="d-flex align-items-center justify-content-center">
       <div class="row justify-content mt-5">
-        <span class="fs-3 title-text font-weight-bold">Choose Quiz</span>
+        <span class="fs-3 title-text">Choose Quiz</span>
         <ng-container
           *ngFor="let data of quizs | slice : 0 : cardData; let i = index"
         >
@@ -14,7 +14,7 @@
                 alt="quiz-logo"
               />
               <div class="card-body">
-                <h5 class="card-title font-weight-bolder">{{ data.title }}</h5>
+                <h5 class="card-title">{{ data.title }}</h5>
                 <p class="card-text small text-content">
                   {{ data.description }}
                 </p>
