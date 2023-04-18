@@ -17,6 +17,7 @@ import { ResultComponent } from "@app/component/result/result.component";
 import { FilterPipe } from '@app/component/pipe/filter.pipe';
 import { AdminDashboardComponent } from '@app/component/admin-dashboard/admin-dashboard.component';
 import { AddQuizComponent } from '@app/component/add-quiz/add-quiz.component';
+import { AddQuestionModalComponent } from '@app/dialog-service/modal/modal/add-question-modal/add-question-modal.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +29,7 @@ import { AddQuizComponent } from '@app/component/add-quiz/add-quiz.component';
         ResultComponent,
         AdminDashboardComponent,
         FullLayoutComponent,
+        AddQuestionModalComponent,
         AddQuizComponent,
         AllresultsComponent,
         FilterPipe

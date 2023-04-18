@@ -9,7 +9,7 @@
 </div>
 
 <div class="modal-body">
-  <div [formGroup]="addNewForm">
+  <form [formGroup]="addNewForm">
     <div class="row">
       <div class="col-mb-3">
         <input
@@ -31,20 +31,7 @@
 
     <div class="row">
       <div class="col-mb-3">
-        <input
-          type="text"
-          placeholder="Rules"
-          class="form-control form-data"
-          id="rules"
-          formControlName="rules"
-        />
-        <div class="form-text text-danger fixed-height">
-          <span
-            *ngIf="addQuizFormValidator['rules'].errors?.['required'] && (addQuizFormValidator['rules'].touched || addQuizFormValidator['rules'].dirty)"
-          >
-            Please Fill the field
-          </span>
-        </div>
+        <div id="editor"> </div>
       </div>
     </div>
 
@@ -161,18 +148,11 @@
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 
 <div class="modal-footer d-flex justify-content-end">
-  <button
-    type="button"
-    class="btn btn-success"
-    (click)="activeModal.close(false)"
-  >
-    Add Quiz
-  </button>
-
+  
   <button type="submit" class="btn btn-success" (click)="openDialog()">
     Add Questions
   </button>

@@ -1,51 +1,138 @@
-<div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Add Question</h4>
-  <button
-    type="button"
-    class="btn-close"
-    aria-label="Close"
-    (click)="activeModal.close(false)"
-  ></button>
-</div>
-<div class="modal-body">
-  <form>
-    <div class="mb-3">
-      <label for="question" class="fw-bold">Question</label>
-      <div class="input-group">
-        <input type="text" class="form-control" />
+<form [formGroup]="addNewQuestionForm">
+  <div formArrayName="form">
+    <div class="wrapper-md">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Question</h4>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="activeModal.close(false)"
+        ></button>
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="option" class="fw-bold">Option</label>
-      <div class="input-group">
-        <input type="text" class="form-control" />
-      </div>
-      <div class="my-2">
-        <input type="text" class="form-control" />
-      </div>
-      <div class="my-2">
-        <input type="text" class="form-control" />
-      </div>
-      <div>
-        <input type="text" class="form-control" />
-      </div>
-    </div>
+      <div class="modal-body">
+        <ngb-carousel
+          #carousel
+          *ngIf="question?.length"
+          [showNavigationArrows]="false"
+          [showNavigationIndicators]="false"
+          [interval]="0"
+          [keyboard]="false"
+        >
+          <ng-template
+            ngbSlide
+            *ngFor="
+              let question of addQuestionFormValidator.controls;
+              let i = index
+            "
+          >
+            <ng-container [formGroupName]="i">
+              <div class="mb-2">
+                <label for="question" class="fw-bold">Question</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="question"
+                />
+                <div class="form-text text-danger fixed-height">
+                  <span *ngIf="addQuestionFormValidator.controls[i].get('question')?.touched && addQuestionFormValidator.controls[i].get('question')?.errors">Fill this field</span>
+                </div>
+              </div>
 
-    <div class="mb-3">
-      <label for="correct-answer" class="fw-bold">Correct Answer</label>
-      <div class="input-group">
-        <input type="text" class="form-control" />
+              <div class="mb-2">
+                <label for="option" class="fw-bold">Option</label>
+                <div class="mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="option"
+                  />
+                  <div class="form-text text-danger fixed-height">
+                    <span *ngIf="addQuestionFormValidator.controls[i].get('option')?.touched && addQuestionFormValidator.controls[i].get('option')?.errors">Fill this field</span>
+                  </div>
+                </div>
+
+                <div class="mb-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="option1"
+                  />
+                  <div class="form-text text-danger fixed-height">
+                    <span *ngIf="addQuestionFormValidator.controls[i].get('option1')?.touched && addQuestionFormValidator.controls[i].get('option1')?.errors">Fill this field</span>
+                  </div>
+                </div>
+
+                <div class="mb-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="option2"
+                  />
+                  <div class="form-text text-danger fixed-height">
+                    <span *ngIf="addQuestionFormValidator.controls[i].get('option2')?.touched && addQuestionFormValidator.controls[i].get('option2')?.errors">Fill this field</span>
+                  </div>
+                </div>
+
+                <div class="mb-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="option3"
+                  />
+                  <div class="form-text text-danger fixed-height">
+                    <span *ngIf="addQuestionFormValidator.controls[i].get('option3')?.touched && addQuestionFormValidator.controls[i].get('option3')?.errors">Fill this field</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-2">
+                <label for="correct-answer" class="fw-bold"
+                  >Correct Answer</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="correctAnswer"
+                />
+                <div class="form-text text-danger fixed-height">
+                  <span *ngIf="addQuestionFormValidator.controls[i].get('correctAnswer')?.touched && addQuestionFormValidator.controls[i].get('correctAnswer')?.errors">Fill this field</span>
+                </div>
+              </div>
+            </ng-container>
+            <div class="modal-footer">
+              <button
+                [disabled]="i == 0"
+                type="button"
+                class="btn btn-success justify-content-start"
+                (click)="previousQuestion(i)"
+              >
+                Previous Question
+              </button>
+              <button
+                [disabled]="questionIndex != i + 1"
+                type="button"
+                class="btn btn-success justify-content-end"
+                data-dismiss="modal"
+                (click)="activeModal.close(false)"
+              >
+                Add Quiz
+              </button>
+              <button
+                [disabled]="!question.valid"
+                type="button"
+                class="btn btn-success justify-content-end"
+                data-slide="next"
+                (click)="nextQuestion(i)"
+              >
+                {{
+                  questionIndex != i + 1 ? "Add New Question" : "Add Questions"
+                }}
+              </button>
+            </div>
+          </ng-template>
+        </ngb-carousel>
       </div>
     </div>
-  </form>
-</div>
-
-<div class="modal-footer d-flex justify-content-end">
-  <button
-    type="button"
-    class="btn btn-success"
-    (click)="activeModal.close(false)"
-  >
-    Add Question
-  </button>
-</div>
+  </div>
+</form>
