@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent {
-  allQuizUrl = "http://localhost:3000/quiz/2";
+  allQuizUrl = "http://localhost:3000/quiz";
   quizData = { ...quizData };
   dialogData = { ...dialogData };
   destroy$: ReplaySubject<boolean> = new ReplaySubject();

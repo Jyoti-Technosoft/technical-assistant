@@ -24,16 +24,18 @@ export class DialogService {
   
   openAddQuizDialog(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(AddQuizComponent, { centered: true  });
+      const modalRef = this.modalService.open(AddQuizComponent, { centered: true,  size: 'xl' });
       modalRef.result.then((data) => {
         resolve(<boolean>data);
       });
     });
   }
 
-  openAddQuestionDialog(): Promise<boolean> {
+  openAddQuestionDialog(configData:any,formGroup:any): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(AddQuestionModalComponent, { centered: true  });
+      const modalRef = this.modalService.open(AddQuestionModalComponent, { centered: true, size: 'xl' });
+      modalRef.componentInstance.configData = configData;
+      modalRef.componentInstance.formGroup = formGroup;
       modalRef.result.then((data) => {
         resolve(<boolean>data);
       });

@@ -15,12 +15,12 @@ import { StartquizComponent } from "@app/component/startquiz/startquiz.component
 import { Quizcomponent } from "@app/component/quiz/quiz.component";
 import { ResultComponent } from "@app/component/result/result.component";
 import { HoverDirective } from '@app/directive/hover.directive';
-import { AddQuestionModalComponent } from '@app/dialog-service/modal/modal/add-question-modal/add-question-modal.component';
 
 
 import { FilterPipe } from '@app/component/pipe/filter.pipe';
 import { AdminDashboardComponent } from '@app/component/admin-dashboard/admin-dashboard.component';
 import { AddQuizComponent } from '@app/component/add-quiz/add-quiz.component';
+import { AddQuestionModalComponent } from '@app/dialog-service/modal/modal/add-question-modal/add-question-modal.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +34,7 @@ import { AddQuizComponent } from '@app/component/add-quiz/add-quiz.component';
         FullLayoutComponent,
         AllresultsComponent,
         HoverDirective,
+        AddQuestionModalComponent,
         AddQuizComponent,
         AllresultsComponent,
         FilterPipe,

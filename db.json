@@ -1160,6 +1160,82 @@
       "title": "Bootstrap",
       "description": "Bootstrap is used with angular",
       "id": 7
+    },
+    {
+      "quizId": "Bootstrap",
+      "rules": "",
+      "image": "assets\\\\img\\\\javascript.svg",
+      "timer": 30,
+      "positivePoints": 10,
+      "negativePoints": 1,
+      "title": "Bootstrap",
+      "numberOfQuestions": 3,
+      "description": "Bootstrap is a coding language and bootstrap is used very much",
+      "question": [
+        {
+          "question": "What is bootstrap",
+          "option": "jhkjhkj",
+          "option1": "hkjh",
+          "option2": "kjhk",
+          "option3": "jhjkhkjh",
+          "correctAnswer": "jhkjhk"
+        },
+        {
+          "question": "jhkjhkjhjk",
+          "option": "hjkhjkhk",
+          "option1": "jhjkhjkhjk",
+          "option2": "hjkhkjhjk",
+          "option3": "hjkhjkhjk",
+          "correctAnswer": "hjkhjkhjk"
+        },
+        {
+          "question": "jhkjkgjkgjhgjh",
+          "option": "gjh",
+          "option1": "gjhgjh",
+          "option2": "gjhg",
+          "option3": "jhgjhg",
+          "correctAnswer": "jhghjgjg"
+        }
+      ],
+      "id": 8
+    },
+    {
+      "quizId": "Bootstrap",
+      "rules": "",
+      "image": "assets\\\\img\\\\javascript.svg",
+      "timer": 30,
+      "positivePoints": 10,
+      "negativePoints": 2,
+      "title": "Bootstrap",
+      "numberOfQuestions": 3,
+      "description": "Booststrap is a cding language and is used very m,uch",
+      "question": [
+        {
+          "question": "What ois bootsdtrap",
+          "option": "Bootstrap",
+          "option1": "Bootstrap",
+          "option2": "Bootstrap",
+          "option3": "Bootstrap",
+          "correctAnswer": "Bootstrap"
+        },
+        {
+          "question": "Bootstrap",
+          "option": "Bootstrap",
+          "option1": "Bootstrap",
+          "option2": "Bootstrap",
+          "option3": "Bootstrap",
+          "correctAnswer": "Bootstrap"
+        },
+        {
+          "question": "Bootstrap",
+          "option": "Bootstrap",
+          "option1": "Bootstrap",
+          "option2": "Bootstrap",
+          "option3": "Bootstrap",
+          "correctAnswer": "Bootstrap"
+        }
+      ],
+      "id": 9
     }
   ],
   "user": [
