@@ -6,7 +6,9 @@
           <div class="container">
             <ng-container>
               <div class="card-body">
-                <h2 class="card-title">Result</h2>
+                <h2 class="card-title text-primary fw-bold">
+                  Your Quiz Result
+                </h2>
                 <div class="row d-flex">
                   <div class="col-sm-12 col-lg-6">
                     <div class="container d-flex justify-content-center">
@@ -22,18 +24,44 @@
                       class="d-flex align-items-center justify-content-between"
                     >
                       <div class="field">
-                        <h5>Total Points : {{ recentResult?.points }}</h5>
-                        <h5>
+                        <h5 class="text-primary">
+                          Total Points : {{ recentResult?.points }}
+                        </h5>
+                        <h5 class="text-success">
                           Correct Answers : {{ recentResult?.correctAnswer }}
                         </h5>
-                        <h5>
+                        <h5 class="text-danger">
                           Wrong Answers : {{ recentResult?.inCorrectAnswer }}
                         </h5>
+                        <div
+                          class="chart"
+                          style="--value1:{{ percentage }}%;--value2:{{
+                            incorrectanswer
+                          }}%;"
+                        >
+                          <div
+                            class="row col-12"
+                            style="
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              padding: 12px;
+                            "
+                          >
+                            <p class="pie_text col-6">
+                              <span class="pie"></span>{{ percentage }}%
+                            </p>
+                            <p class="pie_text col-6">
+                              <span class="pie1"> </span>{{ incorrectanswer }}%
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="card-footer footer">
                 <div class="text-center p-3">
                   <button
