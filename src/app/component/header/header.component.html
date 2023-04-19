@@ -1,55 +1,71 @@
-<nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light p-0">
-  <div class="container-fluid">
-    <div class="d-flex">
-      <a _ngcontent-guv-c108="" class="navbar-brand py-2"
-        ><img
-          src="assets/img/logo.svg"
-          alt="logo"
-          class="d-inline-block image"
-        /><span class="title">APPLICATION</span></a
+<nav
+  class="navbar navbar-light navbar-expand-lg bg-light justify-content-between fixed-top"
+>
+
+<div class="container-fluid">
+  
+  <a class="navbar-brand image-icon"
+    ><img
+      src="assets/img/logo.svg"
+      alt="logo"
+      class="d-inline-block image logo-content"
+    /><span class="title">APPLICATION</span></a
+  >
+  <div class="ml-2 height" *ngIf="userData">
+    <img
+      src="assets/img/profilephoto.svg"
+      alt="Company Logo"
+      class="img-responsive image rounded-circle mx-2"
+    />
+    <div ngbDropdown class="d-inline-block">
+      <a
+        type="button"
+        class="nav-link email-content dropdown"
+        id="dropdownBasic1"
+        ngbDropdownToggle
       >
-    </div>
-    <div class="navigation" *ngIf="userData?.email">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse">
-          <img
-            src="assets/img/profilephoto.svg"
-            alt="Company Logo"
-            class="img-responsive image rounded-circle mx-2"
-          />
-          <div ngbDropdown class="d-inline-block">
-            <a
-              type="button"
-              class="nav-link dropdown"
-              id="dropdownBasic1"
-              ngbDropdownToggle
-            >
-              {{ userData?.email }}
-            </a>
-            <div
-              class="dropdown"
-              ngbDropdownMenu
-              class="dropdownInfo"
-              aria-labelledby="dropdown"
-            >
-              <button
-                class="btn btn-dropdown"
-                ngbDropdownItem
-                (click)="openAboutDialog()"
-              >
-                About
-              </button>
-              <button
-                class="btn btn-dropdown"
-                ngbDropdownItem
-                (click)="openSignOutDialog()"
-              >
-                Sign Out
-              </button>
-            </div>
-          </div>
-        </div>
+        {{ userData?.email }}
+      </a>
+      <div
+        class="dropdown"
+        ngbDropdownMenu
+        class="dropdownInfo"
+        aria-labelledby="dropdown"
+      >
+        <button
+          class="btn btn-dropdown"
+          ngbDropdownItem
+          (click)="openAboutDialog()"
+        >
+          About
+        </button>
+        <button
+          class="btn btn-dropdown"
+          ngbDropdownItem
+          (click)="openSignOutDialog()"
+        >
+          Sign Out
+        </button>
       </div>
     </div>
   </div>
+  <!-- mobile view button -->
+  <!-- <button class="navbar-toggler" type="button" (click)="toggleNavBar()">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+</div>
 </nav>
+<ng-container *ngIf="userData">
+  <div class="container" >
+    <div class="sidebar close navbar-light mt-3 bg-light" appHover #sidebar remove-class="close">
+        <ul class="nav-links mt-5 py-0">
+          <li class="menu-item" *ngFor="let item of menuItem" >
+            <a class="item-link" routerLink="{{ item?.link }}">
+              <i class="bi {{ item?.icon }} icon"></i>
+              <span class="link-name">{{ item?.label }}</span>
+            </a>
+          </li>
+        </ul>
+    </div>
+  </div>
+</ng-container>

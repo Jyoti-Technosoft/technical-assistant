@@ -1,17 +1,17 @@
 export const LOGIN_SUCCESSFULLY: toastMessage = {
     label: 'Login Successfully',
-    icon: 'fa-solid fa-check',
+    icon: 'bi bi-check-lg',
   };
   export const LOGOUT_SUCCESSFULLY: toastMessage = {
     label: 'Logout Successfully',
-    icon: 'fa-solid fa-check',
+    icon: 'bi bi-check-lg',
   };
   export const LOGIN_WRONG_CREDENTIAL =
     'No User Found With This Login credentical';
   
   export const REGISTERED_SUCCESSFULLY: toastMessage = {
     label: 'Registerd Successfully',
-    icon: 'fa-solid fa-check',
+    icon: 'bi bi-check-lg',
   };
   export const ALREADY_REGISTERED_EMAIL =
     'User with this email already registered';
@@ -21,8 +21,8 @@ export const LOGIN_SUCCESSFULLY: toastMessage = {
     icon: 'fa-regular fa-triangle-exclamation',
   };
   export const RESULT_QUIZ = {
-    label: 'No Quiz Played Yet',
-    icon: 'fa-regular fa-triangle-exclamation',
+    label: 'No Recent Quiz Played Yet',
+    icon: 'bi bi-exclamation-circle',
   };
   export const TOKEN = 'No Token Found';
   

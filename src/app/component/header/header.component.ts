@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -18,6 +18,11 @@ import {
 } from 'rxjs';
 import { OnDestroy } from '@angular/core';
 
+interface menuItem {
+  label: string;
+  icon: string;
+  link?: string;
+}
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -28,33 +33,39 @@ export class HeaderComponent implements OnDestroy {
   userData: any;
   loggedInUser$: Observable<any> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
+  menuItem: menuItem[] = [
+    { label: 'Dashboard', icon: 'bi-house-fill', link: 'dashboard' },
+    { label: 'All Results', icon: 'bi-grid-1x2-fill', link: 'allresults' },
+    { label: 'Profile', icon: 'bi-person-fill', link: 'Profile' },
+    { label: 'Sign Out', icon: 'bi-box-arrow-right' },
+  ];
 
   constructor(
     public authenticationService: AuthenticationService,
     private dialogService: DialogService,
     private store: Store<autenticationState>
   ) {}
-  
+
   ngOnInit() {
     this.getUserData();
   }
-  
+
   openAboutDialog() {
     let configData = this.dialogData.aboutModel;
     this.dialogService.openDialog(configData);
   }
-  
+
   getUserData() {
     this.loggedInUser$ = this.store.select(
       (state: any) => state.authentication
-      );
-      this.loggedInUser$
+    );
+    this.loggedInUser$
       .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
       .subscribe((state) => {
         this.userData = state?.userData;
       });
-    }
-    
+  }
+
   openSignOutDialog() {
     let configData = this.dialogData.signoutModel;
     this.dialogService.openDialog(configData).then((value) => {

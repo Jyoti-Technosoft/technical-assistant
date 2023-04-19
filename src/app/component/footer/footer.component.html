@@ -1,17 +1,19 @@
-<div class="footer navbar-light bg-light">
-  <ng-container *ngFor="let data of icons; let i = index">
-    <a href="{{data?.link}}" target="_blank">
-      <i class="fa-brands fa-{{data.icon}} icon"></i>
-    </a>
-  </ng-container>
-
-  <div class="credits">
-    © 2023 Copyright
-    <a
-      class="footer-link"
-      routerLink="jyoti-web"
-    >
-      Jyoti Technosoft LLP
-    </a>
+<div class="top">
+  <div class="footer navbar-light bg-light">
+    <ng-container *ngFor="let data of icons; let i = index">
+      <a href="{{data?.link}}" target="_blank">
+        <i class="bi bi-{{data.icon}} icon"></i>
+      </a>
+    </ng-container>
+  
+    <div class="credits">
+      © 2023 Copyright
+      <a
+        class="footer-link"
+        routerLink="jyoti-web"
+      >
+        Jyoti Technosoft LLP
+      </a>
+    </div>
   </div>
 </div>
