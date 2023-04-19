@@ -4,6 +4,11 @@
 //font awosome 
 @import url('../node_modules/@fortawesome/fontawesome-free/css/all.css');
 
+//quill text-editor
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+@import '~quill/dist/quill.bubble.css';
+
 $bg-colour: #fff;
 * {
   font-family: Roboto;

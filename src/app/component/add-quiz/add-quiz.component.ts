@@ -7,8 +7,9 @@ import Quill from 'quill';
 @Component({
   selector: 'app-add-quiz',
   templateUrl: './add-quiz.component.html',
-  styleUrls: ['./add-quiz.component.scss'],
+  styleUrls: ['./add-quiz.component.scss']
 })
+
 export class AddQuizComponent implements OnInit, AfterViewInit {
   addNewForm = new FormGroup({
     quizName: new FormControl('', Validators.required),
@@ -24,11 +25,13 @@ export class AddQuizComponent implements OnInit, AfterViewInit {
     private dialogService: DialogService,
     public activeModal: NgbActiveModal
   ) {}
+
   ngAfterViewInit(): void {
     let quill = new Quill('#editor', {
       theme: 'snow',
     });
   }
+
   ngOnInit(): void {}
 
   openDialog() {
