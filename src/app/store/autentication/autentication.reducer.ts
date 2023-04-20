@@ -51,5 +51,9 @@ export const autenticationReducer = createReducer(
   on(loginAction.registrationSucess, (state,payload) => ({
     ...state,
     allUsers: payload.users
+  })),
+  on(loginAction.updateUserDetailsSucess, (state,payload) => ({
+    ...state,
+    userData: payload?.users
   }))
 );

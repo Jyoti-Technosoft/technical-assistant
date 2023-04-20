@@ -19,7 +19,6 @@
   border-radius: 50px;
   width: 37px;
   height: 37px;
-  background-color: #ffff;
 }
 .dropdown-toggle::after {
   vertical-align: middle;
@@ -145,6 +144,7 @@ $color_1: #77619e;
         transition: all 0.3s ease;
       }
       .item-link {
+        cursor: pointer;
         display: flex;
         align-items: center;
         text-decoration: none;
@@ -158,10 +158,20 @@ $color_1: #77619e;
     }
   }
 }
-
-@media (max-width: 400px) {
+@media (max-width: 1000px) {
   .sidebar {
     display: none;
     width: 100%;
+  }
+  .animation-slider {
+    height: 100vh;
+    transition-timing-function: ease;
+  }
+  .show {
+    display: contents;
+    transition: all 0.9s ease-out;
+  }
+  .sidebar {
+    width: 100% !important;
   }
 }

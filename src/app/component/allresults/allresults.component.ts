@@ -46,7 +46,6 @@ export class AllresultsComponent {
       .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
       .subscribe((state) => {
         this.userData = state?.userData;
-        this.avatarName = this.getUserLetter(this.userData?.fullName);
       });
   }
 
@@ -62,14 +61,6 @@ export class AllresultsComponent {
       });
   }
 
-  getUserLetter(userName: string) {
-    const intials = userName
-      .split(' ')
-      .map((name) => name[0])
-      .join('')
-      .toUpperCase();
-    return intials;
-  }
 
   loadMoreData() {
     this.initialData = this.initialData + 12;

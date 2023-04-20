@@ -17,5 +17,8 @@ export const doLogout = createAction('[Autentication] doLogout');
 export const doRegistration = createAction('[Autentication] doRegistration', props<authenticationModel.RegisteredPayload>());
 export const registrationSucess = createAction('[Autentication] registrationSucess', props<{users:any}>());
 
+export const updateUserDetails = createAction('[Autentication] updateUserDetails',props<{users:any}>());
+export const updateUserDetailsSucess = createAction('[Autentication] updateUserDetailsSucess',props<{users:any}>());
+
 //handle error message
 export const handlErrors = createAction('[Autentication] handle errors',  props<{error:any}>());

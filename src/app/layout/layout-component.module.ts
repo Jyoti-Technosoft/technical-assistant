@@ -11,10 +11,12 @@ import { LayoutRoutingModule } from "@app/layout/layout-routing.module";
 import { DashboardComponent } from "@app/component/dashboard/dashboard.component";
 import { CommonModule } from "@angular/common";
 import { AllresultsComponent } from "@app/component/allresults/allresults.component";
-import { StartquizComponent } from "@app/component/startquiz/startquiz.component";
+import { UserProfileComponent } from '@app/component/user-profile/user-profile.component';
+import { rulesComponent } from "@app/component/startquiz/startquiz.component";
 import { Quizcomponent } from "@app/component/quiz/quiz.component";
 import { ResultComponent } from "@app/component/result/result.component";
 import { HoverDirective } from '@app/directive/hover.directive';
+
 
 
 
@@ -23,11 +25,12 @@ import { HoverDirective } from '@app/directive/hover.directive';
         HeaderComponent,
         DashboardComponent,
         FooterComponent,
-        StartquizComponent,
+        rulesComponent,
         Quizcomponent,
         ResultComponent,
         FullLayoutComponent,
         AllresultsComponent,
+        UserProfileComponent,
         HoverDirective
     ],
     imports:[

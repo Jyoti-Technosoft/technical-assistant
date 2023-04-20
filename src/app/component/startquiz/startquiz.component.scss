@@ -1,18 +1,15 @@
 .card-layout {
-  margin-bottom: 50px;
   border-radius: 15px;
   height: fit-content;
 }
 
 
 .card-img-top {
-  position: absolute;
-  left: 30%;
-  top: 12%;
-  height: 300px;
-  width: 300px;
   opacity: 0.1;
+  position: absolute;
+  top:20%;
   pointer-events: none;
+  
 }
 .card-title {
   margin-bottom: 10px;

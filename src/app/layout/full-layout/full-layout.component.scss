@@ -1,11 +1,17 @@
-.layout-container {
-  margin-top: 60px;
-  margin-left: 78px;  
+.full-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .container-router {
+    margin-top: 60px;
+    margin-left: 78px;
+  }
 }
 
-
-@media (max-width: 400px) {
-  .layout-container {
-    margin-left: 0px;
+@media only screen and (max-width: 1000px) {
+  .container-router {
+    margin-left: 0px !important;
   }
 }

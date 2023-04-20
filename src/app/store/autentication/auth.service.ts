@@ -16,6 +16,7 @@ import {
   ALREADY_REGISTERED_EMAIL,
   TOKEN,
   TOAST_BG_COLOR,
+  USER_DETAILS_UPDATE_SUCCESSFULLY,
 } from '@app/shared/toast.enum';
 
 @Injectable({
@@ -24,6 +25,7 @@ import {
 
 export class AuthService {
   users: any;
+  LoggedInUsers: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
   constructor(
@@ -39,6 +41,11 @@ export class AuthService {
       .subscribe((data: any) => {
         this.users = data?.allUsers;
       });
+      this.state
+      .select((state) => state.authentication)
+      .subscribe((data: any) => {
+        this.LoggedInUsers = data?.userData;
+      });
   }
 
   validateSession(): Observable<any> {
@@ -46,16 +53,46 @@ export class AuthService {
       this.getUsers();
     }
     if (this.getUserId()) {
-      console.log();
       let findUser = this.users?.find(
         (user: any) => this.decodeObj(this.getUserId()) == user.id
       );
-      console.log(findUser);
       if (findUser) {
         return this.getStateData(findUser);
       }
     }
     return throwError(() => new Error(TOKEN));
+  }
+
+  updateUserDetails(payload: any): Observable<any> {
+    if (!this.users) {
+      this.getUsers();
+    }
+    if (this.LoggedInUsers.id == payload?.id) {
+      if (
+        payload.password &&
+        payload?.password != this.decodeObj(this.LoggedInUsers?.password)
+      ) {
+        return throwError(() => new Error('Please enter Correct Password'));
+      }
+      payload =  Object.assign({}, payload, {password : payload?.newPassword ? this.encodeObj(payload?.newPassword) : this.LoggedInUsers?.password})
+      delete payload.newPassword;
+      delete payload.confirmPassword;
+      const newState = this.users?.map((user: any) => {
+        if (user?.id == payload?.id) {
+          user = payload;
+        }
+        return user;
+      });
+
+      localStorage.setItem('registerUser', JSON.stringify(newState));
+      this.toastService.toastMessage(
+        USER_DETAILS_UPDATE_SUCCESSFULLY,
+        TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
+      );
+      return of(payload);
+    } else {
+      return throwError(() => new Error(LOGIN_WRONG_CREDENTIAL));
+    }
   }
 
   getUser(payload: any): Observable<any> {
@@ -123,6 +160,7 @@ export class AuthService {
     let loggedUser = {
       fullName: user?.fullName,
       email: user?.email,
+      password: user?.password,
       dateOfBirth: user?.dateOfBirth,
       mobile: user?.mobile,
       gender: user?.gender,

@@ -1,8 +1,8 @@
-//importing boostrap file 
+//importing boostrap file
 @import "~bootstrap/dist/css/bootstrap.css";
 
-//font awosome 
-@import url('../node_modules/bootstrap-icons/font/bootstrap-icons.css');
+//font awosome
+@import url("../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 
 $bg-colour: #fff;
 * {
@@ -24,3 +24,49 @@ body {
   src: url(assets/fonts/Roboto-Regular.ttf) format("truetype");
 }
 
+.center-to-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  width: 90%;
+}
+
+@media (max-width: 500px) {
+  .center-to-page {
+    position: initial !important;
+    transform: none !important;
+    -webkit-transform: none;
+    -moz-transform: none;
+    -o-transform: none;
+    -ms-transform: none;
+    width: 100%;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  background: transparent;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b9babd;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #b9babd;
+}

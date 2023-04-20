@@ -1,71 +1,53 @@
 <nav
   class="navbar navbar-light navbar-expand-lg bg-light justify-content-between fixed-top"
 >
-
-<div class="container-fluid">
-  
-  <a class="navbar-brand image-icon"
-    ><img
-      src="assets/img/logo.svg"
-      alt="logo"
-      class="d-inline-block image logo-content"
-    /><span class="title">APPLICATION</span></a
-  >
-  <div class="ml-2 height" *ngIf="userData">
-    <img
-      src="assets/img/profilephoto.svg"
-      alt="Company Logo"
-      class="img-responsive image rounded-circle mx-2"
-    />
-    <div ngbDropdown class="d-inline-block">
-      <a
-        type="button"
-        class="nav-link email-content dropdown"
-        id="dropdownBasic1"
-        ngbDropdownToggle
+  <div class="container-fluid w-100">
+    <div class="d-flex justify-content-between">
+      <a class="navbar-brand image-icon"
+        ><img
+          src="assets/img/logo.svg"
+          alt="logo"
+          class="d-inline-block image logo-content"
+        /><span class="title">APPLICATION</span></a
       >
-        {{ userData?.email }}
-      </a>
-      <div
-        class="dropdown"
-        ngbDropdownMenu
-        class="dropdownInfo"
-        aria-labelledby="dropdown"
-      >
-        <button
-          class="btn btn-dropdown"
-          ngbDropdownItem
-          (click)="openAboutDialog()"
-        >
-          About
-        </button>
-        <button
-          class="btn btn-dropdown"
-          ngbDropdownItem
-          (click)="openSignOutDialog()"
-        >
-          Sign Out
-        </button>
+    </div>
+    <div class="ml-2 height d-none d-lg-block" *ngIf="userData">
+      <img
+        src="assets/img/profilephoto.svg"
+        alt="Company Logo"
+        class="img-responsive image rounded-circle mx-2"
+      />
+      <div ngbDropdown class="d-inline-block">
+        <a type="button" class="nav-link">
+          {{ userData?.email }}
+        </a>
       </div>
     </div>
+    <button class="navbar-toggler" type="button" (click)="togleNavBar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
-  <!-- mobile view button -->
-  <!-- <button class="navbar-toggler" type="button" (click)="toggleNavBar()">
-    <span class="navbar-toggler-icon"></span>
-  </button> -->
-</div>
 </nav>
 <ng-container *ngIf="userData">
-  <div class="container" >
-    <div class="sidebar close navbar-light mt-3 bg-light" appHover #sidebar remove-class="close">
-        <ul class="nav-links mt-5 py-0">
-          <li class="menu-item" *ngFor="let item of menuItem" >
-            <a class="item-link" routerLink="{{ item?.link }}">
-              <i class="bi {{ item?.icon }} icon"></i>
-              <span class="link-name">{{ item?.label }}</span>
-            </a>
-          </li>
-        </ul>
+  <div class="container">
+    <div
+      class="sidebar close navbar-light mt-3 bg-light"
+      #sidebar
+      appHover
+      remove-class="close"
+    >
+      <ul class="nav-links mt-5 py-0">
+        <li class="menu-item" *ngFor="let item of menuItem">
+          <a
+            class="item-link"
+            (click)="!item?.link &&  item?.click()"
+            [routerLink]="item?.link"
+          >
+            <i class="bi {{ item?.icon }} icon"></i>
+            <span class="link-name">{{ item?.label }}</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </ng-container>

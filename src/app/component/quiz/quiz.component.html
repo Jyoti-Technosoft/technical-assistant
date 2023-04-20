@@ -1,8 +1,8 @@
 <form [formGroup]="quizForm">
   <div formArrayName="form">
     <div class="container-fluid">
-      <div class="d-flex align-items-center min-vh-100">
-        <div class="container mx-auto mt-5">
+      <div class="d-flex align-items-center ">
+        <div class="container mx-auto center-to-page">
           <ngb-carousel
             #carousel
             *ngIf="question?.length"
@@ -114,7 +114,7 @@
                         >
                           <span class="d-none d-md-block"> Previous </span>
                           <span class="d-md-none">
-                            <i class="fa-solid fa-chevron-left"></i>
+                            <i class="bi bi-arrow-left"></i>
                           </span>
                         </button>
 
@@ -129,7 +129,7 @@
                           Skip
                         </span>
                           <span class="d-md-none" >
-                            <i class="fa-solid fa-forward"></i>
+                            <i class="bi bi-fast-forward-fill"></i>
                           </span>
                         </button>
 
@@ -144,7 +144,7 @@
                             {{ question.length != i + 1 ? "Next" : "Submit" }}
                           </span>
                           <span class="d-md-none">
-                            <i class="fa-solid fa-chevron-right"></i>
+                            <i class="bi bi-arrow-right"></i>
                           </span>
                         </button>
                       </div>

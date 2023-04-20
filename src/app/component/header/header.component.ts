@@ -33,17 +33,23 @@ export class HeaderComponent implements OnDestroy {
   userData: any;
   loggedInUser$: Observable<any> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-  menuItem: menuItem[] = [
-    { label: 'Dashboard', icon: 'bi-house-fill', link: 'dashboard' },
-    { label: 'All Results', icon: 'bi-grid-1x2-fill', link: 'allresults' },
-    { label: 'Profile', icon: 'bi-person-fill', link: 'Profile' },
-    { label: 'Sign Out', icon: 'bi-box-arrow-right' },
+  @ViewChild('sidebar') sidebar!: ElementRef ; 
+  menuItem: any[] = [
+    { label: 'Dashboard', icon: 'bi-grid-1x2-fill', link: 'dashboard' },
+    { label: 'All Results', icon: 'bi-pie-chart-fill', link: 'allresults' },
+    { label: 'Profile', icon: 'bi-person-fill', link: 'user-profile' },
+    {
+      label: 'Sign Out',
+      icon: 'bi-box-arrow-right',
+      click: () => this.openSignOutDialog(),
+    },
   ];
 
   constructor(
     public authenticationService: AuthenticationService,
     private dialogService: DialogService,
-    private store: Store<autenticationState>
+    private store: Store<autenticationState>,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
@@ -53,6 +59,15 @@ export class HeaderComponent implements OnDestroy {
   openAboutDialog() {
     let configData = this.dialogData.aboutModel;
     this.dialogService.openDialog(configData);
+  }
+
+  togleNavBar() {
+    if (this.sidebar.nativeElement.classList.contains('show')) {
+       this.renderer.removeClass(this.sidebar.nativeElement, 'show');
+    } else {
+      this.renderer.addClass(this.sidebar.nativeElement, 'show');
+
+    }
   }
 
   getUserData() {

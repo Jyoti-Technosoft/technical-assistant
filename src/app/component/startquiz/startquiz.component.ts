@@ -9,11 +9,11 @@ import { State, Store } from '@ngrx/store';
 import { distinctUntilChanged } from 'rxjs';
 
 @Component({
-  selector: 'app-carddesign',
+  selector: 'app-rules',
   templateUrl: './startquiz.component.html',
   styleUrls: ['./startquiz.component.scss'],
 })
-export class StartquizComponent implements OnInit {
+export class rulesComponent implements OnInit {
   quizData = { ...quizData };
   instruction: any;
   selectedQuizType!: string;
