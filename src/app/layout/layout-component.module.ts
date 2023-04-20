@@ -1,6 +1,6 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbCarouselModule, NgbDatepickerModule, NgbDropdownModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
@@ -14,8 +14,10 @@ import { AllresultsComponent } from "@app/component/allresults/allresults.compon
 import { StartquizComponent } from "@app/component/startquiz/startquiz.component";
 import { Quizcomponent } from "@app/component/quiz/quiz.component";
 import { ResultComponent } from "@app/component/result/result.component";
-
-
+import { FilterPipe } from '@app/component/pipe/filter.pipe';
+import { AdminDashboardComponent } from '@app/component/admin-dashboard/admin-dashboard.component';
+import { AddQuizComponent } from '@app/component/add-quiz/add-quiz.component';
+import { AddQuestionModalComponent } from '@app/dialog-service/modal/modal/add-question-modal/add-question-modal.component';
 
 @NgModule({
     declarations: [
@@ -25,8 +27,12 @@ import { ResultComponent } from "@app/component/result/result.component";
         StartquizComponent,
         Quizcomponent,
         ResultComponent,
+        AdminDashboardComponent,
         FullLayoutComponent,
-        AllresultsComponent
+        AddQuestionModalComponent,
+        AddQuizComponent,
+        AllresultsComponent,
+        FilterPipe
     ],
     imports:[
         NgbDropdownModule,
@@ -42,7 +48,7 @@ import { ResultComponent } from "@app/component/result/result.component";
     exports:[
         HeaderComponent,
         FooterComponent,
+        FilterPipe
     ],
 })
-
 export class LayoutComponentModule {}

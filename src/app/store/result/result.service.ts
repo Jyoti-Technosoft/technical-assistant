@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
 import { Result } from './result.model';
 

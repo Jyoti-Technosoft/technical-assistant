@@ -9,7 +9,7 @@ import {
 import { State, Store } from '@ngrx/store';
 
 import QuizData from '@assets/json/data.json';
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 import { quizState } from './quiz.state';
 import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
 

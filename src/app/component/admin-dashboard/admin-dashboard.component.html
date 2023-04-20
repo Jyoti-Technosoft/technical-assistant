@@ -5,7 +5,7 @@
         <div class="search-card mt-2">
           <span
             class="fs-3 title-text d-flex justify-content-between font-weight-bold"
-            >Choose Quiz
+            >Add Quiz
             <div class="input-box field-content">
               <input
                 type="text"
@@ -16,6 +16,9 @@
               <i class="fa fa-search icon"></i>
             </div>
           </span>
+          <div class="add-quiz-btn d-flex justify-content-end py-2">
+            <button class="btn btn-primary" (click)="addQuizData()">Add New Quiz</button>
+          </div>
         </div>
         <ng-container
           *ngFor="
@@ -39,9 +42,8 @@
                   <button
                     type="button"
                     class="btn btn-primary btn-sm float-end btn-content"
-                    (click)="startQuiz(data.quizId)"
                   >
-                    Start Quiz
+                    Delete
                   </button>
                 </div>
               </div>

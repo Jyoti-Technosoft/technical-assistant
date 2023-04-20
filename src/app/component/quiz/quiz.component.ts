@@ -35,7 +35,7 @@ import { Result } from '@app/store/result/result.model';
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss'],
+  styleUrls: ['./quiz.component.scss']
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };

@@ -1,25 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Params, Router } from '@angular/router';
 import { ReplaySubject, distinctUntilChanged, takeUntil } from 'rxjs';
 
 import quizData from '@assets/json/data.json';
 import { Store } from '@ngrx/store';
 import { getAllQuiz, selectQuiz } from '@app/store/quiz/quiz.action';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-admin-dashboard',
+  templateUrl: './admin-dashboard.component.html',
+  styleUrls: ['./admin-dashboard.component.scss']
 })
-
-export class DashboardComponent implements OnInit, OnDestroy {
+export class AdminDashboardComponent {
   quizData = { ...quizData };
   destroy$: ReplaySubject<boolean> = new ReplaySubject();
   quizs: any[] = [];
   cardData: number = 8;
   searchText = '';
 
-  constructor(private route: Router, private store: Store) {}
+  constructor(
+    private store: Store,
+    private dialogService:DialogService
+    ) {}
 
   ngOnInit(): void {
     this.store
@@ -33,10 +35,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
   }
 
-  startQuiz(title: string) {
-    this.store.dispatch(selectQuiz({ quizId: title }));
-    const queryParams: Params = { quiz: title };
-    this.route.navigate(['/quizname'], { queryParams });
+  addQuizData(){
+    this.dialogService.openAddQuizDialog()
   }
 
   loadMore() {
