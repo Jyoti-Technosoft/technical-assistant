@@ -51,7 +51,7 @@ export class AddQuestionModalComponent {
   }
   nextQuestion(questionIndex:number){
     this.questionIndex = questionIndex + 1;
-    if (this.questionIndex != this.question.length) {;
+    if (this.questionIndex != this.question.length) {
       this.carousel.next();
     }
   }

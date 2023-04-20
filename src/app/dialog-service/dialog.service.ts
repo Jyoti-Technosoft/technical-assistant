@@ -24,7 +24,7 @@ export class DialogService {
   
   openAddQuizDialog(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(AddQuizComponent, { centered: true,  size: 'xl' });
+      const modalRef = this.modalService.open(AddQuizComponent, { centered: true,  fullscreen:true });
       modalRef.result.then((data) => {
         resolve(<boolean>data);
       });
@@ -33,7 +33,7 @@ export class DialogService {
 
   openAddQuestionDialog(configData:any): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(AddQuestionModalComponent, { centered: true, size: 'xl' });
+      const modalRef = this.modalService.open(AddQuestionModalComponent, { centered: true, fullscreen:true });
       modalRef.componentInstance.configData = configData;
       modalRef.result.then((data) => {
         resolve(<boolean>data);

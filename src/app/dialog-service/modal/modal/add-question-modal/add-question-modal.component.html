@@ -1,7 +1,7 @@
 <form [formGroup]="addNewQuestionForm">
   <div formArrayName="form">
-    <div class="wrapper-md">
-      <div class="modal-header">
+    <!-- <div class="wrapper-md"> -->
+      <div class="modal-header bg-light">
         <h4 class="modal-title" id="modal-basic-title">Add Question</h4>
         <button
           type="button"
@@ -10,97 +10,154 @@
           (click)="activeModal.close(false)"
         ></button>
       </div>
-      <div class="modal-body">
-        <ngb-carousel
-          #carousel
-          *ngIf="question?.length"
-          [showNavigationArrows]="false"
-          [showNavigationIndicators]="false"
-          [interval]="0"
-          [keyboard]="false"
+
+      <ngb-carousel
+        #carousel
+        *ngIf="question?.length"
+        [showNavigationArrows]="false"
+        [showNavigationIndicators]="false"
+        [interval]="0"
+        [keyboard]="false"
+      >
+        <ng-template
+          ngbSlide
+          *ngFor="
+            let question of addQuestionFormValidator.controls;
+            let i = index
+          "
         >
-          <ng-template
-            ngbSlide
-            *ngFor="
-              let question of addQuestionFormValidator.controls;
-              let i = index
-            "
-          >
-            <ng-container [formGroupName]="i">
-              <div class="mb-2">
-                <label for="question" class="fw-bold">Question</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="question"
-                />
-                <div class="form-text text-danger fixed-height">
-                  <span *ngIf="addQuestionFormValidator.controls[i].get('question')?.touched && addQuestionFormValidator.controls[i].get('question')?.errors">Fill this field</span>
-                </div>
-              </div>
-
-              <div class="mb-2">
-                <label for="option" class="fw-bold">Option</label>
-                <div class="mb-3">
+          <ng-container [formGroupName]="i">
+            <div class="modal-body">
+              <div class="container p-0">
+                <div class="mb-2">
+                  <label for="question" class="fw-bold">Question</label>
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="option"
+                    formControlName="question"
                   />
                   <div class="form-text text-danger fixed-height">
-                    <span *ngIf="addQuestionFormValidator.controls[i].get('option')?.touched && addQuestionFormValidator.controls[i].get('option')?.errors">Fill this field</span>
+                    <span
+                      *ngIf="
+                        addQuestionFormValidator.controls[i].get('question')
+                          ?.touched &&
+                        addQuestionFormValidator.controls[i].get('question')
+                          ?.errors
+                      "
+                      >Fill this field</span
+                    >
                   </div>
                 </div>
 
                 <div class="mb-2">
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="option1"
-                  />
-                  <div class="form-text text-danger fixed-height">
-                    <span *ngIf="addQuestionFormValidator.controls[i].get('option1')?.touched && addQuestionFormValidator.controls[i].get('option1')?.errors">Fill this field</span>
+                  <label for="option" class="fw-bold">Option</label>
+                  <div class="row">
+                    <div class="mb-3 col-6">
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="option"
+                      />
+                      <div class="form-text text-danger fixed-height">
+                        <span
+                          *ngIf="
+                            addQuestionFormValidator.controls[i].get('option')
+                              ?.touched &&
+                            addQuestionFormValidator.controls[i].get('option')
+                              ?.errors
+                          "
+                          >Fill this field</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="mb-2 col-6">
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="option1"
+                      />
+                      <div class="form-text text-danger fixed-height">
+                        <span
+                          *ngIf="
+                            addQuestionFormValidator.controls[i].get('option1')
+                              ?.touched &&
+                            addQuestionFormValidator.controls[i].get('option1')
+                              ?.errors
+                          "
+                          >Fill this field</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="mb-2 col-6">
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="option2"
+                      />
+                      <div class="form-text text-danger fixed-height">
+                        <span
+                          *ngIf="
+                            addQuestionFormValidator.controls[i].get('option2')
+                              ?.touched &&
+                            addQuestionFormValidator.controls[i].get('option2')
+                              ?.errors
+                          "
+                          >Fill this field</span
+                        >
+                      </div>
+                    </div>
+
+                    <div class="mb-2 col-6">
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="option3"
+                      />
+                      <div class="form-text text-danger fixed-height">
+                        <span
+                          *ngIf="
+                            addQuestionFormValidator.controls[i].get('option3')
+                              ?.touched &&
+                            addQuestionFormValidator.controls[i].get('option3')
+                              ?.errors
+                          "
+                          >Fill this field</span
+                        >
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 <div class="mb-2">
+                  <label for="correct-answer" class="fw-bold"
+                    >Correct Answer</label
+                  >
                   <input
                     type="text"
                     class="form-control"
-                    formControlName="option2"
+                    formControlName="correctAnswer"
                   />
                   <div class="form-text text-danger fixed-height">
-                    <span *ngIf="addQuestionFormValidator.controls[i].get('option2')?.touched && addQuestionFormValidator.controls[i].get('option2')?.errors">Fill this field</span>
-                  </div>
-                </div>
-
-                <div class="mb-2">
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="option3"
-                  />
-                  <div class="form-text text-danger fixed-height">
-                    <span *ngIf="addQuestionFormValidator.controls[i].get('option3')?.touched && addQuestionFormValidator.controls[i].get('option3')?.errors">Fill this field</span>
+                    <span
+                      *ngIf="
+                        addQuestionFormValidator.controls[i].get(
+                          'correctAnswer'
+                        )?.touched &&
+                        addQuestionFormValidator.controls[i].get(
+                          'correctAnswer'
+                        )?.errors
+                      "
+                      >Fill this field</span
+                    >
                   </div>
                 </div>
               </div>
-
-              <div class="mb-2">
-                <label for="correct-answer" class="fw-bold"
-                  >Correct Answer</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  formControlName="correctAnswer"
-                />
-                <div class="form-text text-danger fixed-height">
-                  <span *ngIf="addQuestionFormValidator.controls[i].get('correctAnswer')?.touched && addQuestionFormValidator.controls[i].get('correctAnswer')?.errors">Fill this field</span>
-                </div>
-              </div>
-            </ng-container>
-            <div class="modal-footer">
+            </div>
+            <div class="modal-footer bg-light">
               <button
                 [disabled]="i == 0"
                 type="button"
@@ -130,9 +187,9 @@
                 }}
               </button>
             </div>
-          </ng-template>
-        </ngb-carousel>
-      </div>
-    </div>
+          </ng-container>
+        </ng-template>
+      </ngb-carousel>
+    <!-- </div> -->
   </div>
 </form>
