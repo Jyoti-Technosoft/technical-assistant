@@ -58,7 +58,7 @@ export class ResultComponent implements OnInit, OnDestroy {
       (this.recentResult?.points / this.recentResult?.totalPoints) *
       100
     ).toFixed(2);
-    this.incorrectanswer = (100 - this.percentage).toFixed(2);
+    this.incorrectanswer = (100 - this.percentage) .toFixed(2);
   }
 
   startQuizAgain(quizName: string) {
