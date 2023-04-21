@@ -1,10 +1,80 @@
-.footer{
-    background-color: white;
+.footer {
+  background-color: white;
 }
 
 @media only screen and (max-width: 620px) {
-    /* For mobile phones: */
-    .result-card {
-        max-width: 80%;
-    }
+  /* For mobile phones: */
+  .result-card {
+    max-width: 80%;
+  }
+}
+
+:root {
+  --size: 100px;
+  --bord: 10px;
+}
+
+.chart {
+  font-size: 3em;
+  width: 160px;
+  height: 160px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  position: relative;
+  z-index: 0;
+  justify-content: flex-end;
+}
+.chart::after {
+  font-size: 0.45em;
+}
+.chart::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  padding: 16px;
+  background: linear-gradient(#f3f3f3, #f3f3f3) content-box,
+    conic-gradient(
+      green 0 var(--value1),
+      red calc(var(--value1) + 0.5%) calc(var(--value1) + var(--value2)),
+      grey 0
+    );
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 16px),
+    #fff calc(100% - 15px)
+  );
+}
+.pie_text {
+  display: flex;
+  font-size: 12px;
+  font-weight: bold;
+  justify-content: stretch;
+  text-indent: 5px;
+}
+
+.pie {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: green;
+  padding: 10px;
+  width: 1px;
+  height: 1px;
+}
+
+.pie1 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: red;
+  padding: 10px;
+  width: 1px;
+  height: 1px;
 }

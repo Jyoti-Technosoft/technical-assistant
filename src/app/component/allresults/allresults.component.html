@@ -1,5 +1,5 @@
 <div class="col text-center result-layout mb-3">
-  <span class="fs-3">Result</span>
+  <span class="fs-4 text-primary fw-bold">Your Quiz Result</span>
 </div>
 
 <div class="container" *ngIf="allResultData?.length">
@@ -8,21 +8,34 @@
       class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
       *ngFor="let data of allResultData | slice : 0 : initialData"
     >
-      <div class="card shadow mt-3 rounded-4 border-0 cardContainer">
+      <div class="card shadow mt-3 rounded-3 border-0 cardContainer">
         <img
           class="img-fluid p-2 h-100 img-content"
           alt="quiz-logo"
           src="{{ data?.quizTypeImage }}"
         />
-        <div class="card-body">
-          <h4 class="card-title font-weight-bolder">{{ data.type }}</h4>
-
-          <p class="card-text">Total Points : {{ data.points }}</p>
-
-          <p class="card-text">Correct Answers : {{ data.correctAnswer }}</p>
-
-          <p class="card-text">Wrong Answers : {{ data.inCorrectAnswer }}</p>
-
+        <div class="card-body bg-light mt-3 rounded-3 border-0">
+          <h4 class="card-title text-secondary font-weight-bolder text-center">
+            {{ data.type }}
+          </h4>
+          <p class="card-text text-primary d-flex justify-content-between mb-1">
+            <span> Total Points : </span>
+            <span>
+              {{ data.points }}
+            </span>
+          </p>
+          <p class="card-text text-success d-flex justify-content-between mb-1">
+            <span> Correct Answers :</span>
+            <span>
+              {{ data.correctAnswer }}
+            </span>
+          </p>
+          <p class="card-text text-danger d-flex justify-content-between mb-1">
+            <span> Wrong Answers : </span>
+            <span>
+              {{ data.inCorrectAnswer }}
+            </span>
+          </p>
           <div class="text-center mt-2">
             <button
               type="button"

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Params, Router } from '@angular/router';
 
 import { AuthenticationService } from '@app/service/authentication.service';
@@ -16,14 +16,17 @@ import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  styleUrls: ['./result.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
-
 export class ResultComponent implements OnInit, OnDestroy {
   loggedInUser$: Observable<any> | undefined;
   userData: any;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
   recentResult: any;
+  percentage: any;
+  incorrectanswer: any;
+
   constructor(
     public authenticationService: AuthenticationService,
     public router: Router,
@@ -46,8 +49,16 @@ export class ResultComponent implements OnInit, OnDestroy {
 
     if (!this.recentResult) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.toastMessage(RESULT_QUIZ, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
+      this.toastService.toastMessage(
+        RESULT_QUIZ,
+        TOAST_BG_COLOR.TOAST_ERROR_COLOR
+      );
     }
+    this.percentage = (
+      (this.recentResult?.points / this.recentResult?.totalPoints) *
+      100
+    ).toFixed(2);
+    this.incorrectanswer = (100 - this.percentage) .toFixed(2);
   }
 
   startQuizAgain(quizName: string) {
@@ -58,7 +69,6 @@ export class ResultComponent implements OnInit, OnDestroy {
   showAllQuiz() {
     this.router.navigateByUrl('/allresults');
   }
-
   getLoggedUser() {
     this.loggedInUser$ = this.store.select(
       (state: any) => state.authentication
@@ -69,7 +79,6 @@ export class ResultComponent implements OnInit, OnDestroy {
         this.userData = state?.userData;
       });
   }
-
   ngOnDestroy(): void {
     this.destroyer$.next(true);
     this.destroyer$.unsubscribe();

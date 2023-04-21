@@ -26,7 +26,7 @@ import { State, Store } from '@ngrx/store';
 import {
   getAllQuiz,
   selectQuiz,
-  successQuizPlay
+  successQuizPlay,
 } from '@app/store/quiz/quiz.action';
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
@@ -57,6 +57,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   selectedQuiz: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
+  totalpoints!: number;
 
   constructor(
     private router: Router,
@@ -103,14 +104,13 @@ export class Quizcomponent implements OnInit, OnDestroy {
       this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
     }
   }
-
   getQuestionData(data: any) {
     if (!data) {
       return;
     }
-
     this.timer = data?.timer;
     this.positivePoints = data?.positivePoints;
+    this.totalpoints = data?.numberOfQuestions * data?.positivePoints;
     this.negativePoints = data?.negativePoints;
     const arrCopy: any = [...data?.questions];
     this.question = arrCopy;
@@ -161,8 +161,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
       inCorrectAnswer: this.inCorrectAnswer,
       type: this.selectedQuiz?.quizId,
       user: this.userData.id,
+      totalPoints: this.totalpoints,
       quizTypeImage: this.selectedQuiz?.image,
-      date: new Date().toISOString().slice(0, 10)
+      date: new Date().toISOString().slice(0, 10),
     };
     this.store.dispatch(addResults({ result }));
     this.store.dispatch(successQuizPlay({ result: result }));
@@ -224,7 +225,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
       }
     }
   }
-
   getUserData() {
     this.loggedInUser$ = this.store.select(
       (state: any) => state.authentication
@@ -235,7 +235,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.userData = state?.userData;
       });
   }
-
   ngOnDestroy() {
     this.destroyer$.next(true);
     this.destroyer$.unsubscribe();

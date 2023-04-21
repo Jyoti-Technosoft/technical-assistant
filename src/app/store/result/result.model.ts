@@ -3,7 +3,8 @@ export interface Result {
   date: string;
   inCorrectAnswer: number;
   points: number;
+  totalPoints?: number;
   type: string;
   user: number;
-  quizTypeImage:string; 
+  quizTypeImage: string;
 }
