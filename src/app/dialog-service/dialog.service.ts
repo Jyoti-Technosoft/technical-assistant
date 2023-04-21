@@ -31,10 +31,11 @@ export class DialogService {
     });
   }
 
-  openAddQuestionDialog(configData:any,formGroup:any): Promise<boolean> {
+  openAddQuestionDialog(configData:any,configData2:any,formGroup:any): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(AddQuestionModalComponent, { centered: true, size: 'xl' });
       modalRef.componentInstance.configData = configData;
+      modalRef.componentInstance.configData2 = configData2;
       modalRef.componentInstance.formGroup = formGroup;
       modalRef.result.then((data) => {
         resolve(<boolean>data);

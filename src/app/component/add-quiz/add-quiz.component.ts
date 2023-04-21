@@ -28,8 +28,9 @@ export class AddQuizComponent {
     negativePoints: this.fb.control('', Validators.required),
     title: this.fb.control('', Validators.required),
     numberOfQuestions : this.fb.control('', Validators.required),
+    numberOfOptions : this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
-    question: this.fb.array([]),
+    questions: this.fb.array([]),
   });
 
   constructor(
@@ -44,12 +45,13 @@ export class AddQuizComponent {
   openDialog() {
     this.dialogService.openAddQuestionDialog(
       this.addNewForm.value.numberOfQuestions,
+      this.addNewForm.value.numberOfOptions,
       this.addNewForm
     );
   }
 
   saveQuiz() {
-    console.log(this.addNewForm.value)
+    debugger
     this.store.dispatch(addQuiz({ quiz: this.addNewForm.value }));
   }
 

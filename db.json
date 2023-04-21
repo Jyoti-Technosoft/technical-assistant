@@ -1150,51 +1150,703 @@
       "id": 6
     },
     {
-      "quizId": "Bootsrap",
-      "rules": "No Rules",
+      "quizId": "Bootstrap",
+      "rules": "",
       "image": "assets\\\\img\\\\html-css.svg",
       "timer": 30,
-      "positivePoints": 2,
-      "negativePoints": 0.1,
-      "numberOfQuestions": 10,
+      "positivePoints": 1,
+      "negativePoints": 0.25,
       "title": "Bootstrap",
-      "description": "Bootstrap is used with angular",
+      "numberOfQuestions": 10,
+      "numberOfOptions": 4,
+      "description": "Bootstrap is a free, open source front-end development framework for the creation of websites and web apps.",
+      "questions": [
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        }
+      ],
       "id": 7
     },
     {
       "quizId": "Bootstrap",
       "rules": "",
-      "image": "assets\\\\img\\\\javascript.svg",
+      "image": "assets\\\\img\\\\html-css.svg",
       "timer": 30,
-      "positivePoints": 10,
-      "negativePoints": 1,
+      "positivePoints": 1,
+      "negativePoints": 0.25,
       "title": "Bootstrap",
-      "numberOfQuestions": 3,
-      "description": "Bootstrap is a coding language and bootstrap is used very much",
-      "question": [
+      "numberOfQuestions": 10,
+      "numberOfOptions": 4,
+      "description": "Bootstrap is a free, open source front-end development framework for the creation of websites and web apps.",
+      "questions": [
         {
-          "question": "What is bootstrap",
-          "option": "jhkjhkj",
-          "option1": "hkjh",
-          "option2": "kjhk",
-          "option3": "jhjkhkjh",
-          "correctAnswer": "jhkjhk"
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
         },
         {
-          "question": "jhkjhkjhjk",
-          "option": "hjkhjkhk",
-          "option1": "jhjkhjkhjk",
-          "option2": "hjkhkjhjk",
-          "option3": "hjkhjkhjk",
-          "correctAnswer": "hjkhjkhjk"
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
         },
         {
-          "question": "jhkjkgjkgjhgjh",
-          "option": "gjh",
-          "option1": "gjhgjh",
-          "option2": "gjhg",
-          "option3": "jhgjhg",
-          "correctAnswer": "jhghjgjg"
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
         }
       ],
       "id": 8
@@ -1202,40 +1854,560 @@
     {
       "quizId": "Bootstrap",
       "rules": "",
-      "image": "assets\\\\img\\\\javascript.svg",
+      "image": "assets\\\\img\\\\html-css.svg",
       "timer": 30,
-      "positivePoints": 10,
-      "negativePoints": 2,
+      "positivePoints": 1,
+      "negativePoints": 0.25,
       "title": "Bootstrap",
-      "numberOfQuestions": 3,
-      "description": "Booststrap is a cding language and is used very m,uch",
-      "question": [
+      "numberOfQuestions": 10,
+      "numberOfOptions": 4,
+      "description": "Bootstrap is a free, open source front-end development framework for the creation of websites and web apps.",
+      "questions": [
         {
-          "question": "What ois bootsdtrap",
-          "option": "Bootstrap",
-          "option1": "Bootstrap",
-          "option2": "Bootstrap",
-          "option3": "Bootstrap",
-          "correctAnswer": "Bootstrap"
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
         },
         {
-          "question": "Bootstrap",
-          "option": "Bootstrap",
-          "option1": "Bootstrap",
-          "option2": "Bootstrap",
-          "option3": "Bootstrap",
-          "correctAnswer": "Bootstrap"
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
         },
         {
-          "question": "Bootstrap",
-          "option": "Bootstrap",
-          "option1": "Bootstrap",
-          "option2": "Bootstrap",
-          "option3": "Bootstrap",
-          "correctAnswer": "Bootstrap"
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
         }
       ],
       "id": 9
+    },
+    {
+      "quizId": "Bootstrap",
+      "rules": "",
+      "image": "assets\\\\img\\\\html-css.svg",
+      "timer": 30,
+      "positivePoints": 1,
+      "negativePoints": 0.25,
+      "title": "Bootstrap",
+      "numberOfQuestions": 4,
+      "numberOfOptions": 4,
+      "description": "Bootstrap is a free, open source front-end development framework for the creation of websites and web apps.",
+      "questions": [
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        },
+        {
+          "question": "",
+          "options": [
+            {
+              "id": 1,
+              "label": ""
+            },
+            {
+              "id": 2,
+              "label": ""
+            },
+            {
+              "id": 3,
+              "label": ""
+            },
+            {
+              "id": 4,
+              "label": ""
+            }
+          ],
+          "answer": {
+            "id": ""
+          }
+        }
+      ],
+      "id": 10
     }
   ],
   "user": [
@@ -1459,6 +2631,303 @@
       "quizTypeImage": "assets\\img\\javascript.svg",
       "date": "2023-04-13",
       "id": 11
+    },
+    {
+      "points": -2.5,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 10,
+      "quizId": 9,
+      "type": "Bootstrap",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\\\img\\\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 12
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 13
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 14
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 15
+    },
+    {
+      "points": -1,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 1,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 16
+    },
+    {
+      "points": 0,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 0,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 17
+    },
+    {
+      "points": 0,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 0,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 18
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 19
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 20
+    },
+    {
+      "points": 0,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 0,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 21
+    },
+    {
+      "points": 0,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 0,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 22
+    },
+    {
+      "points": 30,
+      "correctAnswer": 3,
+      "inCorrectAnswer": 0,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 23
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 24
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 25
+    },
+    {
+      "points": -2,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 2,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 26
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 27
+    },
+    {
+      "points": -1,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 1,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 28
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 29
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 30
+    },
+    {
+      "points": 8,
+      "correctAnswer": 1,
+      "inCorrectAnswer": 2,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 31
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 32
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 33
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 34
+    },
+    {
+      "points": -3,
+      "correctAnswer": 0,
+      "inCorrectAnswer": 3,
+      "quizId": 1,
+      "type": "Html/CSS",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\img\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 35
+    },
+    {
+      "points": 10,
+      "correctAnswer": 10,
+      "inCorrectAnswer": 0,
+      "quizId": 7,
+      "type": "Bootstrap",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\\\img\\\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 36
+    },
+    {
+      "points": 10,
+      "correctAnswer": 10,
+      "inCorrectAnswer": 0,
+      "quizId": 7,
+      "type": "Bootstrap",
+      "user": 1681131500385,
+      "quizTypeImage": "assets\\\\img\\\\html-css.svg",
+      "date": "2023-04-21",
+      "id": 37
+    },
+    {
+      "points": "0",
+      "correctAnswer": 4,
+      "inCorrectAnswer": 0,
+      "quizId": 8,
+      "type": "",
+      "user": 1681131500385,
+      "quizTypeImage": "",
+      "date": "2023-04-21",
+      "id": 38
     }
   ]
 }
