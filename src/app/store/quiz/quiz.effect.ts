@@ -23,9 +23,11 @@ export class quizEffects implements OnDestroy {
       takeUntil(this.destroyer$),
       distinctUntilChanged(),
       switchMap(() => {
-        return this.quizService
-          .getAllQuiz()
-          .pipe(map((quizes) => quizAction.AllQuizSucess({ quizes })));
+        return this.quizService.getAllQuiz().pipe(
+          map((quizes) => {
+            return quizAction.AllQuizSucess({ quizes });
+          })
+        );
       })
     )
   );
@@ -38,6 +40,48 @@ export class quizEffects implements OnDestroy {
       switchMap((quiz) => {
         return this.quizService.getSelectedQuiz(quiz.quizId).pipe(
           map((quiz) => quizAction.selectQuizSucess({ quiz })),
+          catchError((error: any) => of(quizAction.selectQuizError({ error })))
+        );
+      })
+    )
+  );
+
+  deleteQuiz$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(quizAction.deleteQuiz),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
+      switchMap((data) => {
+        return this.quizService.deleteQuiz(data.id).pipe(
+          map((quiz) => quizAction.deleteQuizSucess({ id: data.id })),
+          catchError((error: any) => of(quizAction.selectQuizError({ error })))
+        );
+      })
+    )
+  );
+
+  createQuiz$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(quizAction.addQuiz),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
+      switchMap((data) => {
+        return this.quizService.createQuiz(data.quiz).pipe(
+          map((quiz) => quizAction.addQuizSucess({ quiz: quiz })),
+          catchError((error: any) => of(quizAction.selectQuizError({ error })))
+        );
+      })
+    )
+  );
+
+  createQuestion$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(quizAction.addQuestion),
+      takeUntil(this.destroyer$),
+      distinctUntilChanged(),
+      switchMap((data) => {
+        return this.quizService.createQuestion(data.question).pipe(
+          map((quiz) => quizAction.addQuestionSuccess({ question: quiz })),
           catchError((error: any) => of(quizAction.selectQuizError({ error })))
         );
       })

@@ -1,30 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { ToastService } from '@app/toast.service';
+import { ToastService } from '@app/component/toast/toast.service';
 import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
 import { Result } from './result.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResultService {
+  resultUrl = "http://localhost:3000/results";
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
-  constructor(private toastService: ToastService) {}
+  constructor(
+    private toastService: ToastService,
+    private http: HttpClient
+    ) {}
 
   getResult(): Observable<any> {
-    let allResult = JSON.parse(localStorage.getItem('result') as string).reverse();
-    return of(allResult);
+    return this.http.get(this.resultUrl);
   }
 
   addNewResult(currentData:Result): Observable<any> {
-     let data: any = localStorage.getItem('result')
-      ? localStorage.getItem('result')
-      : [];
-    let stringifyData = data.length == 0 ? data : JSON.parse(data);
-     stringifyData.push(currentData);
-    localStorage.setItem('result', JSON.stringify(stringifyData));
-    return of(currentData)
+     return this.http.post(`${this.resultUrl}`, currentData);
   }
 
   failedResult(message: any) {

@@ -1,17 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
-  Observable,
-  distinctUntilChanged,
-  of,
-  takeUntil,
-  throwError,
+  Observable
 } from 'rxjs';
-import { State, Store } from '@ngrx/store';
+import { HttpClient } from '@angular/common/http';
 
-import QuizData from '@assets/json/data.json';
-import { ToastService } from '@app/toast.service';
-import { quizState } from './quiz.state';
-import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
+import { ToastService } from '@app/component/toast/toast.service';
+import { CREATED_QUIZ_SUCCESSFULLY, DELETE_SUCCESSFULLY, TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -19,22 +13,18 @@ import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
 
 export class QuizService {
   allQuiz: any;
+  allQuizUrl = "http://localhost:3000/quiz";
   constructor(
-    private store: Store,
     private toastService: ToastService,
-    private state: State<quizState>
+    private http: HttpClient
   ) {}
 
   getAllQuiz(): Observable<any> {
-    return of(QuizData.quiz);
+    return this.http.get(this.allQuizUrl);
   }
 
   getSelectedQuiz(id: any): Observable<any> {
-    let allQuiz = this.state.getValue().quiz.allQuiz;
-    let findQuiz = allQuiz?.find((data: any) => data?.quizId == id);
-    return findQuiz
-      ? of(findQuiz)
-      : throwError(() => new Error('No Quiz Found'));
+    return this.http.get(this.allQuizUrl+`/${id}`);
   }
 
   showError(message: string) {
@@ -42,5 +32,26 @@ export class QuizService {
       { label: message, icon: 'error' },
       TOAST_BG_COLOR.TOAST_ERROR_COLOR
     );
+  }
+
+  deleteQuiz(id:number): Observable<any> {
+    this.toastService.toastMessage(
+      DELETE_SUCCESSFULLY,
+      TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
+    );
+    return this.http.delete(this.allQuizUrl+`/${id}`)
+  }
+
+  createQuiz(quizValue:any): Observable<any> {
+    this.toastService.toastMessage(
+      CREATED_QUIZ_SUCCESSFULLY,
+      TOAST_BG_COLOR.TOAST_SUCCESS_COLOR
+    );
+    return this.http.post(this.allQuizUrl,quizValue)
+  }
+
+  createQuestion(question:any){
+    debugger
+    return this.http.post(this.allQuizUrl,question)
   }
 }
