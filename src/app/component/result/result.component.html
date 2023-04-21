@@ -35,24 +35,16 @@
                         </h5>
                         <div
                           class="chart"
-                          style="--value1:{{ percentage }}%;--value2:{{
+                          style="--value1:{{ percentage }}%; --value2:{{
                             incorrectanswer
                           }}%;"
                         >
-                          <div
-                            class="row col-12"
-                            style="
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                              padding: 12px;
-                            "
-                          >
-                            <p class="pie_text col-6">
-                              <span class="pie1"> </span>{{ incorrectanswer }}%
-                            </p>
+                          <div class="col col-8 mt-3">
                             <p class="pie_text col-6">
                               <span class="pie"></span>{{ percentage }}%
+                            </p>
+                            <p class="pie_text col-6">
+                              <span class="pie1"> </span>{{ incorrectanswer }}%
                             </p>
                           </div>
                         </div>

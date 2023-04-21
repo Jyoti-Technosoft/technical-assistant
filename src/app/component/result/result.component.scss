@@ -52,17 +52,11 @@
   );
 }
 .pie_text {
-  font-size: 10px;
-  font-weight: bold;
-}
-.pie1 {
   display: flex;
-  justify-content: center;
-  text-align: center;
-  background: red;
-  padding: 10px;
-  width: 1px;
-  height: 1px;
+  font-size: 12px;
+  font-weight: bold;
+  justify-content: stretch;
+  text-indent: 5px;
 }
 
 .pie {
@@ -70,6 +64,16 @@
   justify-content: center;
   text-align: center;
   background: green;
+  padding: 10px;
+  width: 1px;
+  height: 1px;
+}
+
+.pie1 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  background: red;
   padding: 10px;
   width: 1px;
   height: 1px;
