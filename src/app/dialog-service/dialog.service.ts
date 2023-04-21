@@ -1,35 +1,53 @@
 import { Injectable } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from './modal/modal/modal.component';
-import dialogData from '../../assets/json/dialogData.json';
-import { Router } from '@angular/router';
 
+import { ModalComponent } from './modal/modal/modal.component';
+import { AddQuestionModalComponent } from './modal/modal/add-question-modal/add-question-modal.component';
+import { AddQuizComponent } from '@app/component/add-quiz/add-quiz.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DialogService {
-  adminform: any;
-  
-  constructor(
-    private modalService:NgbModal,
-    private route:Router
-  ) {}
+  constructor(private modalService: NgbModal) {}
 
-  dialogData = {...dialogData};
-
-  openDialog(label:string, yesButtonLable:string, NoButtonLable:string):Promise<boolean>{
+  openDialog(configData: any): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      const modalRef = this.modalService.open(ModalComponent);
-      modalRef.componentInstance.label = label;
-      modalRef.componentInstance.yesButtonLable = yesButtonLable;
-      modalRef.componentInstance.NoButtonLable = NoButtonLable;
-      
+      const modalRef = this.modalService.open(ModalComponent, { centered: true  });
+      modalRef.componentInstance.configData = configData;
       modalRef.result.then((data) => {
-        resolve(<boolean> data)
-      }); 
-    })
+        resolve(<boolean>data);
+      });
+    });
   }
-    
- }
+  
+  openAddQuizDialog(): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(AddQuizComponent, { centered: true,  size: 'xl' });
+      modalRef.result.then((data) => {
+        resolve(<boolean>data);
+      });
+    });
+  }
+
+  openAddQuestionDialog(configData:any,configData2:any,formGroup:any): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const modalRef = this.modalService.open(AddQuestionModalComponent, { centered: true, size: 'xl' });
+      modalRef.componentInstance.configData = configData;
+      modalRef.componentInstance.configData2 = configData2;
+      modalRef.componentInstance.formGroup = formGroup;
+      modalRef.result.then((data) => {
+        resolve(<boolean>data);
+      });
+    });
+  }
+
+  hasModelOpen() {
+    return this.modalService.hasOpenModals();
+  }
+
+  destroy() {
+    this.modalService.dismissAll(false);
+  }
+}

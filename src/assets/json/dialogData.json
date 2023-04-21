@@ -1,17 +1,33 @@
 {
   "skipModel": {
     "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
-    "yesButtonLable": "Yes",
-    "NoButtonLable": "No"
+    "yes": "Yes",
+    "modelLabel": "Alert",
+    "no": "No",
+    "type": "skipModel"
   },
-  "loginModel": {
-    "label": "Wrong Credentials , Do you want to create new account?",
-    "yesButtonLable": "Yes",
-    "NoButtonLable": "No"
+  "signoutModel": {
+    "modelLabel": "Alert",
+    "label": "Are you sure you want to singout from quiz?",
+    "yes": "Yes",
+    "no": "No",
+    "type": "signoutModel"
   },
-  "emailModal": {
-    "label": "This Email is already registerd with Us, Do you want to login again?.",
-    "yesButtonLable": "Yes",
-    "NoButtonLable": "No"
+  "aboutModel": {
+    "image": "assets\\img\\logo.svg",
+    "companyName": "Jyoti Technosoft LLP",
+    "visitorInfo": "Visit Our Website at jyotitechnosoft for more updates",
+    "copyrightInfo": "Copyright",
+    "companyLink": "jyoti-web",
+    "no": "Cancel",
+    "modelLabel": "About",
+    "type": "aboutModel"
+  },
+  "deleteModel": {
+    "modelLabel": "Alert",
+    "label": "Are you sure you want to delete this quiz?",
+    "yes": "Yes",
+    "no": "No",
+    "type": "deleteModel"
   }
 }
