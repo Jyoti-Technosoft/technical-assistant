@@ -1,7 +1,3 @@
-.layout-container {
-    height: -webkit-fill-available;
-    min-height: 95vh;
-}
 
 $color_1: #77619e;
 
@@ -39,6 +35,9 @@ $color_1: #77619e;
       display: none;
     }
     .menu-item {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       position: relative;
       list-style: none;
       transition: all 0.4s ease;
