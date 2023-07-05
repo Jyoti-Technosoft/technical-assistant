@@ -1,9 +1,12 @@
+$grey1: #d1d1d4;
+$dark_blue: #2929E7;
+
 .userlogo {
   width: 60px;
   height: 60px;
 }
 .fs-4 {
-  color: rgb(41, 41, 231);
+  color: $dark_blue;
   font-weight: bold;
 }
 
@@ -17,15 +20,15 @@
   border-radius: 1px;
   box-shadow: none;
   border: none;
-  border-bottom: 1px solid #d1d1d4 !important;
+  border-bottom: 1px solid $grey1 !important;
 }
 
 .card {
   margin: auto;
   height: auto;
-  position: absolute;
+  position: relative;
   top: 7%;
-  max-width: 480px !important;
+  height: 65vh;
 }
 .d-grid {
   margin-top: 20px;
@@ -40,5 +43,8 @@
 }
 
 .login-section {
-  height: 90% !important;
+  height: 100vh;
+  .img-fluid {
+    height: -webkit-fill-available;
+  }
 }
