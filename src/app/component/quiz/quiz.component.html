@@ -50,25 +50,18 @@
 
                       <div class="option-list">
                         <ng-container
-                          *ngFor="let card of question[questionIndex].options"
+                          *ngFor="let card of question[questionIndex].options; let j = index;"
                         >
                           <div class="mx-0">
                             <label
                               class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
                               *ngIf="card.type == 'checkbox'"
                               [class.hightlight-selected]="
-                                formArray.controls.at(i)?.value.radioValue ==
-                                card.id
+                                formArray.controls.at(i)?.value.radioValue?.includes(card?.id) 
                               "
+                              (click)="onClickCheck(card, i)"
                             >
-                              >
-                              <input
-                                type="checkbox"
-                                class="form-check-input d-none"
-                                formControlName="radioValue"
-                                value="{{ card.id }}"
-                              />
-                              {{ card.lable }}
+                            {{ card.label }}
                             </label>
 
                             <label
