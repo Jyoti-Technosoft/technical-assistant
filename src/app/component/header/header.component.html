@@ -1,17 +1,58 @@
-<nav
-  class="navbar navbar-light navbar-expand-lg bg-light justify-content-between fixed-top"
->
-  <div class="container-fluid w-100">
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top">
+  <div class="container-fluid well w-100">
     <div class="d-flex justify-content-between">
-      <a class="navbar-brand image-icon"
-        ><img
+      <a
+        class="navbar-brand image-icon"
+        >
+        <img
           src="assets/img/logo.svg"
           alt="logo"
           class="d-inline-block image logo-content"
-        /><span class="title">APPLICATION</span></a
-      >
+          />
+        <span class="title fs-15"
+          >APPLICATION</span
+        >
+      </a>
     </div>
-    <div class="ml-2 height d-none d-lg-block" *ngIf="userData">
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavbar"
+      aria-controls="sidebarMenu"
+      aria-expanded="true"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse"
+      *ngIf="userData"
+      id="collapsibleNavbar"
+    >
+      <ul class="navbar-nav d-lg-none me-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngFor="let item of menuItem">
+          <a
+            class="nav-link"
+            (click)="!item?.link && item?.click()"
+            [routerLink]="item?.link"
+          >
+            <i class="bi {{ item?.icon }} icon me-2 c-#77619e"></i>
+            <span class="link-name c-#77619e">{{
+              item?.label
+            }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div
+      class="ml-2 height d-none d-lg-flex align-items-center"
+      routerLink="user-profile"
+      *ngIf="userData"
+    >
       <img
         src="assets/img/profilephoto.svg"
         alt="Company Logo"
@@ -21,17 +62,20 @@
         <a type="button" class="nav-link">
           {{ userData?.email }}
         </a>
-      </div>
     </div>
-    <button class="navbar-toggler" type="button" (click)="togleNavBar()">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    </div>
   </div>
 </nav>
-<ng-container *ngIf="userData">
-  <div class="container">
+
+<ng-container *ngIf="userData" id="navbarSupportedContent">
+  <div
+    class="container"
+    data-ng-show="showContainer"
+    data-off-click="hideContainer()"
+    data-off-click-if="showContainer"
+    >
     <div
-      class="sidebar close navbar-light mt-3 bg-light"
+      class="sidebar close navbar-light bg-light"
       #sidebar
       appHover
       remove-class="close"

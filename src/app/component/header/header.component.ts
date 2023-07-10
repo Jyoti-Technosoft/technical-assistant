@@ -1,5 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { DialogService } from '@app/dialog-service/dialog.service';
@@ -7,7 +6,6 @@ import dialogData from '@assets/json/dialogData.json';
 import { AuthenticationService } from '@app/service/authentication.service';
 import {
   autenticationState,
-  getStateSelector,
 } from '@app/store/autentication/autentication.state';
 import { doLogout } from '@app/store/autentication/autentication.action';
 import {
@@ -49,7 +47,6 @@ export class HeaderComponent implements OnDestroy {
     public authenticationService: AuthenticationService,
     private dialogService: DialogService,
     private store: Store<autenticationState>,
-    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
@@ -59,15 +56,6 @@ export class HeaderComponent implements OnDestroy {
   openAboutDialog() {
     let configData = this.dialogData.aboutModel;
     this.dialogService.openDialog(configData);
-  }
-
-  togleNavBar() {
-    if (this.sidebar.nativeElement.classList.contains('show')) {
-       this.renderer.removeClass(this.sidebar.nativeElement, 'show');
-    } else {
-      this.renderer.addClass(this.sidebar.nativeElement, 'show');
-
-    }
   }
 
   getUserData() {
