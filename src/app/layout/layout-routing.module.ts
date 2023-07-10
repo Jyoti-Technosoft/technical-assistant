@@ -35,7 +35,8 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent }, // new  module
-      { path: 'registration', component: RegistrationComponent }, // new module
+      { path: 'registration', component: LoginComponent }, // new module
+
     ],
   }
 ];
