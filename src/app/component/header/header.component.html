@@ -31,12 +31,13 @@
       class="collapse navbar-collapse"
       *ngIf="userData"
       id="collapsibleNavbar"
+      #collapsibleNavbar
     >
       <ul class="navbar-nav d-lg-none me-auto mb-2 mb-lg-0">
         <li class="nav-item" *ngFor="let item of menuItem">
           <a
             class="nav-link"
-            (click)="!item?.link && item?.click()"
+            (click)="!item?.link && item?.click() && navigate(item?.link)"
             [routerLink]="item?.link"
           >
             <i class="bi {{ item?.icon }} icon me-2"></i>
