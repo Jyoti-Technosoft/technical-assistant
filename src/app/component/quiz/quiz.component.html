@@ -1,8 +1,8 @@
 <form [formGroup]="quizForm">
   <div formArrayName="form">
     <div class="container-fluid">
-      <div class="d-flex align-items-center ">
-        <div class="container mx-auto center-to-page">
+      <div class="d-flex align-items-center min-vh-100">
+        <div class="container mx-auto mt-5">
           <ngb-carousel
             #carousel
             *ngIf="question?.length"
@@ -50,25 +50,18 @@
 
                       <div class="option-list">
                         <ng-container
-                          *ngFor="let card of question[questionIndex].options"
+                          *ngFor="let card of question[questionIndex].options; let j = index;"
                         >
                           <div class="mx-0">
                             <label
                               class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
                               *ngIf="card.type == 'checkbox'"
                               [class.hightlight-selected]="
-                                formArray.controls.at(i)?.value.radioValue ==
-                                card.id
+                                formArray.controls.at(i)?.value.radioValue?.includes(card?.id) 
                               "
+                              (click)="onClickCheck(card, i)"
                             >
-                              >
-                              <input
-                                type="checkbox"
-                                class="form-check-input d-none"
-                                formControlName="radioValue"
-                                value="{{ card.id }}"
-                              />
-                              {{ card.lable }}
+                            {{ card.label }}
                             </label>
 
                             <label
@@ -114,7 +107,7 @@
                         >
                           <span class="d-none d-md-block"> Previous </span>
                           <span class="d-md-none">
-                            <i class="bi bi-arrow-left"></i>
+                            <i class="fa-solid fa-chevron-left"></i>
                           </span>
                         </button>
 
@@ -129,7 +122,7 @@
                           Skip
                         </span>
                           <span class="d-md-none" >
-                            <i class="bi bi-fast-forward-fill"></i>
+                            <i class="fa-solid fa-forward"></i>
                           </span>
                         </button>
 
@@ -144,7 +137,7 @@
                             {{ question.length != i + 1 ? "Next" : "Submit" }}
                           </span>
                           <span class="d-md-none">
-                            <i class="bi bi-arrow-right"></i>
+                            <i class="fa-solid fa-chevron-right"></i>
                           </span>
                         </button>
                       </div>

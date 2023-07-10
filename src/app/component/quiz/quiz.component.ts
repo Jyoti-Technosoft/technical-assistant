@@ -57,6 +57,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   selectedQuiz: any;
   loggedInUser$: Observable<any> | undefined;
   userData: any;
+  selectedOptions: string[] = [];
 
   constructor(
     private router: Router,
@@ -84,6 +85,23 @@ export class Quizcomponent implements OnInit, OnDestroy {
     }
     event.returnValue = false;
   }
+
+  onClickCheck(card:any, questionIndex:number) {
+    const patchValue: any = () => {
+      let prevSelected = this.formArray.controls.at(questionIndex)?.value.radioValue || [];
+      return prevSelected
+    }
+    let selectedValue = this.formArray.controls.at(questionIndex)?.value.radioValue == '' ? [] : patchValue();
+    if (selectedValue.includes(card.id)) {
+      const index = selectedValue.indexOf(card.id);
+      selectedValue.splice(index, 1);
+    } else {
+      selectedValue.push(card.id);
+    }
+    this.formArray.controls.at(this.questionIndex)?.get('radioValue')?.patchValue(selectedValue)
+    this.formArray.controls[questionIndex].markAsDirty();
+  }
+
 
   getQuizData() {
     if (!this.state.getValue().quiz.allQuiz) {
@@ -213,9 +231,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
       });
   }
 
-  answer(questionIndex: number, selectedOption: string) {
+  answer(questionIndex: number, selectedOption: any) {
     if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
-      if (this.question[questionIndex].answer?.id == selectedOption) {
+      if (this.question[questionIndex].answer?.id == selectedOption || this.checkAndValidate(selectedOption,questionIndex)) {
         this.points = this.points += this.positivePoints;
         this.correctAnswer++;
       } else if (!(this.question[questionIndex].answer?.id == selectedOption)) {
@@ -223,6 +241,21 @@ export class Quizcomponent implements OnInit, OnDestroy {
         this.inCorrectAnswer++;
       }
     }
+  }
+
+
+  checkAndValidate(selectedOption:any, questionIndex:any) {
+    let isCorrect = true;
+    if(this.question[questionIndex].answer?.length > 0 ) {
+      selectedOption?.sort((a:any, b:any) => a - b);
+      const answerlist = this.question[questionIndex].answer;
+      answerlist.map((ans:any, i:any) => {
+        if (ans?.id != selectedOption[i]) {
+            isCorrect = false;
+        } 
+      })
+    }
+    return isCorrect;
   }
 
   getUserData() {
