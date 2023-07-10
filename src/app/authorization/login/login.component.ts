@@ -18,7 +18,8 @@ import {
 import { doRegistration } from '@app/store/autentication/autentication.action';
 import { doLogoin } from '@app/store/autentication/autentication.action';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-
+import { Router } from '@angular/router';
+import { REDIRECT_PAGE } from '@app/authorization/login/login.enum';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -49,9 +50,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private store: Store<autenticationState>,
-    public calendar: NgbCalendar
+    public calendar: NgbCalendar,
+    private router: Router
   ) {
-    this.createRegistrationForm();
     this.state = this.store.select(getStateSelector);
   }
 
@@ -60,15 +61,25 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.createForm();
     if (localStorage.getItem('registerUser')) {
       this.userData = JSON.parse(
         localStorage.getItem('registerUser') as string
       );
     }
     this.steps.push(this.step1Template, this.step2Template, this.step3Template);
+    this.redirectPage();
   }
 
+  redirectPage() {
+    if (this.router.url == REDIRECT_PAGE.REDIRECT_LOGIN_PAGE) {
+      this.createForm();
+      this.isSignUp = false;
+    }
+    else if (this.router.url == REDIRECT_PAGE.REDIRECT_REGISTRATION_PAGE) {
+      this.createRegistrationForm();
+      this.isSignUp = true;
+    }
+  }
   createRegistrationForm() {
     this.registrationForm = this.fb.group({
       userCredential: this.fb.group({
