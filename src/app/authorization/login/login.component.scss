@@ -28,7 +28,7 @@ $dark_blue: #2929E7;
   height: auto;
   position: relative;
   top: 7%;
-  height: 65vh;
+  margin-bottom: 3rem;
 }
 .d-grid {
   margin-top: 20px;
@@ -43,7 +43,7 @@ $dark_blue: #2929E7;
 }
 
 .login-section {
-  height: 100vh;
+  height: 100%;
   .img-fluid {
     height: -webkit-fill-available;
     width: -webkit-fill-available;
