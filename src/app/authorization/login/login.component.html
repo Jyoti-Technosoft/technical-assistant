@@ -10,7 +10,7 @@
         <form
           [formGroup]="loginForm"
           (ngSubmit)="formSubmitted(loginForm.value)"
-          class="container-fluid p-3"
+          class="container-fluid p-4"
         >
           <div class="row g-0">
             <div class="col text-center">
@@ -118,7 +118,7 @@
             [formGroup]="registrationForm"
             (ngSubmit)="submitform(registrationForm.value)"
           >
-        <ng-container *ngIf="currentStepIndex == 0" formGroupName="userCredential"> 
+        <ng-container *ngIf="currentStepIndex == 0" formGroupName="userCredential">
             <!-- Account Group  -->
             <div class="row" >
               <div class="col-mb-3">
@@ -184,7 +184,7 @@
                     >
                       Confirm password is Required.
                     </span>
-        
+
                     <span
                       *ngIf="userCredential.controls['confirmPassword'].errors?.['validateConfirmaPassword'] && userCredential.controls['confirmPassword']?.touched && userCredential.controls['confirmPassword'].value"
                     >
@@ -196,7 +196,7 @@
             <!-- Account Group End -->
         </ng-container>
 
-        <ng-container *ngIf="currentStepIndex == 1" formGroupName="personalInfo"> 
+        <ng-container *ngIf="currentStepIndex == 1" formGroupName="personalInfo">
           <!-- Personal Information -->
           <div class="row">
             <div class="col-mb-3">
@@ -300,7 +300,7 @@
           <!-- Personal Information End -->
         </ng-container>
 
-        <ng-container *ngIf="currentStepIndex == 2"> 
+        <ng-container *ngIf="currentStepIndex == 2">
           <div class="row"  formGroupName="personalInfo">
             <div class="col-mb-3">
               <input
