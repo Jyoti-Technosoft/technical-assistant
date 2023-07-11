@@ -2,7 +2,7 @@
   <div class="footer">
     <div class="row">
       <ng-container *ngFor="let item of socialMedia">
-        <a href="#">
+        <a href="{{ item.routerlink }}">
           <i class="{{ item?.icon }} icon"></i>
         </a>
       </ng-container>
