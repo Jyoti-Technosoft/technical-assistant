@@ -2,12 +2,12 @@
   "skipModel": {
     "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
     "yes": "Yes",
-    "modelLabel": "Confirmation Required",
+    "modelLabel": "Alert",
     "no": "No",
     "type": "skipModel"
   },
   "signoutModel": {
-    "modelLabel": "Confirmation Required",
+    "modelLabel": "Alert",
     "label": "Are you sure you want to singout from quiz?",
     "yes": "Yes",
     "no": "No",
@@ -22,5 +22,32 @@
     "no": "Cancel",
     "modelLabel": "About",
     "type": "aboutModel"
-  }
+  },
+  "footer": [
+    {
+      "label": "Contact Us",
+      "name": "contacUs",
+      "link": "https://www.jyotitechnosoft.com/contact-us"
+    },
+    {
+      "label": "Our Services",
+      "name": "services",
+      "link": "https://www.jyotitechnosoft.com/services"
+    },
+    {
+      "label": "Privacy Policy",
+      "name": "",
+      "link": ""
+    },
+    {
+      "label": "Terms & Condition",
+      "name": "",
+      "link": ""
+    },
+    {
+      "label": "Career",
+      "name": "career",
+      "link": "https://www.jyotitechnosoft.com/career"
+    }
+  ]
 }
