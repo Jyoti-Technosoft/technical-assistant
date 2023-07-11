@@ -3,13 +3,15 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: steelblue;
+  // background: steelblue;
 
   .container-router {
     margin-top: 60px;
     margin-left: 78px;
   }
 }
+
+div:has(div.auth-section) { background: steelblue; }
 
 @media only screen and (max-width: 1000px) {
   .container-router {
