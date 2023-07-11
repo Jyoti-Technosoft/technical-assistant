@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { DialogService } from '@app/dialog-service/dialog.service';
@@ -15,6 +15,7 @@ import {
   takeUntil,
 } from 'rxjs';
 import { OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 interface menuItem {
   label: string;
@@ -31,7 +32,7 @@ export class HeaderComponent implements OnDestroy {
   userData: any;
   loggedInUser$: Observable<any> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-  @ViewChild('sidebar') sidebar!: ElementRef ; 
+  @ViewChild('collapsibleNavbar') collapsibleNavbar!: ElementRef ; 
   menuItem: any[] = [
     { label: 'Dashboard', icon: 'bi-grid-1x2-fill', link: 'dashboard' },
     { label: 'All Results', icon: 'bi-pie-chart-fill', link: 'allresults' },
@@ -47,6 +48,8 @@ export class HeaderComponent implements OnDestroy {
     public authenticationService: AuthenticationService,
     private dialogService: DialogService,
     private store: Store<autenticationState>,
+    private router: Router,
+    private renderer: Renderer2
   ) {}
 
   ngOnInit() {
@@ -77,6 +80,22 @@ export class HeaderComponent implements OnDestroy {
       }
     });
   }
+
+  navigate(link:string) {
+    if (link) {
+      this.router.navigate([`/${link}`]);
+      this.toggleNavBar(); 
+    }
+  }
+  
+  toggleNavBar() {
+    if (this.collapsibleNavbar.nativeElement.classList.contains('show')) {
+       this.renderer.removeClass(this.collapsibleNavbar.nativeElement, 'show');
+    } else {
+      this.renderer.addClass(this.collapsibleNavbar.nativeElement, 'show');
+    }
+  }
+
   ngOnDestroy() {
     this.destroyer$.next(true);
     this.destroyer$.unsubscribe();

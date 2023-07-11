@@ -1,16 +1,16 @@
-<div class="login-section m-auto d-flex justify-content-center">
+<div class="auth-section m-auto d-flex justify-content-center">
   <div
     class="d-flex flex-row card shadow col-md-6 col-lg-6 col-sm-6 col-9 mt-5 p-0"
   >
-    <div class="card-body col-5 d-none d-lg-block p-0">
-      <img src="assets/img/login1.jpg" class="img-fluid" alt="" srcset="" />
-    </div>
+  <div class="card-body col-5 d-none d-lg-block p-0">
+    <img src="assets/img/login1.svg" class="img-fluid" alt="" srcset="" />
+  </div>
     <ng-container *ngIf="!isSignUp">
-      <div class="card-body d-flex align-items-center col-5 user-select-none">
+      <div class="login-section card-body d-flex align-items-center col-5 user-select-none">
         <form
           [formGroup]="loginForm"
           (ngSubmit)="formSubmitted(loginForm.value)"
-          class="container-fluid p-3"
+          class="container-fluid p-4"
         >
           <div class="row g-0">
             <div class="col text-center">
@@ -95,8 +95,9 @@
 
     <ng-container *ngIf="isSignUp">
     <!-- <section> -->
-      <div class="d-flex col-12 user-select-none mt-5 col-lg-6">
+      <div class="sign-up-section d-flex col-12 user-select-none pt-5 col-lg-6">
         <div class="container-fluid">
+          <button class="back-btn mb-3" routerLink="/login"><img src="../../../assets/img/back-arrow.svg" class="back-img" alt=""></button>
           <h4 id="heading" class="d-flex justify-content-center">
             Sign Up Your User Account
           </h4>
@@ -118,7 +119,7 @@
             [formGroup]="registrationForm"
             (ngSubmit)="submitform(registrationForm.value)"
           >
-        <ng-container *ngIf="currentStepIndex == 0" formGroupName="userCredential"> 
+        <ng-container *ngIf="currentStepIndex == 0" formGroupName="userCredential">
             <!-- Account Group  -->
             <div class="row" >
               <div class="col-mb-3">
@@ -184,7 +185,7 @@
                     >
                       Confirm password is Required.
                     </span>
-        
+
                     <span
                       *ngIf="userCredential.controls['confirmPassword'].errors?.['validateConfirmaPassword'] && userCredential.controls['confirmPassword']?.touched && userCredential.controls['confirmPassword'].value"
                     >
@@ -196,7 +197,7 @@
             <!-- Account Group End -->
         </ng-container>
 
-        <ng-container *ngIf="currentStepIndex == 1" formGroupName="personalInfo"> 
+        <ng-container *ngIf="currentStepIndex == 1" formGroupName="personalInfo">
           <!-- Personal Information -->
           <div class="row">
             <div class="col-mb-3">
@@ -300,7 +301,7 @@
           <!-- Personal Information End -->
         </ng-container>
 
-        <ng-container *ngIf="currentStepIndex == 2"> 
+        <ng-container *ngIf="currentStepIndex == 2">
           <div class="row"  formGroupName="personalInfo">
             <div class="col-mb-3">
               <input

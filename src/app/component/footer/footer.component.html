@@ -1,21 +1,28 @@
-<footer id="footer" class="footer">
-  <div class="footer navbar-light bg-light">
-    <div class="p-3">
-      <ng-container *ngFor="let data of icons; let i = index">
-        <a href="{{data?.link}}" target="_blank">
-          <i class="bi bi-{{data.icon}} icon"></i>
+<footer>
+  <div class="footer">
+    <div class="row">
+      <ng-container *ngFor="let item of socialMedia">
+        <a href="{{ item.routerlink }}">
+          <i class="{{ item?.icon }} icon"></i>
         </a>
       </ng-container>
     </div>
-  
-    <div class="credits">
+
+    <div class="row">
+      <ul>
+        <li *ngFor="let item of title; let i=index">
+          <a href="{{ item.link }}" class="text-item">{{ item.label }}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="row">
       © 2023 Copyright
       <a
         class="footer-link"
         routerLink="jyoti-web"
       >
-        Jyoti Technosoft LLP
-      </a>
+      https://www.jyotitechnosoft.com
+    </a>
     </div>
   </div>
 </footer>
