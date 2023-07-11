@@ -1,13 +1,16 @@
 $grey1: #d1d1d4;
 $dark_blue: #2929e7;
-
+$steel_blue: #4682b4; 
 .userlogo {
   width: 60px;
   height: 60px;
 }
-.fs-4 {
-  color: $dark_blue;
+
+.main-title {
+  font-family: serif;
+  color: $steel_blue;
   font-weight: bold;
+  font-size: 40px;
 }
 
 .fixed-height {
@@ -85,7 +88,7 @@ $dark_blue: #2929e7;
 
 .progressbar li.active:before,
 .progressbar li.active:after {
-  background: #673ab7;
+  background: $steel_blue;
 }
 
 .progressbar li {
@@ -95,6 +98,7 @@ $dark_blue: #2929e7;
   float: left;
   position: relative;
   font-weight: 400;
+  color: gray;
 }
 
 .progressbar li {
@@ -119,9 +123,20 @@ $dark_blue: #2929e7;
     height: 2px;
     background: lightgray;
     position: absolute;
-    left: 0;
     top: 25px;
     z-index: 1;
+  } 
+}
+
+.progressbar li.account {
+  &:after { 
+      left: 25px;
+  }
+}
+
+.progressbar li.finish {
+  &:after { 
+      right: 25px;
   }
 }
 
@@ -151,4 +166,9 @@ $dark_blue: #2929e7;
 
 .login-section, .sign-up-section {
   background-color: #f8f9fa;
+}
+
+.bi-arrow-left::before { 
+  font-size: 30px;
+  color: $steel_blue;
 }

@@ -5,6 +5,7 @@
 @import url("../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 
 $bg-colour: #fff;
+$steel_blue: #4682b4; 
 * {
   font-family: Roboto;
 }
@@ -69,4 +70,9 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #b9babd;
+}
+
+// btn-primary 
+.btn-primary {
+  background-color: $steel_blue !important;
 }
