@@ -45,7 +45,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   steps: TemplateRef<any>[] = [];
   currentStepIndex = 0;
   registrationForm!: FormGroup;
-  formSteps: any[] = ['Account', 'Personal', 'Finish'];
+  formSteps: any[] = [
+    {label: 'Account', className:"account", link: 'assets/auth-images/account.svg'},
+    {label:'Personal', className:"person", link: 'assets/auth-images/person.svg'},
+    {label:'Finish', className:"finish", link: 'assets/auth-images/finish.svg'}
+  ];
 
   constructor(
     private fb: FormBuilder,

@@ -67,8 +67,19 @@ $dark_blue: #2929e7;
 .progressbar {
   height: 5rem;
   .active:before {
-    font-family: FontAwesome;
-    content: "\f13e";
+    font-family: bootstrap-icons;
+  }
+
+  .account:before {
+    content: "\F47A";
+  }
+
+  .person:before {
+    content: "\F4DA";
+  }
+
+  .finish:before {
+    content: "\F26E";
   }
 }
 
@@ -115,8 +126,7 @@ $dark_blue: #2929e7;
 }
 
 .progressbar li:before {
-  font-family: FontAwesome;
-  content: "\f007";
+  font-family: bootstrap-icons;
   justify-content: center;
   display: flex;
 }
