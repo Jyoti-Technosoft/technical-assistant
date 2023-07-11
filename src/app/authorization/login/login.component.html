@@ -105,9 +105,9 @@
           </p>
           <ul id="progressbar" class="d-flex justify-content-center progressbar p-0">
             <ng-container *ngFor="let item of formSteps; let i = index">
-              <li [ngClass]="{ active: i <= currentStepIndex }">
+              <li class="{{ item?.className }}" [ngClass]="{ active: i <= currentStepIndex }">
                 <strong class="d-flex justify-content-center">
-                  {{ item }}
+                  {{ item?.label }} 
                 </strong>
               </li>
             </ng-container>
