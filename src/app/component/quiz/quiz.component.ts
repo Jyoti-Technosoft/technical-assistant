@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +17,7 @@ import {
   distinctUntilChanged,
 } from 'rxjs';
 
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDismissReasons, NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthenticationService } from '@app/service/authentication.service';
 import quizData from '@assets/json/data.json';
@@ -36,6 +37,21 @@ import { Result } from '@app/store/result/result.model';
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+	styles: [
+		`
+			.dark-modal .modal-content {
+				background-color: #292b2c;
+				color: white;
+			}
+			.dark-modal .close {
+				color: white;
+			}
+			.light-blue-backdrop {
+				background-color: #5cb3fd;
+			}
+		`,
+	],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
@@ -65,11 +81,13 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private dialogService: DialogService,
     private store: Store,
-    private state: State<quizState>
+    private state: State<quizState>,
+    private modalService: NgbModal,
   ) {
     this.quizForm = this.fb.group({
       form: this.fb.array([]),
     });
+    localStorage.setItem("allowOrNot", "1");
   }
 
   ngOnInit(): void {
@@ -85,6 +103,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
     }
     event.returnValue = false;
   }
+  @ViewChild('content') myModal: any;
+  // @ViewChild('btnText') public btnText: ElementRef | any;
+  closeResult: any;
 
   onClickCheck(card:any, questionIndex:number) {
     const patchValue: any = () => {
@@ -171,6 +192,15 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.questionIndex = questionIndex - 1;
     this.carousel?.prev();
   }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 
   submitQuiz() {
     let result: Result = {
@@ -180,13 +210,20 @@ export class Quizcomponent implements OnInit, OnDestroy {
       type: this.selectedQuiz?.quizId,
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
-      date: new Date().toISOString().slice(0, 10)
+      date: new Date().getTime()
     };
     this.store.dispatch(addResults({ result }));
     this.store.dispatch(successQuizPlay({ result: result }));
-
+    this.modalService.open(this.myModal, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
     this.router.navigateByUrl('result');
   }
+  openVerticallyCentered(content: any) {
+		this.modalService.open(content, { centered: true });
+	}
 
   skipQuestion(questionindex: number) {
     let configData = this.dialogData.skipModel;
@@ -232,11 +269,12 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   answer(questionIndex: number, selectedOption: any) {
+    var numSelectedOption = +selectedOption
     if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
-      if (this.question[questionIndex].answer?.id == selectedOption || this.checkAndValidate(selectedOption,questionIndex)) {
+      if (this.question[questionIndex].answer.id == numSelectedOption && this.checkAndValidate(numSelectedOption,questionIndex)) {
         this.points = this.points += this.positivePoints;
         this.correctAnswer++;
-      } else if (!(this.question[questionIndex].answer?.id == selectedOption)) {
+      } else if (!(this.question[questionIndex].answer?.id == numSelectedOption)) {
         this.points = this.points -= this.negativePoints;
         this.inCorrectAnswer++;
       }
@@ -272,5 +310,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyer$.next(true);
     this.destroyer$.unsubscribe();
+  }
+
+  closeModal() {
+    this.dialogService.destroy();
   }
 }

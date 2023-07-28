@@ -1,6 +1,6 @@
 export interface Result {
   correctAnswer: number;
-  date: string;
+  date: any;
   inCorrectAnswer: number;
   points: number;
   type: string;

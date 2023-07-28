@@ -47,8 +47,24 @@ $steel_blue: #4682b4;
   top: 7%;
   margin-bottom: 3rem;
 }
-.d-grid {
+.login-button{
+  display: flex;
+  justify-content: center;
+}
+.next-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
+}
+.btn {
+  width: 50%;
+  border-radius: 20px;
+  .icon {
+    &:before {
+      font-weight: bold !important;
+    }
+  }
 }
 .btn.btn-primary {
   font-weight: bold;
@@ -83,6 +99,14 @@ $steel_blue: #4682b4;
 
   .finish:before {
     content: "\F26E";
+  }
+}
+
+.progressbar li {
+  &:after {
+    .finish {
+      width: 50%;
+    }
   }
 }
 

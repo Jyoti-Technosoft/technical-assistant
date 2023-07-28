@@ -1,4 +1,4 @@
-<div class="auth-section m-auto d-flex justify-content-center">
+<div class="auth-section m-auto mt-5 d-flex justify-content-center">
   <div
     class="d-flex flex-row card shadow col-md-6 col-lg-6 col-sm-6 col-9 mt-5 p-0"
   >
@@ -71,7 +71,7 @@
 
           <div class="row">
             <div class="col-mb-3">
-              <div class="d-grid">
+              <div class="d-flex login-button">
                 <button
                   type="submit"
                   [disabled]="!loginForm.valid"
@@ -356,7 +356,7 @@
 
           <div class="row">
             <div class="col-mb-3">
-              <div class="d-grid">
+              <div class="d-flex next-button">
                 <button
                   [disabled]="isValid"
                   [type]="buttonType"
@@ -364,6 +364,7 @@
                   (click)="nextStep()"
                 >
                   {{ currentStepIndex < 2 ? 'Next' : 'Submit'}}
+                  <i class="bi bi-chevron-right icon"></i>
                 </button>
               </div>
             </div>

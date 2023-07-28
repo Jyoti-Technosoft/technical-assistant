@@ -20,6 +20,5 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.title = data?.footer;
-    console.log("title  : ", this.title);
   }
 }
