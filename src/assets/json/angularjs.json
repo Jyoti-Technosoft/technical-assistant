@@ -1,0 +1,296 @@
+{
+  "angularjs":
+    {
+      "quizId": "angular",
+      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
+      "timer": 60,
+      "positivePoints": 1,
+      "negativePoints": 0.25,
+      "numberOfQuestions": 3,
+      "title": "Angular Quiz",
+      "image": "assets\\img\\javascript.svg",
+      "description": "Angular is a framework.AngularJS extends HTML with new attributes.AngularJS is perfect for Single Page Applications.AngularJS is study to easy.",
+      "questions": [
+        {
+          "question": "Which of the following statement is true for AngularJS?",
+          "options": [
+            {
+              "id": 1,
+              "label": "AngularJS is a closed-source front-end web framework",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "AngularJS is an open-source front-end web framework",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "AngularJS is an open-source backend web framework",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "AngularJS is a closed-source back-end web framework",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 2
+          }
+        },
+        {
+          "question": "Which of the following is the correct syntax for writing AngularJS expressions?",
+          "options": [
+            {
+              "id": 1,
+              "label": "{{expression}}",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "{{expression | filter1 | filter2 | …}}",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "Both of the mentioned",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "None of the mentioned",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 1
+          }
+        },
+        {
+          "question": "Which of the following statement is correct about data binding in AngularJS?",
+          "options": [
+            {
+              "id": 1,
+              "label": "Automatic synchronization of data between model and view components",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "Automatic synchronization of data between model and controller components",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "Technique to save html data in the database",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "Technique to bind database data to html control",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 1
+          }
+        },
+        {
+          "question": "AngularJS expressions bind AngularJS data to HTML like which of the following directive?",
+          "options": [
+            {
+              "id": 1,
+              "label": "ng-repeat",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "ng-bind",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "ng-app",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "ng-model",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 2
+          }
+        },
+        {
+          "question": "Among the following, on which architectural pattern is AngularJS based?",
+          "options": [
+            {
+              "id": 1,
+              "label": "Decorater Pattern",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "Observer Pattern",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "MVVM architecture Pattern",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "MVC architecture Pattern",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 3
+          }
+        },
+        {
+          "question": "Which of the following is an advantage of AngularJS?",
+          "options": [
+            {
+              "id": 1,
+              "label": "AngularJS code is unit testable.",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": " AngularJS provides reusable components.",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "AngularJS uses dependency injection and makes use of separation of concerns",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "All of the above",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 4
+          }
+        },
+        {
+          "question": " Which of the following types of the component can be used to create a custom directive?",
+          "options": [
+            {
+              "id": 1,
+              "label": "Element directives.",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": " Attribute",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "CSS",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "All of the above.",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 4
+          }
+        },
+        {
+          "question": "  How many $RootScope an AngularJS application can have?",
+          "options": [
+            {
+              "id": 1,
+              "label": "Zero",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "One",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "Two",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "Infinity",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 2
+          }
+        },
+        {
+          "question": " What is deep linking in AngularJS?",
+          "options": [
+            {
+              "id": 1,
+              "label": "Deep linking is an SEO-based technique.",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "Deep linking refers to linking various views to the main page.",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "Deep linking allows you to encode the state of an application in the URL so that it can be bookmarked.",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "All of the Above",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 3
+          }
+        },
+        {
+          "question": "Which of the following statement is true in the case of $routeProvider?",
+          "options": [
+            {
+              "id": 1,
+              "label": "It is a service.",
+              "type": "radio"
+            },
+            {
+              "id": 2,
+              "label": "It is a module.",
+              "type": "radio"
+            },
+            {
+              "id": 3,
+              "label": "It is a component.",
+              "type": "radio"
+            },
+            {
+              "id": 4,
+              "label": "None of the above.",
+              "type": "radio"
+            }
+          ],
+          "answer": {
+            "id": 1
+          }
+        }
+      ]
+    }
+}

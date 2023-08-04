@@ -20,6 +20,9 @@ import { storeModule } from '@app/store/store.module';
 
 import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
+import { TearmsConditionComponent } from './component/tearms-condition/tearms-condition.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,8 @@ import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard'
     ModalComponent,
     RegistrationComponent,
     ToastComponent,
+    PrivacyPolicyComponent,
+    TearmsConditionComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard'
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
     LayoutComponentModule,
     NgbToastModule,
-    NgbDatepickerModule
+    NgbDatepickerModule,
+    HttpClientModule
   ],
   providers: [
     AuthGuard,

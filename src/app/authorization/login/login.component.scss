@@ -1,9 +1,10 @@
 $grey1: #d1d1d4;
 $dark_blue: #2929e7;
-$steel_blue: #4682b4; 
+$steel_blue: #4682b4;
 .userlogo {
   width: 60px;
   height: 60px;
+  margin-top: -6%;
 }
 
 .main-title {
@@ -18,7 +19,7 @@ $steel_blue: #4682b4;
 }
 
 .container-fluid {
-  margin-top: -4%;
+  margin-top: -50%;
 }
 
 .back-btn {
@@ -40,14 +41,18 @@ $steel_blue: #4682b4;
   border-bottom: 1px solid $grey1 !important;
   background-color: #f8f9fa;
 }
+.reg-link {
+  margin-top: -8px;
+}
 .card {
   margin: auto;
-  height: auto;
+  width: 50%;
+  height: 412px;
   position: relative;
-  top: 7%;
-  margin-bottom: 3rem;
+  top: -4%;
+  margin-bottom: 0.7rem;
 }
-.login-button{
+.login-button {
   display: flex;
   justify-content: center;
 }
@@ -70,20 +75,26 @@ $steel_blue: #4682b4;
   font-weight: bold;
   border: none;
   padding: 10px;
-  margin: 10px 40px;
+  margin: 10px 64px;
   border-radius: 50px;
   font-size: 16px;
 }
 
+.span-height{
+  height: auto !important;
+}
+
 .auth-section {
   height: 100%;
-  min-height: 700px;
+  min-height: 100px;
   .img-fluid {
     height: -webkit-fill-available;
     width: -webkit-fill-available;
   }
 }
 .progressbar {
+  margin-top: 45%;
+  margin-right: 10%;
   height: 5rem;
   .active:before {
     font-family: bootstrap-icons;
@@ -149,17 +160,17 @@ $steel_blue: #4682b4;
     position: absolute;
     top: 25px;
     z-index: 1;
-  } 
+  }
 }
 
 .progressbar li.account {
-  &:after { 
+  &:after {
       left: 25px;
   }
 }
 
 .progressbar li.finish {
-  &:after { 
+  &:after {
       right: 25px;
   }
 }
@@ -192,7 +203,7 @@ $steel_blue: #4682b4;
   background-color: #f8f9fa;
 }
 
-.bi-arrow-left::before { 
+.bi-arrow-left::before {
   font-size: 30px;
   color: $steel_blue;
 }

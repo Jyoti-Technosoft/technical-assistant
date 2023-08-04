@@ -20,7 +20,7 @@ export class ToastService {
   toastMessage(message: toastMessage, className:string) {
     this.show(message?.label, {
       classname: className,
-      delay: 10000,
+      delay: 5000,
       icon: message?.icon
     });
   }

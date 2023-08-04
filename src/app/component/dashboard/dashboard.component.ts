@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
-import { ReplaySubject, distinctUntilChanged, takeUntil } from 'rxjs';
+import { ReplaySubject, distinctUntilChanged, max, takeUntil } from 'rxjs';
 
 import quizData from '@assets/json/data.json';
 import { Store } from '@ngrx/store';
@@ -16,10 +16,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   quizData = { ...quizData };
   destroy$: ReplaySubject<boolean> = new ReplaySubject();
   quizs: any[] = [];
-  resultData:any = {};
+  resultData: any = {};
   cardData: number = 8;
   resultData$: any;
   allResultData: any;
+  highestPoints: any;
+  hightestTechPlayed: any;
+  maxPoints: any;
+  minPoints: any;
 
   constructor(private route: Router, private store: Store) {}
 
@@ -34,6 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.store.dispatch(getAllQuiz());
     }
     this.getUserResultData();
+    this.getHeightestQuiz();
   }
 
   getUserResultData() {
@@ -50,30 +55,25 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
   strucutreResultData(data: any) {
     this.allResultData = data;
-
-    this.resultData = this.getMostValue(data); 
+    if (data) {
+      this.resultData = this?.getMostValue(data);
+      this.highestPoints = this.getMinValue(data);
+    }
+  }
+  getHeightestQuiz() {
+    var result = this.allResultData.map((a: any) => a.type);
+    this.hightestTechPlayed =  result.sort((a:any,b:any) =>
+    result.filter((v:any) => v===a).length
+  - result.filter((v:any) => v===b).length
+  ).pop();
   }
 
-  getMostValue(array:any) {
-    if(!array?.length)
-        return null;
-    let modeMap:any = {};
-    var maxEl = array[0], maxCount = 1;
-    for(var i = 0; i < array.length; i++)
-    {
-        var el = array[i];
-        if(modeMap[el] == null)
-            modeMap[el] = 1;
-        else
-            modeMap[el]++;  
-        if(modeMap[el] > maxCount)
-        {
+  getMostValue(array: any) {
+    this.maxPoints = Math?.max(...array?.map((obj: any) => obj?.points));
+  }
 
-            maxEl = el;
-            maxCount = modeMap[el];
-        }
-    }
-    return maxEl;
+  getMinValue(array: any) {
+    this.minPoints = Math?.min(...array?.map((obj: any) => obj?.points));
   }
 
   startQuiz(title: string) {

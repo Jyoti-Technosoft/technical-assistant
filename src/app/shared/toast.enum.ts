@@ -18,7 +18,7 @@ export const ALREADY_REGISTERED_EMAIL =
 
 export const USER_DETAILS_UPDATE_SUCCESSFULLY: toastMessage = {
   label: 'User Details Update Successfully',
-  icon: 'fa-solid fa-check',
+  icon: 'bi bi-check-lg',
 };
 export const NO_QUIZ = {
   label: 'No Quiz Found',

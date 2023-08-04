@@ -56,21 +56,24 @@
   z-index: 1;
   height: 70px;
 }
+.link-primary {
+  font-size: 16px;
+  padding: 6px;
+}
 
 @media only screen and (max-width: 768px) {
-  /* For mobile phones: */
   .card-footer {
     display: flex !important;
     flex-direction: column;
     padding: 0.75rem;
-    height: fit-content; 
+    height: fit-content;
     .total-que  {
       margin-top: 1rem;
     }
     .form-btn {
       margin: 1rem;
      }
-  } 
+  }
 }
 
 

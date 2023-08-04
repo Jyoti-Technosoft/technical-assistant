@@ -1,5 +1,6 @@
 import {
   Component,
+  ElementRef,
   HostListener,
   OnDestroy,
   OnInit,
@@ -7,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import {
   interval,
   Subscription,
@@ -32,6 +33,7 @@ import {
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
+import { AppComponent } from '@app/app.component';
 
 @Component({
   selector: 'app-questions',
@@ -54,7 +56,7 @@ import { Result } from '@app/store/result/result.model';
 	],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
-  quizData = { ...quizData };
+  // quizData = { ...quizData };
   @ViewChild('carousel')
   carousel!: NgbCarousel;
   quizForm!: FormGroup;
@@ -74,6 +76,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
   loggedInUser$: Observable<any> | undefined;
   userData: any;
   selectedOptions: string[] = [];
+  notSelect: any = 0;
+  allQuiz: any;
 
   constructor(
     private router: Router,
@@ -83,11 +87,11 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private store: Store,
     private state: State<quizState>,
     private modalService: NgbModal,
+    private app : AppComponent
   ) {
     this.quizForm = this.fb.group({
       form: this.fb.array([]),
     });
-    localStorage.setItem("allowOrNot", "1");
   }
 
   ngOnInit(): void {
@@ -104,7 +108,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
     event.returnValue = false;
   }
   @ViewChild('content') myModal: any;
-  // @ViewChild('btnText') public btnText: ElementRef | any;
   closeResult: any;
 
   onClickCheck(card:any, questionIndex:number) {
@@ -201,7 +204,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
       return  `with: ${reason}`;
     }
   }
-
   submitQuiz() {
     let result: Result = {
       points: this.points,
@@ -210,7 +212,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
       type: this.selectedQuiz?.quizId,
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
-      date: new Date().getTime()
+      date: new Date().toISOString().slice(0, 10),
+      skipQuestion: this.notSelect
     };
     this.store.dispatch(addResults({ result }));
     this.store.dispatch(successQuizPlay({ result: result }));
@@ -221,10 +224,9 @@ export class Quizcomponent implements OnInit, OnDestroy {
     });
     this.router.navigateByUrl('result');
   }
-  openVerticallyCentered(content: any) {
+	openVerticallyCentered(content: any) {
 		this.modalService.open(content, { centered: true });
 	}
-
   skipQuestion(questionindex: number) {
     let configData = this.dialogData.skipModel;
     this.dialogService.openDialog(configData).then((value) => {
@@ -269,18 +271,22 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   answer(questionIndex: number, selectedOption: any) {
+    if (selectedOption == "") {
+      this.notSelect++;
+    }
     var numSelectedOption = +selectedOption
     if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
       if (this.question[questionIndex].answer.id == numSelectedOption && this.checkAndValidate(numSelectedOption,questionIndex)) {
         this.points = this.points += this.positivePoints;
         this.correctAnswer++;
       } else if (!(this.question[questionIndex].answer?.id == numSelectedOption)) {
-        this.points = this.points -= this.negativePoints;
-        this.inCorrectAnswer++;
+        if(selectedOption != "") {
+          this.points = this.points -= this.negativePoints;
+          this.inCorrectAnswer++;
+        }
       }
     }
   }
-
 
   checkAndValidate(selectedOption:any, questionIndex:any) {
     let isCorrect = true;
@@ -290,7 +296,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       answerlist.map((ans:any, i:any) => {
         if (ans?.id != selectedOption[i]) {
             isCorrect = false;
-        } 
+        }
       })
     }
     return isCorrect;

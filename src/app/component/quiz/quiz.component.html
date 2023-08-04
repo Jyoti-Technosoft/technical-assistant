@@ -21,16 +21,18 @@
                     <div
                       class="card-header header-txt py-0 px-3 d-flex align-items-center justify-content-between position-relative"
                     >
-                      <div class="header-title user-select-none col-md-3 col-lg-3 col-sm-3">
+                      <div
+                        class="header-title user-select-none col-md-3 col-lg-3 col-sm-3"
+                      >
                         {{ selectedQuiz?.title }}
                       </div>
                       <div
                         class="timer d-flex align-items-center justify-content-between rounded-2 px-2 py-0 w-auto px-2"
                       >
-                        <div class="timer-left-txt user-select-none col-auto mx-2">
-                          <span class="d-none d-md-block">
-                            Time Left
-                          </span>
+                        <div
+                          class="timer-left-txt user-select-none col-auto mx-2"
+                        >
+                          <span class="d-none d-md-block"> Time Left </span>
                           <span class="d-md-none">
                             <i class="fa-solid fa-timer"></i>
                           </span>
@@ -50,18 +52,23 @@
 
                       <div class="option-list">
                         <ng-container
-                          *ngFor="let card of question[questionIndex].options; let j = index;"
+                          *ngFor="
+                            let card of question[questionIndex].options;
+                            let j = index
+                          "
                         >
                           <div class="mx-0">
                             <label
                               class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
                               *ngIf="card.type == 'checkbox'"
                               [class.hightlight-selected]="
-                                formArray.controls.at(i)?.value.radioValue?.includes(card?.id) 
+                                formArray.controls
+                                  .at(i)
+                                  ?.value.radioValue?.includes(card?.id)
                               "
                               (click)="onClickCheck(card, i)"
                             >
-                            {{ card.label }}
+                              {{ card.label }}
                             </label>
 
                             <label
@@ -98,18 +105,23 @@
                       </div>
 
                       <div class="form-btn">
-                        <button
-                          [disabled]="i == 0"
-                          data-slide="previous"
-                          (click)="previousQuestion(i)"
-                          type="button"
-                          class="btn btn-primary"
-                        >
-                          <span class="d-none d-md-block"> Previous </span>
-                          <span class="d-md-none">
-                            <i class="fa-solid fa-chevron-left"></i>
-                          </span>
-                        </button>
+                        <ng-container *ngIf="i + 1 == 1">
+                          <a class="link-primary" routerLink="/dashboard">Exit</a>
+                        </ng-container>
+                        <ng-container *ngIf="i + 1 != 1">
+                          <button
+                            [disabled]="i == 0"
+                            data-slide=""
+                            (click)="previousQuestion(i)"
+                            type="button"
+                            class="btn btn-primary"
+                          >
+                            <span class="d-none d-md-block">Previous</span>
+                          </button>
+                        </ng-container>
+                        <span class="d-md-none">
+                          <i class="fa-solid fa-chevron-left"></i>
+                        </span>
 
                         <button
                           [disabled]="formArray.controls[i].dirty"
@@ -118,10 +130,8 @@
                           (click)="skipQuestion(i)"
                           class="btn btn-dark my-0 mx-2"
                         >
-                        <span class="d-none d-md-block">
-                          Skip
-                        </span>
-                          <span class="d-md-none" >
+                          <span class="d-none d-md-block"> Skip </span>
+                          <span class="d-md-none">
                             <i class="fa-solid fa-forward"></i>
                           </span>
                         </button>
@@ -152,3 +162,27 @@
     </div>
   </div>
 </form>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Information Box</h4>
+    <button
+      type="button"
+      class="btn-close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <p>Your quiz is complete&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Close
+    </button>
+  </div>
+</ng-template>

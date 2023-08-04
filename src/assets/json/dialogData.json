@@ -13,6 +13,13 @@
     "no": "No",
     "type": "signoutModel"
   },
+  "exitQuizModel": {
+    "modelLabel": "Alert",
+    "label": "Are you sure you want to exit from quiz?",
+    "yes": "Yes",
+    "no": "No",
+    "type": "exitQuizModel"
+  },
   "aboutModel": {
     "image": "assets\\img\\logo1.png",
     "companyName": "Jyoti Technosoft LLP",
@@ -37,12 +44,12 @@
     {
       "label": "Privacy Policy",
       "name": "",
-      "link": ""
+      "link": "privacy-policy"
     },
     {
       "label": "Terms & Condition",
       "name": "",
-      "link": ""
+      "link": "tearms-condition"
     },
     {
       "label": "Career",

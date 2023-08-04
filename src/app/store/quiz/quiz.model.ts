@@ -19,4 +19,5 @@ export interface quizResult {
   type: string,
   user: number,
   date: string,
-} 
+  skipQuiz: number
+}

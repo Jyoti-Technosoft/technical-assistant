@@ -32,7 +32,7 @@ export class HeaderComponent implements OnDestroy {
   userData: any;
   loggedInUser$: Observable<any> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-  @ViewChild('collapsibleNavbar') collapsibleNavbar!: ElementRef ; 
+  @ViewChild('collapsibleNavbar') collapsibleNavbar!: ElementRef ;
   menuItem: any[] = [
     { label: 'Dashboard', icon: 'bi-grid-1x2-fill', link: 'dashboard' },
     { label: 'All Results', icon: 'bi-pie-chart-fill', link: 'allresults' },
@@ -84,10 +84,10 @@ export class HeaderComponent implements OnDestroy {
   navigate(link:string) {
     if (link) {
       this.router.navigate([`/${link}`]);
-      this.toggleNavBar(); 
+      this.toggleNavBar();
     }
   }
-  
+
   toggleNavBar() {
     if (this.collapsibleNavbar.nativeElement.classList.contains('show')) {
        this.renderer.removeClass(this.collapsibleNavbar.nativeElement, 'show');

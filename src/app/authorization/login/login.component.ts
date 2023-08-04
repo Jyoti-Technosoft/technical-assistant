@@ -193,7 +193,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       dateOfBirth: formValue?.personalInfo?.dateOfBirth,
       mobile: formValue?.personalInfo?.mobile,
     };
-    console.log(registerUser)
     this.store.dispatch(doRegistration(registerUser));
   }
 

@@ -1,12 +1,12 @@
 <div class="container-fluid">
-    <div class="d-flex align-items-center center-to-page">
+    <div class="d-flex align-items-center pt-5 pb-5">
       <div class="container mx-auto">
         <div class="row">
-          <div class="col-md-4 pt-5">
+          <div class="col-md-4 offset-md-1 pt-5">
             <div class="card mt-1 user-card shadow border-0 h-100 rounded-4">
               <div class="card-body">
                 <div
-                  class="d-flex justify-content-center flex-column align-items-center h-100"
+                class="d-flex justify-content-center flex-column align-items-center h-100"
                 >
                   <div class="initial-letter shadow">
                     {{ avatarName }}
@@ -18,7 +18,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-8 pt-5">
+          <div class="col-md-7 pt-5">
             <form [formGroup]="profilePageForm">
               <div
                 class="card mt-2 edit-detail-card shadow border-0 rounded-4 user-details"
@@ -44,7 +44,7 @@
                     </div>
                   </div>
                   <hr class="my-2 pb-2" />
-  
+
                   <div class="row">
                     <div class="col-sm-3 mt-1 fw-bold">Email</div>
                     <div
@@ -70,7 +70,7 @@
                     </div>
                   </div>
                   <hr class="my-2 pb-2" />
-  
+
                   <div class="row">
                     <div class="col-sm-3 mt-1 fw-bold">Phone</div>
                     <div
@@ -92,7 +92,7 @@
                         >
                           Number is Invalid.
                         </span>
-  
+
                         <span
                           *ngIf="(profilePageFormController['mobile'].errors?.['maxlength'] && (profilePageFormController['mobile'].dirty || profilePageFormController['mobile'].touched))"
                         >
@@ -107,7 +107,7 @@
                     </div>
                   </div>
                   <hr class="my-2 pb-2" />
-  
+
                   <div class="row">
                     <div class="col-sm-3 mt-1 fw-bold">Gender</div>
                     <div class="col-sm-9 px-3 wrapper h-100">
@@ -145,7 +145,7 @@
                     </div>
                   </div>
                   <hr class="my-2 pb-2" />
-  
+
                   <div class="row">
                     <div class="col-sm-3 mt-1 fw-bold">Date of Birth</div>
                     <div
@@ -173,7 +173,7 @@
                           ><i class="fa-regular fa-calendar-days"></i>
                         </span>
                       </div>
-  
+
                       <ng-template #footerTemplate>
                         <hr class="my-0" />
                         <button
@@ -199,7 +199,7 @@
                     </div>
                   </div>
                   <hr class="my-2" />
-  
+
                   <ng-container *ngIf="show">
                     <div class="row">
                       <div class="col-sm-3 mt-1 fw-bold">Current Password</div>
@@ -228,7 +228,7 @@
                       </div>
                     </div>
                     <hr class="my-2 pb-2" />
-  
+
                     <div class="row">
                       <div class="col-sm-3 mt-1 fw-bold">New Password</div>
                       <div
@@ -243,7 +243,7 @@
                           <span
                             *ngIf="profilePageFormController['newPassword'].errors?.['required'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
                           >
-                            Password is required.
+                            New password is required.
                           </span>
                           <span
                             *ngIf="profilePageFormController['newPassword'].errors?.['pattern'] || profilePageFormController['newPassword'].errors?.['maxlength'] && (profilePageFormController['newPassword'].dirty || profilePageFormController['newPassword'].touched)"
@@ -261,7 +261,7 @@
                       </div>
                     </div>
                     <hr class="my-2 pb-2" />
-  
+
                     <div class="row my-auto">
                       <div class="col-sm-3 mt-1 fw-bold">Confirm Password</div>
                       <div
@@ -278,7 +278,7 @@
                           >
                             Confirm password is Required.
                           </span>
-  
+
                           <span
                             *ngIf="profilePageFormController['confirmPassword'].errors?.['validateConfirmaPassword'] && profilePageFormController['confirmPassword']?.touched && profilePageFormController['confirmPassword'].value"
                           >
@@ -289,7 +289,7 @@
                     </div>
                     <hr class="my-2" />
                   </ng-container>
-  
+
                   <div class="row">
                     <div class="col-sm-12 d-flex justify-content-between">
                       <div class="col-sm-3 d-flex justify-content-between">

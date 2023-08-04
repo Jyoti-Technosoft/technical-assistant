@@ -1,0 +1,276 @@
+{
+  "javascript":
+  {
+    "quizId": "javascript",
+    "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
+    "timer": 50,
+    "positivePoints": 1,
+    "negativePoints": 0.25,
+    "numberOfQuestions": 3,
+    "title": "JavaScript Quiz",
+    "image": "assets\\img\\javascript.svg",
+    "description": "JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions.JavaScript is Easy to learn.",
+    "questions": [
+      {
+        "question": "What is JavaScript?",
+        "options": [
+          {
+            "id": 1,
+            "label": "JavaScript is a scripting language used to make the website interactive",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "JavaScript is an assembly language used to make the website interactive",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "JavaScript is a compiled language used to make the website interactive",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "None of the mentioned",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 1 }
+      },
+      {
+        "question": "Arrays in JavaScript are defined by which of the following statements?",
+        "options": [
+          {
+            "id": 1,
+            "label": "It is an ordered list of ids",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "It is an ordered list of objects",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "It is an ordered list of string",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "It is an ordered list of functions",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 1 }
+      },
+      {
+        "question": "Which of the following is not javascript data types?",
+        "options": [
+          {
+            "id": 1,
+            "label": "Null type",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "Undefined type",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "Number type",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "All of the mentioned",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 4 }
+      },
+      {
+        "question": "Which of the following can be used to call a JavaScript Code Snippet?",
+        "options": [
+          {
+            "id": 1,
+            "label": "Function/Method",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "Preprocessor",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "Triggering Event",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "RMI",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 1 }
+      },
+      {
+        "question": "Why JavaScript Engine is needed?",
+        "options": [
+          {
+            "id": 1,
+            "label": "Both Compiling & Interpreting the JavaScript",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "Parsing the javascript",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "Interpreting the JavaScript",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "Compiling the JavaScript",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 3 }
+      },
+      {
+        "question": "JavaScript is a _______________ language.",
+        "options": [
+          {
+            "id": 1,
+            "label": "Object-Oriented",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "High-level",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "Assembly-language",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "Object-Based",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 4 }
+      },
+      {
+        "question": "A conditional expression is also called a _______________",
+        "options": [
+          {
+            "id": 1,
+            "label": "Alternative to if-else",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "Immediate if",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "If-then-else statement",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "Switch statement",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 2 }
+      },
+      {
+        "question": "The “var” and “function” are __________",
+        "options": [
+          {
+            "id": 1,
+            "label": "Keywords",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "Declaration statements",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "Data types",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "Prototypes",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 2 }
+      },
+      {
+        "question": "If you have a function f and an object o, you can define a method named m of o with ________",
+        "options": [
+          {
+            "id": 1,
+            "label": "o.m=m.f;",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "o.m=f;",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "o=f.m;",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "o=f;",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 2 }
+      },
+      {
+        "question": "The statement a===b refers to _________",
+        "options": [
+          {
+            "id": 1,
+            "label": "Both a and b are equal in value, type and reference address",
+            "type": "radio"
+          },
+          {
+            "id": 2,
+            "label": "Both a and b are equal in value",
+            "type": "radio"
+          },
+          {
+            "id": 3,
+            "label": "Both a and b are equal in value and type",
+            "type": "radio"
+          },
+          {
+            "id": 4,
+            "label": "There is no such statement",
+            "type": "radio"
+          }
+        ],
+        "answer": { "id": 3 }
+      }
+    ]
+  }
+}

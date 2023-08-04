@@ -1,31 +1,56 @@
-<div class="chart-card">
+<div class="col text-center result-layout mb-3">
+  <span class="fs-3">Result</span>
+</div>
+
+<div class="container" *ngIf="allResultData?.length">
   <div class="row">
-    <div class="col-12">
-      <div *ngIf="showChart">
-        <h2 class="text-center top-heading-label">
-          {{ subjectType | titlecase }}
-        </h2>
-      </div>
-        <div #chartContainer class="chart-area" [ngStyle]="{'display': showChart ? 'block' : 'none'}">
-          <div #tooltip class="tooltip"></div>
-  
-          <figure id="bar1"></figure>
-  
-          <figure id="bar2" class="hide-chart"></figure>
+    <div
+      class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12"
+      *ngFor="let data of allResultData | slice : 0 : initialData"
+    >
+      <div class="card shadow mt-3 rounded-4 border-0 cardContainer">
+        <img
+          class="img-fluid p-2 h-100 img-content"
+          alt="quiz-logo"
+          src="{{ data?.quizTypeImage }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title font-weight-bolder">{{ data.type }}</h5>
+
+          <p class="card-text">Total Points : {{ data.points }}</p>
+
+          <p class="card-text">Correct Answers : {{ data.correctAnswer }}</p>
+
+          <p class="card-text">Wrong Answers : {{ data.inCorrectAnswer }}</p>
+
+          <p class="card-text">Skip Questions : {{ data?.skipQuestion }}</p>
+
+          <p class="card-text">Date : {{ data.date | date: 'dd/MM/yyyy' }}</p>
+
+          <div class="text-center mt-2">
+            <button
+              type="button"
+              class="btn btn-primary btn-sm float-end btn-content"
+              (click)="startQuizAgain(data.type)"
+            >
+              Go Again To Quiz
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
+    <div class="container-fluid d-flex justify-content-center mt-4">
+      <button
+        type="button"
+        class="col-lg-3 col-md-3 col-12 btn btn-none text-primary"
+        (click)="loadMoreData()"
+        *ngIf="allResultData.length > initialData"
+      >
+        Show More
+      </button>
     </div>
   </div>
 </div>
-
-<div class="empty-card row" *ngIf="!showChart">
-  <div class="notdata col-6">
-    <h4 class="notdata-title">Sorry, !No quiz played yet</h4>
-    <p class="notdata-description">
-      <strong>Thank you for your interest,</strong>
-    </p>
-    <p class="notdata-description">Please attempt any quiz!</p>
-    <div class="notdata-button">
-      <button class="btn btn-outline-primary back-quiz" routerLink="/dashboard">Go to quiz</button>
-    </div>
-  </div>
+<div *ngIf="!allResultData?.length">
+  <h1>No Quiz Played yet</h1>
 </div>

@@ -18,7 +18,7 @@ import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit, AfterViewInit {
+export class UserProfileComponent implements OnInit {
   avatarName!: string;
   loggedInUser$: Observable<any> | undefined;
   destroyer$: ReplaySubject<boolean> = new ReplaySubject();
@@ -35,14 +35,11 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     public calendar: NgbCalendar
   ) {}
 
-  @ViewChild("datePicker") datePicker!: any 
-
-  ngAfterViewInit(): void {
-    this.profilePageForm.disable();
-  }
+  @ViewChild("datePicker") datePicker!: any
 
   ngOnInit(): void {
     this.getUserData();
+    this.profilePageForm.disable();
   }
 
   getUserData() {
@@ -96,10 +93,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   }
 
 
-  getUserLetter(userName: string) {
+  getUserLetter(userName: any) {
     const intials = userName
       .split(' ')
-      .map((name) => name[0])
+      .map((name: any) => name[0])
       .join('')
       .toUpperCase();
     return intials;
@@ -144,7 +141,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
   }
 
   setTodaysDate() {
-    this.profilePageForm.controls['dateOfBirth'].patchValue(this.calendar.getToday()); 
+    this.profilePageForm.controls['dateOfBirth'].patchValue(this.calendar.getToday());
     this.datePicker?.close();
   }
 

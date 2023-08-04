@@ -5,5 +5,6 @@ export interface Result {
   points: number;
   type: string;
   user: number;
-  quizTypeImage:string; 
+  quizTypeImage:string;
+  skipQuestion: number;
 }
