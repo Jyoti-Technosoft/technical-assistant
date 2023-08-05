@@ -17,26 +17,26 @@
             {
               "id": 1,
               "label": "AngularJS is a closed-source front-end web framework",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "AngularJS is an open-source front-end web framework",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "AngularJS is an open-source backend web framework",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "AngularJS is a closed-source back-end web framework",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 2
+            "id": [1,2]
           }
         },
         {
@@ -45,26 +45,26 @@
             {
               "id": 1,
               "label": "{{expression}}",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "{{expression | filter1 | filter2 | …}}",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "Both of the mentioned",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "None of the mentioned",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 1
+            "id": [1,2]
           }
         },
         {
@@ -73,26 +73,26 @@
             {
               "id": 1,
               "label": "Automatic synchronization of data between model and view components",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "Automatic synchronization of data between model and controller components",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "Technique to save html data in the database",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "Technique to bind database data to html control",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 1
+            "id": [1,2]
           }
         },
         {
@@ -101,26 +101,26 @@
             {
               "id": 1,
               "label": "ng-repeat",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "ng-bind",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "ng-app",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "ng-model",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 2
+            "id": [1,2]
           }
         },
         {
@@ -129,26 +129,26 @@
             {
               "id": 1,
               "label": "Decorater Pattern",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "Observer Pattern",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "MVVM architecture Pattern",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "MVC architecture Pattern",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 3
+            "id": [1,2]
           }
         },
         {
@@ -157,26 +157,26 @@
             {
               "id": 1,
               "label": "AngularJS code is unit testable.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": " AngularJS provides reusable components.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "AngularJS uses dependency injection and makes use of separation of concerns",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "All of the above",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 4
+            "id": [1,2]
           }
         },
         {
@@ -185,26 +185,26 @@
             {
               "id": 1,
               "label": "Element directives.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": " Attribute",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "CSS",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "All of the above.",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 4
+            "id": [1,2]
           }
         },
         {
@@ -213,26 +213,26 @@
             {
               "id": 1,
               "label": "Zero",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "One",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "Two",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "Infinity",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 2
+            "id": [1,2]
           }
         },
         {
@@ -241,26 +241,26 @@
             {
               "id": 1,
               "label": "Deep linking is an SEO-based technique.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "Deep linking refers to linking various views to the main page.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "Deep linking allows you to encode the state of an application in the URL so that it can be bookmarked.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "All of the Above",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 3
+            "id": [1,2]
           }
         },
         {
@@ -269,26 +269,26 @@
             {
               "id": 1,
               "label": "It is a service.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 2,
               "label": "It is a module.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 3,
               "label": "It is a component.",
-              "type": "radio"
+              "type": "checkbox"
             },
             {
               "id": 4,
               "label": "None of the above.",
-              "type": "radio"
+              "type": "checkbox"
             }
           ],
           "answer": {
-            "id": 1
+            "id": [1,2]
           }
         }
       ]

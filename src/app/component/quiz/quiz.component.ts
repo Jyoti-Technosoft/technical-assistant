@@ -18,7 +18,11 @@ import {
   distinctUntilChanged,
 } from 'rxjs';
 
-import { ModalDismissReasons, NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  ModalDismissReasons,
+  NgbCarousel,
+  NgbModal,
+} from '@ng-bootstrap/ng-bootstrap';
 
 import { AuthenticationService } from '@app/service/authentication.service';
 import quizData from '@assets/json/data.json';
@@ -28,7 +32,7 @@ import { State, Store } from '@ngrx/store';
 import {
   getAllQuiz,
   selectQuiz,
-  successQuizPlay
+  successQuizPlay,
 } from '@app/store/quiz/quiz.action';
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
@@ -40,20 +44,20 @@ import { AppComponent } from '@app/app.component';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
   encapsulation: ViewEncapsulation.None,
-	styles: [
-		`
-			.dark-modal .modal-content {
-				background-color: #292b2c;
-				color: white;
-			}
-			.dark-modal .close {
-				color: white;
-			}
-			.light-blue-backdrop {
-				background-color: #5cb3fd;
-			}
-		`,
-	],
+  styles: [
+    `
+      .dark-modal .modal-content {
+        background-color: #292b2c;
+        color: white;
+      }
+      .dark-modal .close {
+        color: white;
+      }
+      .light-blue-backdrop {
+        background-color: #5cb3fd;
+      }
+    `,
+  ],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   // quizData = { ...quizData };
@@ -87,7 +91,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private store: Store,
     private state: State<quizState>,
     private modalService: NgbModal,
-    private app : AppComponent
+    private app: AppComponent
   ) {
     this.quizForm = this.fb.group({
       form: this.fb.array([]),
@@ -110,22 +114,28 @@ export class Quizcomponent implements OnInit, OnDestroy {
   @ViewChild('content') myModal: any;
   closeResult: any;
 
-  onClickCheck(card:any, questionIndex:number) {
+  onClickCheck(card: any, questionIndex: number) {
     const patchValue: any = () => {
-      let prevSelected = this.formArray.controls.at(questionIndex)?.value.radioValue || [];
-      return prevSelected
-    }
-    let selectedValue = this.formArray.controls.at(questionIndex)?.value.radioValue == '' ? [] : patchValue();
+      let prevSelected =
+        this.formArray.controls.at(questionIndex)?.value.radioValue || [];
+      return prevSelected;
+    };
+    let selectedValue =
+      this.formArray.controls.at(questionIndex)?.value.radioValue == ''
+        ? []
+        : patchValue();
     if (selectedValue.includes(card.id)) {
       const index = selectedValue.indexOf(card.id);
       selectedValue.splice(index, 1);
     } else {
       selectedValue.push(card.id);
     }
-    this.formArray.controls.at(this.questionIndex)?.get('radioValue')?.patchValue(selectedValue)
+    this.formArray.controls
+      .at(this.questionIndex)
+      ?.get('radioValue')
+      ?.patchValue(selectedValue);
     this.formArray.controls[questionIndex].markAsDirty();
   }
-
 
   getQuizData() {
     if (!this.state.getValue().quiz.allQuiz) {
@@ -201,7 +211,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
   submitQuiz() {
@@ -213,20 +223,25 @@ export class Quizcomponent implements OnInit, OnDestroy {
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
       date: new Date().toISOString().slice(0, 10),
-      skipQuestion: this.notSelect
+      skipQuestion: this.notSelect,
     };
     this.store.dispatch(addResults({ result }));
     this.store.dispatch(successQuizPlay({ result: result }));
-    this.modalService.open(this.myModal, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(this.myModal, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
     this.router.navigateByUrl('result');
   }
-	openVerticallyCentered(content: any) {
-		this.modalService.open(content, { centered: true });
-	}
+  openVerticallyCentered(content: any) {
+    this.modalService.open(content, { centered: true });
+  }
   skipQuestion(questionindex: number) {
     let configData = this.dialogData.skipModel;
     this.dialogService.openDialog(configData).then((value) => {
@@ -271,33 +286,48 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   answer(questionIndex: number, selectedOption: any) {
-    if (selectedOption == "") {
+    if (selectedOption == '') {
       this.notSelect++;
     }
-    var numSelectedOption = +selectedOption
+
+    var a = JSON.stringify(this.question[questionIndex].answer.id);
+    var b = JSON.stringify(selectedOption);
+    var c = a === b;
+
+    var numSelectedOption = +selectedOption;
+
     if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
-      if (this.question[questionIndex].answer.id == numSelectedOption && this.checkAndValidate(numSelectedOption,questionIndex)) {
-        this.points = this.points += this.positivePoints;
-        this.correctAnswer++;
-      } else if (!(this.question[questionIndex].answer?.id == numSelectedOption)) {
-        if(selectedOption != "") {
-          this.points = this.points -= this.negativePoints;
-          this.inCorrectAnswer++;
+      if(c) {
+        if (
+          JSON.stringify(this.question[questionIndex].answer.id) == JSON.stringify(selectedOption) &&
+          this.checkAndValidate(selectedOption, questionIndex)
+        ) {
+          this.points = this.points += this.positivePoints;
+          this.correctAnswer++;
+        }
+      } else {
+        if (
+          !(JSON.stringify(this.question[questionIndex].answer?.id) == JSON.stringify(selectedOption))
+        ) {
+          if (JSON.stringify(selectedOption) != '') {
+            this.points = this.points -= this.negativePoints;
+            this.inCorrectAnswer++;
+          }
         }
       }
     }
   }
 
-  checkAndValidate(selectedOption:any, questionIndex:any) {
+  checkAndValidate(selectedOption: any, questionIndex: any) {
     let isCorrect = true;
-    if(this.question[questionIndex].answer?.length > 0 ) {
-      selectedOption?.sort((a:any, b:any) => a - b);
+    if (this.question[questionIndex].answer?.length > 0) {
+      selectedOption?.sort((a: any, b: any) => a - b);
       const answerlist = this.question[questionIndex].answer;
-      answerlist.map((ans:any, i:any) => {
+      answerlist.map((ans: any, i: any) => {
         if (ans?.id != selectedOption[i]) {
-            isCorrect = false;
+          isCorrect = false;
         }
-      })
+      });
     }
     return isCorrect;
   }
