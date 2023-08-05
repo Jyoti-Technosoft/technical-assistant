@@ -1,6 +1,5 @@
 import {
   Component,
-  ElementRef,
   HostListener,
   OnDestroy,
   OnInit,
@@ -8,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   interval,
   Subscription,
@@ -17,11 +16,7 @@ import {
   Observable,
   distinctUntilChanged,
 } from 'rxjs';
-
 import { ModalDismissReasons, NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-import { AuthenticationService } from '@app/service/authentication.service';
-import quizData from '@assets/json/data.json';
 import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
 import { State, Store } from '@ngrx/store';
@@ -33,7 +28,6 @@ import {
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
 import { Result } from '@app/store/result/result.model';
-import { AppComponent } from '@app/app.component';
 
 @Component({
   selector: 'app-questions',
@@ -78,6 +72,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
   selectedOptions: string[] = [];
   notSelect: any = 0;
   allQuiz: any;
+  numberOfQuestions: any;
 
   constructor(
     private router: Router,
@@ -87,7 +82,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private store: Store,
     private state: State<quizState>,
     private modalService: NgbModal,
-    private app : AppComponent
   ) {
     this.quizForm = this.fb.group({
       form: this.fb.array([]),
@@ -159,6 +153,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.question = this.question
       ?.sort(() => Math.random() - 0.67)
       .splice(0, data?.numberOfQuestions);
+      this.numberOfQuestions = data.numberOfQuestions;
 
     const formArray = this.quizForm.controls['form'] as FormArray;
     this.question?.forEach((item: any) => {
@@ -204,6 +199,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       return  `with: ${reason}`;
     }
   }
+
   submitQuiz() {
     let result: Result = {
       points: this.points,
@@ -213,7 +209,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
       user: this.userData.id,
       quizTypeImage: this.selectedQuiz?.image,
       date: new Date().toISOString().slice(0, 10),
-      skipQuestion: this.notSelect
+      skipQuestion: this.notSelect,
+      totalQuestions: this.numberOfQuestions
     };
     this.store.dispatch(addResults({ result }));
     this.store.dispatch(successQuizPlay({ result: result }));
@@ -224,9 +221,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     });
     this.router.navigateByUrl('result');
   }
-	openVerticallyCentered(content: any) {
-		this.modalService.open(content, { centered: true });
-	}
+
   skipQuestion(questionindex: number) {
     let configData = this.dialogData.skipModel;
     this.dialogService.openDialog(configData).then((value) => {
@@ -242,8 +237,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
       .at(this.questionIndex)
       ?.get('radioValue')
       ?.disable();
-    this.formArray.controls.at(this.questionIndex)?.get('timer')?.disable();
-    this.formArray.controls.at(this.questionIndex)?.markAsDirty();
+    // this.formArray.controls.at(this.questionIndex)?.get('timer')?.disable();
+    // this.formArray.controls.at(this.questionIndex)?.markAsDirty();
   }
 
   startCounter() {
@@ -271,15 +266,19 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   answer(questionIndex: number, selectedOption: any) {
-    if (selectedOption == "") {
+    if (selectedOption == '') {
       this.notSelect++;
     }
-    var numSelectedOption = +selectedOption
+    let a = JSON.stringify(this.question[questionIndex].answer.id);
+    let b = JSON.stringify(selectedOption);
+    let c = a === b;
     if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
-      if (this.question[questionIndex].answer.id == numSelectedOption && this.checkAndValidate(numSelectedOption,questionIndex)) {
-        this.points = this.points += this.positivePoints;
-        this.correctAnswer++;
-      } else if (!(this.question[questionIndex].answer?.id == numSelectedOption)) {
+      if(c) {
+        if (c && this.checkAndValidate(selectedOption, questionIndex)) {
+          this.points = this.points += this.positivePoints;
+          this.correctAnswer++;
+        }
+      } else {
         if(selectedOption != "") {
           this.points = this.points -= this.negativePoints;
           this.inCorrectAnswer++;
@@ -316,9 +315,5 @@ export class Quizcomponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroyer$.next(true);
     this.destroyer$.unsubscribe();
-  }
-
-  closeModal() {
-    this.dialogService.destroy();
   }
 }

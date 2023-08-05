@@ -22,16 +22,17 @@
                       class="d-flex align-items-center justify-content-between"
                     >
                       <div class="field">
-                        <h5>Total Points : {{ recentResult?.points }}</h5>
+                        <h5>Total Questions : {{ recentResult?.totalQuestions }}</h5>
+                        <h5>
+                          Skip Questions : {{ recentResult?.skipQuestion }}
+                        </h5>
                         <h5>
                           Correct Answers : {{ recentResult?.correctAnswer }}
                         </h5>
                         <h5>
                           Wrong Answers : {{ recentResult?.inCorrectAnswer }}
                         </h5>
-                        <h5>
-                          Skip Questions : {{ recentResult?.skipQuestion }}
-                        </h5>
+                        <h5>Total Points : {{ recentResult?.points }}</h5>
                       </div>
                     </div>
                   </div>

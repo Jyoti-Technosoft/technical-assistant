@@ -2,7 +2,7 @@
   "react_js":
     {
       "quizId": "reactJS",
-      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
+      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 20 seconds </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
       "timer": 20,
       "positivePoints": 1,
       "negativePoints": 0.25,
@@ -13,26 +13,23 @@
       "questions": [
         {
           "question": "What is React.js?",
+          "type": "radio",
           "options": [
             {
               "id": 1,
-              "label": "Open-source JavaScript back-end library",
-              "type": "radio"
+              "label": "Open-source JavaScript back-end library"
             },
             {
               "id": 2,
-              "label": "JavaScript front-end library to create a database",
-              "type": "radio"
+              "label": "JavaScript front-end library to create a database"
             },
             {
               "id": 3,
-              "label": "Free and open-source JavaScript front-end library",
-              "type": "radio"
+              "label": "Free and open-source JavaScript front-end library"
             },
             {
               "id": 4,
-              "label": "None of the mentioned",
-              "type": "radio"
+              "label": "None of the mentioned"
             }
           ],
           "answer": {
@@ -41,26 +38,23 @@
         },
         {
           "question": "Which of the following acts as the input of a class-based component?",
+          "type": "radio",
           "options": [
             {
               "id": 1,
-              "label": "Class",
-              "type": "radio"
+              "label": "Class"
             },
             {
               "id": 2,
-              "label": "Props",
-              "type": "radio"
+              "label": "Props"
             },
             {
               "id": 3,
-              "label": "Factory",
-              "type": "radio"
+              "label": "Factory"
             },
             {
               "id": 4,
-              "label": "None of the mentioned",
-              "type": "radio"
+              "label": "None of the mentioned"
             }
           ],
           "answer": {
@@ -69,26 +63,23 @@
         },
         {
           "question": "React.js is written in which of the following language?",
+          "type": "radio",
           "options": [
             {
               "id": 1,
-              "label": 3,
-              "type": "radio"
+              "label": 3
             },
             {
               "id": 2,
-              "label": "C++",
-              "type": "radio"
+              "label": "C++"
             },
             {
               "id": 3,
-              "label": "JavaScript",
-              "type": "radio"
+              "label": "JavaScript"
             },
             {
               "id": 4,
-              "label": "Java",
-              "type": "radio"
+              "label": "Java"
             }
           ],
           "answer": {
@@ -97,26 +88,23 @@
         },
         {
           "question": "In which of the following directory React Components are saved?",
+          "type": "radio",
           "options": [
             {
               "id": 1,
-              "label": "Inside js/components/",
-              "type": "radio"
+              "label": "Inside js/components/"
             },
             {
               "id": 2,
-              "label": "Inside components/js/",
-              "type": "radio"
+              "label": "Inside components/js/"
             },
             {
               "id": 3,
-              "label": "Inside vendor/js/components/",
-              "type": "radio"
+              "label": "Inside vendor/js/components/"
             },
             {
               "id": 4,
-              "label": "Inside vendor/components/",
-              "type": "radio"
+              "label": "Inside vendor/components/"
             }
           ],
           "answer": {
@@ -125,26 +113,23 @@
         },
         {
           "question": "Which of the following command is used to Install create-react-app?",
+          "type": "radio",
           "options": [
             {
               "id": 1,
-              "label": "npm install create-react-app",
-              "type": "radio"
+              "label": "npm install create-react-app"
             },
             {
               "id": 2,
-              "label": "npm install -f create-react-app",
-              "type": "radio"
+              "label": "npm install -f create-react-app"
             },
             {
               "id": 3,
-              "label": "npm install -g create-react-app",
-              "type": "radio"
+              "label": "npm install -g create-react-app"
             },
             {
               "id": 4,
-              "label": "install -g create-react-app",
-              "type": "radio"
+              "label": "install -g create-react-app"
             }
           ],
           "answer": {

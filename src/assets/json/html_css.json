@@ -2,376 +2,333 @@
   "html_css":
   {
     "quizId": "Html/CSS",
-    "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>10 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -1 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
+    "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>10 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -1 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 seconds </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
     "timer": 30,
     "positivePoints": 10,
     "negativePoints": 1,
     "numberOfQuestions": 3,
-    "type": "radio",
     "title": "HTML-CSS Quiz",
     "image": "assets\\img\\html-css.svg",
     "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages.",
     "questions": [
       {
         "question": "What is HTML?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "HTML describes the structure of a webpage",
-            "type": "radio"
+            "label": "HTML describes the structure of a webpage"
           },
           {
             "id": 2,
-            "label": "HTML is the standard markup language mainly used to create web pages",
-            "type": "radio"
+            "label": "HTML is the standard markup language mainly used to create web pages"
           },
           {
             "id": 3,
-            "label": "HTML consists of a set of elements that helps the browser how to view the content",
-            "type": "radio"
+            "label": "HTML consists of a set of elements that helps the browser how to view the content"
           },
           {
             "id": 4,
-            "label": "All of the mentioned",
-            "type": "radio"
+            "label": "All of the mentioned"
           }
         ],
         "answer": { "id": 4 }
       },
       {
         "question": "Which of the following tag is used for inserting the largest heading in HTML?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "head",
-            "type": "radio"
+            "label": "head"
           },
           {
             "id": 2,
-            "label": "<h1>",
-            "type": "radio"
+            "label": "<h1>"
           },
           {
             "id": 3,
-            "label": "<h6>",
-            "type": "radio"
+            "label": "<h6>"
           },
           {
             "id": 4,
-            "label": "heading",
-            "type": "radio"
+            "label": "heading"
           }
         ],
         "answer": { "id": 2 }
       },
       {
         "question": " HTML stands for __________",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "HyperText Markup Language",
-            "type": "radio"
+            "label": "HyperText Markup Language"
           },
           {
             "id": 2,
-            "label": "HyperText Machine Language",
-            "type": "radio"
+            "label": "HyperText Machine Language"
           },
           {
             "id": 3,
-            "label": "HyperText Marking Language",
-            "type": "radio"
+            "label": "HyperText Marking Language"
           },
           {
             "id": 4,
-            "label": "HighText Marking Language",
-            "type": "radio"
+            "label": "HighText Marking Language"
           }
         ],
         "answer": { "id": 1 }
       },
       {
         "question": "Which element is used to get highlighted text in HTML5?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "<u>",
-            "type": "radio"
+            "label": "<u>"
           },
           {
             "id": 2,
-            "label": "<mark>",
-            "type": "radio"
+            "label": "<mark>"
           },
           {
             "id": 3,
-            "label": "<highlight>",
-            "type": "radio"
+            "label": "<highlight>"
           },
           {
             "id": 4,
-            "label": "<b>",
-            "type": "radio"
+            "label": "<b>"
           }
         ],
         "answer": { "id": 2 }
       },
       {
         "question": "How do we write comments in HTML?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "</…….>",
-            "type": "radio"
+            "label": "</…….>"
           },
           {
             "id": 2,
-            "label": "<!……>",
-            "type": "radio"
+            "label": "<!……>"
           },
           {
             "id": 3,
-            "label": "</……/>",
-            "type": "radio"
+            "label": "</……/>"
           },
           {
             "id": 4,
-            "label": "<…….!>",
-            "type": "radio"
+            "label": "<…….!>"
           }
         ],
         "answer": { "id": 2 }
       },
       {
         "question": "Which of the following tag is used to embed css in html page?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "<css>",
-            "type": "radio"
+            "label": "<css>"
           },
           {
             "id": 2,
-            "label": "<!DOCTYPE html>",
-            "type": "radio"
+            "label": "<!DOCTYPE html>"
           },
           {
             "id": 3,
-            "label": "<script>",
-            "type": "radio"
+            "label": "<script>"
           },
           {
             "id": 4,
-            "label": "<style>",
-            "type": "radio"
+            "label": "<style>"
           }
         ],
         "answer": { "id": 4 }
       },
       {
         "question": "Which of the following has introduced text, list, box, margin, border, color, and background properties?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "HTML",
-            "type": "radio"
+            "label": "HTML"
           },
           {
             "id": 2,
-            "label": "PHP",
-            "type": "radio"
+            "label": "PHP"
           },
           {
             "id": 3,
-            "label": "CSS",
-            "type": "radio"
+            "label": "CSS"
           },
           {
             "id": 4,
-            "label": "Ajax",
-            "type": "radio"
+            "label": "Ajax"
           }
         ],
         "answer": { "id": 3 }
       },
       {
         "question": "What is the work of <address> element in HTML5?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "contains IP address",
-            "type": "radio"
+            "label": "contains IP address"
           },
           {
             "id": 2,
-            "label": "contains home address",
-            "type": "radio"
+            "label": "contains home address"
           },
           {
             "id": 3,
-            "label": "contains url",
-            "type": "radio"
+            "label": "contains url"
           },
           {
             "id": 4,
-            "label": "contains contact details for author",
-            "type": "radio"
+            "label": "contains contact details for author"
           }
         ],
         "answer": { "id": 4 }
       },
       {
         "question": " Which tag is used to create a dropdown in HTML Form?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "<input>",
-            "type": "radio"
+            "label": "<input>"
           },
           {
             "id": 2,
-            "label": "<select>",
-            "type": "radio"
+            "label": "<select>"
           },
           {
             "id": 3,
-            "label": "<text>",
-            "type": "radio"
+            "label": "<text>"
           },
           {
             "id": 4,
-            "label": "<textarea>",
-            "type": "radio"
+            "label": "<textarea>"
           }
         ],
         "answer": { "id": 2 }
       },
       {
         "question": "Which of the following CSS style property is used to specify an italic text?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "style",
-            "type": "radio"
+            "label": "style"
           },
           {
             "id": 2,
-            "label": "font",
-            "type": "radio"
+            "label": "font"
           },
           {
             "id": 3,
-            "label": "font-style",
-            "type": "radio"
+            "label": "font-style"
           },
           {
             "id": 4,
-            "label": "@font-face",
-            "type": "radio"
+            "label": "@font-face"
           }
         ],
         "answer": { "id": 3 }
       },
       {
         "question": " Which of the following function defines a linear gradient as a CSS image?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "gradient()",
-            "type": "radio"
+            "label": "gradient()"
           },
           {
             "id": 2,
-            "label": "linear-gradient()",
-            "type": "radio"
+            "label": "linear-gradient()"
           },
           {
             "id": 3,
-            "label": "grayscale()",
-            "type": "radio"
+            "label": "grayscale()"
           },
           {
             "id": 4,
-            "label": "image()",
-            "type": "radio"
+            "label": "image()"
           }
         ],
         "answer": { "id": 2 }
       },
       {
         "question": "Which of the following CSS property can be used to set the image as a border instead of the border style?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "background-image-source",
-            "type": "radio"
+            "label": "background-image-source"
           },
           {
             "id": 2,
-            "label": "background-image",
-            "type": "radio"
+            "label": "background-image"
           },
           {
             "id": 3,
-            "label": "border-image-source",
-            "type": "radio"
+            "label": "border-image-source"
           },
           {
             "id": 4,
-            "label": "border-image",
-            "type": "radio"
+            "label": "border-image"
           }
         ],
         "answer": { "id": 3 }
       },
       {
         "question": "Which of the following CSS property sets the font size of text?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "font-size",
-            "type": "radio"
+            "label": "font-size"
           },
           {
             "id": 2,
-            "label": "text-size",
-            "type": "radio"
+            "label": "text-size"
           },
           {
             "id": 3,
-            "label": "text",
-            "type": "radio"
+            "label": "text"
           },
           {
             "id": 4,
-            "label": "size",
-            "type": "radio"
+            "label": "size"
           }
         ],
         "answer": { "id": 1 }
       },
       {
         "question": "Which of the following CSS selector selects the elements that are checked?",
+        "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": ":checked",
-            "type": "radio"
+            "label": ":checked"
           },
           {
             "id": 2,
-            "label": "E ~ F",
-            "type": "radio"
+            "label": "E ~ F"
           },
           {
             "id": 3,
-            "label": "::after",
-            "type": "radio"
+            "label": "::after"
           },
           {
             "id": 4,
-            "label": "none of the mentioned",
-            "type": "radio"
+            "label": "none of the mentioned"
           }
         ],
         "answer": { "id": 1 }

@@ -1,18 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
   Observable,
-  distinctUntilChanged,
   of,
-  takeUntil,
   throwError,
 } from 'rxjs';
 import { State, Store } from '@ngrx/store';
-
-import QuizData from '@assets/json/data.json';
 import { ToastService } from '@app/toast.service';
 import { quizState } from './quiz.state';
 import { TOAST_BG_COLOR } from '@app/shared/toast.enum';
-
 import angularQuiz  from '@assets/json/angularjs.json';
 import htmlCssQuiz  from '@assets/json/html_css.json';
 import javaScriptQuiz  from '@assets/json/javascript.json';
