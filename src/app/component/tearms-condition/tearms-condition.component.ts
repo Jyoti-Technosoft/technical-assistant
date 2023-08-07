@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tearms-condition',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class TearmsConditionComponent {
 
+  constructor(private router: Router) {  }
+
+  onExit() {
+    this.router.navigate(['/login']);
+  }
 }

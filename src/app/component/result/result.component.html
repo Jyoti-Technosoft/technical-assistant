@@ -8,31 +8,38 @@
               <div class="card-body">
                 <h2 class="card-title">Result</h2>
                 <div class="row d-flex">
-                  <div class="col-sm-12 col-lg-6">
+                  <div class="col-sm-12 col-lg-5">
                     <div class="container d-flex justify-content-center">
                       <img
-                        class="img-fluid"
+                        class="img-fluid mt-2"
                         src="{{ recentResult?.quizTypeImage }}"
                         alt=""
                       />
                     </div>
                   </div>
-                  <div class="col-sm-12 col-lg-6 d-flex justify-content-center">
+                  <div class="col-sm-12 col-lg-7 justify-content-center">
                     <div
-                      class="d-flex align-items-center justify-content-between"
+                      class="align-items-center justify-content-between"
                     >
                       <div class="field">
-                        <h5>Total Questions : {{ recentResult?.totalQuestions }}</h5>
-                        <h5>
-                          Skip Questions : {{ recentResult?.skipQuestion }}
-                        </h5>
-                        <h5>
-                          Correct Answers : {{ recentResult?.correctAnswer }}
-                        </h5>
-                        <h5>
-                          Wrong Answers : {{ recentResult?.inCorrectAnswer }}
-                        </h5>
-                        <h5>Total Points : {{ recentResult?.points }}</h5>
+                        <div class="row">
+                          <div class="col-7 offset-md-1">
+                            <h5><b>{{ recentResult?.type | titlecase}}</b></h5>
+                            <h5>Total Questions</h5>
+                            <h5>Skip Questions</h5>
+                            <h5>Correct Answers</h5>
+                            <h5>Wrong Answers</h5>
+                            <h5>Total Points</h5>
+                          </div>
+                          <div class="col-4 text-center">
+                            <h5><b>{{ recentResult?.date | date: 'dd-MM-yyyy' }}</b></h5>
+                            <h5>{{ recentResult?.totalQuestions }}</h5>
+                            <h5>{{ recentResult?.skipQuestion }}</h5>
+                            <h5>{{ recentResult?.correctAnswer }}</h5>
+                            <h5>{{ recentResult?.inCorrectAnswer }}</h5>
+                            <h5>{{ recentResult?.points }}</h5>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -322,6 +322,13 @@ export class Quizcomponent implements OnInit, OnDestroy {
       });
   }
 
+  onExit() {
+    let configData = this.dialogData.exitQuizModel;
+    this.dialogService.openDialog(configData).then((value) => {
+      value ? this.router.navigate(['/dashboard']) : '';
+     });
+  }
+
   ngOnDestroy() {
     this.destroyer$.next(true);
     this.destroyer$.unsubscribe();

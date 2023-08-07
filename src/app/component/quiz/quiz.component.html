@@ -107,7 +107,7 @@
 
                       <div class="form-btn">
                         <ng-container *ngIf="i + 1 == 1">
-                          <a class="link-primary" routerLink="/dashboard">Exit</a>
+                          <a class="link-primary" (click)="onExit()">Exit</a>
                         </ng-container>
                         <ng-container *ngIf="i + 1 != 1">
                           <button
