@@ -23,7 +23,7 @@ import { State, Store } from '@ngrx/store';
 import {
   getAllQuiz,
   selectQuiz,
-  successQuizPlay
+  successQuizPlay,
 } from '@app/store/quiz/quiz.action';
 import { quizState } from '@app/store/quiz/quiz.state';
 import { addResults } from '@app/store/result/result.action';
@@ -34,20 +34,20 @@ import { Result } from '@app/store/result/result.model';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
   encapsulation: ViewEncapsulation.None,
-	styles: [
-		`
-			.dark-modal .modal-content {
-				background-color: #292b2c;
-				color: white;
-			}
-			.dark-modal .close {
-				color: white;
-			}
-			.light-blue-backdrop {
-				background-color: #5cb3fd;
-			}
-		`,
-	],
+  styles: [
+    `
+      .dark-modal .modal-content {
+        background-color: #292b2c;
+        color: white;
+      }
+      .dark-modal .close {
+        color: white;
+      }
+      .light-blue-backdrop {
+        background-color: #5cb3fd;
+      }
+    `,
+  ],
 })
 export class Quizcomponent implements OnInit, OnDestroy {
   // quizData = { ...quizData };
@@ -104,22 +104,28 @@ export class Quizcomponent implements OnInit, OnDestroy {
   @ViewChild('content') myModal: any;
   closeResult: any;
 
-  onClickCheck(card:any, questionIndex:number) {
+  onClickCheck(card: any, questionIndex: number) {
     const patchValue: any = () => {
-      let prevSelected = this.formArray.controls.at(questionIndex)?.value.radioValue || [];
-      return prevSelected
-    }
-    let selectedValue = this.formArray.controls.at(questionIndex)?.value.radioValue == '' ? [] : patchValue();
+      let prevSelected =
+        this.formArray.controls.at(questionIndex)?.value.radioValue || [];
+      return prevSelected;
+    };
+    let selectedValue =
+      this.formArray.controls.at(questionIndex)?.value.radioValue == ''
+        ? []
+        : patchValue();
     if (selectedValue.includes(card.id)) {
       const index = selectedValue.indexOf(card.id);
       selectedValue.splice(index, 1);
     } else {
       selectedValue.push(card.id);
     }
-    this.formArray.controls.at(this.questionIndex)?.get('radioValue')?.patchValue(selectedValue)
+    this.formArray.controls
+      .at(this.questionIndex)
+      ?.get('radioValue')
+      ?.patchValue(selectedValue);
     this.formArray.controls[questionIndex].markAsDirty();
   }
-
 
   getQuizData() {
     if (!this.state.getValue().quiz.allQuiz) {
@@ -196,7 +202,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
 
@@ -214,14 +220,18 @@ export class Quizcomponent implements OnInit, OnDestroy {
     };
     this.store.dispatch(addResults({ result }));
     this.store.dispatch(successQuizPlay({ result: result }));
-    this.modalService.open(this.myModal, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(this.myModal, { ariaLabelledBy: 'modal-basic-title' })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
     this.router.navigateByUrl('result');
   }
-
   skipQuestion(questionindex: number) {
     let configData = this.dialogData.skipModel;
     this.dialogService.openDialog(configData).then((value) => {
@@ -287,16 +297,16 @@ export class Quizcomponent implements OnInit, OnDestroy {
     }
   }
 
-  checkAndValidate(selectedOption:any, questionIndex:any) {
+  checkAndValidate(selectedOption: any, questionIndex: any) {
     let isCorrect = true;
-    if(this.question[questionIndex].answer?.length > 0 ) {
-      selectedOption?.sort((a:any, b:any) => a - b);
+    if (this.question[questionIndex].answer?.length > 0) {
+      selectedOption?.sort((a: any, b: any) => a - b);
       const answerlist = this.question[questionIndex].answer;
-      answerlist.map((ans:any, i:any) => {
+      answerlist.map((ans: any, i: any) => {
         if (ans?.id != selectedOption[i]) {
-            isCorrect = false;
+          isCorrect = false;
         }
-      })
+      });
     }
     return isCorrect;
   }
