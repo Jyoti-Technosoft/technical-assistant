@@ -2,7 +2,7 @@
   "angularjs":
     {
       "quizId": "angular",
-      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 secound </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
+      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 60 seconds </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
       "timer": 60,
       "positivePoints": 1,
       "negativePoints": 0.25,
@@ -13,282 +13,252 @@
       "questions": [
         {
           "question": "Which of the following statement is true for AngularJS?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "AngularJS is a closed-source front-end web framework",
-              "type": "checkbox"
+              "label": "AngularJS is a closed-source front-end web framework"
             },
             {
               "id": 2,
-              "label": "AngularJS is an open-source front-end web framework",
-              "type": "checkbox"
+              "label": "AngularJS is an open-source front-end web framework"
             },
             {
               "id": 3,
-              "label": "AngularJS is an open-source backend web framework",
-              "type": "checkbox"
+              "label": "AngularJS is an open-source backend web framework"
             },
             {
               "id": 4,
-              "label": "AngularJS is a closed-source back-end web framework",
-              "type": "checkbox"
+              "label": "AngularJS is a closed-source back-end web framework"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": "Which of the following is the correct syntax for writing AngularJS expressions?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "{{expression}}",
-              "type": "checkbox"
+              "label": "{{expression}}"
             },
             {
               "id": 2,
-              "label": "{{expression | filter1 | filter2 | …}}",
-              "type": "checkbox"
+              "label": "{{expression | filter1 | filter2 | …}}"
             },
             {
               "id": 3,
-              "label": "Both of the mentioned",
-              "type": "checkbox"
+              "label": "Both of the mentioned"
             },
             {
               "id": 4,
-              "label": "None of the mentioned",
-              "type": "checkbox"
+              "label": "None of the mentioned"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": "Which of the following statement is correct about data binding in AngularJS?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "Automatic synchronization of data between model and view components",
-              "type": "checkbox"
+              "label": "Automatic synchronization of data between model and view components"
             },
             {
               "id": 2,
-              "label": "Automatic synchronization of data between model and controller components",
-              "type": "checkbox"
+              "label": "Automatic synchronization of data between model and controller components"
             },
             {
               "id": 3,
-              "label": "Technique to save html data in the database",
-              "type": "checkbox"
+              "label": "Technique to save html data in the database"
             },
             {
               "id": 4,
-              "label": "Technique to bind database data to html control",
-              "type": "checkbox"
+              "label": "Technique to bind database data to html control"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": "AngularJS expressions bind AngularJS data to HTML like which of the following directive?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "ng-repeat",
-              "type": "checkbox"
+              "label": "ng-repeat"
             },
             {
               "id": 2,
-              "label": "ng-bind",
-              "type": "checkbox"
+              "label": "ng-bind"
             },
             {
               "id": 3,
-              "label": "ng-app",
-              "type": "checkbox"
+              "label": "ng-app"
             },
             {
               "id": 4,
-              "label": "ng-model",
-              "type": "checkbox"
+              "label": "ng-model"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": "Among the following, on which architectural pattern is AngularJS based?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "Decorater Pattern",
-              "type": "checkbox"
+              "label": "Decorater Pattern"
             },
             {
               "id": 2,
-              "label": "Observer Pattern",
-              "type": "checkbox"
+              "label": "Observer Pattern"
             },
             {
               "id": 3,
-              "label": "MVVM architecture Pattern",
-              "type": "checkbox"
+              "label": "MVVM architecture Pattern"
             },
             {
               "id": 4,
-              "label": "MVC architecture Pattern",
-              "type": "checkbox"
+              "label": "MVC architecture Pattern"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": "Which of the following is an advantage of AngularJS?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "AngularJS code is unit testable.",
-              "type": "checkbox"
+              "label": "AngularJS code is unit testable."
             },
             {
               "id": 2,
-              "label": " AngularJS provides reusable components.",
-              "type": "checkbox"
+              "label": " AngularJS provides reusable components."
             },
             {
               "id": 3,
-              "label": "AngularJS uses dependency injection and makes use of separation of concerns",
-              "type": "checkbox"
+              "label": "AngularJS uses dependency injection and makes use of separation of concerns"
             },
             {
               "id": 4,
-              "label": "All of the above",
-              "type": "checkbox"
+              "label": "All of the above"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": " Which of the following types of the component can be used to create a custom directive?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "Element directives.",
-              "type": "checkbox"
+              "label": "Element directives."
             },
             {
               "id": 2,
-              "label": " Attribute",
-              "type": "checkbox"
+              "label": " Attribute"
             },
             {
               "id": 3,
-              "label": "CSS",
-              "type": "checkbox"
+              "label": "CSS"
             },
             {
               "id": 4,
-              "label": "All of the above.",
-              "type": "checkbox"
+              "label": "All of the above."
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": "  How many $RootScope an AngularJS application can have?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "Zero",
-              "type": "checkbox"
+              "label": "Zero"
             },
             {
               "id": 2,
-              "label": "One",
-              "type": "checkbox"
+              "label": "One"
             },
             {
               "id": 3,
-              "label": "Two",
-              "type": "checkbox"
+              "label": "Two"
             },
             {
               "id": 4,
-              "label": "Infinity",
-              "type": "checkbox"
+              "label": "Infinity"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": " What is deep linking in AngularJS?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "Deep linking is an SEO-based technique.",
-              "type": "checkbox"
+              "label": "Deep linking is an SEO-based technique."
             },
             {
               "id": 2,
-              "label": "Deep linking refers to linking various views to the main page.",
-              "type": "checkbox"
+              "label": "Deep linking refers to linking various views to the main page."
             },
             {
               "id": 3,
-              "label": "Deep linking allows you to encode the state of an application in the URL so that it can be bookmarked.",
-              "type": "checkbox"
+              "label": "Deep linking allows you to encode the state of an application in the URL so that it can be bookmarked."
             },
             {
               "id": 4,
-              "label": "All of the Above",
-              "type": "checkbox"
+              "label": "All of the Above"
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         },
         {
           "question": "Which of the following statement is true in the case of $routeProvider?",
+          "type": "checkbox",
           "options": [
             {
               "id": 1,
-              "label": "It is a service.",
-              "type": "checkbox"
+              "label": "It is a service."
             },
             {
               "id": 2,
-              "label": "It is a module.",
-              "type": "checkbox"
+              "label": "It is a module."
             },
             {
               "id": 3,
-              "label": "It is a component.",
-              "type": "checkbox"
+              "label": "It is a component."
             },
             {
               "id": 4,
-              "label": "None of the above.",
-              "type": "checkbox"
+              "label": "None of the above."
             }
           ],
           "answer": {
-            "id": [1,2]
+            "id": [2,3]
           }
         }
       ]

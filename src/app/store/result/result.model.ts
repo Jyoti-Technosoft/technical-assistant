@@ -7,4 +7,5 @@ export interface Result {
   user: number;
   quizTypeImage:string;
   skipQuestion: number;
+  totalQuestions: number;
 }

@@ -48,6 +48,7 @@
                     <div class="card-body que-txt d-inline-block rounded-2 p-3">
                       <div class="que-data user-select-none">
                         {{ "Q-" + (i + 1) }} {{ question[i]["question"] }}
+                        <p class="fs-15"> {{ question[i].type === 'checkbox' ? "( You can select multiple options )" : "( You can select only one option )" }} </p>
                       </div>
 
                       <div class="option-list">
@@ -60,7 +61,7 @@
                           <div class="mx-0">
                             <label
                               class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
-                              *ngIf="card.type == 'checkbox'"
+                              *ngIf="question[questionIndex].type === 'checkbox'"
                               [class.hightlight-selected]="
                                 formArray.controls
                                   .at(i)
@@ -73,7 +74,7 @@
 
                             <label
                               class="form-check-label option px-3 py-2 mt-3 w-100 rounded-2 align-items-center user-select-none"
-                              *ngIf="card.type == 'radio'"
+                              *ngIf="question[questionIndex].type === 'radio'"
                               [class.hightlight-selected]="
                                 formArray.controls.at(i)?.value.radioValue ==
                                 card.id
@@ -130,10 +131,10 @@
                           (click)="skipQuestion(i)"
                           class="btn btn-dark my-0 mx-2"
                         >
-                          <span class="d-none d-md-block"> Skip </span>
-                          <span class="d-md-none">
-                            <i class="fa-solid fa-forward"></i>
-                          </span>
+                        <span class="d-none d-md-block"> Skip </span>
+                        <span class="d-md-none">
+                          <i class="fa-solid fa-forward"></i>
+                        </span>
                         </button>
 
                         <button
