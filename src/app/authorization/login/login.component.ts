@@ -1,5 +1,6 @@
 import {
   Component,
+  Injectable,
   OnDestroy,
   OnInit,
   TemplateRef,
@@ -7,9 +8,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-
 import dialogData from '@assets/json/dialogData.json';
-
 import { Observable, ReplaySubject } from 'rxjs';
 import {
   autenticationState,
@@ -17,13 +16,41 @@ import {
 } from '../../store/autentication/autentication.state';
 import { doRegistration } from '@app/store/autentication/autentication.action';
 import { doLogoin } from '@app/store/autentication/autentication.action';
-import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { REDIRECT_PAGE } from '@app/authorization/login/login.enum';
+
+
+@Injectable()
+export class CustomDateParserFormatter extends NgbDateParserFormatter {
+  readonly DELIMITER = '/';
+
+  parse(value: any): NgbDateStruct | null {
+    if (typeof value !== 'string') {
+      const date = value.split(this.DELIMITER);
+      return {
+        day: parseInt(date[0], 10),
+        month: parseInt(date[1], 10),
+        year: parseInt(date[2], 10),
+      };
+    }
+    return null;
+  }
+
+  format(date: NgbDateStruct | null): string {
+    return date
+      ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year
+      : '';
+  }
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  providers: [
+    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+  ],
 })
 
 
