@@ -160,13 +160,14 @@ export class AllresultsComponent implements OnInit{
       .style('opacity', 1);
   };
   private mouseoverChart2 = (
-    points: number,
-    correctAnswer: number,
-    date: any
+    d: any
   ) => {
+    let newDate = new Date(d.date);
+    let formatDate = ("0" + newDate.getDate()).slice(-2) + "/" + ("0"+(newDate.getMonth()+1)).slice(-2) + "/" + newDate.getFullYear();
+
     this.tooltip2
       .html(
-        `Points: ${points} <br> Correct Answer: ${correctAnswer} <br> Incorrect Answer: ${date}`
+        `Date: ${formatDate} <br/> Points: ${d.points} <br/> Total Questions: ${d.totalQuestions} <br/> Correct Answer: ${d.correctAnswer} <br/>`
       )
       .style('opacity', 1);
   };
@@ -363,10 +364,7 @@ export class AllresultsComponent implements OnInit{
         this.subjectType = 'Results';
       })
       .on('mouseover', (event: MouseEvent, d: any) => {
-        const points = d.points;
-        const correctAnswer = d.correctAnswer;
-        const date = new Date(d.date).toLocaleDateString();
-        this.mouseoverChart2(points, correctAnswer, date);
+        this.mouseoverChart2(d);
       })
       .on('mousemove', this.mousemoveChart2)
       .on('mouseleave', this.mouseleaveChart2)
