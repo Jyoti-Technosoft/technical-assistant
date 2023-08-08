@@ -125,7 +125,7 @@
                         </span>
 
                         <button
-                          [disabled]="formArray.controls[i].dirty"
+                          [disabled]="!skipButton"
                           data-slide="skip"
                           type="button"
                           (click)="skipQuestion(i)"
@@ -138,7 +138,7 @@
                         </button>
 
                         <button
-                          [disabled]="!formArray.controls[i].dirty"
+                          [disabled]="!nextButton"
                           data-slide="next"
                           type="button"
                           (click)="nextQuestion(i)"

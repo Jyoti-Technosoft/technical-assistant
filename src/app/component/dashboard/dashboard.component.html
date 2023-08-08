@@ -40,7 +40,7 @@
               </span>
               <span class="border-inline d-none d-lg-inline-block"></span>
               <p class="d-flex justify-content-center">
-                <b>{{ maxPoints }}</b>
+                <b>{{ maxPoints ? maxPoints : 0 }}</b>
               </p>
             </div>
           </div>
@@ -61,7 +61,7 @@
               >
               <span class="border-inline d-none d-lg-inline-block"></span>
               <p class="d-flex justify-content-center">
-                <b>{{ minPoints }}</b>
+                <b>{{ minPoints ? minPoints : 0 }}</b>
               </p>
             </div>
           </div>
@@ -82,7 +82,7 @@
               >
               <!-- <span class="border-inline d-none d-lg-inline-block"></span> -->
               <p class="d-flex justify-content-center">
-                <b>{{ hightestTechPlayed }}</b>
+                <b>{{ hightestTechPlayed ? hightestTechPlayed : "-" }}</b>
               </p>
             </div>
           </div>

@@ -3,7 +3,7 @@
     {
       "quizId": "angular",
       "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 60 seconds </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-      "timer": 60,
+      "timer": 1000,
       "positivePoints": 1,
       "negativePoints": 0.25,
       "numberOfQuestions": 3,

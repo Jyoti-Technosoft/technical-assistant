@@ -73,6 +73,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
   notSelect: any = 0;
   allQuiz: any;
   numberOfQuestions: any;
+  skipButton: boolean = true;
+  nextButton: boolean = false;
 
   constructor(
     private router: Router,
@@ -105,15 +107,48 @@ export class Quizcomponent implements OnInit, OnDestroy {
   closeResult: any;
 
   onClickCheck(card: any, questionIndex: number) {
+
+    // console.log("skipButton  : ", this.skipButton);
+    // console.log("nextButton  : ", this.nextButton);
+    // this.skipButton = this.skipButton ? false : true;
+    // this.nextButton = this.nextButton ? false : true;
     const patchValue: any = () => {
       let prevSelected =
-        this.formArray.controls.at(questionIndex)?.value.radioValue || [];
+        this.formArray.controls.at(questionIndex)?.value.radioValue;
+    // console.log("prevSelected  : ", prevSelected);
       return prevSelected;
     };
     let selectedValue =
       this.formArray.controls.at(questionIndex)?.value.radioValue == ''
         ? []
         : patchValue();
+
+    // console.log("selectedValue  : ", selectedValue);
+    // console.log("selectedValue length  : ", selectedValue.length);
+
+    if(
+      ((selectedValue == 1 || selectedValue != '') && selectedValue.length == 1) ||
+      ((selectedValue == 1 || selectedValue != '') && selectedValue.length == 2) ||
+      ((selectedValue == 1 || selectedValue != '') && selectedValue.length == 3) ||
+      ((selectedValue == 1 || selectedValue != '') && selectedValue.length == 4)) {
+      debugger
+      console.warn(`if  : ${selectedValue} : ${selectedValue.length}`);
+      this.skipButton = false;
+      this.nextButton = true;
+    } else if((selectedValue == 1 && selectedValue.length == 1)) {
+      console.warn(`else if : ${selectedValue} : ${selectedValue.length}`);
+      this.skipButton = true;
+      this.nextButton = false;
+    }
+
+    // if(selectedValue) {
+    //   this.skipButton = false;
+    //   this.nextButton = true;
+    // } else if(!selectedValue) {
+    //   this.skipButton = true;
+    //   this.nextButton = false;
+    // }
+
     if (selectedValue.includes(card.id)) {
       const index = selectedValue.indexOf(card.id);
       selectedValue.splice(index, 1);
@@ -170,6 +205,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         })
       );
     });
+    console.log("formArray  : ", formArray.value);
   }
 
   get formArray() {
