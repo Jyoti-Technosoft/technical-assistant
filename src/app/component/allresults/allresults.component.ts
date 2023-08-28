@@ -1,134 +1,117 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
-import {
-  distinctUntilChanged,
-  Observable,
-  ReplaySubject,
-  takeUntil
-} from 'rxjs';
-import { Store } from '@ngrx/store';
-import { resultState } from '@app/store/result/result.state';
-import { getAllResults } from '@app/store/result/result.action';
-import { Result } from '@app/store/result/result.model';
+import { Subscription } from 'rxjs';
 import * as d3 from 'd3';
+import { ResultService } from '@app/service/result.service';
+import { ToastService } from '@app/toast.service';
+import { LOCALSTORAGE_KEY } from '@app/utility/utility';
 
 @Component({
   selector: 'app-allresults',
   templateUrl: './allresults.component.html',
-  styleUrls: ['./allresults.component.scss']
+  styleUrls: ['./allresults.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class AllresultsComponent implements OnInit{
-  initialData: number = 12;
-  allResultData: Result[] = [];
-  subjectType: string = 'Results';
-  loggedInUser$: Observable<any> | undefined;
-  resultData$: Observable<any> | undefined;
+
+  allResultData = [];
+  subjectWiseData = [];
   userData: any;
-  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
+  subjectType: string = 'Results';
   avatarName!: string;
-  showChart: boolean = false;
+  showChart = false;
+  sub: Subscription;
+  isMobileView = false;
+  resultObject: any[] = [];
+  chartArray: any = {};
+  tooltip: any;
+  tooltip2: any;
+  svg: any = '';
+  margin = { top: 20, right: 20, bottom: 50, left: 40 };
+  width!: number;
+  height!: number;
 
   constructor(
-    public authenticationService: AuthenticationService,
-    public router: Router,
-    private store: Store<resultState>
+    private auth: AuthenticationService,
+    private result: ResultService,
+    private router: Router,
+    private toastService: ToastService,
+    private cd: ChangeDetectorRef
   ) {
+
+    this.sub = new Subscription();
+    this.auth.authStatusListener$.next(true);
+    this.userData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string);
+
+    this.resultData();
     this.width = 500 - this.margin.left - this.margin.right;
-    this.height = 500 - this.margin.top - this.margin.bottom;
+    this.height = 400 - this.margin.top - this.margin.bottom;
   }
 
-  @HostListener('window:resize', ['$event'])
-  onresize(event?: Event): void {
-    const containerWidth = document.getElementById('chart-container')?.clientWidth;
-    this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
-    this.height = this.width * 0.8;
-    this.drawBars(this.resultObject);
-  }
+    // @HostListener('window:resize', ['$event'])
+    // onresize(event?: Event): void {
+    //   console.log('resize================');
+    //   const containerWidth = document.getElementById('chart-container')?.clientWidth;
+    //   this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
+    //   this.height = this.width * 0.8;
+    //   this.drawBars(this.resultObject);
+    // }
 
   ngOnInit(): void {
-    this.resultData();
-    this.getUserData();
-    this.createSvg();
-    this.drawBars(this.resultObject);
-    this.createSvg2();
-    this.createTooltip();
-  }
 
-  getUserData() {
-    this.loggedInUser$ = this.store.select(
-      (state: any) => state.authentication
-    );
-    this.loggedInUser$
-      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
-      .subscribe((state) => {
-        this.userData = state?.userData;
-      });
-  }
-
-  resultData() {
-    this.resultData$ = this.store.select((state: any) => state.result);
-    this.resultData$
-      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
-      .subscribe((state) => {
-        this.allResultData = state?.results;
-        if (!this.allResultData) {
-          this.store.dispatch(getAllResults());
-        }
-      });
-
-    this.resultData$.forEach((data) => {
-      this.chartArray = {};
-
-      data.results.forEach((res: any) => {
-        if (Object.keys(this.chartArray).indexOf(res.type) !== -1) {
-          this.chartArray[res.type].push(res);
-        } else {
-          this.chartArray[res.type] = [res];
-        }
-      });
-
-      if (this.allResultData.length > 0) {
-        data.results.forEach((res: any) => {
-          const resultObject = {
-            points: res.points,
-            type: res.type,
-          };
-          this.resultObject.push(resultObject);
-        });
-        this.showChart = true;  
-      } else {
-        this.showChart = false;    
-      }
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd.detectChanges();
     });
   }
 
+  resultData() {
 
-  loadMoreData() {
-    this.initialData = this.initialData + 12;
+    const getData = this.result.getUserResultData().subscribe({
+      next:(data) => {
+        if (data) {
+          this.allResultData = this.subjectWiseData = data;
+          this.showChart = true;
+          if (this.allResultData.length > 0) {
+            this.allResultData.forEach((res: any) => {
+              const resultObject = {
+                points: res.points,
+                type: res.type,
+              };
+              this.resultObject.push(resultObject);
+            });
+            this.createSvg();
+            this.createSvg2();
+            this.createTooltip();
+            this.cd.detectChanges();
+
+          } else {
+            this.showChart = false;
+          }
+        } else {
+          this.toastService.show('error', 'Error! While fetching result.');
+        }
+      }
+    });
+
+    this.sub.add(getData);
   }
 
   startQuizAgain(quizName: string) {
+
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });
   }
 
   ngOnDestroy(): void {
-    this.destroyer$.next(true);
-    this.destroyer$.unsubscribe();
+
+    this.sub.unsubscribe();
   }
 
-  private resultObject: any[] = [];
-  private chartArray: any = {};
-  private tooltip: any;
-  private tooltip2: any;
-  private svg: any;
-  private margin = { top: 20, right: 20, bottom: 50, left: 40 };
-  private width!: number;
-  private height!: number;
-
   private createTooltip(): void {
+
     this.tooltip = d3
       .select('body')
       .append('div')
@@ -155,38 +138,45 @@ export class AllresultsComponent implements OnInit{
   }
 
   private mouseoverChart1 = (points: number, type: string) => {
+
     this.tooltip
       .html(`Subject: ${this.capitalizeFirstLetter(type)} <br> Points: ${points}`)
       .style('opacity', 1);
   };
+
   private mouseoverChart2 = (
+
     points: number,
-    correctAnswer: number,
-    date: any
+    correctAnswer: number
   ) => {
     this.tooltip2
       .html(
-        `Points: ${points} <br> Correct Answer: ${correctAnswer} <br> Incorrect Answer: ${date}`
+        `Points: ${points} <br> Correct Answer: ${correctAnswer}`
       )
       .style('opacity', 1);
   };
 
   private mousemoveChart1 = (event: MouseEvent) => {
+
     this.tooltip
-      .style('left', event.pageX + 30 + 'px')
+      .style('left', event.pageX + 10 + 'px')
       .style('top', event.pageY + 'px');
   };
+
   private mousemoveChart2 = (event: MouseEvent) => {
+
     this.tooltip2
-      .style('left', event.pageX + 30 + 'px')
+      .style('left', event.pageX + 10 + 'px')
       .style('top', event.pageY + 'px');
   };
 
   private mouseleaveChart1 = () => {
+
     this.tooltip.style('opacity', 0);
   };
 
   private mouseleaveChart2 = () => {
+
     this.tooltip2.style('opacity', 0);
   };
 
@@ -195,12 +185,14 @@ export class AllresultsComponent implements OnInit{
   .range(['#0d6efd', '#3d87f7', '#72a9fc', '#a7caff']);
 
   private capitalizeFirstLetter (str: string)  {
+
+    console.log('this.createSvg();=', str);
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 
   private drawBars(resultObject: any[]): void {
-    const colorScale = this.subjectColors;;
 
+    const colorScale = this.subjectColors;
     const x = d3
       .scaleBand()
       .domain(resultObject.map((d) => d.type))
@@ -251,7 +243,7 @@ export class AllresultsComponent implements OnInit{
       .attr('height', 0)
       .attr('fill', (d: any) => colorScale(d.type))
       .on('click', (event: MouseEvent, d: any) => {
-        this.onBarClick(event, d);
+        this.onFirstChartBarClick(event, d);
         this.tooltip.style('opacity', 0);
       })
       .on('mouseover', (event: MouseEvent, d: any) => {
@@ -268,6 +260,7 @@ export class AllresultsComponent implements OnInit{
   }
 
   private createSvg(): void {
+
     this.svg = d3
       .select('#bar1')
       .append('svg')
@@ -278,13 +271,20 @@ export class AllresultsComponent implements OnInit{
       .append('g')
       .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
-      if(this.showChart) {
-        this.drawBars(this.resultObject);
-      }
+      this.drawBars(this.resultObject);
   }
 
-  private onBarClick(event: any, data: any): void {
+  private onFirstChartBarClick(event: any, data: any): void {
+
     d3.select('#bar1').remove();
+    this.chartArray = {};
+    this.subjectWiseData.forEach((res: any) => {
+      if (Object.keys(this.chartArray).indexOf(res.type) !== -1) {
+        this.chartArray[res.type].push(res);
+      } else {
+        this.chartArray[res.type] = [res];
+      }
+    });
     this.drawSecondChart(data.type);
   }
 
@@ -299,18 +299,16 @@ export class AllresultsComponent implements OnInit{
   }
 
   private drawSecondChart(type: any): void {
+
     this.subjectType = type;
-
     d3.select('#bar2').classed('hide-chart', false);
-
     const colorScale = this.subjectColors;
-
     this.svg.selectAll('*').remove();
 
     const x = d3
       .scaleBand()
       .domain(
-        this.chartArray[type].map((d: any) => new Date(d.date).toLocaleString())
+        this.chartArray[type]?.map((d: any) => new Date(d.date).toLocaleString())
       )
       .range([0, this.width])
       .padding(0.4);
@@ -365,8 +363,7 @@ export class AllresultsComponent implements OnInit{
       .on('mouseover', (event: MouseEvent, d: any) => {
         const points = d.points;
         const correctAnswer = d.correctAnswer;
-        const date = new Date(d.date).toLocaleDateString();
-        this.mouseoverChart2(points, correctAnswer, date);
+        this.mouseoverChart2(points, correctAnswer);
       })
       .on('mousemove', this.mousemoveChart2)
       .on('mouseleave', this.mouseleaveChart2)
@@ -377,6 +374,7 @@ export class AllresultsComponent implements OnInit{
   }
 
   private createSvg2(): void {
+
     this.svg = d3
       .select('#bar2')
       .append('svg')

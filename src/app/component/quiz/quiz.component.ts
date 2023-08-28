@@ -1,38 +1,31 @@
 import {
   Component,
-  HostListener,
   OnDestroy,
   OnInit,
   ViewChild,
   ViewEncapsulation,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef
 } from '@angular/core';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
-  interval,
   Subscription,
-  ReplaySubject,
-  takeUntil,
-  Observable,
-  distinctUntilChanged,
 } from 'rxjs';
 import { ModalDismissReasons, NgbCarousel, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import dialogData from '@assets/json/dialogData.json';
 import { DialogService } from '@app/dialog-service/dialog.service';
-import { State, Store } from '@ngrx/store';
-import {
-  getAllQuiz,
-  selectQuiz,
-  successQuizPlay,
-} from '@app/store/quiz/quiz.action';
-import { quizState } from '@app/store/quiz/quiz.state';
-import { addResults } from '@app/store/result/result.action';
-import { Result } from '@app/store/result/result.model';
+import { QuizDataService } from '@app/service/quiz-data.service';
+import { AuthenticationService } from '@app/service/authentication.service';
+import { ResultService } from '@app/service/result.service';
+import { ToastService } from '@app/toast.service';
+import { LOCALSTORAGE_KEY } from '@app/utility/utility';
 
 @Component({
   selector: 'app-questions',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   styles: [
     `
@@ -49,154 +42,265 @@ import { Result } from '@app/store/result/result.model';
     `,
   ],
 })
+
 export class Quizcomponent implements OnInit, OnDestroy {
-  // quizData = { ...quizData };
+
+  @ViewChild('content') myModal: any;
   @ViewChild('carousel')
   carousel!: NgbCarousel;
-  quizForm!: FormGroup;
-  question!: any;
-  title!: any;
   dialogData = { ...dialogData };
-  private destroyer$: ReplaySubject<boolean> = new ReplaySubject(1);
-  questionIndex: number = 0;
-  interval$!: Subscription;
-  points: number = 0;
-  correctAnswer: number = 0;
-  inCorrectAnswer: number = 0;
-  timer: number | undefined;
-  positivePoints!: number;
-  negativePoints!: number;
-  selectedQuiz: any;
-  loggedInUser$: Observable<any> | undefined;
-  userData: any;
-  selectedOptions: string[] = [];
-  notSelect: any = 0;
-  allQuiz: any;
-  numberOfQuestions: any;
+  closeResult: any;
+  quizForm!: FormGroup;
+  quizInfo:any = {};
+  questionsData: any;
+  subRandomQueList:any = {};
+  selectedQuiz = '';
+  subs: Subscription;
+  selectedAns: any = [];
+  currentIndex = 0;
+  isMobileView = false;
+  userId!: number;
+
+  // result
+  positivePoints = 0;
+  negativePoints = 0;
+  correctAnswer = 0;
+  inCorrectAnswer = 0;
+  skipAnswer = 0;
+  totalPoints = 0;
+
+  // timer related
+  timerInterval:any;
+  isStartTimer = false;
 
   constructor(
     private router: Router,
+    private auth: AuthenticationService,
     private activeRouter: ActivatedRoute,
     private fb: FormBuilder,
     private dialogService: DialogService,
-    private store: Store,
-    private state: State<quizState>,
+    private quizservice: QuizDataService,
     private modalService: NgbModal,
+    private resultService: ResultService,
+    private toastService: ToastService,
+    private cd: ChangeDetectorRef
   ) {
-    this.quizForm = this.fb.group({
-      form: this.fb.array([]),
-    });
+
+    this.subs = new Subscription();
+    this.auth.authStatusListener$.next(true);
+    if (!this.selectedQuiz) {
+      this.selectedQuiz = this.activeRouter.snapshot.queryParams['quiz'];
+    }
+    this.userId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string).id;
   }
 
   ngOnInit(): void {
-    this.getUserData();
-    this.startCounter();
-    this.getQuizData();
+
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd.detectChanges();
+    });
+
+    window.history.forward();
+    window.addEventListener("keyup", this.disableF5);
+    window.addEventListener("keydown", this.disableF5);
+
+    this.quizInfo = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.QUIZ_DETAILS) as string);
+    this.getQuestionList();
   }
 
-  @HostListener('window:beforeunload', ['$event'])
-  unloadHandler(event: Event) {
-    let result;
-    if (result) {
-    }
-    event.returnValue = false;
-  }
-  @ViewChild('content') myModal: any;
-  closeResult: any;
+  disableF5(e:any): void {
 
-  onClickCheck(card: any, questionIndex: number) {
-    const patchValue: any = () => {
-      let prevSelected =
-        this.formArray.controls.at(questionIndex)?.value.radioValue || [];
-      return prevSelected;
-    };
-    let selectedValue =
-      this.formArray.controls.at(questionIndex)?.value.radioValue == ''
-        ? []
-        : patchValue();
-    if (selectedValue.includes(card.id)) {
-      const index = selectedValue.indexOf(card.id);
-      selectedValue.splice(index, 1);
-    } else {
-      selectedValue.push(card.id);
-    }
-    this.formArray.controls
-      .at(this.questionIndex)
-      ?.get('radioValue')
-      ?.patchValue(selectedValue);
-    this.formArray.controls[questionIndex].markAsDirty();
+    if ((e.which || e.keyCode) == 116) e.preventDefault();
+  };
+
+  getQuestionList(): void {
+
+    const quizData = this.quizservice.getListOfQuizDetails(this.selectedQuiz).subscribe({
+      next: (res) => {
+        if (!!res) {
+          this.questionsData = res;
+          this.getQuestionData(this.quizInfo, this.questionsData);
+          this.cd.detectChanges();
+        }
+      },
+      error: () => {
+        this.toastService.show('error', 'Error! While fetching list of questions.');
+      }
+    });
+    this.subs.add(quizData);
   }
 
-  getQuizData() {
-    if (!this.state.getValue().quiz.allQuiz) {
-      this.store.dispatch(getAllQuiz());
-    }
-    this.store
-      .select((state: any) => state.quiz.selectedQuiz)
-      .pipe(distinctUntilChanged())
-      .subscribe((data) => {
-        this.getQuestionData(data);
-        this.selectedQuiz = data;
-      });
-    if (!this.selectedQuiz) {
-      const selectedQuizId = this.activeRouter.snapshot.queryParamMap.get(
-        'quiz'
-      ) as string;
-      this.store.dispatch(selectQuiz({ quizId: selectedQuizId }));
-    }
+  createQueForm(queData: any): void {
+
+    this.quizForm = this.fb.group({
+      id: queData?.id,
+      queList: this.fb.array([])
+    });
+    this.addQueList(queData.questions);
   }
 
-  getQuestionData(data: any) {
-    if (!data) {
-      return;
-    }
+  queList(): FormArray {
 
-    this.timer = data?.timer;
-    this.positivePoints = data?.positivePoints;
-    this.negativePoints = data?.negativePoints;
-    const arrCopy: any = [...data?.questions];
-    this.question = arrCopy;
-    this.question = this.question
-      ?.sort(() => Math.random() - 0.67)
-      .splice(0, data?.numberOfQuestions);
-      this.numberOfQuestions = data.numberOfQuestions;
+    return this.quizForm?.get("queList") as FormArray
+  }
 
-    const formArray = this.quizForm.controls['form'] as FormArray;
-    this.question?.forEach((item: any) => {
-      formArray.push(
-        this.fb.group({
-          radioValue: '',
-          timer: this.timer,
-        })
-      );
+  addQueList(data: any): void {
+
+    data.forEach((que:any, i:number) => {
+      this.queList().push(
+        this.fb?.group({
+        question: que?.question,
+        selectedAnswer: [],
+        timer: this.quizInfo?.timer,
+        next: 0,
+        previous: 0,
+        skip: 0,
+        queType: que?.type,
+        answers: [que?.answer]
+      }));
+    });
+
+    this.startCounter(this.currentIndex);
+  }
+
+
+  getFormControlItem(): any {
+
+    return ((this.quizForm?.controls['queList'] as FormArray).controls as FormGroup[])
+  }
+
+  exitFromQuiz(): void {
+
+    let configData = this.dialogData?.exitQuizModel;
+    this.dialogService?.openDialog(configData).then((value) => {
+      if (value) {
+        this.router?.navigateByUrl('dashboard');
+      }
     });
   }
 
+  onSelectAnswer(ans: any, i: number): void {
+
+    const formData = this.queList().controls[i].getRawValue();
+
+    let skipValue = formData.skip;
+    let previousValue = formData.previous;
+    let nextValue = formData.next;
+    let timerValue = formData.timer;
+    let queType = formData.queType;
+
+    if (timerValue === 0 && nextValue && skipValue) {
+      this.toastService.show('error', 'Sorry, Your time is over');
+    } else {
+      if (((skipValue || previousValue) && !nextValue) || (!skipValue && !previousValue && !nextValue)) {
+
+        if (queType === 'checkbox') {
+          if (this.selectedAns.includes(ans.id)) {
+            this.selectedAns = this.selectedAns.filter((value:number) => value !== ans.id);
+          } else {
+            this.selectedAns.push(ans.id);
+          }
+        } else {
+          this.selectedAns = [];
+          this.selectedAns.push(ans.id);
+        }
+
+        let ansControl = this.queList().controls[i];
+        ansControl.patchValue({
+          selectedAnswer: this.selectedAns
+        });
+      } else {
+        this.toastService.show('error', 'Sorry, Your answer has been submitted');
+      }
+    }
+  }
+
+  checkSelected(selectedId: number): boolean {
+
+    if (this.selectedAns?.includes(selectedId) && !!this.selectedAns.length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  getQuestionData(info:any, queData: any): void {
+
+    if (!queData) {
+      return;
+    }
+
+    this.positivePoints = info?.positivePoints;
+    this.negativePoints = info?.negativePoints;
+    const listOfAllQues: any = [...queData?.questions];
+    let randomQueList = listOfAllQues
+      ?.sort(() => Math.random() - 0.67)
+      .splice(0, info?.numberOfQuestions);
+
+    this.subRandomQueList = {
+      id: queData.id,
+      questions: randomQueList
+    }
+    this.createQueForm(this.subRandomQueList);
+  }
+
   get formArray() {
+
     return this.quizForm.controls['form'] as FormArray;
   }
 
-  nextQuestion(questionIndex: number) {
-    this.carousel.next();
-    if (this.dialogService.hasModelOpen()) {
-      this.dialogService.destroy();
+  next(index: number): void {
+
+    const formData = this.queList().controls[index];
+    this.stopTimer();
+    formData.patchValue({
+      next: 1,
+      previous: 0,
+      skip: 0,
+    });
+
+    console.log('next que========', formData.getRawValue());
+    this.selectedAns = [];
+    this.moveToNextQue(index);
+  }
+
+  previous(i: number): void {
+
+    const formData = this.queList().controls[i];
+    this.stopTimer();
+    formData.patchValue({
+      previous: 1,
+      next: 0,
+      skip: 0,
+      selectedAnswer: null
+    });
+
+    console.log('previous current=======', formData.getRawValue());
+    this.selectedAns = [];
+    this.currentIndex = i - 1;
+    this.carousel.prev();
+    this.moveToPreviousQuestion(this.currentIndex);
+  }
+
+  moveToPreviousQuestion(i: number): void {
+
+    const formData = this.queList().controls[i];
+    let skipValue = formData?.get('skip')?.value;
+    let previousValue = formData?.get('previous')?.value;
+    let nextValue = formData?.get('next')?.value;
+    let timerValue = formData?.get('timer')?.value;
+
+    if ((skipValue || previousValue) && !nextValue && timerValue !== 0) {
+      this.startCounter(i);
     }
-    this.answer(
-      questionIndex,
-      this.formArray.controls[questionIndex].value.radioValue
-    );
-    this.disabledValuesAndForm();
-    this.questionIndex = questionIndex + 1;
-    if (this.questionIndex == this.question.length) {
-      this.submitQuiz();
+    if (nextValue) {
+      this.selectedAns = this.queList().controls[i].get('selectedAnswer')?.value;
     }
   }
 
-  previousQuestion(questionIndex: number) {
-    this.questionIndex = questionIndex - 1;
-    this.carousel?.prev();
-  }
   private getDismissReason(reason: any): string {
+
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -206,20 +310,52 @@ export class Quizcomponent implements OnInit, OnDestroy {
     }
   }
 
-  submitQuiz() {
-    let result: Result = {
-      points: this.points,
+  submitQuiz(): void {
+
+    let testData = this.quizForm.getRawValue();
+
+    testData?.queList.forEach((que:any) => {
+      if (que.skip) {
+        this.skipAnswer = this.skipAnswer + 1;
+      } else {
+        if (que?.next) {
+          let equalsCheck = JSON.stringify(que?.answers) === JSON.stringify(que?.selectedAnswer)
+          if (equalsCheck) {
+            this.correctAnswer = this.correctAnswer + 1;
+          } else {
+            this.inCorrectAnswer = this.inCorrectAnswer + 1;
+          }
+        }
+      }
+    });
+
+    let correct = this.correctAnswer * this.positivePoints;
+    let wrong = this.inCorrectAnswer * this.negativePoints;
+    this.totalPoints = correct - wrong;
+
+    let result = {
+      type: testData?.id,
+      totalQuestions: this.quizInfo?.numberOfQuestions,
+      points: this.totalPoints,
+      skipAnswer: this.skipAnswer,
       correctAnswer: this.correctAnswer,
       inCorrectAnswer: this.inCorrectAnswer,
-      type: this.selectedQuiz?.quizId,
-      user: this.userData.id,
-      quizTypeImage: this.selectedQuiz?.image,
+      quizTypeImage: this.quizInfo?.image,
       date: new Date().toISOString().slice(0, 10),
-      skipQuestion: this.notSelect,
-      totalQuestions: this.numberOfQuestions
+      userId: this.userId
     };
-    this.store.dispatch(addResults({ result }));
-    this.store.dispatch(successQuizPlay({ result: result }));
+
+    console.log('result', result);
+    localStorage.setItem(LOCALSTORAGE_KEY.LAST_RESULT_DATA, JSON.stringify(result));
+
+    const finalData = this.resultService.addResultData(result).subscribe({
+      error: () => {
+        this.toastService.show('error', 'Erorr! While saving result data.');
+      }
+    });
+
+    this.subs.add(finalData);
+
     this.modalService
       .open(this.myModal, { ariaLabelledBy: 'modal-basic-title' })
       .result.then(
@@ -230,100 +366,79 @@ export class Quizcomponent implements OnInit, OnDestroy {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         }
       );
+
     this.router.navigateByUrl('result');
   }
-  skipQuestion(questionindex: number) {
+
+  skip(data: any, index: number): void {
+
     let configData = this.dialogData.skipModel;
     this.dialogService.openDialog(configData).then((value) => {
       if (value) {
-        this.questionIndex = questionindex;
-        this.nextQuestion(this.questionIndex);
+        const formData = this.queList().controls[index];
+        this.stopTimer();
+        formData.patchValue({
+          question: data?.question,
+          next: 0,
+          previous: 0,
+          skip: 1,
+          selectedAnswer: null
+        });
+        console.log('skip que current=======', formData.getRawValue());
+        this.selectedAns = [];
+        this.moveToNextQue(index);
       }
     });
   }
 
-  disabledValuesAndForm() {
-    this.formArray.controls
-      .at(this.questionIndex)
-      ?.get('radioValue')
-      ?.disable();
-    // this.formArray.controls.at(this.questionIndex)?.get('timer')?.disable();
-    // this.formArray.controls.at(this.questionIndex)?.markAsDirty();
-  }
+  moveToNextQue(i: number): void {
 
-  startCounter() {
-    this.interval$ = interval(1000)
-      .pipe(takeUntil(this.destroyer$))
-      .subscribe((val) => {
-        const counterValue = this.formArray.controls.at(this.questionIndex)
-          ?.value.timer;
-        if (
-          Number(counterValue) != 0 &&
-          !this.formArray.controls.at(this.questionIndex)?.get('timer')
-            ?.disabled
-        ) {
-          this.formArray.controls
-            .at(this.questionIndex)
-            ?.patchValue({ timer: counterValue - 1 });
-        } else if (
-          Number(counterValue) === 0 &&
-          !this.formArray.controls.at(this.questionIndex)?.get('timer')
-            ?.disabled
-        ) {
-          this.nextQuestion(this.questionIndex);
-        }
-      });
-  }
-
-  answer(questionIndex: number, selectedOption: any) {
-    if (selectedOption == '') {
-      this.notSelect++;
+    if (i === this.subRandomQueList?.questions?.length - 1) {
+      this.submitQuiz();
+    } else {
+      this.carousel.next();
+      this.currentIndex = i + 1;
+      this.startCounter(this.currentIndex);
     }
-    let a = JSON.stringify(this.question[questionIndex].answer.id);
-    let b = JSON.stringify(selectedOption);
-    let c = a === b;
-    if (!this.formArray.at(questionIndex).get('timer')?.disabled) {
-      if(c) {
-        if (c && this.checkAndValidate(selectedOption, questionIndex)) {
-          this.points = this.points += this.positivePoints;
-          this.correctAnswer++;
-        }
-      } else {
-        if(selectedOption != "") {
-          this.points = this.points -= this.negativePoints;
-          this.inCorrectAnswer++;
-        }
+  }
+
+  startCounter(index: number): void {
+
+    const formData = this.queList()?.controls[index];
+    let timerValue = formData?.get('timer')?.value;
+
+    this.isStartTimer = true;
+    this.timerInterval = setInterval(() => {
+      if (timerValue > 0) {
+        timerValue = timerValue - 1;
+        formData?.patchValue({
+          timer: timerValue
+        });
+      } else if (timerValue === 0) {
+        this.stopTimer();
+        formData?.patchValue({
+          timer: timerValue,
+          next: 1,
+          previous: 0,
+          skip: 1,
+          selectedAnswer: null
+        });
+        this.selectedAns = [];
+        this.moveToNextQue(index);
       }
-    }
+    }, 1000);
   }
 
-  checkAndValidate(selectedOption: any, questionIndex: any) {
-    let isCorrect = true;
-    if (this.question[questionIndex].answer?.length > 0) {
-      selectedOption?.sort((a: any, b: any) => a - b);
-      const answerlist = this.question[questionIndex].answer;
-      answerlist.map((ans: any, i: any) => {
-        if (ans?.id != selectedOption[i]) {
-          isCorrect = false;
-        }
-      });
-    }
-    return isCorrect;
-  }
+  stopTimer(): void {
 
-  getUserData() {
-    this.loggedInUser$ = this.store.select(
-      (state: any) => state.authentication
-    );
-    this.loggedInUser$
-      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
-      .subscribe((state) => {
-        this.userData = state?.userData;
-      });
+    this.isStartTimer = false;
+    clearInterval(this.timerInterval);
   }
 
   ngOnDestroy() {
-    this.destroyer$.next(true);
-    this.destroyer$.unsubscribe();
+    this.subs.unsubscribe();
+    this.stopTimer();
+    this.timerInterval = null;
+    this.isStartTimer = false;
   }
 }

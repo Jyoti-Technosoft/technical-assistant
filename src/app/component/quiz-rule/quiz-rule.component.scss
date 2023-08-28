@@ -1,0 +1,79 @@
+:host {
+    .main-div {
+        height: calc(100vh - 64px);
+        padding: 0 40px;
+    }
+
+    .mt-15 {
+        margin-top: 15px;
+    }
+
+    .card-layout {
+        border-radius: 15px;
+        padding: 20px;
+        width: 80%;
+      }
+
+    .card-img-top {
+        opacity: 0.1;
+        position: absolute;
+        top:20%;
+        pointer-events: none;
+    }
+
+    .card-content {
+        height: 245px;
+        margin: 15px;
+    }
+
+    .card-subtitle {
+        margin-bottom: 10px;
+        margin-left: 8px;
+        padding: 6px;
+    }
+
+    .btn-start {
+        border: 2px solid rgb(47, 168, 98);
+        color: rgb(47, 168, 98);
+
+        transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+        &:hover {
+          box-shadow: 0 0 40px 40px rgb(47, 168, 98) inset;
+        }
+    }
+
+    .btn-back {
+        border: 2px solid rgb(99 95 96);
+        color: rgb(99 95 96);
+
+        transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+        &:hover {
+          box-shadow: 0 0 40px 40px rgb(99 95 96) inset;
+        }
+    }
+
+    .common-btn {
+        box-sizing: border-box;
+        appearance: none;
+        background-color: transparent;
+        border-radius: 0.6em;
+        cursor: pointer;
+        display: flex;
+        align-self: center;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1;
+        margin: 0 auto;
+        padding: 1.2em 2.8em;
+        text-decoration: none;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 700;
+
+        &:hover,
+        &:focus {
+          color: #fff;
+          outline: 0;
+        }
+    }
+}

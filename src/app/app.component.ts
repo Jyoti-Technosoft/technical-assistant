@@ -1,11 +1,4 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, ReplaySubject, takeUntil } from 'rxjs';
-import {
-  getAllUsers,
-  validateSession,
-} from './store/autentication/autentication.action';
-import { QuizDataService } from './quiz-data.service';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -13,22 +6,10 @@ import { QuizDataService } from './quiz-data.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'technical-assistant';
-  message$: Observable<any> | undefined;
-  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
 
-
-
-  htmlCssData: any;
-  angularJsData: any;
-  javaScriptData: any;
-  reactJsData: any;
-
-  constructor(private store: Store, private quizDataService: QuizDataService) {  }
+  constructor() { }
 
   ngOnInit() {
-    this.store.dispatch(getAllUsers());
-    this.store.dispatch(validateSession());
   }
 
 }

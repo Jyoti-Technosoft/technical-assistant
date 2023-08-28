@@ -1,7 +1,7 @@
 .footer {
-  background: #f8f9fa;
+  background: #2c2f40;
   padding: 10px 0px;
-  font-family: "Play", sans-serif;
+  // font-family: "Play", sans-serif;
   text-align: center;
   position: relative;
 }
@@ -9,10 +9,11 @@
 .footer .row {
   width: 100%;
   margin: 0% 0%;
-  color: gray;
+  color: white;
   font-size: 0.8em;
   display: inline-block;
 }
+
 .icon {
   padding: 7px;
   border-radius: 50%;
@@ -24,7 +25,7 @@
 }
 .footer .row a {
   text-decoration: none;
-  color: gray;
+  color: white;
   transition: 0.5s;
 }
 
@@ -47,7 +48,7 @@
 }
 .text-item {
   display: inline-block;
-  color: #7c7676;
+  color: white;
   text-decoration: none;
   &:hover {
     color: black;

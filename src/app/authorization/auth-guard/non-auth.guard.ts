@@ -6,18 +6,27 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { State } from '@ngrx/store';
-
-import { autenticationState } from '@app/store/autentication/autentication.state';
+import { AuthenticationService } from '@app/service/authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NonAuthGuard  {
+
+  userData!: boolean;
+  userToken!: boolean;
+
   constructor(
     private router: Router,
-    private store: State<autenticationState>
-  ) {}
+    private auth: AuthenticationService
+  ) {
+    // this.auth.getAuthStatusListener().subscribe(v => {
+    //   this.userData = v;
+    // });
+
+    // this.userToken = JSON.parse(JSON.stringify(localStorage.getItem(LOCALSTORAGE_KEY.TOKEN)));
+  }
+
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -26,11 +35,13 @@ export class NonAuthGuard  {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      
-    if (this.store.getValue().authentication.isUserLoggedIn) {
-      this.router.navigateByUrl('dashboard');
+
+      // if (this.userToken === false) {
+      //   return true;
+      // } else {
+      //   this.router.navigateByUrl('/login');
+      //   return false;
+      // }
       return true;
-    }
-    return true;
   }
 }

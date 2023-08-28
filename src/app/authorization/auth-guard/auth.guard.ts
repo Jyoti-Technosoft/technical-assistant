@@ -8,9 +8,7 @@ import {
 import {
   Observable,
 } from 'rxjs';
-import { State } from '@ngrx/store';
-
-import { autenticationState } from '@app/store/autentication/autentication.state';
+import { LOCALSTORAGE_KEY } from '@app/utility/utility';
 
 
 @Injectable({
@@ -18,26 +16,27 @@ import { autenticationState } from '@app/store/autentication/autentication.state
 })
 export class AuthGuard  {
 
+  userData!: boolean;
+  userToken!: boolean;
+
   constructor(
-    private router: Router,
-    private store: State<autenticationState>
-  ) {}
+    private router: Router
+  ) {
+    this.userToken = JSON.parse(JSON.stringify(localStorage.getItem(LOCALSTORAGE_KEY.TOKEN)));
+  }
 
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
-    | boolean
-    | UrlTree
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
+  | Observable<boolean | UrlTree>
+  | Promise<boolean | UrlTree>
+  | boolean
+  | UrlTree {
 
-    if (!this.store.getValue().authentication.isUserLoggedIn) {
-      this.router.navigateByUrl('login');
-      return false;
-    }
-    return true;
+    let checkData = Boolean(this.userToken) ? true : this.router.createUrlTree(['/login']);
+    return checkData;
   }
 
 }

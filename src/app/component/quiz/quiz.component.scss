@@ -1,82 +1,88 @@
+.quizContainer {
 
-.header-txt {
-  z-index: 1;
-  height: 70px;
-  .header-title {
-    font-size: 25px;
-    font-weight: 600;
-  }
-}
+  height: calc(100vh - 64px);
 
-.fs-15 {
-  font-size: 15px;
-}
-
-.timer {
-  color: #004085;
-  background: #cce5ff;
-  border: 1px solid #b8daff;
-  height: 45px;
-  .timer-left-txt {
-    font-size: 17px;
-    font-weight: 600;
-  }
-  .timer-sec {
-    font-size: 18px;
-    font-weight: 500;
-    height: auto;
-    width: auto;
-    color: #fff;
-    line-height: 30px;
-    background: #343a40;
-    border: 1px solid #343a40;
-    padding: 0vh 2vh;
-  }
-}
-
-.que-txt {
-  font-size: 20px;
-  box-sizing: border-box;
-  .que-data {
-    font-size: 20px;
-    font-weight: 600;
-  }
-}
-
-.option {
-  background: rgb(222, 239, 255);
-  border: 1px solid #84c5fe;
-  font-size: 17px;
-  cursor: pointer;
-}
-
-.hightlight-selected {
-  background: rgb(133, 190, 255) !important;
-  border: 1px solid #4a98ff !important;
-  font-weight: 600;
-}
-
-.footer-txt {
-  z-index: 1;
-  height: 70px;
-}
-.link-primary {
-  font-size: 16px;
-  padding: 6px;
-}
-
-@media only screen and (max-width: 768px) {
-  .card-footer {
-    display: flex !important;
-    flex-direction: column;
-    padding: 0.75rem;
-    height: fit-content;
-    .total-que  {
-      margin-top: 1rem;
+  .header-txt {
+    z-index: 1;
+    height: 70px;
+    .header-title {
+      font-size: 25px;
     }
-    .form-btn {
-      margin: 1rem;
-     }
+  }
+
+  .timer-input {
+    width: 30px;
+    border-radius: 0.375rem;
+    border: none;
+    background: none;
+    font-size: 23px;
+  }
+
+  .fs-15 {
+    font-size: 15px;
+  }
+
+  .fs-23 {
+    font-size: 23px;
+  }
+
+  .timer {
+    color: #004085;
+    height: 45px;
+    .timer-left-txt {
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .timer-sec {
+      font-size: 18px;
+      font-weight: 500;
+      height: auto;
+      width: auto;
+      color: #fff;
+      line-height: 30px;
+      background: #343a40;
+      border: 1px solid #343a40;
+      padding: 0vh 2vh;
+    }
+  }
+
+  .que-txt {
+    font-size: 20px;
+    box-sizing: border-box;
+    .que-data {
+      font-size: 20px;
+    }
+  }
+
+  .option {
+    background: rgb(222, 239, 255);
+    border: 1px solid #84c5fe;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .hightlight-selected {
+    background: rgb(133, 190, 255) !important;
+    border: 1px solid #4a98ff !important;
+    font-weight: 600;
+  }
+
+  .footer-txt {
+    z-index: 1;
+    height: 70px;
+  }
+
+  .card-header {
+    height: 60px;
+  }
+
+  .card-footer {
+    height: 50px;
+  }
+
+  .link-primary {
+    font-size: 16px;
+    padding: 6px;
   }
 }
 

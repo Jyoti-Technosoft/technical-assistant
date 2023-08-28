@@ -1,99 +1,94 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {
-  Observable,
-  ReplaySubject,
-  distinctUntilChanged,
-  takeUntil,
-} from 'rxjs';
-import { Store } from '@ngrx/store';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
-import { autenticationState } from '@app/store/autentication/autentication.state';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { updateUserDetails } from '@app/store/autentication/autentication.action';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { LOCALSTORAGE_KEY, PATTERN } from '@app/utility/utility';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { ToastService } from '@app/toast.service';
 
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
+  providers: [
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class UserProfileComponent implements OnInit {
+
   avatarName!: string;
-  loggedInUser$: Observable<any> | undefined;
-  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
   userData: any;
   profilePageForm!: FormGroup;
-  editMode!: boolean;
-  show !: boolean;
+  changePasswordForm!: FormGroup;
+  editMode = false;
+  showPasswordChange = false;
+  subs: Subscription;
+  isMobileView = false;
+  userId: number;
+
+  hidePassword = true;
+  hideNewPassword = true;
+  hideconfirmPassword = true;
+
+  passwordMess = '';
 
   constructor(
-    public authenticationService: AuthenticationService,
+    private auth: AuthenticationService,
+    private cd: ChangeDetectorRef,
     public router: Router,
-    private store: Store<autenticationState>,
+    private toastService: ToastService,
     private fb: FormBuilder,
     public calendar: NgbCalendar
-  ) {}
+  ) {
 
-  @ViewChild("datePicker") datePicker!: any
+    this.subs = new Subscription();
+    this.auth.authStatusListener$.next(true);
+    this.userId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string)?.id;
+  }
 
   ngOnInit(): void {
-    this.getUserData();
-    this.profilePageForm.disable();
-  }
 
-  getUserData() {
-    this.loggedInUser$ = this.store.select(
-      (state: any) => state.authentication
-    );
-    this.loggedInUser$
-      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
-      .subscribe((state) => {
-        this.initForm(state?.userData);
-        this.userData = state?.userData;
-        this.avatarName = this.getUserLetter(state?.userData?.fullName);
-      });
-  }
-
-  validateConfirmaPassword() {
-    const password = this.profilePageForm?.controls['newPassword'];
-    const confirmPassword = this.profilePageForm?.controls['confirmPassword']
-     password?.value !== confirmPassword?.value
-      ? confirmPassword?.setErrors({ validateConfirmaPassword: true })
-      : confirmPassword?.setErrors(null);
-  };
-
-  validateNewPassword() {
-    const password = this.profilePageForm?.controls['password'];
-    const newPassword = this.profilePageForm?.controls['newPassword']
-     password?.value == newPassword?.value
-      ? newPassword?.setErrors({ duplicatePassword: true })
-      : newPassword?.setErrors(null);
-  };
-
-  validateNumber: ValidatorFn = (
-    control: AbstractControl
-  ): ValidationErrors | null => {
-    const regex = /^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[123456789]\d{9}$/;
-    return regex.test(control.value) ? null : { pattern: true };
-  };
-
-  initForm(data?:any) {
-    this.profilePageForm = this.fb.group({
-      dateOfBirth: [data?.dateOfBirth || '',Validators.compose([Validators.required])],
-      email: [data?.email || '',Validators.compose([Validators.required, Validators.email])],
-      fullName: [data?.fullName || '',Validators.compose([Validators.required])],
-      gender: [data?.gender || '',Validators.compose([Validators.required])],
-      id: [data?.id || ''],
-      mobile: [data?.mobile || '',Validators.compose([Validators.required,this.validateNumber])],
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd?.detectChanges();
     });
-    if(this.show) {
-      this.appendFormFieldForPassword();
-    }
+    this.getUserData(this.userId);
   }
 
+  getUserData(id: number): void {
+
+    this.auth.getSingleUserData(id).subscribe({
+      next: (res) => {
+        this.userData = res;
+        this.avatarName = this.getUserLetter(this.userData?.fullName);
+        this.createForm(this.userData);
+        this.createChangePasswordForm();
+        localStorage.setItem(LOCALSTORAGE_KEY.USERDATA, JSON.stringify(this.userData));
+        this.cd?.detectChanges();
+      },
+      error: () => {
+        this.toastService.show('error', 'somthing goes wrong');
+      }
+    });
+  }
 
   getUserLetter(userName: any) {
+
     const intials = userName
       .split(' ')
       .map((name: any) => name[0])
@@ -102,50 +97,110 @@ export class UserProfileComponent implements OnInit {
     return intials;
   }
 
-  onHideShow() {
-    this.appendFormFieldForPassword();
-    this.show = true;
+  createForm(data?:any) {
+
+    this.profilePageForm = this.fb.group({
+      email: [data?.email || '', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
+      fullName: [data?.fullName || '', [Validators.required, Validators.pattern(PATTERN.FULL_NAME_PATTERN)]],
+      gender: [data?.gender || '', Validators.required],
+      dob: [new Date(data?.dob) || '', Validators.required],
+      mobile: [data?.mobile || '', [Validators.required, Validators.pattern(PATTERN.MOBILE_PATTERN)]],
+      id: [data?.id || '', Validators.required]
+    });
   }
 
-  appendFormFieldForPassword() {
-    this.profilePageForm.addControl('password',this.fb.control('',Validators.compose([Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$')])));
-    this.profilePageForm.addControl('newPassword',this.fb.control('',Validators.compose([Validators.required,Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$')])));
-    this.profilePageForm.addControl('confirmPassword',this.fb.control('',Validators.compose([Validators.required])));
+  createChangePasswordForm(): void {
 
-    this.profilePageForm?.get('newPassword')?.valueChanges?.subscribe((data)=>{
-      this.validateConfirmaPassword();
-      this.validateNewPassword();
-    })
-    this.profilePageForm?.get('confimrPassword')?.valueChanges?.subscribe((data)=>{
-      this.validateConfirmaPassword();
-    })
+    this.changePasswordForm = this.fb.group({
+      password: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.pattern(PATTERN.PASSWORD_PATTERN)]],
+      confirmPassword: ['', [Validators.required, Validators.pattern(PATTERN.PASSWORD_PATTERN)]],
+    });
+
+    this.changePasswordForm.get('password')?.setValidators(this.passwordMatchValidator.bind(this));
+    this.changePasswordForm.get('confirmPassword')?.setValidators(this.confirmPasswordMatchValidator.bind(this));
   }
 
-  deleteFormFieldForPassword() {
-    this.profilePageForm.removeControl('password');
-    this.profilePageForm.removeControl('newPassword');
-    this.profilePageForm.removeControl('confirmPassword');
+  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+
+    let password = control.value;
+    return password === this.userData.password ? null : { passwordMismatch: true };
+  }
+
+  confirmPasswordMatchValidator(control: AbstractControl): ValidationErrors | null {
+
+    let newPass = this.changePasswordForm.get('newPassword')?.value;
+    let password = control.value;
+    return password ===  newPass ? null : { passwordMismatch: true };
+  }
+
+  updatePassword(): void {
+
+    if (this.changePasswordForm.valid) {
+
+      let data = this.changePasswordForm.get('newPassword')?.value;
+      const userData = this.auth.updateUserData({'password': data}, this.userId).subscribe({
+        next: () => {
+          this.toastService.show('success', 'Password change successfully');
+          this.editMode = false;
+          this.router.navigateByUrl('login');
+          this.cd.detectChanges();
+        },
+        error: () => {
+          this.toastService.show('error', 'Error while update profile');
+        }
+      });
+
+      this.subs.add(userData);
+
+    } else {
+      this.changePasswordForm.markAllAsTouched();
+    }
+  }
+
+  onHideShowPasswordForm() {
+
+    this.showPasswordChange = !this.showPasswordChange;
   }
 
   updateUserDetails() {
-    this.store.dispatch(updateUserDetails(this.profilePageForm?.value));
+
+    if (this.profilePageForm.valid) {
+
+      let data = this.profilePageForm.getRawValue();
+      let id = data.id;
+      delete data.id;
+      const userData = this.auth.updateUserData(data, id).subscribe({
+        next: () => {
+          this.toastService.show('success', 'Profile updated successfully');
+          this.editMode = false;
+          this.getUserData(id);
+          this.cd.detectChanges();
+        },
+        error: () => {
+          this.toastService.show('error', 'Error while update profile');
+        }
+      });
+
+      this.subs.add(userData);
+
+    } else {
+      this.profilePageForm.markAllAsTouched();
+    }
   }
+
   cancelUpdate() {
-    this.profilePageForm.disable();
-    this.deleteFormFieldForPassword()
-    this.show = false;
+    this.showPasswordChange = false;
+    this.editMode = false;
+    this.cd.detectChanges();
   }
 
   editUserdetails() {
-    this.profilePageForm.enable();
+    this.editMode = true;
+    this.cd.detectChanges();
   }
 
-  setTodaysDate() {
-    this.profilePageForm.controls['dateOfBirth'].patchValue(this.calendar.getToday());
-    this.datePicker?.close();
-  }
-
-  get profilePageFormController() {
-    return this.profilePageForm.controls;
+  getControl(form: FormGroup, field: string) {
+    return form.get(field);
   }
 }

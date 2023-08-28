@@ -1,174 +1,193 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  Injectable,
   OnDestroy,
   OnInit,
   TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import dialogData from '@assets/json/dialogData.json';
-import { Observable, ReplaySubject } from 'rxjs';
-import {
-  autenticationState,
-  getStateSelector,
-} from '../../store/autentication/autentication.state';
-import { doRegistration } from '@app/store/autentication/autentication.action';
-import { doLogoin } from '@app/store/autentication/autentication.action';
-import { NgbCalendar, NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { REDIRECT_PAGE } from '@app/authorization/login/login.enum';
+import { AuthenticationService } from '@app/service/authentication.service';
+import { Subscription } from 'rxjs';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { ToastService } from '@app/toast.service';
+import { LOCALSTORAGE_KEY, PATTERN } from '@app/utility/utility';
 
-
-@Injectable()
-export class CustomDateParserFormatter extends NgbDateParserFormatter {
-  readonly DELIMITER = '/';
-
-  parse(value: any): NgbDateStruct | null {
-    if (typeof value !== 'string') {
-      const date = value.split(this.DELIMITER);
-      return {
-        day: parseInt(date[0], 10),
-        month: parseInt(date[1], 10),
-        year: parseInt(date[2], 10),
-      };
-    }
-    return null;
-  }
-
-  format(date: NgbDateStruct | null): string {
-    return date
-      ? date.day + this.DELIMITER + date.month + this.DELIMITER + date.year
-      : '';
-  }
-}
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   providers: [
-    { provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 
 export class LoginComponent implements OnInit, OnDestroy {
-  userData: any;
-  dialogData = { ...dialogData };
-  loginForm!: FormGroup;
-  message$: Observable<any> | undefined;
-  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-  state!: Observable<any>;
-  error: any;
-  isSignUp: boolean = false;
-  buttonType: String = 'button';
-  @ViewChild('datePicker') datePicker!: any;
-  @ViewChild('step1', { static: true }) step1Template!: TemplateRef<any>;
-  @ViewChild('step2', { static: true }) step2Template!: TemplateRef<any>;
-  @ViewChild('step3', { static: true }) step3Template!: TemplateRef<any>;
 
-  steps: TemplateRef<any>[] = [];
-  currentStepIndex = 0;
+  loginForm!: FormGroup;
   registrationForm!: FormGroup;
+  loginPage = true;
+  sub: Subscription;
+  hidePassword = true;
+  hideConfirmPassword = true;
+  isMobileView = false;
+  steps: TemplateRef<any>[] = [];
   formSteps: any[] = [
     {label: 'Account', className:"account", link: 'assets/auth-images/account.svg'},
     {label:'Personal', className:"person", link: 'assets/auth-images/person.svg'},
     {label:'Finish', className:"finish", link: 'assets/auth-images/finish.svg'}
   ];
+  @ViewChild('step1', { static: true }) step1Template!: TemplateRef<any>;
+  @ViewChild('step2', { static: true }) step2Template!: TemplateRef<any>;
+  @ViewChild('step3', { static: true }) step3Template!: TemplateRef<any>;
+  currentStepIndex = 0;
 
   constructor(
+    private router: Router,
+    private auth: AuthenticationService,
+    private toastService: ToastService,
     private fb: FormBuilder,
-    private store: Store<autenticationState>,
-    public calendar: NgbCalendar,
-    private router: Router
+    private cd: ChangeDetectorRef,
   ) {
-    this.state = this.store.select(getStateSelector);
-  }
 
-  public formSubmitted(formValue: any) {
-    this.store.dispatch(doLogoin(formValue));
+    this.sub = new Subscription();
+    this.auth.authStatusListener$.next(false);
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('registerUser')) {
-      this.userData = JSON.parse(
-        localStorage.getItem('registerUser') as string
-      );
-    }
+
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd.detectChanges();
+    });
+
     this.steps.push(this.step1Template, this.step2Template, this.step3Template);
-    this.redirectPage();
+    this.createForm();
   }
 
-  redirectPage() {
-    if (this.router.url == REDIRECT_PAGE.REDIRECT_LOGIN_PAGE) {
+
+  createForm(): void {
+
+    if (this.loginPage) {
+      this.loginForm = this.fb.group({
+        email: ['mitali.jtdev@gmail.com', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
+        password: ['Mitali@123', [Validators.required, Validators.minLength(8)]]
+      });
+    } else {
+      this.registrationForm = this.fb.group({
+        userCredential: this.fb.group({
+          email: ['', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
+          password: ['', [Validators.required, Validators.pattern(PATTERN.PASSWORD_PATTERN)]],
+          confirmPassword: ['', Validators.required],
+        }),
+        personalInfo: this.fb.group({
+          fullName: ['', [Validators.required, Validators.pattern(PATTERN.FULL_NAME_PATTERN)]],
+          gender: ['', Validators.required],
+          dateOfBirth: ['', Validators.required],
+        }),
+        extras: this.fb.group({
+          mobile: ['', [Validators.required, Validators.pattern(PATTERN.MOBILE_PATTERN)]],
+          acceptTerms: [false, Validators.requiredTrue],
+        }),
+      });
+    }
+    this.cd.detectChanges();
+  }
+
+  getLoginControl(field: string): any {
+    return this.loginForm.get(field);
+  }
+
+  getUserDetailControl(form: string, field: string): any {
+    return this.registrationForm.controls[form].get(field);
+  }
+
+  doLogin() : void {
+
+    if (this.loginForm.valid) {
+
+      const formValue = this.loginForm.getRawValue();
+      const logUser = this.auth.getAllUser().subscribe({
+        next: (res:any) => {
+          let user = res.filter((v:any) => v.email === formValue.email && v.password === formValue.password);
+          if (!!user.length) {
+            this.toastService.show('success', 'Login successfully');
+            localStorage.setItem(LOCALSTORAGE_KEY.USERDATA, JSON.stringify(user[0]));
+            localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, JSON.stringify(true));
+            this.auth.authStatusListener$.next(true);
+            this.router.navigateByUrl('dashboard');
+          } else {
+            this.toastService.show('success', 'Login successfully');
+          }
+        },
+        error: () => {
+          this.toastService.show('error', 'Login Error');
+        }
+      });
+      this.sub.add(logUser);
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
+    this.cd.detectChanges();
+  }
+
+  redirectTo(type: string): void {
+
+    if (type === 'login') {
+      this.loginPage = true;
+      this.router.navigateByUrl('login');
+      this.cd.detectChanges();
       this.createForm();
-      this.isSignUp = false;
+    } else {
+      this.loginPage = false;
+      this.router.navigateByUrl('registration');
+      this.cd.detectChanges();
+      this.createForm();
     }
-    else if (this.router.url == REDIRECT_PAGE.REDIRECT_REGISTRATION_PAGE) {
-      this.createRegistrationForm();
-      this.isSignUp = true;
-    }
-  }
-  createRegistrationForm() {
-    this.registrationForm = this.fb.group({
-      userCredential: this.fb.group({
-        email: [
-          '',
-          Validators.compose([Validators.required, Validators.email]),
-        ],
-        password: [
-          '',
-          Validators.compose([
-            Validators.required,
-            Validators.pattern(
-              '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$'
-            ),
-          ]),
-        ],
-        confirmPassword: [
-          '',
-          Validators.compose([
-            Validators.required,
-            // this.validateConfirmaPassword,
-          ]),
-        ],
-      }),
-      personalInfo: this.fb.group({
-        fullName: ['', [Validators.required]],
-        gender: ['', Validators.compose([Validators.required])],
-        dateOfBirth: ['', Validators.compose([Validators.required])],
-        mobile: [
-          '',
-          // Validators.compose([Validators.required, this.validateNumber]),
-        ],
-      }),
-      extras: this.fb.group({
-        acceptTerms: [false, Validators.requiredTrue],
-      }),
-    });
   }
 
-  createForm() {
-    this.loginForm = this.fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      password: [
-        '',
-        Validators.compose([
-          Validators.required,
-          Validators.pattern(
-            '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^ws]).{8,15}$'
-          ),
-        ]),
-      ],
-    });
-  }
+  submitUserData(): void {
 
-  previousStep(): void {
-    if (this.currentStepIndex > 0) {
-      this.currentStepIndex--;
-    }
+    let user = this.registrationForm.getRawValue();
+
+    const data = {
+      'email': user.userCredential.email,
+      'password': user.userCredential.password,
+      'fullName': user.personalInfo.fullName,
+      'gender': user.personalInfo.gender,
+      'dob': user.personalInfo.dateOfBirth,
+      'mobile': user.extras.mobile,
+      'terms': user.extras.acceptTerms
+    };
+
+    const userData = this.auth.addUserData(data).subscribe({
+      next: () => {
+        this.toastService.show('success', 'Registation successfully');
+        this.loginPage = true;
+        this.router.navigateByUrl('login');
+      },
+      error: () => {
+        this.toastService.show('error', 'Error while doing Registation');
+      }
+    });
+
+    this.sub.add(userData);
   }
 
   nextStep(): void {
@@ -181,58 +200,26 @@ export class LoginComponent implements OnInit, OnDestroy {
     return this.steps[this.currentStepIndex];
   }
 
-  get loginFormValidator() {
-    return this.loginForm.controls;
-  }
-
-  get personalInfo(): FormGroup {
-    return this.registrationForm.get('personalInfo') as FormGroup;
-  }
-
-  get userCredential(): FormGroup {
-    return this.registrationForm.get('userCredential') as FormGroup;
-  }
-
-  get policy(): FormGroup {
-    return this.registrationForm.get('extras') as FormGroup;
-  }
-
   get isValid(): boolean {
+
     if (this.currentStepIndex == 0) {
-      this.buttonType = 'button';
-      return this.registrationForm.get('userCredential')?.invalid || false;
+      let pass = this.getUserDetailControl('userCredential','password');
+      let confirmPass = this.getUserDetailControl('userCredential','password');
+
+      if (pass.value === confirmPass.value && this.registrationForm.get('userCredential')?.valid) {
+        return false;
+      } else {
+        return true;
+      }
     } else if (this.currentStepIndex == 1) {
-      this.buttonType = 'button';
       return this.registrationForm.get('personalInfo')?.invalid || false;
     } else {
-      this.buttonType = 'submit';
       return this.registrationForm.invalid || false;
     }
   }
 
-  submitform(formValue: any) {
-    let registerUser = {
-      id: Date.now().toString(),
-      fullName: formValue.personalInfo.fullName,
-      email: formValue?.userCredential?.email,
-      password: window.btoa(JSON.stringify(formValue?.userCredential?.confirmPassword)),
-      gender: formValue?.personalInfo?.gender,
-      dateOfBirth: formValue?.personalInfo?.dateOfBirth,
-      mobile: formValue?.personalInfo?.mobile,
-    };
-    this.store.dispatch(doRegistration(registerUser));
-  }
-
-  setTodaysDate() {
-    this.registrationForm.controls['dateOfBirth'].patchValue(
-      this.calendar.getToday()
-    );
-    this.datePicker?.close();
-  }
-
   ngOnDestroy(): void {
-    this.destroyer$.next(true);
-    this.destroyer$.unsubscribe();
+    this.sub.unsubscribe();
   }
 
 }

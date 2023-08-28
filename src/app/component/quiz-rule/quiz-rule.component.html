@@ -1,0 +1,25 @@
+<div class="main-div">
+  <div class="d-flex h-auto align-items-center justify-content-around center-to-page">
+    <div class="card shadow card-layout">
+      <div *ngIf="instruction">
+        <div class="container d-flex justify-content-center">
+        <img class="card-img-top w-50 h-50" src="assets\img\rules.svg" alt="Rules-image" />
+        </div>
+        <h2 class="text-center mb-2">Instuctions</h2>
+        <div class="card-content" [innerHTML]="displayRules"></div>
+        <div class="row mt-15">
+          <div class="col">
+            <button class="common-btn btn-back" (click)="allQuiz()">
+              Go to List
+            </button>
+          </div>
+          <div class="col">
+            <button class="common-btn btn-start" (click)="quiz()">
+              Start Now
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

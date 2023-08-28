@@ -1,20 +1,5 @@
-.full-layout {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  // background: steelblue;
-
-  .container-router {
-    margin-top: 60px;
-    margin-left: 78px;
+:host {
+    .main-div{
+        padding: 20px;
+    }
   }
-}
-
-div:has(div.auth-section) { background: steelblue; }
-
-@media only screen and (max-width: 1000px) {
-  .container-router {
-    margin-left: 0px !important;
-  }
-}

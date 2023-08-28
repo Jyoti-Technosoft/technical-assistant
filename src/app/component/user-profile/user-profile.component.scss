@@ -1,5 +1,24 @@
-.initial-letter {
+:host {
+
+  .user-profile-div {
+    padding: 0 40px;
+    height: calc(100vh - 64px);
+  }
+
+  .containt-row {
     display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+  }
+
+  .card-layout {
+    border-radius: 15px;
+    padding: 15px;
+  }
+
+  .initial-letter {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 10rem;
@@ -11,14 +30,14 @@
     line-height: 10rem;
     background-color: rgb(213, 235, 235);
   }
-  
+
   .user-details {
     .form-control:disabled {
       background-color: #ffff !important;
       border: none !important;
     }
   }
-  
+
   .calander {
     border: none !important;
     .date-picker {
@@ -33,6 +52,7 @@
       background-color: none !important;
     }
   }
+
   .calander-enable {
     border: 1px solid #ced4da !important;
     appearance: none;
@@ -41,6 +61,16 @@
       border: none !important;
     }
   }
-  .fixed-height {
-    height: 10px;
+
+  mat-card {
+    // height: 500px;
   }
+
+  table {
+    height: 300px;
+    tr {
+      border-bottom: 2px solid #f7f2f2;
+    }
+  }
+
+}

@@ -1,10 +1,16 @@
-.footer{
-    background-color: white;
-}
+:host {
+    .main-div {
+        height: calc(100vh - 64px);
+        padding: 0 40px;
+    }
 
-@media only screen and (max-width: 620px) {
-    /* For mobile phones: */
-    .result-card {
-        max-width: 80%;
+    .containt-row {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .card-layout {
+        border-radius: 15px;
+        padding: 15px;
     }
 }

@@ -1,11 +1,11 @@
 //importing boostrap file
 @import "~bootstrap/dist/css/bootstrap.css";
-
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 //font awosome
 @import url("../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 
 $bg-colour: #fff;
-$steel_blue: #4682b4; 
+$steel_blue: #4682b4;
 * {
   font-family: Roboto;
 }

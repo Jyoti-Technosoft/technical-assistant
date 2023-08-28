@@ -1,48 +1,42 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { Params, Router } from '@angular/router';
-
 import { AuthenticationService } from '@app/service/authentication.service';
-import {
-  distinctUntilChanged,
-  Observable,
-  ReplaySubject,
-  takeUntil,
-} from 'rxjs';
-import { Store } from '@ngrx/store';
-import { autenticationState } from '@app/store/autentication/autentication.state';
-import { ToastService } from '@app/toast.service';
 import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
+import { ToastService } from '@app/toast.service';
+import { Subscription } from 'rxjs';
+import { LOCALSTORAGE_KEY } from '@app/utility/utility';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  styleUrls: ['./result.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ResultComponent implements OnInit, OnDestroy {
-  loggedInUser$: Observable<any> | undefined;
-  userData: any;
-  destroyer$: ReplaySubject<boolean> = new ReplaySubject();
-  recentResult: any;
-  constructor(
-    public authenticationService: AuthenticationService,
-    public router: Router,
-    private store: Store<any>,
-    private toastService: ToastService
-  ) {}
 
-  ngOnInit(): void {
-    this.getLoggedUser();
-    this.resultData();
+  userData: any;
+  sub: Subscription;
+  recentResult: any;
+  isMobileView = false;
+
+  constructor (
+    public auth: AuthenticationService,
+    public router: Router,
+    private toastService: ToastService,
+    private cd: ChangeDetectorRef
+  ) {
+    this.sub = new Subscription();
+    this.auth.authStatusListener$.next(true);
+    this.recentResult = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.LAST_RESULT_DATA) as string);
   }
 
-  resultData() {
-    this.store
-      .select((state: any) => state.quiz.latestQuizResult)
-      .pipe(distinctUntilChanged(), takeUntil(this.destroyer$))
-      .subscribe((data) => {
-        this.recentResult = data;
-      });
+  ngOnInit(): void {
+
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd.detectChanges();
+    });
 
     if (!this.recentResult) {
       this.router.navigateByUrl('dashbaord');
@@ -50,28 +44,19 @@ export class ResultComponent implements OnInit, OnDestroy {
     }
   }
 
-  startQuizAgain(quizName: string) {
+  startQuizAgain(quizName: string): void {
+
     const queryParams: Params = { quiz: quizName };
-    this.router.navigate(['/quizname'], { queryParams });
+    this.router.navigate(['/rules'], { queryParams });
   }
 
-  showAllQuiz() {
-    this.router.navigateByUrl('/allresults');
-  }
+  showAllQuiz(): void {
 
-  getLoggedUser() {
-    this.loggedInUser$ = this.store.select(
-      (state: any) => state.authentication
-    );
-    this.loggedInUser$
-      .pipe(takeUntil(this.destroyer$), distinctUntilChanged())
-      .subscribe((state) => {
-        this.userData = state?.userData;
-      });
+    this.router.navigateByUrl('allresults');
   }
 
   ngOnDestroy(): void {
-    this.destroyer$.next(true);
-    this.destroyer$.unsubscribe();
+
+    this.sub.unsubscribe();
   }
 }
