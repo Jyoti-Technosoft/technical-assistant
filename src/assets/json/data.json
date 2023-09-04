@@ -8,7 +8,7 @@
       "negativePoints": 0.25,
       "numberOfQuestions": 3,
       "title": "Angular",
-      "image": "assets\\img\\javascript.svg",
+      "image": "assets\\img\\angular_logo.svg",
       "description": "Angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you import into your applications."
     },
     {
@@ -41,7 +41,7 @@
       "negativePoints": 0.25,
       "numberOfQuestions": 3,
       "title": "React JS",
-      "image": "assets\\img\\react.svg",
+      "image": "assets\\img\\react_logo.svg",
       "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta."
     }
   ]

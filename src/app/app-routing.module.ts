@@ -1,24 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RedirectGuard } from './authorization/redirect-guard/redirect.guard';
+import { LoginComponent } from './authorization/login/login.component';
+import { AuthGuard } from './authorization/auth-guard/auth.guard';
 
 const routes: Routes = [
+
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'registration', component: LoginComponent },
   {
-    path: '',
+    path: 'layout',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./layout/layout-component.module').then(
         (m) => m.LayoutComponentModule
       ),
   },
-  {
-    path: 'jyoti-web',
-    canActivate: [RedirectGuard],
-    component: RedirectGuard,
-    data: {
-      externalUrl: 'https://www.jyotitechnosoft.com/',
-    },
-  },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

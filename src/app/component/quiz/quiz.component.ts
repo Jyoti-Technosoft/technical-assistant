@@ -18,8 +18,8 @@ import { DialogService } from '@app/dialog-service/dialog.service';
 import { QuizDataService } from '@app/service/quiz-data.service';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { ResultService } from '@app/service/result.service';
-import { ToastService } from '@app/toast.service';
-import { LOCALSTORAGE_KEY } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
+import { SnackbarService } from '@app/service/snackbar.service';
 
 @Component({
   selector: 'app-questions',
@@ -82,7 +82,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     private quizservice: QuizDataService,
     private modalService: NgbModal,
     private resultService: ResultService,
-    private toastService: ToastService,
+    private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
   ) {
 
@@ -125,7 +125,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         }
       },
       error: () => {
-        this.toastService.show('error', 'Error! While fetching list of questions.');
+        this.snackBarService.error(MESSAGE.QUESTION_FAILED);
       }
     });
     this.subs.add(quizData);
@@ -161,7 +161,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       }));
     });
 
-    this.startCounter(this.currentIndex);
+    // this.startCounter(this.currentIndex);
   }
 
 
@@ -191,7 +191,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
     let queType = formData.queType;
 
     if (timerValue === 0 && nextValue && skipValue) {
-      this.toastService.show('error', 'Sorry, Your time is over');
+      this.snackBarService.error(MESSAGE.TIMER_OFF);
     } else {
       if (((skipValue || previousValue) && !nextValue) || (!skipValue && !previousValue && !nextValue)) {
 
@@ -211,7 +211,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
           selectedAnswer: this.selectedAns
         });
       } else {
-        this.toastService.show('error', 'Sorry, Your answer has been submitted');
+        this.snackBarService.error(MESSAGE.NO_ANS_SELECTION);
       }
     }
   }
@@ -260,7 +260,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
       skip: 0,
     });
 
-    console.log('next que========', formData.getRawValue());
     this.selectedAns = [];
     this.moveToNextQue(index);
   }
@@ -276,7 +275,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
       selectedAnswer: null
     });
 
-    console.log('previous current=======', formData.getRawValue());
     this.selectedAns = [];
     this.currentIndex = i - 1;
     this.carousel.prev();
@@ -345,12 +343,11 @@ export class Quizcomponent implements OnInit, OnDestroy {
       userId: this.userId
     };
 
-    console.log('result', result);
     localStorage.setItem(LOCALSTORAGE_KEY.LAST_RESULT_DATA, JSON.stringify(result));
 
     const finalData = this.resultService.addResultData(result).subscribe({
       error: () => {
-        this.toastService.show('error', 'Erorr! While saving result data.');
+        this.snackBarService.error(MESSAGE.SOMTHING);
       }
     });
 
@@ -384,7 +381,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
           skip: 1,
           selectedAnswer: null
         });
-        console.log('skip que current=======', formData.getRawValue());
         this.selectedAns = [];
         this.moveToNextQue(index);
       }

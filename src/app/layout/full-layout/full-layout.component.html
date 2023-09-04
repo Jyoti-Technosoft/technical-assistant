@@ -1,6 +1,56 @@
-<app-header></app-header>
-<div *ngIf="!userData">
-  <router-outlet></router-outlet>
+<mat-toolbar color="primary" class="fixed-top docs-navbar-header">
+  <mat-icon (click)="sidenav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">menu</mat-icon>
+  <span>
+    <img src="assets/img/JT.png" alt="logo" class="d-inline-block image"/>
+    <span class="title fs-15"> DevQuest </span>
+  </span>
+  <span class="example-spacer"></span>
+  <span>
+    <img
+        src="assets/img/profilephoto.svg"
+        alt="user"
+        class="img-responsive image rounded-circle mx-2"
+        [matMenuTriggerFor]="belowMenu"/>
+    <mat-menu #belowMenu="matMenu" yPosition="below">
+      <div mat-menu-item> {{userData.email}} </div>
+      <div mat-menu-item (click)="openSignOutDialog()"> Sign Out</div>
+    </mat-menu>
+  </span>
+</mat-toolbar>
+<div class="main-container">
+  <mat-sidenav-container (backdropClick)="close('backdrop')" autosize>
+    <mat-sidenav #sidenav [opened]="true" [mode]="'side'">
+        <mat-nav-list *ngFor="let menu of menuItem">
+          <mat-list-item [disableRipple]="true" [routerLinkActive]="['active']" routerLink="{{menu?.link}}">
+            <mat-icon matListItemIcon>{{menu?.icon}}</mat-icon>
+            <mat-label matListItemTitle> {{menu.label}} </mat-label>
+          </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!-- <mat-toolbar color="primary" class="fixed-top docs-navbar-header">
+        <mat-icon (click)="sidenav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">menu</mat-icon>
+        <span class="m-xl-3">
+          <img src="assets/img/JT.png" alt="logo" class="d-inline-block image"/>
+          <span class="title fs-15"> DevQuest </span>
+        </span>
+        <span class="example-spacer"></span>
+        <span>
+          <img
+              src="assets/img/profilephoto.svg"
+              alt="user"
+              class="img-responsive image rounded-circle mx-2"
+              [matMenuTriggerFor]="belowMenu"/>
+          <mat-menu #belowMenu="matMenu" yPosition="below">
+            <div mat-menu-item> {{userData.email}} </div>
+            <div mat-menu-item (click)="openSignOutDialog()"> Sign Out</div>
+          </mat-menu>
+        </span>
+      </mat-toolbar> -->
+      <router-outlet></router-outlet>
+      <footer>
+        <app-footer></app-footer>
+      </footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
-<!-- <app-footer></app-footer> -->
-

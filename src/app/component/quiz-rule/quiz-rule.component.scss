@@ -1,7 +1,7 @@
 :host {
     .main-div {
-        height: calc(100vh - 64px);
         padding: 0 40px;
+        margin: 40px auto;
     }
 
     .mt-15 {
@@ -11,7 +11,6 @@
     .card-layout {
         border-radius: 15px;
         padding: 20px;
-        width: 80%;
       }
 
     .card-img-top {
@@ -22,7 +21,7 @@
     }
 
     .card-content {
-        height: 245px;
+        height: auto;
         margin: 15px;
     }
 
@@ -32,48 +31,49 @@
         padding: 6px;
     }
 
-    .btn-start {
-        border: 2px solid rgb(47, 168, 98);
-        color: rgb(47, 168, 98);
+    .h-50 {
+        height: 50px;
+    }
 
-        transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-        &:hover {
-          box-shadow: 0 0 40px 40px rgb(47, 168, 98) inset;
-        }
+    .fs-50 {
+        font-size: 50px;
+    }
+
+    mat-icon {
+        font-size: 35px;
+        height: 35px;
+        width: 35px;
+    }
+
+    .mr-20 {
+        margin-right: 10px;
     }
 
     .btn-back {
-        border: 2px solid rgb(99 95 96);
-        color: rgb(99 95 96);
-
-        transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+        color: rgb(27, 26, 26);
+        border: 1px solid #dadbdd;
+        border-radius: 5px;
+        height: 35px;
+        font-size: 15px;
+        font-weight: 500;
         &:hover {
-          box-shadow: 0 0 40px 40px rgb(99 95 96) inset;
+            background: #dddddd;
         }
     }
 
-    .common-btn {
-        box-sizing: border-box;
-        appearance: none;
-        background-color: transparent;
-        border-radius: 0.6em;
-        cursor: pointer;
-        display: flex;
-        align-self: center;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1;
-        margin: 0 auto;
-        padding: 1.2em 2.8em;
-        text-decoration: none;
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: 700;
-
-        &:hover,
-        &:focus {
-          color: #fff;
-          outline: 0;
+    .btn-play {
+        background: #367dc8;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 5px 10px #a4c4e6;
+        height: 35px;
+        font-size: 15px;
+        transition: 0.2s;
+        &:hover {
+            box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;
+            color: #174b83;
+            font-weight: 500;
         }
     }
 }

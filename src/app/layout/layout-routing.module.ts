@@ -6,25 +6,12 @@ import { Quizcomponent } from '../component/quiz/quiz.component';
 import { ResultComponent } from '../component/result/result.component';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
 import { AllresultsComponent } from '@app/component/allresults/allresults.component';
-import { LoginComponent } from '@app/authorization/login/login.component';
 import { UserProfileComponent } from '@app/component/user-profile/user-profile.component';
 import { PrivacyPolicyComponent } from '@app/component/privacy-policy/privacy-policy.component';
 import { TearmsConditionComponent } from '@app/component/tearms-condition/tearms-condition.component';
 import { QuizRuleComponent } from '@app/component/quiz-rule/quiz-rule.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: FullLayoutComponent,
-    // canActivate: [NonAuthGuard],
-    children: [
-      { path: '', redirectTo: '/login', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'registration', component: LoginComponent },
-      { path: 'privacy-policy', component: PrivacyPolicyComponent },
-      { path: 'tearms-condition', component: TearmsConditionComponent }
-    ],
-  },
   {
     path: '',
     component: FullLayoutComponent,

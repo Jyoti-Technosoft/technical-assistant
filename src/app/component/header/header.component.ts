@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private dialogService: DialogService,
     private cd: ChangeDetectorRef,
     private router: Router,
-    private renderer: Renderer2
   ) {
     this.authListenerSubs = new Subscription;
     this.userToken = JSON.parse(JSON.stringify(localStorage.getItem(LOCALSTORAGE_KEY.TOKEN)));

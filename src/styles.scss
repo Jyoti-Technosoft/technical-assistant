@@ -1,29 +1,30 @@
 //importing boostrap file
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 //font awosome
 @import url("../node_modules/bootstrap-icons/font/bootstrap-icons.css");
 
 $bg-colour: #fff;
 $steel_blue: #4682b4;
 * {
-  font-family: Roboto;
+  font-family: 'Poppins', sans-serif;
+  // font-family: 'open-sans,open sans' !important;
 }
 
 html,
 body {
-  height: auto;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
   background: $bg-colour;
 }
 
-@font-face {
-  font-family: Roboto;
-  src: url(assets/fonts/Roboto-Regular.ttf) format("truetype");
-}
+// @font-face {
+//   font-family: Roboto;
+//   src: url(assets/fonts/Roboto-Regular.ttf) format("truetype");
+// }
 
 .center-to-page {
   position: absolute;
@@ -35,18 +36,6 @@ body {
   -o-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   width: 90%;
-}
-
-@media (max-width: 500px) {
-  .center-to-page {
-    position: initial !important;
-    transform: none !important;
-    -webkit-transform: none;
-    -moz-transform: none;
-    -o-transform: none;
-    -ms-transform: none;
-    width: 100%;
-  }
 }
 
 ::-webkit-scrollbar {
@@ -67,12 +56,57 @@ body {
   border-radius: 10px;
 }
 
+.mdc-list-item--with-leading-icon .mdc-list-item__start {
+  margin-left: 16px !important;
+  margin-right: 16px !important;
+}
+
+.mat-mdc-snack-bar-container {
+  --mat-mdc-snack-bar-button-color: #fff;
+  --mdc-snackbar-supporting-text-color: #fff;
+
+  &.info-snackbar {
+    --mdc-snackbar-container-color: #4682b4;
+  }
+
+  &.error-snackbar {
+    --mdc-snackbar-container-color: #d72626;
+  }
+
+  &.success-snackbar {
+    --mdc-snackbar-container-color: #5b9d70;
+  }
+}
+
+.mdc-list-item__primary-text {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+  // .mat-form-field-appearance-outline .mat-form-field-outline-start {
+  //   background-color: rgb(199, 135, 135) !important;
+  // }
+  // .mat-form-field-appearance-outline .mat-form-field-outline-gap {
+  //   background-color: rgb(196, 67, 67) !important;
+  // }
+  // .mat-form-field-appearance-outline .mat-form-field-outline-end {
+  //   background-color: rgb(104, 12, 12) !important;
+  // }
+  // mat-form-field mat-label {
+  //   background-color: rgba(34, 1, 1, 0.9);
+  // }
+  // .mat-form-field-appearance-outline:not(.mat-form-field-disabled)
+  //   .mat-form-field-flex:hover
+  //   .mat-form-field-outline {
+  //   opacity: 0 !important;
+  // }
+
+
+mat-icon {
+  cursor: pointer;
+}
+
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #b9babd;
-}
-
-// btn-primary 
-.btn-primary {
-  background-color: $steel_blue !important;
 }

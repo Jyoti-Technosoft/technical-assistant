@@ -1,28 +1,26 @@
-<footer>
-  <div class="footer">
-    <div class="row">
-      <ng-container *ngFor="let item of socialMedia">
-        <a href="{{ item.routerlink }}">
-          <i class="{{ item?.icon }} icon"></i>
-        </a>
-      </ng-container>
-    </div>
-
-    <div class="row">
-      <ul>
-        <li *ngFor="let item of title; let i=index">
-          <a href="{{ item.link }}" class="text-item">{{ item.label }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="row">
-      © 2023 Copyright
-      <a
-        class="footer-link"
-        routerLink="jyoti-web"
-      >
-      https://www.jyotitechnosoft.com
-    </a>
-    </div>
+<div class="footer">
+  <div class="row">
+    <ng-container *ngFor="let item of socialMedia">
+      <a href="{{ item.routerlink }}">
+        <i class="{{ item?.icon }} icon"></i>
+      </a>
+    </ng-container>
   </div>
-</footer>
+
+  <div class="row">
+    <ul>
+      <li *ngFor="let item of title; let i=index">
+        <a href="{{ item.link }}" class="text-item">{{ item.label }}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="row">
+    © 2023 Copyright
+    <a
+      class="footer-link"
+      routerLink="jyoti-web"
+    >
+    https://www.jyotitechnosoft.com
+  </a>
+  </div>
+</div>

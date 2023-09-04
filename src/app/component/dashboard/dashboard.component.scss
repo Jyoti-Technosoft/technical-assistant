@@ -1,5 +1,3 @@
-$btn-primary: #3f51b5;
-
 $btn-width: 250px !default;
 $btn-height: 80px !default;
 $btn-full: $btn-height+$btn-width !default;
@@ -12,11 +10,12 @@ $bg-color: #eeeeee !default;
 }
 
 .img-content {
-  min-height: 140px;
-  max-height: 240px;
+  min-height: 40%;
+  max-height: 40%;
 }
+
 .text-content {
-  white-space: nowrap;
+  white-space: pre-wrap;
   text-overflow: ellipsis;
   overflow: hidden;
 
@@ -29,18 +28,9 @@ $bg-color: #eeeeee !default;
     -webkit-box-orient: vertical;
   }
 }
+
 .btn-content {
-  background-color: $btn-primary;
-  border-color: $btn-primary;
   border-radius: 8px;
-}
-
-.max-width {
-  max-width: 450px;
-}
-
-.stac-icon {
-  font-size: 40px;
 }
 
 .icon-background {
@@ -67,20 +57,21 @@ $bg-color: #eeeeee !default;
 
 .icons {
   font-weight: 500;
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   line-height: 1;
 }
+
 .icon-color-1 {
-  color: #4e73e5;
+  color: #3793db;
 }
 .icon-color-2 {
-  color: #17d1bd;
+  color: #2bb070;
 }
 .icon-color-3 {
   color: #ff5c33;
 }
 .icon-color-4 {
-  color: #4e73e5;
+  color: #dab92deb;
 }
 
 .card-container-icons {
@@ -108,33 +99,21 @@ $bg-color: #eeeeee !default;
 }
 
 .btn-start {
-  box-sizing: border-box;
-  appearance: none;
-  background-color: transparent;
-  border: 2px solid $btn-primary;
-  border-radius: 0.6em;
-  color: $btn-primary;
-  cursor: pointer;
-  display: flex;
-  align-self: center;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1;
-  margin: 0 auto;
-  padding: 1.2em 2.8em;
-  text-decoration: none;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 700;
 
-  &:hover,
-  &:focus {
-    color: #fff;
-    outline: 0;
-  }
+  background: #367dc8;
+  color: white;
+  width: 40%;
+  // border: rgb(41, 40, 40) solid 1px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px #a4c4e6;
+  height: 35px;
+  font-size: 15px;
+  transition: 0.2s;
 
-  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
   &:hover {
-    box-shadow: 0 0 40px 40px $btn-primary inset;
+    box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;
+    color: #174b83;
+    font-weight: 500;
   }
 }

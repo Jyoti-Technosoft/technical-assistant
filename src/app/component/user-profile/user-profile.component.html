@@ -88,17 +88,13 @@
                   </td>
                 </tr>
               </table>
-              <div class="col">
-                <ng-container *ngIf="!editMode">
-                  <button mat-raised-button color="primary" class="m-2" (click)="editUserdetails()"> Update Profile </button>
-                  <button mat-raised-button color="primary" class="m-2" (click)="onHideShowPasswordForm()"> Change Password </button>
-                </ng-container>
-                <ng-container *ngIf="editMode">
-                  <div class="col">
-                    <button mat-raised-button color="primary" class="m-2" (click)="updateUserDetails()"> Save </button>
-                    <button mat-raised-button color="primary" class="m-2" (click)="cancelUpdate()"> Cancel </button>
-                  </div>
-                </ng-container>
+              <div class="d-flex flex-row justify-content-between" *ngIf="!editMode">
+                <button class="common-btn btn-update m-2" (click)="editUserdetails()"> Update Profile </button>
+                <button class="common-btn btn-change m-2" (click)="onHideShowPasswordForm()"> Change Password </button>
+              </div>
+              <div class="d-flex flex-row justify-content-end" *ngIf="editMode">
+                <button class="common-btn btn-save m-2" (click)="updateUserDetails()"> Save </button>
+                <button class="common-btn btn-cancel m-2" (click)="cancelUpdate()"> Cancel </button>
               </div>
             </ng-container>
 
@@ -110,8 +106,8 @@
                     <mat-form-field appearance="outline" class="mb-2 w-100">
                       <mat-label>Password</mat-label>
                       <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-                      <mat-icon mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
-                        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                        {{hidePassword ? 'visibility' : 'visibility_off'}}
                       </mat-icon>
                       <mat-error *ngIf="getControl(changePasswordForm, 'password')?.hasError('required')">
                         Password is required.
@@ -128,8 +124,8 @@
                     <mat-form-field appearance="outline" class="mb-2 w-100">
                       <mat-label>Password</mat-label>
                       <input matInput [type]="hideNewPassword ? 'password' : 'text'" formControlName="newPassword" minlength="8" required>
-                      <mat-icon mat-icon-button matSuffix (click)="hideNewPassword = !hideNewPassword">
-                        <mat-icon>{{hideNewPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <mat-icon matSuffix (click)="hideNewPassword = !hideNewPassword">
+                        {{hideNewPassword ? 'visibility' : 'visibility_off'}}
                       </mat-icon>
                       <mat-error *ngIf="getControl(changePasswordForm, 'newPassword')?.hasError('required')">
                         Password is required.
@@ -148,8 +144,8 @@
                     <mat-form-field appearance="outline" class="mb-2 w-100">
                       <mat-label>Password</mat-label>
                       <input matInput [type]="hideconfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" minlength="8" required>
-                      <mat-icon mat-icon-button matSuffix (click)="hideconfirmPassword = !hideconfirmPassword">
-                        <mat-icon>{{hideconfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <mat-icon matSuffix (click)="hideconfirmPassword = !hideconfirmPassword">
+                        {{hideconfirmPassword ? 'visibility' : 'visibility_off'}}
                       </mat-icon>
                       <mat-error *ngIf="getControl(changePasswordForm, 'confirmPassword')?.hasError('required')">
                         Password is required.
@@ -161,9 +157,9 @@
                   </td>
                 </tr>
               </table>
-              <div class="col">
-                <button mat-raised-button color="primary" class="m-2" (click)="updatePassword()"> Update Password </button>
-                <button mat-raised-button color="primary" class="m-2" (click)="cancelUpdate()"> Cancel </button>
+              <div class="d-flex flex-row justify-content-end">
+                <button class="common-btn btn-update m-2" (click)="updatePassword()"> Update Password </button>
+                <button class="common-btn btn-cancel m-2" (click)="cancelUpdate()"> Cancel </button>
               </div>
             </ng-container>
           </div>

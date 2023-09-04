@@ -1,9 +1,9 @@
 <div class="main-div">
   <div class="row mt-3">
-    <span class="fs-3 title-text font-weight-bold">Statistics </span>
+    <span class="fs-3 title-text font-weight-bold">Analytics</span>
     <div class="card shadow mt-3 rounded-4 border-0 h-100">
       <div class="d-flex row justify-content-center align-items-center">
-        <div class="col-lg-3 col-md-5 card-1">
+        <div class="col-lg-3 col-md-6 col-xs-12 card-1">
           <div
             class="d-flex justify-content-between text-align-center align-items-center card-container-icons"
           >
@@ -25,7 +25,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-5 card-2">
+        <div class="col-lg-3 col-md-6 col-xs-12 card-2">
           <div
             class="d-flex justify-content-between align-items-center card-container-icons"
           >
@@ -45,8 +45,7 @@
             </div>
           </div>
         </div>
-
-        <div class="col-lg-3 col-md-5 card-3">
+        <div class="col-lg-3 col-md-6 col-xs-12 card-3">
           <div
             class="d-flex justify-content-between align-items-center card-container-icons"
           >
@@ -66,8 +65,7 @@
             </div>
           </div>
         </div>
-
-        <div class="col-lg-3 col-md-5 card-4">
+        <div class="col-lg-3 col-md-6 col-xs-12 card-4">
           <div
             class="d-flex justify-content-between align-items-center card-container-icons"
           >
@@ -81,7 +79,7 @@
                 >Height Quiz Played</span
               >
               <p class="d-flex justify-content-center">
-                <b>{{ quizCountData?.highestQuizPlayed || 0 }}</b>
+                <b>{{ quizCountData?.highestQuizPlayed | titlecase }}</b>
               </p>
             </div>
           </div>
@@ -92,20 +90,20 @@
   <div class="row mb-5">
     <div class="d-flex align-items-center justify-content-center">
       <div class="row justify-content mt-5">
-        <span class="fs-3 title-text font-weight-bold">Trending Quiz</span>
+        <span class="fs-3 title-text font-weight-bold">Hot Trends Technologies</span>
         <ng-container
           *ngFor="let data of quizs | slice : 0 : cardData; let i = index"
         >
           <div class="col-lg-3 col-md-6 col-xs-12 p-3">
-            <div class="card shadow mt-3 rounded-4 border-0 cardContainer quiz-list">
+            <div class="card shadow mt-3 rounded-4 border-0 cardContainer quiz-list align-items-center">
               <img
-                class="img-fluid p-2 h-100 img-content"
+                class="img-content p-2"
                 src="{{ data.image }}"
                 alt="quiz-logo"
               />
               <div class="card-body">
                 <h5 class="card-title font-weight-bolder text-center font-weight-bolder">{{ data.title }}</h5>
-                <p align="justify" class="card-text small text-content">
+                <p class="card-text small text-content">
                   {{ data.description }}
                 </p>
                 <div class="text-center">

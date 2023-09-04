@@ -19,6 +19,16 @@
       "mobile": "1234567896",
       "terms": true,
       "id": 2
+    },
+    {
+      "email": "yashesh@gmail.com",
+      "password": "Yashesh123",
+      "fullName": "Yashesh shah",
+      "gender": "male",
+      "dob": "2020-06-09T18:30:00.000Z",
+      "mobile": "5879874564",
+      "terms": true,
+      "id": 3
     }
   ],
   "countData": [
@@ -32,13 +42,13 @@
   "quizDetails": [
     {
       "id": "angular",
-      "rules": "<li>There are a total <b>numberOfQuestions</b> questions.</li><li>There is a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>positivePoints Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> negativePoints Point.</b></li></ul><ul> <li>You must have <b> timer seconds </b> for each questions.</li></ul><li>After completion of time for each question, The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
+      "rules": "<ul> <li>There are a total of <b>numberOfQuestions</b> questions in the test.</li> <li>There is negative marking, where an incorrect answer deducts <b>negativePoints Point.</b></li> <li>A correct answer earns you <b>positivePoints Point.</b></li> <li>Each question must be answered within a <b>timer seconds</b> time limit.</li> <li>After <b>timer seconds</b>, the question changes automatically.</li> <li>Participants have the option to proceed to the next question before the time limit ends by clicking on a <b>Next button<b>.</li>",
       "timer": 15,
       "positivePoints": 1,
       "negativePoints": 0.25,
       "numberOfQuestions": 5,
       "title": "Angular",
-      "image": "assets\\img\\javascript.svg",
+      "image": "assets\\img\\angular_logo.svg",
       "description": "Angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you import into your applications."
     },
     {
@@ -49,7 +59,7 @@
       "negativePoints": 1,
       "numberOfQuestions": 4,
       "title": "HTML-CSS",
-      "image": "assets\\img\\html-css.svg",
+      "image": "assets\\img\\htmlcss_logo.svg",
       "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages."
     },
     {
@@ -60,7 +70,7 @@
       "negativePoints": 0.25,
       "numberOfQuestions": 3,
       "title": "JavaScript",
-      "image": "assets\\img\\javascript.svg",
+      "image": "assets\\img\\javascript_logo.png",
       "description": "JavaScript is a light-weight object-oriented programming language that is used by several websites for scripting the webpages. It is an interpreted, full-fledged programming language. JavaScript enables dynamic interactivity on websites when it is applied to an HTML document."
     },
     {
@@ -71,7 +81,7 @@
       "negativePoints": 0.25,
       "numberOfQuestions": 3,
       "title": "React JS",
-      "image": "assets\\img\\react.svg",
+      "image": "assets\\img\\react_logo.svg",
       "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta."
     }
   ],

@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
-import { RESULT_QUIZ, TOAST_BG_COLOR } from '@app/shared/toast.enum';
-import { ToastService } from '@app/toast.service';
 import { Subscription } from 'rxjs';
-import { LOCALSTORAGE_KEY } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
+import { SnackbarService } from '@app/service/snackbar.service';
 
 @Component({
   selector: 'app-result',
@@ -23,7 +22,7 @@ export class ResultComponent implements OnInit, OnDestroy {
   constructor (
     public auth: AuthenticationService,
     public router: Router,
-    private toastService: ToastService,
+    private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
   ) {
     this.sub = new Subscription();
@@ -40,7 +39,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
     if (!this.recentResult) {
       this.router.navigateByUrl('dashbaord');
-      this.toastService.toastMessage(RESULT_QUIZ, TOAST_BG_COLOR.TOAST_ERROR_COLOR);
+      this.snackBarService.error(MESSAGE.NO_QUIZ);
     }
   }
 

@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { LOCALSTORAGE_KEY, PATTERN } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, MESSAGE, PATTERN } from '@app/utility/utility';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { ToastService } from '@app/toast.service';
+import { SnackbarService } from '@app/service/snackbar.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -51,7 +51,7 @@ export class UserProfileComponent implements OnInit {
     private auth: AuthenticationService,
     private cd: ChangeDetectorRef,
     public router: Router,
-    private toastService: ToastService,
+    private snackBarService: SnackbarService,
     private fb: FormBuilder,
     public calendar: NgbCalendar
   ) {
@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
         this.cd?.detectChanges();
       },
       error: () => {
-        this.toastService.show('error', 'somthing goes wrong');
+        this.snackBarService.error(MESSAGE.SOMTHING);
       }
     });
   }
@@ -141,13 +141,13 @@ export class UserProfileComponent implements OnInit {
       let data = this.changePasswordForm.get('newPassword')?.value;
       const userData = this.auth.updateUserData({'password': data}, this.userId).subscribe({
         next: () => {
-          this.toastService.show('success', 'Password change successfully');
+          this.snackBarService.success(MESSAGE.PASSWORD_CHANGE_SUCCESSFUL);
           this.editMode = false;
           this.router.navigateByUrl('login');
           this.cd.detectChanges();
         },
         error: () => {
-          this.toastService.show('error', 'Error while update profile');
+          this.snackBarService.error(MESSAGE.SOMTHING);
         }
       });
 
@@ -172,13 +172,13 @@ export class UserProfileComponent implements OnInit {
       delete data.id;
       const userData = this.auth.updateUserData(data, id).subscribe({
         next: () => {
-          this.toastService.show('success', 'Profile updated successfully');
+          this.snackBarService.success(MESSAGE.PROFILE_UPDATE_SUCCESSFUL);
           this.editMode = false;
           this.getUserData(id);
           this.cd.detectChanges();
         },
         error: () => {
-          this.toastService.show('error', 'Error while update profile');
+          this.snackBarService.error(MESSAGE.SOMTHING);
         }
       });
 

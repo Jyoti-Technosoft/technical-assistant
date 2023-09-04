@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule  } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbDatepickerModule, NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
-import { CookieService } from 'ngx-cookie-service';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from '@app/app.component';
 import { LoginComponent } from '@app/authorization/login/login.component';
 import { ToastComponent } from '@app/toast/toast.component';
@@ -13,7 +11,7 @@ import { LayoutComponentModule } from '@app/layout/layout-component.module';
 import { ModalComponent } from '@app/dialog-service/modal/modal/modal.component';
 import { AuthGuard } from '@app/authorization/auth-guard/auth.guard';
 import { AuthenticationService } from '@app/service/authentication.service';
-import {  MaterialModule } from '@app/material/material.module';
+import { MaterialModule } from '@app/material/material.module';
 import { storeModule } from '@app/store/store.module';
 import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard';
@@ -40,7 +38,6 @@ import { QuizRuleComponent } from './component/quiz-rule/quiz-rule.component';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: true }),
     LayoutComponentModule,
     NgbToastModule,
     NgbDatepickerModule,
@@ -51,7 +48,6 @@ import { QuizRuleComponent } from './component/quiz-rule/quiz-rule.component';
     NonAuthGuard,
     RedirectGuard,
     AuthenticationService,
-    CookieService,
   ],
   bootstrap: [AppComponent],
 })

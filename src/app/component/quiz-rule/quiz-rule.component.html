@@ -1,24 +1,18 @@
 <div class="main-div">
-  <div class="d-flex h-auto align-items-center justify-content-around center-to-page">
-    <div class="card shadow card-layout">
-      <div *ngIf="instruction">
-        <div class="container d-flex justify-content-center">
-        <img class="card-img-top w-50 h-50" src="assets\img\rules.svg" alt="Rules-image" />
-        </div>
-        <h2 class="text-center mb-2">Instuctions</h2>
-        <div class="card-content" [innerHTML]="displayRules"></div>
-        <div class="row mt-15">
-          <div class="col">
-            <button class="common-btn btn-back" (click)="allQuiz()">
-              Go to List
-            </button>
-          </div>
-          <div class="col">
-            <button class="common-btn btn-start" (click)="quiz()">
-              Start Now
-            </button>
-          </div>
-        </div>
+  <div class="card shadow card-layout" [ngStyle]="{'width': isMobileView ? '100%' : '60%', 'margin': 'auto'}">
+    <div *ngIf="instruction">
+      <div class="container d-flex justify-content-center">
+      <img class="card-img-top w-50 h-50" src="assets\img\rules_icon.png" alt="Rules-image" />
+      </div>
+      <h2 class="text-center mb-2">Scoring Guidelines</h2>
+      <div class="card-content" [innerHTML]="displayRules"></div>
+      <div class="d-flex flex-row justify-content-between m-4">
+        <button [ngStyle]="{'width': isMobileView ? '30%' : '25%'}" class="btn-back" (click)="allQuiz()">
+          Return to List
+        </button>
+        <button [ngStyle]="{'width': isMobileView ? '30%' : '25%'}" class="btn-play" (click)="quiz()">
+          Let's Start
+        </button>
       </div>
     </div>
   </div>

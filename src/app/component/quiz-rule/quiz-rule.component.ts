@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { QuizDataService } from '@app/service/quiz-data.service';
-import { ToastService } from '@app/toast.service';
 import { Subscription } from 'rxjs';
-import { LOCALSTORAGE_KEY } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
+import { SnackbarService } from '@app/service/snackbar.service';
 
 @Component({
   selector: 'app-quiz-rule',
@@ -19,13 +19,14 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
   selectedQuiz = '';
   sub: Subscription;
   displayRules!: string;
+  isMobileView = false;
 
   constructor(
     private route: Router,
     private activeRoute: ActivatedRoute,
     private auth: AuthenticationService,
     private quizservice: QuizDataService,
-    private toastService: ToastService,
+    private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
   ) {
 
@@ -36,6 +37,10 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
 
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd.detectChanges();
+    });
     this.getInstructions();
   }
 
@@ -51,7 +56,7 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
         }
       },
       error: () => {
-        this.toastService.show('error', 'Error! While fetching information.');
+        this.snackBarService.error(MESSAGE.SOMTHING);
       }
     });
     this.sub.add(quizData);
@@ -59,7 +64,7 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
 
   applyRulesForTest(data: string): void {
 
-    data = data.replace('timer', this.instruction.timer);
+    data = data.replaceAll('timer', this.instruction.timer);
     data = data.replace('positivePoints', this.instruction.positivePoints);
     data = data.replace('negativePoints', this.instruction.negativePoints);
     data = data.replace('numberOfQuestions', this.instruction.numberOfQuestions);

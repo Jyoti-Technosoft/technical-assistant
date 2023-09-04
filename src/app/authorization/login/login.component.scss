@@ -1,156 +1,172 @@
 $grey1: #d1d1d4;
 $steel_blue: #4682b4;
-.userlogo {
-  width: 60px;
-  height: 60px;
-  margin-top: -6%;
-}
-
-
-.fixed-height {
-  height: 10px;
-}
-
-.mb-20 {
-  margin-bottom: 20px;
-}
-
-.back-btn {
-  border: none;
-  background-color: transparent;
-}
-.back-img {
-  width: 40px;
-  height: 40px;
-  margin-left: -30%;
-  margin-top: -13%;
-}
-.form-control {
-  margin-top: 10px;
-  width: 100%;
-  border-radius: 1px;
-  box-shadow: none;
-  border: none;
-  border-bottom: 1px solid $grey1 !important;
-  background-color: #f8f9fa;
-}
-
-.btn {
-  width: 30%;
-  border-radius: 15px;
-  bottom: 20px;
-  background: #4682b4;
-  color: white;
-  .icon {
-    &:before {
-      font-weight: bold !important;
-    }
-  }
-}
-.btn.btn-primary {
-  font-weight: bold;
-  border: none;
-  padding: 10px;
-  margin: 10px 64px;
-  border-radius: 50px;
-  font-size: 16px;
-}
-
-.progressbar {
-  width: 100%;
-  height: 5rem;
-
-  .account:before {
-    content: "\F47A";
-  }
-
-  .person:before {
-    content: "\F4DA";
-  }
-
-  .finish:before {
-    content: "\F26E";
-  }
-}
-
-.progressbar li {
-  &:after {
-    .finish {
-      width: 50%;
-    }
-  }
-}
-
-.progressbar li.active:before,
-.progressbar li.active:after {
-  background: $steel_blue;
-}
-
-.progressbar li {
-  list-style-type: none;
-  font-size: 15px;
-  width: 25%;
-  float: left;
-  position: relative;
-  font-weight: 400;
-  color: gray;
-}
-
-.progressbar li {
-  &:before {
-    position: inherit;
-    width: 50px;
-    height: 50px;
-    line-height: 45px;
-    display: block;
-    font-size: 20px;
-    color: #ffffff;
-    background: lightgray;
-    border-radius: 50%;
-    margin: 0 auto 10px auto;
-    padding: 2px;
-    z-index: 2;
-  }
-
-  &:after {
-    content: "";
-    width: 100%;
-    height: 2px;
-    background: lightgray;
-    position: absolute;
-    top: 25px;
-    z-index: 1;
-  }
-}
-
-.progressbar li.account {
-  &:after {
-      left: 25px;
-  }
-}
-
-.progressbar li.finish {
-  &:after {
-      right: 25px;
-  }
-}
-
-.progressbar li:before {
-  font-family: bootstrap-icons;
-  justify-content: center;
-  display: flex;
-}
-
-.bi-arrow-left::before {
-  font-size: 30px;
-  color: $steel_blue;
-}
 
 :host {
 
+  .userlogo {
+    width: 60px;
+    height: 60px;
+    margin-top: -6%;
+  }
+
+  .fixed-height {
+    height: 10px;
+  }
+
+  .mb-20 {
+    margin-bottom: 20px;
+  }
+
+  .back-btn {
+    border: none;
+    background-color: transparent;
+  }
+  .back-img {
+    width: 40px;
+    height: 40px;
+    margin-left: -30%;
+    margin-top: -13%;
+  }
+
+  mat-form-field {
+    mat-icon {
+      padding: 8px !important;
+      color: gray !important;
+    }
+  }
+
+  form {
+    height: 408px !important
+  }
+
+  mat-radio-button {
+    color: $steel_blue;
+  }
+
+  .form-control {
+    margin-top: 10px;
+    width: 100%;
+    border-radius: 1px;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid $grey1 !important;
+    background-color: #f8f9fa;
+  }
+
+  .btn {
+    width: 30%;
+    border-radius: 15px;
+    bottom: 20px;
+    background: $steel_blue;
+    color: white;
+    .icon {
+      &:before {
+        font-weight: bold !important;
+      }
+    }
+  }
+  .btn.btn-primary {
+    font-weight: bold;
+    border: none;
+    padding: 10px;
+    margin: 10px 64px;
+    border-radius: 50px;
+    font-size: 16px;
+  }
+
+  .progressbar {
+    width: 100%;
+    height: 5rem;
+
+    .account:before {
+      content: "\F47A";
+    }
+
+    .person:before {
+      content: "\F4DA";
+    }
+
+    .finish:before {
+      content: "\F26E";
+    }
+  }
+
+  .progressbar li {
+    &:after {
+      .finish {
+        width: 50%;
+      }
+    }
+  }
+
+  .progressbar li.active:before,
+  .progressbar li.active:after {
+    background: $steel_blue;
+  }
+
+  .progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: gray;
+  }
+
+  .progressbar li {
+    &:before {
+      position: inherit;
+      width: 50px;
+      height: 50px;
+      line-height: 45px;
+      display: block;
+      font-size: 20px;
+      color: #ffffff;
+      background: lightgray;
+      border-radius: 50%;
+      margin: 0 auto 10px auto;
+      padding: 2px;
+      z-index: 2;
+    }
+
+    &:after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      background: lightgray;
+      position: absolute;
+      top: 25px;
+      z-index: 1;
+    }
+  }
+
+  .progressbar li.account {
+    &:after {
+        left: 25px;
+    }
+  }
+
+  .progressbar li.finish {
+    &:after {
+        right: 25px;
+    }
+  }
+
+  .progressbar li:before {
+    font-family: bootstrap-icons;
+    justify-content: center;
+    display: flex;
+  }
+
+  .bi-arrow-left::before {
+    font-size: 30px;
+    color: $steel_blue;
+  }
+
   .login {
-    height: calc(100vh - 64px);
-    background: lavender;
+    height: 100vh;
+    background: #f3f3f3;
     padding: 20px;
     display: flex;
     justify-content: center;
@@ -159,11 +175,23 @@ $steel_blue: #4682b4;
 
   mat-card {
     margin: 0 auto;
-    width: 70%;
+  }
 
-    mat-card-content {
-      padding: 10px;
-    }
+  .logo-image {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mat-mdc-raised-button:not(:disabled) {
+    background-color: $steel_blue;
+    color: white;
+  }
+
+  .title {
+    // border-bottom: 3px solid green;
+    color: rgb(38 50 56);
+    font-weight: 500;
+    font-size: 20px;
   }
 
   .text-center {

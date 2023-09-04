@@ -5,15 +5,15 @@ import {
   OnDestroy,
   OnInit,
   TemplateRef,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { ToastService } from '@app/toast.service';
-import { LOCALSTORAGE_KEY, PATTERN } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, MESSAGE, PATTERN } from '@app/utility/utility';
+import { SnackbarService } from '@app/service/snackbar.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private auth: AuthenticationService,
-    private toastService: ToastService,
+    private snackbarService: SnackbarService,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
   ) {
@@ -87,8 +87,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginPage) {
       this.loginForm = this.fb.group({
         email: ['mitali.jtdev@gmail.com', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
-        password: ['Mitali@123', [Validators.required, Validators.minLength(8)]]
+        password: ['Mitali@12345', [Validators.required, Validators.minLength(8)]]
       });
+      this.cd.detectChanges();
     } else {
       this.registrationForm = this.fb.group({
         userCredential: this.fb.group({
@@ -106,8 +107,8 @@ export class LoginComponent implements OnInit, OnDestroy {
           acceptTerms: [false, Validators.requiredTrue],
         }),
       });
+      this.cd.detectChanges();
     }
-    this.cd.detectChanges();
   }
 
   getLoginControl(field: string): any {
@@ -126,18 +127,18 @@ export class LoginComponent implements OnInit, OnDestroy {
       const logUser = this.auth.getAllUser().subscribe({
         next: (res:any) => {
           let user = res.filter((v:any) => v.email === formValue.email && v.password === formValue.password);
-          if (!!user.length) {
-            this.toastService.show('success', 'Login successfully');
+          if (user.length > 0) {
+            this.snackbarService.success(MESSAGE.LOGIN_SUCCESS);
             localStorage.setItem(LOCALSTORAGE_KEY.USERDATA, JSON.stringify(user[0]));
             localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, JSON.stringify(true));
             this.auth.authStatusListener$.next(true);
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('layout');
           } else {
-            this.toastService.show('success', 'Login successfully');
+            this.snackbarService.error(MESSAGE.LOGIN_FAILED);
           }
         },
         error: () => {
-          this.toastService.show('error', 'Login Error');
+          this.snackbarService.error(MESSAGE.LOGIN_FAILED);
         }
       });
       this.sub.add(logUser);
@@ -149,17 +150,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   redirectTo(type: string): void {
 
-    if (type === 'login') {
+    if (type === 'new') {
+      this.loginPage = false;
+      console.log('login page=====', this.loginPage);
+      this.router.navigateByUrl('registration');
+    } else {
       this.loginPage = true;
       this.router.navigateByUrl('login');
-      this.cd.detectChanges();
-      this.createForm();
-    } else {
-      this.loginPage = false;
-      this.router.navigateByUrl('registration');
-      this.cd.detectChanges();
-      this.createForm();
     }
+    this.createForm();
+    this.cd.detectChanges();
   }
 
   submitUserData(): void {
@@ -178,12 +178,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     const userData = this.auth.addUserData(data).subscribe({
       next: () => {
-        this.toastService.show('success', 'Registation successfully');
+        this.snackbarService.success(MESSAGE.REGISTRATION_SUCCESS);
         this.loginPage = true;
         this.router.navigateByUrl('login');
       },
       error: () => {
-        this.toastService.show('error', 'Error while doing Registation');
+        this.snackbarService.error(MESSAGE.REGISTRATION_FAILED);
       }
     });
 

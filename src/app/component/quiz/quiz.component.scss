@@ -1,6 +1,7 @@
 .quizContainer {
 
-  height: calc(100vh - 64px);
+  padding: 0 40px;
+  margin: 40px auto;
 
   .header-txt {
     z-index: 1;
@@ -27,7 +28,7 @@
   }
 
   .timer {
-    color: #004085;
+    color: black;
     height: 45px;
     .timer-left-txt {
       font-size: 17px;
@@ -55,21 +56,16 @@
   }
 
   .option {
-    background: rgb(222, 239, 255);
-    border: 1px solid #84c5fe;
+    background: rgb(235 235 235);
+    border: 1px solid #959a9f;
     font-size: 17px;
     cursor: pointer;
   }
 
   .hightlight-selected {
-    background: rgb(133, 190, 255) !important;
-    border: 1px solid #4a98ff !important;
-    font-weight: 600;
-  }
-
-  .footer-txt {
-    z-index: 1;
-    height: 70px;
+    background: rgb(162 162 162);
+    border: 1px solid #2c2c2e !important;
+    color: white;
   }
 
   .card-header {
@@ -77,12 +73,59 @@
   }
 
   .card-footer {
-    height: 50px;
+    height: 60px;
   }
 
   .link-primary {
     font-size: 16px;
     padding: 6px;
+  }
+
+  .mr-10 {
+    margin-right: 10px;
+  }
+
+  .common-btn {
+    background: #fffbfb;
+    width: 25%;
+    border: #a89f9f solid 1px;
+    border-radius: 5px;
+    height: 35px;
+    font-size: 15px;
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        outline: 0;
+    }
+  }
+
+  .btn-exit {
+      transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+      &:hover {
+        box-shadow: 0 0 40px 40px gray inset;
+      }
+  }
+
+  .btn-back {
+      transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+      &:hover {
+        box-shadow: 0 0 40px 40px gray inset;
+      }
+  }
+
+  .btn-skip {
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    &:hover {
+      box-shadow: 0 0 40px 40px gray inset;
+    }
+  }
+
+  .btn-next {
+    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    &:hover {
+      box-shadow: 0 0 40px 40px gray inset;
+    }
   }
 }
 

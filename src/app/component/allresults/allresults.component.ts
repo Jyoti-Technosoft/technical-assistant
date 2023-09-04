@@ -4,8 +4,8 @@ import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import * as d3 from 'd3';
 import { ResultService } from '@app/service/result.service';
-import { ToastService } from '@app/toast.service';
-import { LOCALSTORAGE_KEY } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
+import { SnackbarService } from '@app/service/snackbar.service';
 
 @Component({
   selector: 'app-allresults',
@@ -37,7 +37,7 @@ export class AllresultsComponent implements OnInit{
     private auth: AuthenticationService,
     private result: ResultService,
     private router: Router,
-    private toastService: ToastService,
+    private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
   ) {
 
@@ -50,14 +50,14 @@ export class AllresultsComponent implements OnInit{
     this.height = 400 - this.margin.top - this.margin.bottom;
   }
 
-    // @HostListener('window:resize', ['$event'])
-    // onresize(event?: Event): void {
-    //   console.log('resize================');
-    //   const containerWidth = document.getElementById('chart-container')?.clientWidth;
-    //   this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
-    //   this.height = this.width * 0.8;
-    //   this.drawBars(this.resultObject);
-    // }
+    @HostListener('window:resize', ['$event'])
+    onresize(event?: Event): void {
+      const containerWidth = document.getElementById('chart-container')?.clientWidth;
+      this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
+      this.height = this.width * 0.8;
+      this.createSvg();
+      // this.drawBars(this.resultObject);
+    }
 
   ngOnInit(): void {
 
@@ -86,12 +86,11 @@ export class AllresultsComponent implements OnInit{
             this.createSvg2();
             this.createTooltip();
             this.cd.detectChanges();
-
           } else {
             this.showChart = false;
           }
         } else {
-          this.toastService.show('error', 'Error! While fetching result.');
+          this.snackBarService.error(MESSAGE.ALL_RESULT_FAILED)
         }
       }
     });
