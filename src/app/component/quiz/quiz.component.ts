@@ -161,7 +161,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
       }));
     });
 
-    // this.startCounter(this.currentIndex);
+    this.startCounter(this.currentIndex);
   }
 
 
