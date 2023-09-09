@@ -10,6 +10,7 @@
   .user-profile-div {
     padding: 0 40px;
     margin: 40px auto;
+    min-height: calc(100vh - 115px) !important;
   }
 
   .card-layout {
