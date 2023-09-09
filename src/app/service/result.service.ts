@@ -17,7 +17,7 @@ export class ResultService {
     return this.http.post(`${this.url}/result`, data);
   }
 
-  getUserResultData(): Observable<any> {
-    return this.http.get(`${this.url}/result`);
+  getUserResultData(userId: any): Observable<any> {
+    return this.http.get(`${this.url}/result?userId=${userId}`);
   }
 }

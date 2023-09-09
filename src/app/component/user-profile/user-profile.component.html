@@ -81,7 +81,7 @@
                   </td>
                 </tr>
               </table>
-              <div class="d-flex w-100 flex-row align-items-center justify-content-around" *ngIf="!editMode">
+              <div class="d-flex w-100 flex-row align-items-center justify-content-between" *ngIf="!editMode">
                 <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-update" (click)="editUserdetails()"> Update Profile </button>
                 <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-change m-2" (click)="onHideShowPasswordForm()"> Change Password </button>
               </div>

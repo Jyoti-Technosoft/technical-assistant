@@ -68,7 +68,7 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
 
   resultData(): void {
 
-    const getData = this.result.getUserResultData().subscribe({
+    const getData = this.result.getUserResultData(this.userData.id).subscribe({
       next:(data) => {
         if (data) {
           this.allResultData = this.subjectWiseData = data;
