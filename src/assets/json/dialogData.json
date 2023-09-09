@@ -1,6 +1,6 @@
 {
   "skipModel": {
-    "label": "Are you sure you want to skip this question as you will not be able to answer this question again.",
+    "label": "Are you sure you want to skip this question as you will be able to answer this question again.",
     "yes": "Yes",
     "modelLabel": "Alert",
     "no": "No",
@@ -8,17 +8,31 @@
   },
   "signoutModel": {
     "modelLabel": "Alert",
-    "label": "Are you sure you want to singout from quiz?",
+    "label": "Are you sure you want to sign out from quiz?",
     "yes": "Yes",
     "no": "No",
     "type": "signoutModel"
   },
   "exitQuizModel": {
     "modelLabel": "Alert",
-    "label": "Are you sure you want to exit from quiz?",
+    "label": "Are you sure you want to exit?",
     "yes": "Yes",
     "no": "No",
     "type": "exitQuizModel"
+  },
+  "updateProfileModel": {
+    "modelLabel": "Alert",
+    "label": "Are you sure you want to update your profile?",
+    "yes": "Yes",
+    "no": "No",
+    "type": "updateProfileModel"
+  },
+  "changePasswordModel": {
+    "modelLabel": "Alert",
+    "label": "Are you sure you want to change your password?",
+    "yes": "Yes",
+    "no": "No",
+    "type": "changePasswordModel"
   },
   "aboutModel": {
     "image": "assets\\img\\logo1.png",

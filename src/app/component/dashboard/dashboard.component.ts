@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   sub: Subscription;
   quizCountData: any;
   userToken!: boolean;
+  isMobileView = false;
 
   constructor(
     private auth: AuthenticationService,
@@ -33,6 +34,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd.detectChanges();
+    });
 
     this.auth.authStatusListener$.next(true);
     this.getUserCountData();

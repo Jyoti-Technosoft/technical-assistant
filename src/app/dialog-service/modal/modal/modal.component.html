@@ -42,7 +42,7 @@
       <button
         *ngIf="configData?.no"
         type="button"
-        class="btn btn-danger no-btn"
+        class="btn no-btn"
         (click)="activeModal.close(false)"
       >
         {{ configData?.no }}
@@ -50,7 +50,7 @@
       <button
         *ngIf="configData?.yes"
         type="button"
-        class="btn btn-success yes-btn"
+        class="btn yes-btn"
         (click)="activeModal.close(true)"
       >
         {{ configData?.yes }}

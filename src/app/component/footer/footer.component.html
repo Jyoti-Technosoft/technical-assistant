@@ -2,7 +2,7 @@
   <div class="row">
     <ng-container *ngFor="let item of socialMedia">
       <a href="{{ item.routerlink }}">
-        <i class="{{ item?.icon }} icon"></i>
+        <i class="{{ item?.icon }} icon h5"></i>
       </a>
     </ng-container>
   </div>
@@ -10,17 +10,16 @@
   <div class="row">
     <ul>
       <li *ngFor="let item of title; let i=index">
-        <a href="{{ item.link }}" class="text-item">{{ item.label }}</a>
+        <a href="{{ item.link }}" class="h6 small text-item">{{ item.label }}</a>
       </li>
     </ul>
   </div>
-  <div class="row">
-    © 2023 Copyright
-    <a
-      class="footer-link"
-      routerLink="jyoti-web"
-    >
-    https://www.jyotitechnosoft.com
-  </a>
+  <div class="d-flex justify-content-center">
+    <p class="h6 small text-center">
+      <span class="ms-1">© 2023</span>
+      <span> Jyoti Technosoft LLP. All Rights Reserved by </span>
+      <a routerLink="jyoti-web" target="_blank">Jyoti Technosoft LLP
+      </a>
+    </p>
   </div>
 </div>

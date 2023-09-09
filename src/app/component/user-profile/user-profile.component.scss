@@ -18,18 +18,19 @@
   }
 
   .initial-letter {
+    width: 130px;
+    height:130px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 10rem;
-    height: 10rem;
     border-radius: 50%;
     font-size: 3.5rem;
-    color: #424141;
+    color: white;
     text-align: center;
     line-height: 10rem;
-    background-color: rgb(208 211 211);
+    background-color: #6a9cd2;
+    box-shadow: 0 0.5rem 1rem #6a9cd28f !important;
   }
 
   table {
@@ -40,47 +41,67 @@
   }
 
   .common-btn {
-    background: #ebebeb;
-    width: 30%;
-    height: auto;
-    min-height: 30px;
-    border: gray solid 1px;
+    border: none;
     border-radius: 5px;
-    font-size: 15px;
-
-    &:hover,
-    &:focus {
-        color: #fff;
-        outline: 0;
-    }
   }
 
-  .btn-update {
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-    &:hover {
-      box-shadow: 0 0 40px 40px gray inset;
+  .btn-update, .btn-change {
+    background: #367dc8;
+    color: white;
+    box-shadow: 0 5px 10px #a4c4e6;
+    transition: 0.2s;
+    &:hover:not([disabled]) {
+      box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;
+      color: #174b83;
+      font-weight: 500;
     }
-  }
-
-  .btn-change {
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-    &:hover {
-      box-shadow: 0 0 40px 40px gray inset;
-    }
-  }
-
-  .btn-save {
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-    &:hover {
-      box-shadow: 0 0 40px 40px gray inset;
+    &:disabled {
+      background: #8f9ba8;
     }
   }
 
   .btn-cancel {
-    transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+    background: #ce2a2af0;
+    color: white;
+    box-shadow: 0 5px 10px #e7b1b1f0;
+    transition: 0.2s;
+    width: 25%;
     &:hover {
-      box-shadow: 0 0 40px 40px gray inset;
+      box-shadow: 0 0 40px 40px rgb(255 162 145) inset;
+      color: rgb(251 4 4);
+      font-weight: 500;
     }
   }
 
+  .btn-save {
+    background: rgb(16 144 27 / 94%);
+    color: white;
+    box-shadow: 0 5px 10px rgb(120 206 108 / 94%);
+    transition: 0.2s;
+    width: 25%;
+    &:hover {
+      box-shadow: 0 0 40px 40px rgb(186 234 194) inset;
+      color: rgb(12 61 15);
+      font-weight: 500;
+    }
+  }
+
+  .mat-mdc-card-content {
+    padding: 10px;
+  }
+
+  ::ng-deep {
+
+    .mat-mdc-form-field-subscript-wrapper {
+      height: 10px !important;
+    }
+
+    .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex {
+      height: 40px !important;
+    }
+
+    .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+      padding-top: 10px !important;
+    }
+  }
 }

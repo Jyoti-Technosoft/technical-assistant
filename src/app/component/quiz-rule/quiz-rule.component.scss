@@ -23,6 +23,7 @@
     .card-content {
         height: auto;
         margin: 15px;
+        line-height: 30px;
     }
 
     .card-subtitle {
@@ -54,7 +55,6 @@
         border: 1px solid #dadbdd;
         border-radius: 5px;
         height: 35px;
-        font-size: 15px;
         font-weight: 500;
         &:hover {
             background: #dddddd;
@@ -68,7 +68,6 @@
         border-radius: 5px;
         box-shadow: 0 5px 10px #a4c4e6;
         height: 35px;
-        font-size: 15px;
         transition: 0.2s;
         &:hover {
             box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;

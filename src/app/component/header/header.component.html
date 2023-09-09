@@ -1,33 +1,19 @@
-<mat-toolbar color="primary">
-  <button *ngIf="userIsAuthenticated && userToken" (click)="sidenav.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>
-    <img src="assets/img/logo.svg" alt="logo" class="d-inline-block image logo-content"/>
-    <span class="title fs-15"> APPLICATION </span>
+<mat-toolbar color="primary" class="fixed-top docs-navbar-header">
+  <!-- <mat-icon (click)="sidenav.toggle()" class="example-icon" aria-label="Example icon-button with menu icon">menu</mat-icon> -->
+  <span class="m-xl-3">
+    <img src="assets/img/JT.png" alt="logo" class="d-inline-block image"/>
+    <span class="title fs-15"> DevQuest </span>
   </span>
   <span class="example-spacer"></span>
-  <span *ngIf="userIsAuthenticated && userToken">
+  <span>
     <img
         src="assets/img/profilephoto.svg"
         alt="user"
         class="img-responsive image rounded-circle mx-2"
         [matMenuTriggerFor]="belowMenu"/>
     <mat-menu #belowMenu="matMenu" yPosition="below">
-      <div mat-menu-item> vidhi.jtdev@gmail.com </div>
+      <div mat-menu-item> {{userData.email}} </div>
       <div mat-menu-item (click)="openSignOutDialog()"> Sign Out</div>
     </mat-menu>
   </span>
 </mat-toolbar>
-<mat-sidenav-container *ngIf="userIsAuthenticated && userToken" (backdropClick)="close('backdrop')">
-  <mat-sidenav #sidenav [opened]="true" [mode]="'side'">
-      <mat-nav-list *ngFor="let menu of menuItem">
-        <a mat-list-item routerLink="{{menu?.link}}">
-        <mat-icon>{{menu?.icon}}</mat-icon>
-        </a>
-      </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>

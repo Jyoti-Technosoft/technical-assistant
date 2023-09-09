@@ -217,4 +217,19 @@ $steel_blue: #4682b4;
     font-weight: bold;
     font-size: 40px;
   }
+
+  .login-btn {
+    background: #367dc8;
+    color: white;
+    box-shadow: 0 5px 10px #a4c4e6;
+    transition: 0.2s;
+    &:hover:not([disabled]) {
+      box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;
+      color: #174b83;
+      font-weight: 500;
+    }
+    &:disabled {
+      background: #8f9ba8;
+    }
+  }
 }

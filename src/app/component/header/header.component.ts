@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Renderer2, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { OnDestroy, OnInit } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
 import { DialogService } from '@app/dialog-service/dialog.service';
 import dialogData from '@assets/json/dialogData.json';
 import { AuthenticationService } from '@app/service/authentication.service';
@@ -20,15 +19,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   dialogData = { ...dialogData };
   authListenerSubs: Subscription;
   userIsAuthenticated = false;
-  @ViewChild('sidenav') sidenav!: MatSidenav;
-  menuItem: any = [
-    { label: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
-    { label: 'All Results', icon: 'pie_chart', link: '/allresults' },
-    { label: 'Profile', icon: 'account_circle', link: '/user-profile' },
-    { label: 'Sign Out', icon: 'logout', click: () => this.openSignOutDialog(),}
-  ];
-  reason = '';
   userToken!: boolean;
+  userData: any;
 
   constructor(
     private auth: AuthenticationService,
@@ -38,6 +30,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {
     this.authListenerSubs = new Subscription;
     this.userToken = JSON.parse(JSON.stringify(localStorage.getItem(LOCALSTORAGE_KEY.TOKEN)));
+    this.userData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string);
   }
 
   ngOnInit() {
@@ -51,12 +44,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     this.authListenerSubs.unsubscribe();
-  }
-
-  close(reason: string) {
-
-    this.reason = reason;
-    this.sidenav.close();
   }
 
   openSignOutDialog() {

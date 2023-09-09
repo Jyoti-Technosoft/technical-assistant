@@ -4,9 +4,9 @@
       <div class="container d-flex justify-content-center">
       <img class="card-img-top w-50 h-50" src="assets\img\rules_icon.png" alt="Rules-image" />
       </div>
-      <h2 class="text-center mb-2">Scoring Guidelines</h2>
-      <div class="card-content" [innerHTML]="displayRules"></div>
-      <div class="d-flex flex-row justify-content-between m-4">
+      <span class="card-title h5 d-flex justify-content-center text-center mb-2">Scoring Guidelines</span>
+      <span class="card-text small card-content" [innerHTML]="displayRules"></span>
+      <div class="d-flex flex-row justify-content-between m-2">
         <button [ngStyle]="{'width': isMobileView ? '30%' : '25%'}" class="btn-back" (click)="allQuiz()">
           Return to List
         </button>

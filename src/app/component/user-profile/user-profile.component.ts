@@ -7,6 +7,8 @@ import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { LOCALSTORAGE_KEY, MESSAGE, PATTERN } from '@app/utility/utility';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { SnackbarService } from '@app/service/snackbar.service';
+import dialogData from '@assets/json/dialogData.json';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 export const MY_FORMATS = {
   parse: {
@@ -40,6 +42,7 @@ export class UserProfileComponent implements OnInit {
   subs: Subscription;
   isMobileView = false;
   userId: number;
+  dialogData = { ...dialogData };
 
   hidePassword = true;
   hideNewPassword = true;
@@ -53,6 +56,7 @@ export class UserProfileComponent implements OnInit {
     public router: Router,
     private snackBarService: SnackbarService,
     private fb: FormBuilder,
+    private dialogService: DialogService,
     public calendar: NgbCalendar
   ) {
 
@@ -138,21 +142,24 @@ export class UserProfileComponent implements OnInit {
 
     if (this.changePasswordForm.valid) {
 
-      let data = this.changePasswordForm.get('newPassword')?.value;
-      const userData = this.auth.updateUserData({'password': data}, this.userId).subscribe({
-        next: () => {
-          this.snackBarService.success(MESSAGE.PASSWORD_CHANGE_SUCCESSFUL);
-          this.editMode = false;
-          this.router.navigateByUrl('login');
-          this.cd.detectChanges();
-        },
-        error: () => {
-          this.snackBarService.error(MESSAGE.SOMTHING);
+      let configData = this.dialogData?.changePasswordModel;
+      this.dialogService?.openDialog(configData).then((value) => {
+        if (value) {
+          let data = this.changePasswordForm.get('newPassword')?.value;
+          const userData = this.auth.updateUserData({'password': data}, this.userId).subscribe({
+            next: () => {
+              this.snackBarService.success(MESSAGE.PASSWORD_CHANGE_SUCCESSFUL);
+              this.editMode = false;
+              this.router.navigateByUrl('login');
+              this.cd.detectChanges();
+            },
+            error: () => {
+              this.snackBarService.error(MESSAGE.SOMTHING);
+            }
+          });
+          this.subs.add(userData);
         }
       });
-
-      this.subs.add(userData);
-
     } else {
       this.changePasswordForm.markAllAsTouched();
     }
@@ -166,24 +173,26 @@ export class UserProfileComponent implements OnInit {
   updateUserDetails() {
 
     if (this.profilePageForm.valid) {
-
-      let data = this.profilePageForm.getRawValue();
-      let id = data.id;
-      delete data.id;
-      const userData = this.auth.updateUserData(data, id).subscribe({
-        next: () => {
-          this.snackBarService.success(MESSAGE.PROFILE_UPDATE_SUCCESSFUL);
-          this.editMode = false;
-          this.getUserData(id);
-          this.cd.detectChanges();
-        },
-        error: () => {
-          this.snackBarService.error(MESSAGE.SOMTHING);
+      let configData = this.dialogData?.updateProfileModel;
+      this.dialogService?.openDialog(configData).then((value) => {
+        if (value) {
+          let data = this.profilePageForm.getRawValue();
+          let id = data.id;
+          delete data.id;
+          const userData = this.auth.updateUserData(data, id).subscribe({
+            next: () => {
+              this.snackBarService.success(MESSAGE.PROFILE_UPDATE_SUCCESSFUL);
+              this.editMode = false;
+              this.getUserData(id);
+              this.cd.detectChanges();
+            },
+            error: () => {
+              this.snackBarService.error(MESSAGE.SOMTHING);
+            }
+          });
+          this.subs.add(userData);
         }
       });
-
-      this.subs.add(userData);
-
     } else {
       this.profilePageForm.markAllAsTouched();
     }

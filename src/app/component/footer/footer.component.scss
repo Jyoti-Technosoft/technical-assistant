@@ -1,16 +1,16 @@
 .footer {
-  // background: #f3f3f3;
-  background: #ebebeb;
+  background: #fafafa;
   padding: 10px 0px;
-  // font-family: "Play", sans-serif;
   text-align: center;
+  box-shadow: 0 -0.5rem 1rem rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 600px;
 }
 
 .footer .row {
   width: 100%;
   margin: 0% 0%;
   color: black;
-  font-size: 0.8em;
   display: inline-block;
 }
 
@@ -43,9 +43,9 @@
 }
 
 .footer .row a i {
-  font-size: 2em;
   margin: 0% -0.8%;
 }
+
 .text-item {
   display: inline-block;
   color: black;
@@ -54,17 +54,3 @@
     color: black;
   }
 }
-// @media (max-width: 720px) {
-//   .footer {
-//     text-align: left;
-//     padding: 5%;
-//   }
-//   .footer .row ul li {
-//     display: block;
-//     margin: 10px 0px;
-//     text-align: left;
-//   }
-//   .footer .row a i {
-//     margin: 0% 3%;
-//   }
-// }

@@ -1,24 +1,47 @@
 :host {
+  height: 100vh;
+
   .example-spacer {
     flex: 1 1 auto;
   }
 
-  .sub-part {
-    height: auto;
+  .example-icon {
+    color: black;
+    font-size: xx-large;
+    margin: 15px;
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   mat-toolbar {
-    padding: 0 5px;
-    background: #46539d;
+    padding: 10px;
+    height: 70px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background: #fafafa;
+  }
+
+  .main-container {
+    padding-top: 60px;
   }
 
   mat-sidenav {
-    width: 60px;
+    position: fixed;
+    padding-top: 70px;
   }
 
-  mat-sidenav-content {
-    overflow: hidden;
+  mat-nav-list {
+    padding: 5px;
+    &:focus {
+      background-color: rgb(255, 255, 255) !important;
+      border-left: black solid 2px;
+    }
+    .active {
+      background-color: rgb(255, 255, 255) !important;
+      border-left: black solid 2px;
+    }
   }
+
 
   .image-icon {
     z-index: 1000;
@@ -37,7 +60,9 @@
   }
 
   .title {
-    border-bottom: 3px solid green;
-    font-size: 15px;
+    // border-bottom: 3px solid green;
+    color: rgb(38 50 56);
+    font-weight: 500;
+    font-size: 20px;
   }
 }

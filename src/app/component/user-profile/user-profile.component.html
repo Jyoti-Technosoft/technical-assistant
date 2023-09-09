@@ -1,25 +1,21 @@
 <div class="user-profile-div">
   <div class="row d-flex align-items-center justify-content-center my-auto mx-auto h-100">
-    <mat-card [ngStyle]="{'width': isMobileView ? '100%' : '80%'}">
+    <mat-card class="shadow" [ngStyle]="{'width': isMobileView ? '80%' : '50%'}">
       <mat-card-content>
-        <div class="d-flex row align-items-center">
-          <div class="d-flex col-md-4 align-items-center justify-content-center h-100">
-            <div class="d-flex row align-items-center justify-content-center">
-              <div class="initial-letter shadow">
-                {{ avatarName }}
-              </div>
-              <h4 class="mt-4 d-flex row align-items-center justify-content-center">{{ userData?.fullName }}</h4>
-            </div>
+        <div class="d-flex flex-row align-items-center justify-content-center">
+          <div class="initial-letter">
+            {{ avatarName }}
           </div>
-          <div class="col-md-8" *ngIf="profilePageForm || changePasswordForm">
+        </div>
+        <div class="d-flex flex-row w-100 align-items-center justify-content-center">
+          <div class="w-100" *ngIf="profilePageForm || changePasswordForm">
             <ng-container *ngIf="!showPasswordChange" [formGroup]="profilePageForm">
-              <table class="table">
+              <table class="table w-100 m-3">
                 <tr class="font-weight-bold">
                   <th>Full Name</th>
-                  <td *ngIf="!editMode">{{ userData?.fullName | titlecase }}</td>
+                  <td *ngIf="!editMode" class="h6 small">{{ userData?.fullName | titlecase }}</td>
                   <td *ngIf="editMode">
                     <mat-form-field appearance="outline" class="w-100">
-                      <mat-label>Full Name</mat-label>
                       <input matInput formControlName="fullName" required>
                       <mat-error *ngIf="getControl(profilePageForm,'fullName')?.hasError('required')">
                         Full name is required
@@ -32,10 +28,9 @@
                 </tr>
                 <tr>
                   <th>Email</th>
-                  <td *ngIf="!editMode">{{ userData?.email }}</td>
+                  <td *ngIf="!editMode" class="h6 small">{{ userData?.email }}</td>
                   <td *ngIf="editMode">
                     <mat-form-field appearance="outline" class="w-100">
-                      <mat-label>Email</mat-label>
                       <input matInput formControlName="email" required>
                       <mat-error *ngIf="getControl(profilePageForm, 'email')?.hasError('required')">
                         Email is required
@@ -48,10 +43,9 @@
                 </tr>
                 <tr>
                   <th>Phone</th>
-                  <td *ngIf="!editMode">{{ userData?.mobile }}</td>
+                  <td *ngIf="!editMode" class="h6 small">{{ userData?.mobile }}</td>
                   <td *ngIf="editMode">
                     <mat-form-field appearance="outline" class="w-100">
-                      <mat-label>Mobile Number</mat-label>
                       <input matInput formControlName="mobile" type="text" maxlength="10" required>
                       <mat-error *ngIf="getControl(profilePageForm, 'mobile')?.hasError('required')">
                         Mobile is required.
@@ -64,9 +58,9 @@
                 </tr>
                 <tr>
                   <th>Gender</th>
-                  <td *ngIf="!editMode">{{ userData?.gender }}</td>
+                  <td *ngIf="!editMode" class="h6 small">{{ userData?.gender | titlecase }}</td>
                   <td *ngIf="editMode">
-                    <mat-radio-group formControlName="gender" required>
+                    <mat-radio-group formControlName="gender" required color="primary">
                       <mat-radio-button value="male">Male</mat-radio-button>
                       <mat-radio-button value="female">Female</mat-radio-button>
                     </mat-radio-group>
@@ -74,10 +68,9 @@
                 </tr>
                 <tr>
                   <th>Date of Birth</th>
-                  <td *ngIf="!editMode">{{ userData?.dob | date: 'dd-MM-YYYY' }}</td>
+                  <td *ngIf="!editMode" class="h6 small">{{ userData?.dob | date: 'dd-MM-YYYY' }}</td>
                   <td *ngIf="editMode">
-                    <mat-form-field appearance="outline" class="mb-2">
-                      <mat-label>Date of Birth</mat-label>
+                    <mat-form-field appearance="outline" class="w-100 mb-2">
                       <input matInput formControlName="dob" [matDatepicker]="picker" placeholder="DD/MM/YYYY" required>
                       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                       <mat-datepicker #picker ></mat-datepicker>
@@ -88,23 +81,21 @@
                   </td>
                 </tr>
               </table>
-              <div class="d-flex flex-row justify-content-between" *ngIf="!editMode">
-                <button class="common-btn btn-update m-2" (click)="editUserdetails()"> Update Profile </button>
-                <button class="common-btn btn-change m-2" (click)="onHideShowPasswordForm()"> Change Password </button>
+              <div class="d-flex w-100 flex-row align-items-center justify-content-around" *ngIf="!editMode">
+                <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-update" (click)="editUserdetails()"> Update Profile </button>
+                <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-change m-2" (click)="onHideShowPasswordForm()"> Change Password </button>
               </div>
-              <div class="d-flex flex-row justify-content-end" *ngIf="editMode">
-                <button class="common-btn btn-save m-2" (click)="updateUserDetails()"> Save </button>
-                <button class="common-btn btn-cancel m-2" (click)="cancelUpdate()"> Cancel </button>
+              <div class="d-flex w-100 flex-row align-items-center justify-content-end" *ngIf="editMode">
+                <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-save m-2" (click)="updateUserDetails()"> Update </button>
+                <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-cancel m-2" (click)="cancelUpdate()"> Cancel </button>
               </div>
             </ng-container>
-
             <ng-container *ngIf="showPasswordChange" [formGroup]="changePasswordForm">
-              <table class="table">
+              <table class="table w-100">
                 <tr class="font-weight-bold">
                   <th>Current Password</th>
                   <td>
-                    <mat-form-field appearance="outline" class="mb-2 w-100">
-                      <mat-label>Password</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
                       <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
                       <mat-icon matSuffix (click)="hidePassword = !hidePassword">
                         {{hidePassword ? 'visibility' : 'visibility_off'}}
@@ -121,8 +112,7 @@
                 <tr>
                   <th>New Password</th>
                   <td>
-                    <mat-form-field appearance="outline" class="mb-2 w-100">
-                      <mat-label>Password</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
                       <input matInput [type]="hideNewPassword ? 'password' : 'text'" formControlName="newPassword" minlength="8" required>
                       <mat-icon matSuffix (click)="hideNewPassword = !hideNewPassword">
                         {{hideNewPassword ? 'visibility' : 'visibility_off'}}
@@ -131,18 +121,15 @@
                         Password is required.
                       </mat-error>
                       <mat-error *ngIf="getControl(changePasswordForm, 'newPassword')?.hasError('pattern')">
-                        <!-- Password must contain one number, one character and one special character -->
                         Make a strong password.
                       </mat-error>
                     </mat-form-field>
-                    <!-- <mat-icon matSuffix matTooltip="Password must have 8 characters (contain one number,one character and one special character).">info</mat-icon> -->
                   </td>
                 </tr>
                 <tr>
                   <th>Confirm Password</th>
                   <td>
-                    <mat-form-field appearance="outline" class="mb-2 w-100">
-                      <mat-label>Password</mat-label>
+                    <mat-form-field appearance="outline" class="w-100">
                       <input matInput [type]="hideconfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" minlength="8" required>
                       <mat-icon matSuffix (click)="hideconfirmPassword = !hideconfirmPassword">
                         {{hideconfirmPassword ? 'visibility' : 'visibility_off'}}
@@ -157,9 +144,9 @@
                   </td>
                 </tr>
               </table>
-              <div class="d-flex flex-row justify-content-end">
-                <button class="common-btn btn-update m-2" (click)="updatePassword()"> Update Password </button>
-                <button class="common-btn btn-cancel m-2" (click)="cancelUpdate()"> Cancel </button>
+              <div class="d-flex w-100 flex-row justify-content-end">
+                <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-save m-2" (click)="updatePassword()"> Update </button>
+                <button [ngStyle]="{'height': isMobileView ? '45px' : '35px'}" class="common-btn btn-cancel m-2" (click)="cancelUpdate()"> Cancel </button>
               </div>
             </ng-container>
           </div>

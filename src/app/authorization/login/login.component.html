@@ -5,7 +5,6 @@
         <img src="assets/img/quizlogin.svg" width="100%" height="100%" alt="login image"/>
       </div>
       <div class="d-flex col-6 align-items-center">
-        {{loginPage}}
         <div *ngIf="loginPage else registration">
           <form class="p-2" [formGroup]="loginForm" *ngIf="loginForm">
             <span>
@@ -156,8 +155,9 @@
 
             <div class="d-flex flex-column text-center">
               <button
+                mat-raised-button
                 [disabled]="isValid"
-                class="btn"
+                class="login-btn"
                 (click)="currentStepIndex < 2 ? nextStep() : submitUserData()"
               >
               {{ currentStepIndex < 2 ? 'Next' : 'Submit'}}

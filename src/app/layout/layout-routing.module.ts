@@ -10,6 +10,7 @@ import { UserProfileComponent } from '@app/component/user-profile/user-profile.c
 import { PrivacyPolicyComponent } from '@app/component/privacy-policy/privacy-policy.component';
 import { TearmsConditionComponent } from '@app/component/tearms-condition/tearms-condition.component';
 import { QuizRuleComponent } from '@app/component/quiz-rule/quiz-rule.component';
+import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard';
 
 const routes: Routes = [
   {
@@ -25,7 +26,15 @@ const routes: Routes = [
       { path: 'allresults', component: AllresultsComponent },
       { path: 'user-profile' ,component: UserProfileComponent},
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
-      { path: 'tearms-condition', component: TearmsConditionComponent }
+      { path: 'tearms-condition', component: TearmsConditionComponent },
+      {
+        path: 'jyoti-web',
+        canActivate: [RedirectGuard],
+        component: RedirectGuard,
+        data: {
+          externalUrl: 'https://www.jyotitechnosoft.com/',
+        },
+      },
     ],
   },
 ];

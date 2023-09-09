@@ -6,7 +6,8 @@ import dialogData from '@assets/json/dialogData.json';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { LOCALSTORAGE_KEY } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
+import { SnackbarService } from '@app/service/snackbar.service';
 
 @Component({
   selector: 'app-full-layout',
@@ -24,16 +25,17 @@ export class FullLayoutComponent implements OnInit {
     { label: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
     { label: 'All Results', icon: 'pie_chart', link: '/allresults' },
     { label: 'Profile', icon: 'account_circle', link: '/user-profile' },
-    { label: 'Sign Out', icon: 'logout', link: '/login', click: () => this.openSignOutDialog() }
   ];
   reason = '';
   userToken!: boolean;
   userData: any;
   selected?: string = '';
+  avatarName!: string;
 
   constructor(
     private auth: AuthenticationService,
     private dialogService: DialogService,
+    private snackbarService: SnackbarService,
     private router: Router,
     private cd: ChangeDetectorRef
   ) {
@@ -48,6 +50,17 @@ export class FullLayoutComponent implements OnInit {
       this.userIsAuthenticated = v;
       this.cd.detectChanges();
     });
+    this.avatarName = this.getUserLetter(this.userData?.fullName);
+  }
+
+  getUserLetter(userName: any) {
+
+    const intials = userName
+      .split(' ')
+      .map((name: any) => name[0])
+      .join('')
+      .toUpperCase();
+    return intials;
   }
 
   ngOnDestroy(): void {
@@ -70,6 +83,7 @@ export class FullLayoutComponent implements OnInit {
         localStorage.clear();
         localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, JSON.stringify(false));
         this.router.navigateByUrl('login');
+        this.snackbarService.success(MESSAGE.LOGOUT_SUCESS);
       }
     });
   }

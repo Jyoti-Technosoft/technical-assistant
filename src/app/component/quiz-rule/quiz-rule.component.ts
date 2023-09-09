@@ -73,6 +73,7 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
 
   allQuiz(): void {
 
+    localStorage.removeItem(LOCALSTORAGE_KEY.QUIZ_DETAILS);
     this.route.navigateByUrl('dashboard');
   }
 

@@ -128,11 +128,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         next: (res:any) => {
           let user = res.filter((v:any) => v.email === formValue.email && v.password === formValue.password);
           if (user.length > 0) {
-            this.snackbarService.success(MESSAGE.LOGIN_SUCCESS);
-            localStorage.setItem(LOCALSTORAGE_KEY.USERDATA, JSON.stringify(user[0]));
-            localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, JSON.stringify(true));
             this.auth.authStatusListener$.next(true);
             this.router.navigateByUrl('layout');
+            localStorage.setItem(LOCALSTORAGE_KEY.USERDATA, JSON.stringify(user[0]));
+            localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, JSON.stringify(true));
+            this.snackbarService.success(MESSAGE.LOGIN_SUCCESS);
           } else {
             this.snackbarService.error(MESSAGE.LOGIN_FAILED);
           }
@@ -152,14 +152,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (type === 'new') {
       this.loginPage = false;
-      console.log('login page=====', this.loginPage);
       this.router.navigateByUrl('registration');
+      this.cd.detectChanges();
     } else {
       this.loginPage = true;
       this.router.navigateByUrl('login');
+      this.cd.detectChanges();
     }
     this.createForm();
-    this.cd.detectChanges();
   }
 
   submitUserData(): void {

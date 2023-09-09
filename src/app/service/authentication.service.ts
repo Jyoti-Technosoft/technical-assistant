@@ -30,10 +30,8 @@ export class AuthenticationService {
       .subscribe(result => {
         const breakpoints = result.breakpoints;
         if (breakpoints[Breakpoints.XSmall] || breakpoints[Breakpoints.Small]) {
-          console.log("screens matches tab and mobile view");
           this.mobileView$.next(true);
         } else {
-          console.log("laptop view");
           this.mobileView$.next(false);
         }
       });

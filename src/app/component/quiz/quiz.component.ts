@@ -176,6 +176,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.dialogService?.openDialog(configData).then((value) => {
       if (value) {
         this.router?.navigateByUrl('dashboard');
+        localStorage.removeItem(LOCALSTORAGE_KEY.QUIZ_DETAILS);
+        this.snackBarService.success(MESSAGE.EXIT_FROM_QUIZ);
       }
     });
   }
@@ -192,6 +194,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
     if (timerValue === 0 && nextValue && skipValue) {
       this.snackBarService.error(MESSAGE.TIMER_OFF);
+    } if (timerValue !== 0 && nextValue) {
+      this.snackBarService.error(MESSAGE.MISSED_OUT);
     } else {
       if (((skipValue || previousValue) && !nextValue) || (!skipValue && !previousValue && !nextValue)) {
 
@@ -233,16 +237,28 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
     this.positivePoints = info?.positivePoints;
     this.negativePoints = info?.negativePoints;
-    const listOfAllQues: any = [...queData?.questions];
-    let randomQueList = listOfAllQues
-      ?.sort(() => Math.random() - 0.67)
-      .splice(0, info?.numberOfQuestions);
 
-    this.subRandomQueList = {
-      id: queData.id,
-      questions: randomQueList
+    let allLevelQueList = queData;
+    let listOfAllQues:any = [];
+    info?.testLevel.forEach((v:any) => {
+      allLevelQueList[v].forEach((que:any) => {
+        listOfAllQues.push(que);
+      })
+    });
+
+    if (info?.numberOfQuestions > 0) {
+
+      let randomQueList = listOfAllQues
+        ?.sort(() => Math.random() - 0.67)
+        .splice(0, info?.numberOfQuestions);
+
+        this.subRandomQueList = {
+        id: queData.id,
+        questions: randomQueList
+      }
+      this.createQueForm(this.subRandomQueList);
     }
-    this.createQueForm(this.subRandomQueList);
+    this.cd.detectChanges();
   }
 
   get formArray() {
@@ -433,6 +449,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subs.unsubscribe();
+    localStorage.removeItem(LOCALSTORAGE_KEY.QUIZ_DETAILS);
     this.stopTimer();
     this.timerInterval = null;
     this.isStartTimer = false;

@@ -1,9 +1,3 @@
-$btn-width: 250px !default;
-$btn-height: 80px !default;
-$btn-full: $btn-height+$btn-width !default;
-$btn-half: $btn-full/2 !default;
-$bg-color: #eeeeee !default;
-
 .cardContainer {
   max-height: 380px !important;
   min-height: 240px !important;
@@ -75,18 +69,16 @@ $bg-color: #eeeeee !default;
 }
 
 .card-container-icons {
-  margin: 3rem 0.5rem 3rem 0.5rem !important;
+  margin: 10px !important;
 }
 
 .border-inline {
-  content: " ";
-  position: absolute;
-  border-right: 1px #6c757d solid;
-  top: 16%;
-  height: 62%;
-  margin-left: 16px;
-  margin-top: auto;
-  margin-bottom: auto;
+  border-right: 1px solid black;
+  height: 20%;
+}
+
+.p-20 {
+  padding: 20px;
 }
 
 .quiz-list {

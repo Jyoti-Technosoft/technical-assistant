@@ -1,7 +1,7 @@
 :host {
     .main-div {
-        // height: calc(100vh - 64px);
         padding: 0 40px;
+        margin: 40px auto;
     }
 
     .containt-row {
@@ -12,5 +12,40 @@
     .card-layout {
         border-radius: 15px;
         padding: 15px;
+    }
+
+    .no-result {
+        width: 400px;
+        height: 400px;
+    }
+
+    .btn-common {
+        border: none;
+        border-radius: 5px;
+        height: 35px;
+    }
+
+    .btn-result, .btn-other {
+        background: #367dc8;
+        color: white;
+        box-shadow: 0 5px 10px #a4c4e6;
+        transition: 0.2s;
+        &:hover {
+            box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;
+            color: #174b83;
+            font-weight: 500;
+        }
+    }
+
+    .btn-again {
+        background: rgb(16 144 27 / 94%);
+        color: white;
+        box-shadow: 0 5px 10px rgb(120 206 108 / 94%);
+        transition: 0.2s;
+        &:hover {
+            box-shadow: 0 0 40px 40px rgb(186 234 194) inset;
+            color: rgb(12 61 15);
+            font-weight: 500;
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ import { SnackbarService } from '@app/service/snackbar.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AllresultsComponent implements OnInit{
+export class AllresultsComponent implements OnInit, AfterViewInit{
 
   allResultData = [];
   subjectWiseData = [];
@@ -50,24 +50,23 @@ export class AllresultsComponent implements OnInit{
     this.height = 400 - this.margin.top - this.margin.bottom;
   }
 
-    @HostListener('window:resize', ['$event'])
-    onresize(event?: Event): void {
-      const containerWidth = document.getElementById('chart-container')?.clientWidth;
-      this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
-      this.height = this.width * 0.8;
-      this.createSvg();
-      // this.drawBars(this.resultObject);
-    }
-
   ngOnInit(): void {
 
-    this.auth.getScreenSize().subscribe(v => {
-      this.isMobileView = v;
-      this.cd.detectChanges();
-    });
+    // this.auth.getScreenSize().subscribe(v => {
+    //   this.isMobileView = v;
+    // });
   }
 
-  resultData() {
+  ngAfterViewInit(): void {
+    const containerWidth = document.getElementById('chart-container')?.clientWidth;
+    this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
+    this.height = this.width;
+    this.drawBars(this.resultObject);
+    this.createSvg2();
+    this.cd?.detectChanges();
+  }
+
+  resultData(): void {
 
     const getData = this.result.getUserResultData().subscribe({
       next:(data) => {
@@ -98,7 +97,7 @@ export class AllresultsComponent implements OnInit{
     this.sub.add(getData);
   }
 
-  startQuizAgain(quizName: string) {
+  startQuizAgain(quizName: string): void {
 
     const queryParams: Params = { quiz: quizName };
     this.router.navigate(['/quizname'], { queryParams });
@@ -144,7 +143,6 @@ export class AllresultsComponent implements OnInit{
   };
 
   private mouseoverChart2 = (
-
     points: number,
     correctAnswer: number
   ) => {
@@ -181,11 +179,9 @@ export class AllresultsComponent implements OnInit{
 
   private subjectColors = d3.scaleOrdinal<string>()
   .domain(this.resultObject.map(d => d.type))
-  .range(['#0d6efd', '#3d87f7', '#72a9fc', '#a7caff']);
+  .range(['#6a9cd2', '#3d87f7', '#72a9fc', '#a7caff']);
 
   private capitalizeFirstLetter (str: string)  {
-
-    console.log('this.createSvg();=', str);
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
 

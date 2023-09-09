@@ -38,7 +38,7 @@ export class ResultComponent implements OnInit, OnDestroy {
     });
 
     if (!this.recentResult) {
-      this.router.navigateByUrl('dashbaord');
+      this.router.navigateByUrl('dashboard');
       this.snackBarService.error(MESSAGE.NO_QUIZ);
     }
   }
@@ -54,8 +54,14 @@ export class ResultComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('allresults');
   }
 
+  goToList(): void {
+    this.router.navigateByUrl('dashboard');
+  }
+
   ngOnDestroy(): void {
 
+    localStorage.removeItem(LOCALSTORAGE_KEY.LAST_RESULT_DATA);
+    localStorage.removeItem(LOCALSTORAGE_KEY.QUIZ_DETAILS);
     this.sub.unsubscribe();
   }
 }
