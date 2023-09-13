@@ -23,7 +23,7 @@ const routes: Routes = [
       { path: 'rules', component: QuizRuleComponent },
       { path: 'quiz', component: Quizcomponent },
       { path: 'result', component: ResultComponent },
-      { path: 'allresults', component: AllresultsComponent },
+      { path: 'results', component: AllresultsComponent },
       { path: 'user-profile' ,component: UserProfileComponent},
       { path: 'privacy-policy', component: PrivacyPolicyComponent },
       { path: 'tearms-condition', component: TearmsConditionComponent },

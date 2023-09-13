@@ -79,9 +79,8 @@
   }
 
   mat-nav-list {
-    padding: 5px;
     .active {
-      background-color: rgb(255, 255, 255) !important;
+      background-color: rgb(231 231 231) !important;
       border-left: #3b3939b3 solid 2px;
     }
   }

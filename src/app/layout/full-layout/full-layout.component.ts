@@ -23,7 +23,7 @@ export class FullLayoutComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   menuItem: any = [
     { label: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
-    { label: 'All Results', icon: 'pie_chart', link: '/allresults' },
+    { label: 'All Results', icon: 'pie_chart', link: '/results' },
     { label: 'Profile', icon: 'account_circle', link: '/user-profile' },
   ];
   reason = '';

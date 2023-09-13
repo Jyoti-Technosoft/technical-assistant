@@ -51,7 +51,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   showAllQuiz(): void {
 
-    this.router.navigateByUrl('allresults');
+    this.router.navigateByUrl('results');
   }
 
   goToList(): void {
