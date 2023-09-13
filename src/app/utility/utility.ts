@@ -19,7 +19,7 @@ export enum MESSAGE {
     LOGIN_FAILED = 'Login Error',
     LOGOUT_SUCESS = 'Logout Successfully',
     REGISTRATION_SUCCESS = 'Registration Successfully',
-    REGISTRATION_FAILED = 'Registation Error',
+    REGISTRATION_FAILED = 'Registration Error',
     ALL_RESULT_FAILED = 'Error! While fetching result data',
     COUNT_FAILED = 'Error! While fetching quiz count data',
     QUIZ_DETAIL_FAILED = 'Error! While fetching quiz details',

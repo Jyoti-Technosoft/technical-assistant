@@ -61,7 +61,7 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
     const containerWidth = document.getElementById('chart-container')?.clientWidth;
     this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
     this.height = this.width;
-    this.drawBars(this.resultObject);
+    this.firstChart(this.resultObject);
     this.createSvg2();
     this.cd?.detectChanges();
   }
@@ -97,102 +97,52 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
     this.sub.add(getData);
   }
 
-  startQuizAgain(quizName: string): void {
+  private createSvg(): void {
 
-    const queryParams: Params = { quiz: quizName };
-    this.router.navigate(['/quizname'], { queryParams });
+    this.svg = d3
+      .select('#bar1')
+      .append('svg')
+      .attr('class', 'mychart')
+      .attr('class', 'bar-label')
+      .attr('width', this.width + this.margin.left + this.margin.right)
+      .attr('height', this.height + this.margin.top + this.margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+
+      this.firstChart(this.resultObject);
   }
 
-  ngOnDestroy(): void {
+  private createSvg2(): void {
 
-    this.sub.unsubscribe();
-  }
-
-  private createTooltip(): void {
-
-    this.tooltip = d3
-      .select('body')
-      .append('div')
-      .style('opacity', 0)
-      .attr('class', 'tooltip')
-      .style('background-color', 'white')
-      .style('border', 'solid')
-      .style('border-width', '1px')
-      .style('border-radius', '5px')
-      .style('position', 'absolute')
-      .style('padding', '10px');
-
-    this.tooltip2 = d3
+    this.svg = d3
       .select('#bar2')
-      .append('div')
-      .style('opacity', 0)
-      .attr('class', 'tooltip')
-      .style('background-color', 'white')
-      .style('border', 'solid')
-      .style('border-width', '1px')
-      .style('border-radius', '5px')
-      .style('position', 'absolute')
-      .style('padding', '10px');
+      .append('svg')
+      .attr('class', 'mychart')
+      .attr('width', this.width + this.margin.left + this.margin.right)
+      .attr('height', this.height + this.margin.top + this.margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
   }
 
-  private mouseoverChart1 = (points: number, type: string) => {
+  private firstChart(resultObject: any[]): void {
 
-    this.tooltip
-      .html(`Subject: ${this.capitalizeFirstLetter(type)} <br> Points: ${points}`)
-      .style('opacity', 1);
-  };
+    const groupedData = d3.group(resultObject, d => d.type);
+    console.log('groupedData',groupedData);
+    const aggregatedData = Array.from(groupedData, ([type, values]) => ({
+      type,
+      totalAttempts: values.length,
+    }));
+    console.log('aggregatedData', aggregatedData);
 
-  private mouseoverChart2 = (
-    points: number,
-    correctAnswer: number
-  ) => {
-    this.tooltip2
-      .html(
-        `Points: ${points} <br> Correct Answer: ${correctAnswer}`
-      )
-      .style('opacity', 1);
-  };
+    const colorScale = d3.scaleOrdinal()
+                      .domain(aggregatedData.map(d => d.type))
+                      .range(d3.schemeCategory10);
 
-  private mousemoveChart1 = (event: MouseEvent) => {
-
-    this.tooltip
-      .style('left', event.pageX + 10 + 'px')
-      .style('top', event.pageY + 'px');
-  };
-
-  private mousemoveChart2 = (event: MouseEvent) => {
-
-    this.tooltip2
-      .style('left', event.pageX + 10 + 'px')
-      .style('top', event.pageY + 'px');
-  };
-
-  private mouseleaveChart1 = () => {
-
-    this.tooltip.style('opacity', 0);
-  };
-
-  private mouseleaveChart2 = () => {
-
-    this.tooltip2.style('opacity', 0);
-  };
-
-  private subjectColors = d3.scaleOrdinal<string>()
-  .domain(this.resultObject.map(d => d.type))
-  .range(['#6a9cd2', '#3d87f7', '#72a9fc', '#a7caff']);
-
-  private capitalizeFirstLetter (str: string)  {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  }
-
-  private drawBars(resultObject: any[]): void {
-
-    const colorScale = this.subjectColors;
     const x = d3
       .scaleBand()
       .domain(resultObject.map((d) => d.type))
       .range([0, this.width])
-      .padding(0.4);
+      .padding(0.5);
 
     this.svg
       .append('g')
@@ -207,14 +157,11 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
       .attr('x', this.width / 2)
       .attr('y', this.height + this.margin.bottom - 5)
       .attr('text-anchor', 'middle')
-      .text('Subjects');
+      .text('Technologies');
 
     const y = d3
       .scaleLinear()
-      .domain([
-        d3.min(resultObject, (d: any) => d.points) - 5,
-        d3.max(resultObject, (d: any) => d.points) + 2,
-      ])
+      .domain([0, d3.max(aggregatedData, (d:any) => d.totalAttempts) + 2])
       .range([this.height, 0]);
 
     this.svg.append('g').call(d3.axisLeft(y));
@@ -225,86 +172,96 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
       .attr('x', -(this.height / 2))
       .attr('y', -this.margin.left + 12)
       .attr('text-anchor', 'middle')
-      .text('Total Points')
+      .text('Attempts')
 
     this.svg
       .selectAll('bars')
-      .data(this.resultObject)
+      .data(aggregatedData)
       .enter()
       .append('rect')
-      .attr('x', (d: any) => x(d.type))
-      .attr('y', this.height)
+      .attr('x', (d:any) => x(d.type))
+      .attr('y', (d:any) => y(d.totalAttempts))
       .attr('width', x.bandwidth())
-      .attr('height', 0)
-      .attr('fill', (d: any) => colorScale(d.type))
+      .attr('height', (d:any) => this.height - y(d.totalAttempts))
+      .attr('cursor', 'pointer')
+      .style("fill", (d:any) => colorScale(d.type))
       .on('click', (event: MouseEvent, d: any) => {
         this.onFirstChartBarClick(event, d);
         this.tooltip.style('opacity', 0);
       })
       .on('mouseover', (event: MouseEvent, d: any) => {
-        const points = d.points;
-        const type = d.type;
-        this.mouseoverChart1(points, type);
+        const points = d.totalAttempts;
+        this.mouseoverChart1(event, points);
       })
       .on('mousemove', this.mousemoveChart1)
       .on('mouseleave', this.mouseleaveChart1)
       .transition()
       .duration(1000)
-      .attr('y', (d: any) => y(d.points))
-      .attr('height', (d: any) => this.height - y(d.points));
-  }
-
-  private createSvg(): void {
-
-    this.svg = d3
-      .select('#bar1')
-      .append('svg')
-      .attr('class', 'mychart')
-      .attr('class', 'bar-label')
-      .attr('width', this.width + this.margin.left + this.margin.right)
-      .attr('height', this.height + this.margin.top + this.margin.bottom)
-      .append('g')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
-
-      this.drawBars(this.resultObject);
   }
 
   private onFirstChartBarClick(event: any, data: any): void {
 
     d3.select('#bar1').remove();
-    this.chartArray = {};
-    this.subjectWiseData.forEach((res: any) => {
-      if (Object.keys(this.chartArray).indexOf(res.type) !== -1) {
-        this.chartArray[res.type].push(res);
-      } else {
-        this.chartArray[res.type] = [res];
-      }
-    });
-    this.drawSecondChart(data.type);
+    const filteredData = this.subjectWiseData.filter((d:any) => d.type === data.type);
+
+  // Group the filtered data by date and calculate the sum of points
+    const groupedData = d3.group(filteredData, (d:any) => d.date);
+    const aggregatedData = Array.from(groupedData, ([date, values]) => ({
+      date,
+      points: values.map(v => v.points)
+    }));
+
+    this.secondChart(data.type, aggregatedData);
   }
 
-  private onSubjectClick(event: any, d: any) {
-    d3.select('#bar1').classed('hide-chart', false);
-    this.svg.selectAll('*').remove();
-    this.drawBars(this.resultObject);
-  }
+  private secondChart(type: any, data: any): void {
 
-  private hideTooltip() {
-    this.tooltip2.style('opacity', 0);
-  }
-
-  private drawSecondChart(type: any): void {
+    console.log('data======', data);
 
     this.subjectType = type;
     d3.select('#bar2').classed('hide-chart', false);
-    const colorScale = this.subjectColors;
     this.svg.selectAll('*').remove();
+
+    let allPoints:any = [];
+
+    const transformedData = data.map((item:any) => {
+      let transformedItem:any = {
+        "date": item.date
+      };
+
+      item.points.forEach((point:any, index:number) => {
+        transformedItem[`point${index + 1}`] = point;
+        allPoints.push(point);
+      });
+
+      return transformedItem;
+    });
+
+    console.log('transformedData', transformedData, allPoints);
+
+    let totalKeys:any = [];
+
+    transformedData.forEach((v:any) => {
+      Object.keys(v).forEach((key:any) => {
+        if ((key.toString().toLowerCase()).includes('point')) {
+          totalKeys.push(key);
+        }
+      });
+    });
+    totalKeys = [...new Set(totalKeys)];
+    console.log('totalKeys', totalKeys);
+
+    let color = d3.scaleOrdinal()
+              .domain(totalKeys)
+              .range(d3.schemeCategory10);
+
+    const stackedData = d3.stack().keys(totalKeys)(transformedData);
+
+    console.log('stackedData********', stackedData);
 
     const x = d3
       .scaleBand()
-      .domain(
-        this.chartArray[type]?.map((d: any) => new Date(d.date).toLocaleString())
-      )
+      .domain(transformedData.map((d:any) => d.date))
       .range([0, this.width])
       .padding(0.4);
 
@@ -313,17 +270,18 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
       .attr('x', this.width / 2)
       .attr('y', this.height + this.margin.bottom - 5)
       .attr('text-anchor', 'middle')
-      .text(this.capitalizeFirstLetter(this.chartArray[type][0].type))
+      .text('Date')
 
     const y = d3
       .scaleLinear()
-      .domain([
-        d3.min(this.resultObject, (d: any) => d.points) - 5,
-        d3.max(this.resultObject, (d: any) => d.points) + 2,
-      ])
+      .domain([Number(d3.min(allPoints)) - 3,
+              Number(d3.max(allPoints)) + 3])
+      .nice()
       .range([this.height, 0]);
 
     this.svg.append('g').call(d3.axisLeft(y));
+
+    // let color = ['#00D7D2', '#313c53', '#7BD500', '#e41a1c', '#377eb8', '#4daf4a']
 
     this.svg
       .append('text')
@@ -341,42 +299,115 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
       .style('text-anchor', 'middle');
 
     this.svg
-      .selectAll('bars')
-      .data(this.chartArray[type])
-      .enter()
-      .append('rect')
-      .attr('x', (d: any) => x(new Date(d.date).toLocaleString()))
-      .attr('y', this.height)
-      .attr('width', x.bandwidth())
-      .attr('height', 0)
-      .attr('fill', (d: any) => colorScale(d.type))
+      .append("g")
+      .selectAll('g')
+
+      .data(stackedData)
+      .join('g')
+      .attr('fill', (d:any) => color(d.key))
+      .selectAll("rect")
+
+      .data((d:any) => d)
+      .join("rect")
+      .attr("x", (d:any)=> x(d.data.date))
+      // .attr("y", (d:any)=> Number(y(d[1])))
+      // .attr('height', (d:any) => y(d[0]) - y(d[1]))
+      .attr("y", (d:any) => d[1] > 0 ? y(d[1]) : y(d[0]))
+      .attr("height", (d:any) => d[1] > 0 ? y(d[0]) - y(d[1]) : y(d[1]) - y(d[0]))
+      .attr("width", x.bandwidth())
+      .attr('cursor', 'pointer')
       .on('click', (event: MouseEvent, d: any) => {
-        this.onSubjectClick(event, d);
-        this.hideTooltip();
+        this.onSecondChartBarClick(event, d);
+        this.mouseleaveChart2();
         this.subjectType = 'Results';
       })
       .on('mouseover', (event: MouseEvent, d: any) => {
-        const points = d.points;
-        const correctAnswer = d.correctAnswer;
-        this.mouseoverChart2(points, correctAnswer);
+        const points = d[1];
+        this.mouseoverChart2(event, points);
       })
       .on('mousemove', this.mousemoveChart2)
       .on('mouseleave', this.mouseleaveChart2)
-      .transition()
-      .duration(1000)
-      .attr('y', (d: any) => y(d.points))
-      .attr('height', (d: any) => this.height - y(d.points));
   }
 
-  private createSvg2(): void {
-
-    this.svg = d3
-      .select('#bar2')
-      .append('svg')
-      .attr('class', 'mychart')
-      .attr('width', this.width + this.margin.left + this.margin.right)
-      .attr('height', this.height + this.margin.top + this.margin.bottom)
-      .append('g')
-      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
+  private onSecondChartBarClick(event: any, d: any) {
+    d3.select('#bar1').classed('hide-chart', false);
+    this.svg.selectAll('*').remove();
+    this.firstChart(this.resultObject);
   }
+
+  // tooltip section
+
+  private createTooltip(): void {
+
+    this.tooltip = d3
+      .select('body')
+      .append('div')
+      .style('opacity', 0)
+      .attr('class', 'tooltip')
+      .style('background-color', 'white')
+      .style('border', 'solid')
+      .style('border-width', '1px')
+      .style('border-radius', '5px')
+      .style('position', 'absolute')
+      .style('padding', '10px');
+  }
+
+  private mouseoverChart1 = (e:any, points: number) => {
+
+    this.tooltip
+    // total attempts number
+      .html(`<b> Total - ${points} </b>`)
+      .style('opacity', 1)
+      .style("top", (e.pageY-20)+"px").style("left",(e.pageX+20)+"px");
+  };
+
+  private mousemoveChart1 = (event: MouseEvent) => {
+
+    this.tooltip
+      .style('left', event.pageX + 10 + 'px')
+      .style('top', event.pageY + 'px');
+  };
+
+  private mouseleaveChart1 = () => {
+
+    this.tooltip.style('opacity', 0);
+  };
+
+  private mouseoverChart2 = (e: any, points: number) => {
+    this.tooltip
+      .html(`Points: ${points}`)
+      .style('opacity', 1)
+      .style("top", (e.pageY-20)+"px").style("left",(e.pageX+20)+"px");
+  };
+
+  private mousemoveChart2 = (event: MouseEvent) => {
+
+    this.tooltip
+      .style('left', event.pageX + 10 + 'px')
+      .style('top', event.pageY + 'px');
+  };
+
+  private mouseleaveChart2 = () => {
+
+    this.tooltip.style('opacity', 0);
+  };
+
+  private capitalizeFirstLetter (str: string)  {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  startQuizAgain(quizName: string): void {
+
+    const queryParams: Params = { quiz: quizName };
+    this.router.navigate(['/quizname'], { queryParams });
+  }
+
+  ngOnDestroy(): void {
+
+    this.sub.unsubscribe();
+  }
+
+  // private subjectColors = d3.scaleOrdinal<string>()
+  // .domain(this.resultObject.map(d => d.type))
+  // .range(['#6a9cd2', '#3d87f7', '#72a9fc', '#a7caff']);
 }
