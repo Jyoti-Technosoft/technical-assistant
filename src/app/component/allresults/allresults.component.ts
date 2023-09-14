@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +14,7 @@ import { SnackbarService } from '@app/service/snackbar.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class AllresultsComponent implements OnInit, AfterViewInit{
+export class AllresultsComponent implements OnInit {
 
   allResultData = [];
   subjectWiseData = [];
@@ -52,18 +52,10 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
 
-    // this.auth.getScreenSize().subscribe(v => {
-    //   this.isMobileView = v;
-    // });
-  }
-
-  ngAfterViewInit(): void {
-    const containerWidth = document.getElementById('chart-container')?.clientWidth;
-    this.width = containerWidth ? containerWidth - this.margin.left - this.margin.right: this.width;
-    this.height = this.width;
-    this.firstChart(this.resultObject);
-    this.createSvg2();
-    this.cd?.detectChanges();
+    this.auth.getScreenSize().subscribe(v => {
+      this.isMobileView = v;
+      this.cd?.detectChanges();
+    });
   }
 
   resultData(): void {
@@ -127,12 +119,10 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
   private firstChart(resultObject: any[]): void {
 
     const groupedData = d3.group(resultObject, d => d.type);
-    console.log('groupedData',groupedData);
     const aggregatedData = Array.from(groupedData, ([type, values]) => ({
       type,
       totalAttempts: values.length,
     }));
-    console.log('aggregatedData', aggregatedData);
 
     const colorScale = d3.scaleOrdinal()
                       .domain(aggregatedData.map(d => d.type))
@@ -202,6 +192,7 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
   private onFirstChartBarClick(event: any, data: any): void {
 
     d3.select('#bar1').remove();
+    d3.select('#bar1').classed('hide-chart', true);
     const filteredData = this.subjectWiseData.filter((d:any) => d.type === data.type);
 
   // Group the filtered data by date and calculate the sum of points
@@ -215,8 +206,6 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
   }
 
   private secondChart(type: any, data: any): void {
-
-    console.log('data======', data);
 
     this.subjectType = type;
     d3.select('#bar2').classed('hide-chart', false);
@@ -237,8 +226,6 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
       return transformedItem;
     });
 
-    console.log('transformedData', transformedData, allPoints);
-
     let totalKeys:any = [];
 
     transformedData.forEach((v:any) => {
@@ -249,15 +236,12 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
       });
     });
     totalKeys = [...new Set(totalKeys)];
-    console.log('totalKeys', totalKeys);
 
     let color = d3.scaleOrdinal()
               .domain(totalKeys)
               .range(d3.schemeCategory10);
 
     const stackedData = d3.stack().keys(totalKeys)(transformedData);
-
-    console.log('stackedData********', stackedData);
 
     const x = d3
       .scaleBand()
@@ -280,8 +264,6 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
       .range([this.height, 0]);
 
     this.svg.append('g').call(d3.axisLeft(y));
-
-    // let color = ['#00D7D2', '#313c53', '#7BD500', '#e41a1c', '#377eb8', '#4daf4a']
 
     this.svg
       .append('text')
@@ -406,8 +388,4 @@ export class AllresultsComponent implements OnInit, AfterViewInit{
 
     this.sub.unsubscribe();
   }
-
-  // private subjectColors = d3.scaleOrdinal<string>()
-  // .domain(this.resultObject.map(d => d.type))
-  // .range(['#6a9cd2', '#3d87f7', '#72a9fc', '#a7caff']);
 }
