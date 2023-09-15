@@ -87,11 +87,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
   ) {
 
     this.subs = new Subscription();
-    this.auth.authStatusListener$.next(true);
     if (!this.selectedQuiz) {
       this.selectedQuiz = this.activeRouter.snapshot.queryParams['quiz'];
     }
-    this.userId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string).id;
+    this.userId = auth.getUserId();
   }
 
   ngOnInit(): void {
@@ -347,27 +346,35 @@ export class Quizcomponent implements OnInit, OnDestroy {
     let wrong = this.inCorrectAnswer * this.negativePoints;
     this.totalPoints = correct - wrong;
 
-    let result = {
-      type: testData?.id,
-      totalQuestions: this.quizInfo?.numberOfQuestions,
+    let result:any = {
+      quiz_id: testData?.id,
+      total_questions: this.quizInfo?.numberOfQuestions,
       points: this.totalPoints,
-      skipAnswer: this.skipAnswer,
-      correctAnswer: this.correctAnswer,
-      inCorrectAnswer: this.inCorrectAnswer,
+      skip_answer: this.skipAnswer,
+      correct_answer: this.correctAnswer,
+      incorrect_answer: this.inCorrectAnswer,
+      user_id: Number(this.userId),
       quizTypeImage: this.quizInfo?.image,
-      date: new Date().toISOString().slice(0, 10),
-      userId: this.userId
+      quiz_date: new Date().toISOString().slice(0, 10)
     };
 
     localStorage.setItem(LOCALSTORAGE_KEY.LAST_RESULT_DATA, JSON.stringify(result));
 
-    const finalData = this.resultService.addResultData(result).subscribe({
-      error: () => {
-        this.snackBarService.error(MESSAGE.SOMTHING);
+    let passData = {...result};
+    delete passData?.quiz_date;
+    delete passData?.quizTypeImage;
+
+    const resultData = this.resultService.addResultData(passData).subscribe({
+      next: (res) => {
+        if (!res.success) {
+          this.snackBarService.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.snackBarService.error(err.message);
       }
     });
-
-    this.subs.add(finalData);
+    this.subs.add(resultData);
 
     this.modalService
       .open(this.myModal, { ariaLabelledBy: 'modal-basic-title' })

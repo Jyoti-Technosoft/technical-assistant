@@ -86,8 +86,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (this.loginPage) {
       this.loginForm = this.fb.group({
-        email: ['mitali.jtdev@gmail.com', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
-        password: ['Mitali@12345', [Validators.required, Validators.minLength(8)]]
+        email: ['', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
+        password: ['', [Validators.required, Validators.minLength(8)]]
       });
       this.cd.detectChanges();
     } else {
@@ -124,21 +124,19 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
 
       const formValue = this.loginForm.getRawValue();
-      const logUser = this.auth.getAllUser().subscribe({
+      const logUser = this.auth.logInUser(formValue).subscribe({
         next: (res:any) => {
-          let user = res.filter((v:any) => v.email === formValue.email && v.password === formValue.password);
-          if (user.length > 0) {
-            this.auth.authStatusListener$.next(true);
+          if (res.success) {
+            localStorage.setItem(LOCALSTORAGE_KEY.USERID, res.data.user_id);
+            localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, res.data.token);
             this.router.navigateByUrl('layout');
-            localStorage.setItem(LOCALSTORAGE_KEY.USERDATA, JSON.stringify(user[0]));
-            localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, JSON.stringify(true));
-            this.snackbarService.success(MESSAGE.LOGIN_SUCCESS);
+            this.snackbarService.success(res.message);
           } else {
-            this.snackbarService.error(MESSAGE.LOGIN_FAILED);
+            this.snackbarService.error(res.message);
           }
         },
-        error: () => {
-          this.snackbarService.error(MESSAGE.LOGIN_FAILED);
+        error: (err) => {
+          this.snackbarService.error(err.message);
         }
       });
       this.sub.add(logUser);
@@ -167,23 +165,26 @@ export class LoginComponent implements OnInit, OnDestroy {
     let user = this.registrationForm.getRawValue();
 
     const data = {
+      'name': user.personalInfo.fullName,
       'email': user.userCredential.email,
       'password': user.userCredential.password,
-      'fullName': user.personalInfo.fullName,
       'gender': user.personalInfo.gender,
-      'dob': user.personalInfo.dateOfBirth,
-      'mobile': user.extras.mobile,
-      'terms': user.extras.acceptTerms
+      'birth_date': user.personalInfo.dateOfBirth,
+      'contact': user.extras.mobile,
     };
 
-    const userData = this.auth.addUserData(data).subscribe({
-      next: () => {
-        this.snackbarService.success(MESSAGE.REGISTRATION_SUCCESS);
-        this.loginPage = true;
-        this.router.navigateByUrl('login');
+    const userData = this.auth.registerUser(data).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.loginPage = true;
+          this.snackbarService.success(res.message);
+          this.router.navigateByUrl('login');
+        } else  {
+          this.snackbarService.error(res.message);
+        }
       },
-      error: () => {
-        this.snackbarService.error(MESSAGE.REGISTRATION_FAILED);
+      error: (err) => {
+        this.snackbarService.error(err.message);
       }
     });
 

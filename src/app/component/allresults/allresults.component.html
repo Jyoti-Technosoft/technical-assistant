@@ -1,17 +1,17 @@
 <div class="main-div">
-  <div class="chart-card">
-    <ng-container class="empty-card row" *ngIf="subjectWiseData.length === 0">
-      <div class="notdata col-6">
-        <h4 class="notdata-title">Sorry, !No quiz played yet</h4>
-        <p class="notdata-description">
-          <strong>Thank you for your interest,</strong>
-        </p>
-        <p class="notdata-description">Please attempt any quiz!</p>
-        <div class="notdata-button">
-          <button class="btn btn-outline-primary back-quiz" routerLink="/dashboard">Go to quiz</button>
-        </div>
+  <div [ngStyle]="{'width': isMobileView ? '100%' : '70%'}" class="empty-card row" *ngIf="subjectWiseData.length === 0 else chart">
+    <div class="notdata col-6">
+      <h4 class="notdata-title">Sorry, !No quiz played yet</h4>
+      <p class="notdata-description">
+        <strong>Thank you for your interest,</strong>
+      </p>
+      <p class="notdata-description">Please attempt any quiz!</p>
+      <div class="notdata-button">
+        <button type="button" class="btn-quiz" routerLink="/dashboard"> Go to quiz </button>
       </div>
-    </ng-container>
+    </div>
+  </div>
+  <ng-template #chart class="chart-card">
     <div class="col-12" [ngStyle]="{'width': isMobileView ? '100%' : '80%'}">
       <div #chartContainer class="chart-area" [ngStyle]="{'display': showChart ? 'block' : 'none'}">
         <div #tooltip class="tooltip"></div>
@@ -19,5 +19,5 @@
         <div id="bar2" class="hide-chart"></div>
       </div>
     </div>
-  </div>
+  </ng-template>
 </div>

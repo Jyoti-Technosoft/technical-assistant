@@ -3,8 +3,9 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { QuizDataService } from '@app/service/quiz-data.service';
 import { Subscription } from 'rxjs';
-import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY } from '@app/utility/utility';
 import { SnackbarService } from '@app/service/snackbar.service';
+import quizData from '@assets/json/quizDetails.json';
 
 @Component({
   selector: 'app-quiz-rule',
@@ -14,7 +15,8 @@ import { SnackbarService } from '@app/service/snackbar.service';
 })
 export class QuizRuleComponent implements OnInit, OnDestroy{
 
-  instruction:any = {};
+  allQuizData = [...quizData];
+  instruction: any;
   selectedQuizType = '';
   selectedQuiz = '';
   sub: Subscription;
@@ -32,7 +34,6 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
 
     this.sub = new Subscription();
     this.selectedQuiz = this.activeRoute.snapshot.queryParams['quiz'];
-    this.auth.authStatusListener$.next(true);
    }
 
   ngOnInit(): void {
@@ -41,33 +42,23 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
       this.isMobileView = v;
       this.cd.detectChanges();
     });
-    this.getInstructions();
+    this.instruction = this.allQuizData?.filter((v:any) => v?.id === this.selectedQuiz)[0];
+    this.getInstructions(this.instruction);
   }
 
-  getInstructions(): void {
+  getInstructions(quizInfo: any): void {
 
-    const quizData = this.quizservice.getSingleQuizDetails(this.selectedQuiz).subscribe({
-      next: (res) => {
-        if (!!res) {
-          this.instruction = res;
-          this.applyRulesForTest(this.instruction.rules);
-          localStorage.setItem(LOCALSTORAGE_KEY.QUIZ_DETAILS, JSON.stringify(this.instruction));
-          this.cd.detectChanges();
-        }
-      },
-      error: () => {
-        this.snackBarService.error(MESSAGE.SOMTHING);
-      }
-    });
-    this.sub.add(quizData);
+    this.applyRulesForTest(quizInfo.rules);
+    localStorage.setItem(LOCALSTORAGE_KEY.QUIZ_DETAILS, JSON.stringify(this.instruction));
+    this.cd.detectChanges();
   }
 
   applyRulesForTest(data: string): void {
 
-    data = data.replaceAll('timer', this.instruction.timer);
-    data = data.replace('positivePoints', this.instruction.positivePoints);
-    data = data.replace('negativePoints', this.instruction.negativePoints);
-    data = data.replace('numberOfQuestions', this.instruction.numberOfQuestions);
+    data = data?.replaceAll('timer', this.instruction.timer);
+    data = data?.replace('positivePoints', this.instruction.positivePoints);
+    data = data?.replace('negativePoints', this.instruction.negativePoints);
+    data = data?.replace('numberOfQuestions', this.instruction.numberOfQuestions);
     this.displayRules = data;
   }
 

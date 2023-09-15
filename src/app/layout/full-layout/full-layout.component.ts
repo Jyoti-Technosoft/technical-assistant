@@ -6,7 +6,6 @@ import dialogData from '@assets/json/dialogData.json';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
 import { SnackbarService } from '@app/service/snackbar.service';
 
 @Component({
@@ -28,29 +27,44 @@ export class FullLayoutComponent implements OnInit {
   ];
   reason = '';
   userToken!: boolean;
+  userId: number;
   userData: any;
   selected?: string = '';
   avatarName!: string;
+  subs: Subscription;
 
   constructor(
     private auth: AuthenticationService,
     private dialogService: DialogService,
     private snackbarService: SnackbarService,
     private router: Router,
+    private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
   ) {
+
     this.authListenerSubs = new Subscription;
-    this.userToken = JSON.parse(JSON.stringify(localStorage.getItem(LOCALSTORAGE_KEY.TOKEN)));
-    this.userData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string);
+    this.subs = new Subscription();
+    this.userId = auth.getUserId();
   }
 
   ngOnInit() {
 
-    this.authListenerSubs = this.auth.getAuthStatusListener().subscribe(v => {
-      this.userIsAuthenticated = v;
-      this.cd.detectChanges();
+    const userData = this.auth.getUserDetail(this.userId).subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.userData = res.data;
+          this.avatarName = this.getUserLetter(this.userData?.name);
+          this.cd?.detectChanges();
+        } else {
+          this.snackBarService.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.snackBarService.error(err.message);
+      }
     });
-    this.avatarName = this.getUserLetter(this.userData?.fullName);
+
+    this.subs.add(userData);
   }
 
   getUserLetter(userName: any) {
@@ -79,11 +93,22 @@ export class FullLayoutComponent implements OnInit {
     let configData = this.dialogData.signoutModel;
     this.dialogService.openDialog(configData).then((value) => {
       if (value) {
-        this.auth.authStatusListener$.next(false);
-        localStorage.clear();
-        localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, JSON.stringify(false));
-        this.router.navigateByUrl('login');
-        this.snackbarService.success(MESSAGE.LOGOUT_SUCESS);
+        const logOut = this.auth.signOutUser(this.userId).subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.snackbarService.success(res.message);
+              localStorage.clear();
+              this.router.navigateByUrl('login');
+              this.cd.detectChanges();
+            } else {
+              this.snackbarService.error(res.message);
+            }
+          },
+          error: (err) => {
+            this.snackbarService.error(err.message);
+          }
+        });
+        this.subs.add(logOut);
       }
     });
   }

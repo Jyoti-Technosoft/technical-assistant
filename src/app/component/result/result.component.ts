@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy } from '@angular/core';
-import { Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
@@ -26,7 +26,6 @@ export class ResultComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef
   ) {
     this.sub = new Subscription();
-    this.auth.authStatusListener$.next(true);
     this.recentResult = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.LAST_RESULT_DATA) as string);
   }
 
@@ -43,14 +42,7 @@ export class ResultComponent implements OnInit, OnDestroy {
     }
   }
 
-  startQuizAgain(quizName: string): void {
-
-    const queryParams: Params = { quiz: quizName };
-    this.router.navigate(['/rules'], { queryParams });
-  }
-
   showAllQuiz(): void {
-
     this.router.navigateByUrl('results');
   }
 
@@ -61,7 +53,6 @@ export class ResultComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     localStorage.removeItem(LOCALSTORAGE_KEY.LAST_RESULT_DATA);
-    localStorage.removeItem(LOCALSTORAGE_KEY.QUIZ_DETAILS);
     this.sub.unsubscribe();
   }
 }

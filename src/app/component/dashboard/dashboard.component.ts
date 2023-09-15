@@ -5,7 +5,7 @@ import { DashboardService } from '@app/service/dashboard.service';
 import { QuizDataService } from '@app/service/quiz-data.service';
 import { Params, Router } from '@angular/router';
 import { SnackbarService } from '@app/service/snackbar.service';
-import { MESSAGE } from '@app/utility/utility';
+import quizData from '@assets/json/quizDetails.json';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,11 +15,11 @@ import { MESSAGE } from '@app/utility/utility';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-  quizs: any[] = [];
+  quizInformationdata = [...quizData];
   cardData = 8;
   sub: Subscription;
   quizCountData: any;
-  userToken!: boolean;
+  userId!: number;
   isMobileView = false;
 
   constructor(
@@ -31,6 +31,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef
   ) {
     this.sub = new Subscription();
+    this.userId = auth.getUserId();
   }
 
   ngOnInit(): void {
@@ -40,22 +41,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.cd.detectChanges();
     });
 
-    this.auth.authStatusListener$.next(true);
     this.getUserCountData();
     this.getQuizData();
   }
 
   getUserCountData(): void {
 
-    const countData = this.dashboard.getAllCountData().subscribe({
+    const countData = this.dashboard.getAllCountData(this.userId).subscribe({
       next: (res) => {
-        if (!!res) {
-          this.quizCountData = res[0];
+        if (res.success) {
+          this.quizCountData = res;
           this.cd.detectChanges();
+        } else {
+          this.snackbarService.error(res.message);
         }
       },
-      error: () => {
-        this.snackbarService.error(MESSAGE.COUNT_FAILED);
+      error: (err) => {
+        this.snackbarService.error(err.message);
       }
     });
     this.sub.add(countData);
@@ -63,18 +65,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getQuizData(): void {
 
-    const quizData = this.quizservice.getQuizDetails().subscribe({
-      next: (res) => {
-        if (!!res) {
-          this.quizs = res;
-          this.cd.detectChanges();
-        }
-      },
-      error: () => {
-        this.snackbarService.error(MESSAGE.QUIZ_DETAIL_FAILED);
-      }
+    // const quizData = this.quizservice.getQuizName().subscribe({
+    //   next: (res) => {
+    //     if (res.success) {
+    //       this.addOtherQuizDetails(this.quizName);
+    //       this.cd.detectChanges();
+    //     } else {
+    //       this.snackbarService.error(res.message);
+    //     }
+    //   },
+    //   error: (err) => {
+    //     this.snackbarService.error(err.message);
+    //   }
+    // });
+    // this.sub.add(quizData);
+  }
+
+  addOtherQuizDetails(data: any): void {
+
+    data?.forEach((v:any) => {
+      this.quizInformationdata = this.quizInformationdata?.filter((q:any) => v?.id === q?.id);
     });
-    this.sub.add(quizData);
   }
 
   startQuiz(title: string) {

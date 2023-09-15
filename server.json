@@ -1,44 +1,4 @@
 {
-  "userData": [
-    {
-      "email": "heer@gmail.com",
-      "password": "Heer@123",
-      "fullName": "Vidhi Shah",
-      "gender": "female",
-      "dob": "2023-08-08T18:30:00.000Z",
-      "mobile": "4875120620",
-      "terms": true,
-      "id": 1
-    },
-    {
-      "email": "mitali.jtdev@gmail.com",
-      "password": "Mitali@12345",
-      "fullName": "Mitali Rana",
-      "gender": "female",
-      "dob": "2023-08-27T18:30:00.000Z",
-      "mobile": "1234567896",
-      "terms": true,
-      "id": 2
-    },
-    {
-      "email": "yashesh@gmail.com",
-      "password": "Yashesh123",
-      "fullName": "Yashesh shah",
-      "gender": "male",
-      "dob": "2020-06-09T18:30:00.000Z",
-      "mobile": "5879874564",
-      "terms": true,
-      "id": 3
-    }
-  ],
-  "countData": [
-    {
-      "totalQuizPlayed": "5",
-      "highestPoints": "24",
-      "lowestPoints": "10",
-      "highestQuizPlayed": "angular"
-    }
-  ],
   "quizDetails": [
     {
       "id": "angular",
@@ -1863,6 +1823,18 @@
       "date": "2023-09-11",
       "userId": 2,
       "id": 22
+    },
+    {
+      "type": "angular",
+      "totalQuestions": 4,
+      "points": 0.25,
+      "skipAnswer": 0,
+      "correctAnswer": 1,
+      "inCorrectAnswer": 3,
+      "quizTypeImage": "assets\\img\\angular_logo.svg",
+      "date": "2023-09-15",
+      "userId": "7",
+      "id": 23
     }
   ]
 }

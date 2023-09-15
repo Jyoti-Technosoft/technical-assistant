@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { environment } from 'environments/environment.development';
+import { LOCALSTORAGE_KEY } from '@app/utility/utility';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +11,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 export class AuthenticationService {
 
-  url = 'http://localhost:3000';
-
+  serverUrl = environment.API_URL;
   authStatusListener$: BehaviorSubject<boolean>;
   mobileView$: BehaviorSubject<boolean>;
 
@@ -25,6 +26,7 @@ export class AuthenticationService {
     this.getScreenSize();
   }
 
+  // detect screen size
   getScreenSize() {
     this.responsive.observe([Breakpoints.XSmall,Breakpoints.Small])
       .subscribe(result => {
@@ -38,27 +40,49 @@ export class AuthenticationService {
     return this.mobileView$.asObservable();
   }
 
-  getAllUser(): Observable<any> {
-    return this.http.get(`${this.url}/userData`);
+  // login
+  logInUser(data: any): Observable<any> {
+    return this.http.post(`${this.serverUrl}/login`, data, {headers:{skip:"true"}});
   }
 
-  addUserData(data: any): Observable<any> {
-    return this.http.post(`${this.url}/userData`, data);
+  // register
+  registerUser(userdata: any): Observable<any> {
+    return this.http.post(`${this.serverUrl}/register`, userdata, {headers:{skip:"true"}});
   }
 
-  updateUserData(data: any, id: number): Observable<any> {
-    return this.http.patch(`${this.url}/userData/${id}`, data);
+  // logout
+  signOutUser(userId: number): Observable<any> {
+    return this.http.get(`${this.serverUrl}/sign-out/${userId}`, {headers:{skip:"true"}});
   }
 
-  getSingleUserData(id: number): Observable<any> {
-    return this.http.get(`${this.url}/userData/${id}`);
+  // get user details
+  getUserDetail(userId: number): Observable<any> {
+    return this.http.get(`${this.serverUrl}/user/${userId}`);
   }
 
-  updatePassword(data: any, id: number): Observable<any> {
-    return this.http.patch(`${this.url}/userData/${id}`, data);
+  // update user details
+  updateUserData(data: any, userId: number): Observable<any> {
+    return this.http.put(`${this.serverUrl}/edit-user/${userId}`, data);
+  }
+
+  // updadte user password
+  changePassword(data: any): Observable<any> {
+    return this.http.put(`${this.serverUrl}/change-password`, data);
   }
 
   getAuthStatusListener() {
     return this.authStatusListener$.asObservable();
+  }
+
+  getAuthToken(): string {
+    return JSON.parse(JSON.stringify(localStorage.getItem(LOCALSTORAGE_KEY.TOKEN)))
+  }
+
+  removerToken(): void {
+    localStorage.removeItem(LOCALSTORAGE_KEY.TOKEN);
+  }
+
+  getUserId(): number {
+    return JSON.parse(JSON.stringify(localStorage.getItem(LOCALSTORAGE_KEY.USERID)));
   }
 }

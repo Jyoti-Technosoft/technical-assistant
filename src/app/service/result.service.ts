@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '@environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,17 @@ import { Observable } from 'rxjs';
 export class ResultService {
 
   url = 'http://localhost:3000';
+  serverUrl = environment.API_URL;
 
   constructor(
     private http: HttpClient
   ) { }
 
   addResultData(data: any): Observable<any> {
-    return this.http.post(`${this.url}/result`, data);
+    return this.http.post(`${this.serverUrl}/result`, data);
   }
 
-  getUserResultData(userId: any): Observable<any> {
-    return this.http.get(`${this.url}/result?userId=${userId}`);
+  getUserResultData(userId: number): Observable<any> {
+    return this.http.get(`${this.serverUrl}/result/${userId}`);
   }
 }

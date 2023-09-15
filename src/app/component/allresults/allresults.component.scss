@@ -23,12 +23,27 @@
     display: none;
   }
 
+  .btn-quiz {
+    width: 20%;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    background: #367dc8;
+    color: white;
+    box-shadow: 0 5px 10px #a4c4e6;
+    transition: 0.2s;
+    &:hover {
+      box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;
+      color: #174b83;
+      font-weight: 500;
+    }
+  }
+
   .empty-card {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 15rem;
-    margin-right: 15rem;
+    margin: 0 auto;
   }
 
   .notdata {

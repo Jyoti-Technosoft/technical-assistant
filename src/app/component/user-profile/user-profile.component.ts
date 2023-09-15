@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
-import { LOCALSTORAGE_KEY, MESSAGE, PATTERN } from '@app/utility/utility';
+import { PATTERN } from '@app/utility/utility';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { SnackbarService } from '@app/service/snackbar.service';
 import dialogData from '@assets/json/dialogData.json';
@@ -43,7 +43,6 @@ export class UserProfileComponent implements OnInit {
   isMobileView = false;
   userId: number;
   dialogData = { ...dialogData };
-
   hidePassword = true;
   hideNewPassword = true;
   hideconfirmPassword = true;
@@ -61,8 +60,7 @@ export class UserProfileComponent implements OnInit {
   ) {
 
     this.subs = new Subscription();
-    this.auth.authStatusListener$.next(true);
-    this.userId = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string)?.id;
+    this.userId = auth.getUserId();
   }
 
   ngOnInit(): void {
@@ -76,19 +74,24 @@ export class UserProfileComponent implements OnInit {
 
   getUserData(id: number): void {
 
-    this.auth.getSingleUserData(id).subscribe({
+    const userData = this.auth.getUserDetail(id).subscribe({
       next: (res) => {
-        this.userData = res;
-        this.avatarName = this.getUserLetter(this.userData?.fullName);
-        this.createForm(this.userData);
-        this.createChangePasswordForm();
-        localStorage.setItem(LOCALSTORAGE_KEY.USERDATA, JSON.stringify(this.userData));
-        this.cd?.detectChanges();
+        if (res.success) {
+          this.userData = res.data;
+          this.avatarName = this.getUserLetter(this.userData?.name);
+          this.createForm(this.userData);
+          this.createChangePasswordForm();
+          this.cd?.detectChanges();
+        } else {
+          this.snackBarService.error(res.message);
+        }
       },
-      error: () => {
-        this.snackBarService.error(MESSAGE.SOMTHING);
+      error: (err) => {
+        this.snackBarService.error(err.message);
       }
     });
+
+    this.subs.add(userData);
   }
 
   getUserLetter(userName: any) {
@@ -105,11 +108,10 @@ export class UserProfileComponent implements OnInit {
 
     this.profilePageForm = this.fb.group({
       email: [data?.email || '', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
-      fullName: [data?.fullName || '', [Validators.required, Validators.pattern(PATTERN.FULL_NAME_PATTERN)]],
+      name: [data?.name || '', [Validators.required, Validators.pattern(PATTERN.FULL_NAME_PATTERN)]],
       gender: [data?.gender || '', Validators.required],
-      dob: [new Date(data?.dob) || '', Validators.required],
-      mobile: [data?.mobile || '', [Validators.required, Validators.pattern(PATTERN.MOBILE_PATTERN)]],
-      id: [data?.id || '', Validators.required]
+      birth_date: [new Date(data?.birth_date) || '', Validators.required],
+      contact: [data?.contact || '', [Validators.required, Validators.pattern(PATTERN.MOBILE_PATTERN)]]
     });
   }
 
@@ -121,15 +123,15 @@ export class UserProfileComponent implements OnInit {
       confirmPassword: ['', [Validators.required, Validators.pattern(PATTERN.PASSWORD_PATTERN)]],
     });
 
-    this.changePasswordForm.get('password')?.setValidators(this.passwordMatchValidator.bind(this));
+    // this.changePasswordForm.get('password')?.setValidators(this.passwordMatchValidator.bind(this));
     this.changePasswordForm.get('confirmPassword')?.setValidators(this.confirmPasswordMatchValidator.bind(this));
   }
 
-  passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
+  // passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
 
-    let password = control.value;
-    return password === this.userData.password ? null : { passwordMismatch: true };
-  }
+  //   let password = control.value;
+  //   return password === this.userData.password ? null : { passwordMismatch: true };
+  // }
 
   confirmPasswordMatchValidator(control: AbstractControl): ValidationErrors | null {
 
@@ -145,16 +147,26 @@ export class UserProfileComponent implements OnInit {
       let configData = this.dialogData?.changePasswordModel;
       this.dialogService?.openDialog(configData).then((value) => {
         if (value) {
-          let data = this.changePasswordForm.get('newPassword')?.value;
-          const userData = this.auth.updateUserData({'password': data}, this.userId).subscribe({
-            next: () => {
-              this.snackBarService.success(MESSAGE.PASSWORD_CHANGE_SUCCESSFUL);
-              this.editMode = false;
-              this.router.navigateByUrl('login');
-              this.cd.detectChanges();
+          let data = this.changePasswordForm.getRawValue();
+          const passData = {
+            'userId': this.userId,
+            'old_password': data.password,
+            'new_password': data.newPassword
+          };
+
+          const userData = this.auth.changePassword(passData).subscribe({
+            next: (res) => {
+              if (res.status) {
+                this.snackBarService.success(res.message);
+                this.editMode = false;
+                this.router.navigateByUrl('login');
+                this.cd.detectChanges();
+              } else {
+                this.snackBarService.error(res.message);
+              }
             },
-            error: () => {
-              this.snackBarService.error(MESSAGE.SOMTHING);
+            error: (err) => {
+              this.snackBarService.error(err.message);
             }
           });
           this.subs.add(userData);
@@ -177,17 +189,15 @@ export class UserProfileComponent implements OnInit {
       this.dialogService?.openDialog(configData).then((value) => {
         if (value) {
           let data = this.profilePageForm.getRawValue();
-          let id = data.id;
-          delete data.id;
-          const userData = this.auth.updateUserData(data, id).subscribe({
-            next: () => {
-              this.snackBarService.success(MESSAGE.PROFILE_UPDATE_SUCCESSFUL);
+          const userData = this.auth.updateUserData(data, this.userId).subscribe({
+            next: (res) => {
+              this.snackBarService.success(res.message);
               this.editMode = false;
-              this.getUserData(id);
+              this.getUserData(this.userId);
               this.cd.detectChanges();
             },
-            error: () => {
-              this.snackBarService.error(MESSAGE.SOMTHING);
+            error: (err) => {
+              this.snackBarService.error(err.message);
             }
           });
           this.subs.add(userData);

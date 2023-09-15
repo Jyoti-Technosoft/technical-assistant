@@ -1,5 +1,4 @@
-// const { urls } = require("../assets/json/server.json");
-
 export const environment = {
-    production: false
+    production: false,
+    API_URL: 'https://llp.jyotitechnosoft.com/api',
 };

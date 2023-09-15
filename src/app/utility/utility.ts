@@ -1,5 +1,6 @@
 export enum LOCALSTORAGE_KEY {
     TOKEN = 'token',
+    USERID = 'userId',
     USERDATA = 'userData',
     QUIZ_DETAILS = 'quizDetails',
     LAST_RESULT_DATA = 'lastResultData',

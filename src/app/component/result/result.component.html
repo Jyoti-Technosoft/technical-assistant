@@ -7,7 +7,7 @@
           <img
             class="img-fluid p-2 h-100 img-content"
             src="{{ recentResult?.quizTypeImage }}"
-            alt="{{ recentResult?.type }}"
+            alt="{{ recentResult?.quiz_id }}"
           />
         </div>
         <div class="col my-auto">
@@ -17,27 +17,27 @@
                 <tbody>
                     <tr>
                       <th class="h6">Subject</th>
-                      <td class="h6 small">{{ recentResult?.type | titlecase}}</td>
+                      <td class="h6 small">{{ recentResult?.quiz_id | titlecase}}</td>
                     </tr>
                     <tr>
                       <th class="h6">Date</th>
-                      <td class="h6 small">{{ recentResult?.date | date: 'dd/MM/YYYY'}}</td>
+                      <td class="h6 small">{{ recentResult?.quiz_date | date: 'dd/MM/YYYY'}}</td>
                     </tr>
                     <tr>
                       <th class="h6">Total Questions</th>
-                      <td class="h6 small">{{ recentResult?.totalQuestions }}</td>
+                      <td class="h6 small">{{ recentResult?.total_questions }}</td>
                     </tr>
                     <tr>
                       <th class="h6">Skip Questions</th>
-                      <td class="h6 small">{{ recentResult?.skipAnswer }}</td>
+                      <td class="h6 small">{{ recentResult?.skip_answer }}</td>
                     </tr>
                     <tr>
                       <th class="h6">Correct Answers</th>
-                      <td class="h6 small">{{ recentResult?.correctAnswer }}</td>
+                      <td class="h6 small">{{ recentResult?.correct_answer }}</td>
                     </tr>
                     <tr>
                       <th class="h6">Wrong Answers</th>
-                      <td class="h6 small">{{ recentResult?.inCorrectAnswer }}</td>
+                      <td class="h6 small">{{ recentResult?.incorrect_answer }}</td>
                     </tr>
                     <tr>
                       <th class="h6">Total Points</th>
@@ -57,9 +57,6 @@
           <div class="d-flex gap-3" [ngStyle]="{'flex-direction': isMobileView ? 'column' : 'row'}">
             <button class="btn-common btn-result p-2" (click)="showAllQuiz()">
               Show All Results
-            </button>
-            <button class="btn-common btn-again p-2" (click)="startQuizAgain(recentResult?.type)">
-              Take Another Round
             </button>
           </div>
         </div>

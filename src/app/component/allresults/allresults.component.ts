@@ -4,7 +4,7 @@ import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import * as d3 from 'd3';
 import { ResultService } from '@app/service/result.service';
-import { LOCALSTORAGE_KEY, MESSAGE } from '@app/utility/utility';
+import { MESSAGE } from '@app/utility/utility';
 import { SnackbarService } from '@app/service/snackbar.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class AllresultsComponent implements OnInit {
 
   allResultData = [];
   subjectWiseData = [];
-  userData: any;
+  userId: any;
   subjectType: string = 'Results';
   avatarName!: string;
   showChart = false;
@@ -42,8 +42,7 @@ export class AllresultsComponent implements OnInit {
   ) {
 
     this.sub = new Subscription();
-    this.auth.authStatusListener$.next(true);
-    this.userData = JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY.USERDATA) as string);
+    this.userId = auth.getUserId();
 
     this.resultData();
     this.width = 500 - this.margin.left - this.margin.right;
@@ -60,7 +59,7 @@ export class AllresultsComponent implements OnInit {
 
   resultData(): void {
 
-    const getData = this.result.getUserResultData(this.userData.id).subscribe({
+    const getData = this.result.getUserResultData(this.userId).subscribe({
       next:(data) => {
         if (data) {
           this.allResultData = this.subjectWiseData = data;
@@ -69,7 +68,7 @@ export class AllresultsComponent implements OnInit {
             this.allResultData.forEach((res: any) => {
               const resultObject = {
                 points: res.points,
-                type: res.type,
+                type: res.quiz_id,
               };
               this.resultObject.push(resultObject);
             });
@@ -196,7 +195,7 @@ export class AllresultsComponent implements OnInit {
     const filteredData = this.subjectWiseData.filter((d:any) => d.type === data.type);
 
   // Group the filtered data by date and calculate the sum of points
-    const groupedData = d3.group(filteredData, (d:any) => d.date);
+    const groupedData = d3.group(filteredData, (d:any) => d.created_at);
     const aggregatedData = Array.from(groupedData, ([date, values]) => ({
       date,
       points: values.map(v => v.points)
