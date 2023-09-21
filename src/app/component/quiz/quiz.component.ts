@@ -237,7 +237,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
     this.positivePoints = info?.positivePoints;
     this.negativePoints = info?.negativePoints;
 
-    let allLevelQueList = queData;
+    let allLevelQueList = queData.list;
+
     let listOfAllQues:any = [];
     info?.testLevel.forEach((v:any) => {
       allLevelQueList[v].forEach((que:any) => {

@@ -9,6 +9,20 @@ import { environment } from '@environments/environment.development';
 export class QuizDataService {
 
   url = 'http://localhost:3000';
+  queData = [
+    {
+      sub: 'angular', dataFile: 'assets/json/angularjs.json'
+    },
+    {
+      sub: 'htmlCss', dataFile: 'assets/json/html_css.json'
+    },
+    {
+      sub: 'javascript', dataFile: 'assets/json/javascript.json'
+    },
+    {
+      sub: 'reactJS', dataFile: 'assets/json/reactjs.json'
+    }
+  ];
   serverUrl = environment.API_URL;
 
   constructor(
@@ -19,11 +33,8 @@ export class QuizDataService {
     return this.http.get(`${this.serverUrl}/quiz`);
   }
 
-  getSingleQuizDetails(name: string): Observable<any> {
-    return this.http.get(`${this.url}/quizDetails/${name}`);
-  }
-
   getListOfQuizDetails(id: string): Observable<any> {
-    return this.http.get(`${this.url}/questionsList/${id}`);
+    let jsonFile = this.queData.filter(v => v.sub === id);
+    return this.http.get(jsonFile[0].dataFile);
   }
 }

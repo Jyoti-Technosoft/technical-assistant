@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const countData = this.dashboard.getAllCountData(this.userId).subscribe({
       next: (res) => {
         if (res.success) {
-          this.quizCountData = res;
+          this.quizCountData = res.data;
           this.cd.detectChanges();
         } else {
           this.snackbarService.error(res.message);
@@ -65,26 +65,40 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getQuizData(): void {
 
-    // const quizData = this.quizservice.getQuizName().subscribe({
-    //   next: (res) => {
-    //     if (res.success) {
-    //       this.addOtherQuizDetails(this.quizName);
-    //       this.cd.detectChanges();
-    //     } else {
-    //       this.snackbarService.error(res.message);
-    //     }
-    //   },
-    //   error: (err) => {
-    //     this.snackbarService.error(err.message);
-    //   }
-    // });
-    // this.sub.add(quizData);
+    const quizData = this.quizservice.getQuizName().subscribe({
+      next: (res) => {
+        if (res.success) {
+          this.addOtherQuizDetails(res.data);
+          this.cd.detectChanges();
+        } else {
+          this.snackbarService.error(res.message);
+        }
+      },
+      error: (err) => {
+        this.snackbarService.error(err.message);
+      }
+    });
+    this.sub.add(quizData);
+  }
+
+  maxPlayed(title: any): string {
+
+    let sub;
+    if (title.length > 1) {
+      sub = title?.join(', ');
+    } else {
+      sub = title[0];
+    }
+    return sub;
   }
 
   addOtherQuizDetails(data: any): void {
 
-    data?.forEach((v:any) => {
-      this.quizInformationdata = this.quizInformationdata?.filter((q:any) => v?.id === q?.id);
+    let ids = data.filter((v:any) => v.id);
+    this.quizInformationdata.filter((q:any) => {
+      if (ids.includes(q.id)) {
+        return q;
+      }
     });
   }
 

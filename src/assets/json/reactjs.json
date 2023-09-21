@@ -1,141 +1,386 @@
 {
-  "react_js":
-    {
-      "quizId": "reactJS",
-      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 20 seconds </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-      "timer": 20,
-      "positivePoints": 1,
-      "negativePoints": 0.25,
-      "numberOfQuestions": 3,
-      "title": "React JS Quiz",
-      "image": "assets\\img\\react.svg",
-      "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta.",
-      "questions": [
-        {
-          "question": "What is React.js?",
-          "type": "radio",
-          "options": [
-            {
-              "id": 1,
-              "label": "Open-source JavaScript back-end library"
-            },
-            {
-              "id": 2,
-              "label": "JavaScript front-end library to create a database"
-            },
-            {
-              "id": 3,
-              "label": "Free and open-source JavaScript front-end library"
-            },
-            {
-              "id": 4,
-              "label": "None of the mentioned"
-            }
-          ],
-          "answer": {
-            "id": 3
+  "id": "reactJS",
+  "list": {
+    "1st": [
+      {
+        "question": "What is React.js?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "A server-side framework"
+          },
+          {
+            "id": 2,
+            "label": "A JavaScript library for building user interfaces"
+          },
+          {
+            "id": 3,
+            "label": "A database management system"
+          },
+          {
+            "id": 4,
+            "label": "An operating system"
           }
-        },
-        {
-          "question": "Which of the following acts as the input of a class-based component?",
-          "type": "radio",
-          "options": [
-            {
-              "id": 1,
-              "label": "Class"
-            },
-            {
-              "id": 2,
-              "label": "Props"
-            },
-            {
-              "id": 3,
-              "label": "Factory"
-            },
-            {
-              "id": 4,
-              "label": "None of the mentioned"
-            }
-          ],
-          "answer": {
-            "id": 2
+        ],
+        "answer": [
+          2
+        ]
+      },
+      {
+        "question": "What is JSX?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "JavaScript XML"
+          },
+          {
+            "id": 2,
+            "label": "JavaScript eXtensible Syntax"
+          },
+          {
+            "id": 3,
+            "label": "JavaScript eXtension Language"
+          },
+          {
+            "id": 4,
+            "label": "JavaScript XML Syntax"
           }
-        },
-        {
-          "question": "React.js is written in which of the following language?",
-          "type": "radio",
-          "options": [
-            {
-              "id": 1,
-              "label": 3
-            },
-            {
-              "id": 2,
-              "label": "C++"
-            },
-            {
-              "id": 3,
-              "label": "JavaScript"
-            },
-            {
-              "id": 4,
-              "label": "Java"
-            }
-          ],
-          "answer": {
-            "id": 3
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "In React, what is the purpose of the `render` method?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "To update the component's state"
+          },
+          {
+            "id": 2,
+            "label": "To handle user input"
+          },
+          {
+            "id": 3,
+            "label": "To perform asynchronous operations"
+          },
+          {
+            "id": 4,
+            "label": "To return the initial HTML structure"
           }
-        },
-        {
-          "question": "In which of the following directory React Components are saved?",
-          "type": "radio",
-          "options": [
-            {
-              "id": 1,
-              "label": "Inside js/components/"
-            },
-            {
-              "id": 2,
-              "label": "Inside components/js/"
-            },
-            {
-              "id": 3,
-              "label": "Inside vendor/js/components/"
-            },
-            {
-              "id": 4,
-              "label": "Inside vendor/components/"
-            }
-          ],
-          "answer": {
-            "id": 1
+        ],
+        "answer": [
+          4
+        ]
+      },
+      {
+        "question": "Which function is used to change the state of a component?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "setState()"
+          },
+          {
+            "id": 2,
+            "label": "changeState()"
+          },
+          {
+            "id": 3,
+            "label": "updateState()"
+          },
+          {
+            "id": 4,
+            "label": "modifyState()"
           }
-        },
-        {
-          "question": "Which of the following command is used to Install create-react-app?",
-          "type": "radio",
-          "options": [
-            {
-              "id": 1,
-              "label": "npm install create-react-app"
-            },
-            {
-              "id": 2,
-              "label": "npm install -f create-react-app"
-            },
-            {
-              "id": 3,
-              "label": "npm install -g create-react-app"
-            },
-            {
-              "id": 4,
-              "label": "install -g create-react-app"
-            }
-          ],
-          "answer": {
-            "id": 3
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "What's the key benefit of using React's virtual DOM?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "It improves server performance"
+          },
+          {
+            "id": 2,
+            "label": "It allows direct manipulation of the DOM"
+          },
+          {
+            "id": 3,
+            "label": "It reduces the need for reflows and repaints"
+          },
+          {
+            "id": 4,
+            "label": "It eliminates the need for JavaScript"
           }
-        }
-      ]
-    }
+        ],
+        "answer": [
+          3
+        ]
+      }
+    ],
+    "2nd": [
+      {
+        "question": "In React, what is a prop?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "A method for updating state"
+          },
+          {
+            "id": 2,
+            "label": "A reserved keyword"
+          },
+          {
+            "id": 3,
+            "label": "A way to pass data from parent to child components"
+          },
+          {
+            "id": 4,
+            "label": "A built-in JavaScript function"
+          }
+        ],
+        "answer": [
+          3
+        ]
+      },
+      {
+        "question": "Which lifecycle method is invoked just before a component is removed from the DOM?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "componentDidMount()"
+          },
+          {
+            "id": 2,
+            "label": "componentWillUnmount()"
+          },
+          {
+            "id": 3,
+            "label": "componentDidUpdate()"
+          },
+          {
+            "id": 4,
+            "label": "componentWillUpdate()"
+          }
+        ],
+        "answer": [
+          2
+        ]
+      },
+      {
+        "question": "What is the purpose of React Router in a React application?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "To manage HTTP requests"
+          },
+          {
+            "id": 2,
+            "label": "To handle authentication"
+          },
+          {
+            "id": 3,
+            "label": "To create a single-page application with routing"
+          },
+          {
+            "id": 4,
+            "label": "To optimize rendering performance"
+          }
+        ],
+        "answer": [
+          3
+        ]
+      },
+      {
+        "question": "How can you pass a function as a prop in React?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "You can't pass functions as props"
+          },
+          {
+            "id": 2,
+            "label": "Use the this.functionName syntax"
+          },
+          {
+            "id": 3,
+            "label": "Use an arrow function in the props"
+          },
+          {
+            "id": 4,
+            "label": "Wrap the function in curly braces"
+          }
+        ],
+        "answer": [
+          4
+        ]
+      },
+      {
+        "question": "Which of the following is correct about prop in react?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "Can be changed inside another component"
+          },
+          {
+            "id": 2,
+            "label": "Can be changed inside the component"
+          },
+          {
+            "id": 3,
+            "label": "Cannot be changed in the component"
+          },
+          {
+            "id": 4,
+            "label": " All of the mentioned"
+          }
+        ],
+        "answer": [
+          3
+        ]
+      }
+    ],
+    "3rd": [
+      {
+        "question": "Choose the correct data flow sequence of flux concept.",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "Action -> Dispatcher -> Store -> View"
+          },
+          {
+            "id": 2,
+            "label": "Action -> Dispatcher -> View -> Store"
+          },
+          {
+            "id": 3,
+            "label": "Action -> Store -> View -> Dispatcher"
+          },
+          {
+            "id": 4,
+            "label": "Dispatcher -> Action -> Store -> View"
+          }
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "Among the corner which is a must-have for every ReactJS component?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "renderComponent"
+          },
+          {
+            "id": 2,
+            "label": "SetinitialComponent"
+          },
+          {
+            "id": 3,
+            "label": "Render"
+          },
+          {
+            "id": 4,
+            "label": "All of the above"
+          }
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "What is the functionality of a “webpack” command?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "Runs react local development server"
+          },
+          {
+            "id": 2,
+            "label": "transfer files all the JavaScript down into one file"
+          },
+          {
+            "id": 3,
+            "label": "a module blunder"
+          },
+          {
+            "id": 4,
+            "label": "none of the above"
+          }
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "Which of the following is used to access a function fetch() from h1 element in JSX?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "<h1> ${fetch()} </h1>"
+          },
+          {
+            "id": 2,
+            "label": "<h1> {fetch} </h1>"
+          },
+          {
+            "id": 3,
+            "label": "<h1> ${fetch} </h1>"
+          },
+          {
+            "id": 4,
+            "label": "<h1> {fetch()} </h1>"
+          }
+        ],
+        "answer": [
+          4
+        ]
+      },
+      {
+        "question": "Explain the concept of controlled vs. uncontrolled components in React.",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "Controlled components are components that are managed by the DOM, while uncontrolled components are managed by React."
+          },
+          {
+            "id": 2,
+            "label": "Controlled components are components that don't have a state, while uncontrolled components have a state."
+          },
+          {
+            "id": 3,
+            "label": "Controlled components are components that use props for data, while uncontrolled components use state."
+          },
+          {
+            "id": 4,
+            "label": "Controlled components are components whose values are controlled by React state, while uncontrolled components rely on the DOM for their state."
+          }
+        ],
+        "answer": [
+          4
+        ]
+      }
+    ]
+  }
 }

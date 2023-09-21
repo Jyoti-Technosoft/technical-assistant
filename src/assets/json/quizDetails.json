@@ -7,7 +7,6 @@
     "negativePoints": 0.25,
     "numberOfQuestions": 4,
     "testLevel": [
-      "1st",
       "2nd"
     ],
     "title": "Angular",
@@ -38,7 +37,7 @@
     "numberOfQuestions": 3,
     "testLevel": [
       "1st",
-      "2nd"
+      "3rd"
     ],
     "title": "JavaScript",
     "image": "assets\\img\\javascript_logo.png",
@@ -52,8 +51,8 @@
     "negativePoints": 0.25,
     "numberOfQuestions": 3,
     "testLevel": [
-      "1st",
-      "2nd"
+      "2nd",
+      "3rd"
     ],
     "title": "React JS",
     "image": "assets\\img\\react_logo.svg",

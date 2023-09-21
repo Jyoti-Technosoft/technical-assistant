@@ -1,266 +1,388 @@
 {
-  "angularjs":
-    {
-      "quizId": "angular",
-      "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>1 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -0.25 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 60 seconds </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-      "timer": 60,
-      "positivePoints": 1,
-      "negativePoints": 0.25,
-      "numberOfQuestions": 3,
-      "title": "Angular Quiz",
-      "image": "assets\\img\\javascript.svg",
-      "description": "Angular is a framework.AngularJS extends HTML with new attributes.AngularJS is perfect for Single Page Applications.AngularJS is study to easy.",
-      "questions": [
-        {
-          "question": "Which of the following statement is true for AngularJS?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "AngularJS is a closed-source front-end web framework"
-            },
-            {
-              "id": 2,
-              "label": "AngularJS is an open-source front-end web framework"
-            },
-            {
-              "id": 3,
-              "label": "AngularJS is an open-source backend web framework"
-            },
-            {
-              "id": 4,
-              "label": "AngularJS is a closed-source back-end web framework"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+  "id": "angular",
+  "list": {
+    "1st": [
+      {
+        "question": "Angular is a ____",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "Java framework"
+          },
+          {
+            "id": 2,
+            "label": "JavaScript framework"
+          },
+          {
+            "id": 3,
+            "label": "HTML framework"
+          },
+          {
+            "id": 4,
+            "label": "TypeScript framework"
           }
-        },
-        {
-          "question": "Which of the following is the correct syntax for writing AngularJS expressions?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "{{expression}}"
-            },
-            {
-              "id": 2,
-              "label": "{{expression | filter1 | filter2 | …}}"
-            },
-            {
-              "id": 3,
-              "label": "Both of the mentioned"
-            },
-            {
-              "id": 4,
-              "label": "None of the mentioned"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          2
+        ]
+      },
+      {
+        "question": "Which of the following is not a hook application life cycle?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "ngOnChanges"
+          },
+          {
+            "id": 2,
+            "label": "ngViewStart"
+          },
+          {
+            "id": 3,
+            "label": "ngOnInit"
+          },
+          {
+            "id": 4,
+            "label": "None of the above"
           }
-        },
-        {
-          "question": "Which of the following statement is correct about data binding in AngularJS?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "Automatic synchronization of data between model and view components"
-            },
-            {
-              "id": 2,
-              "label": "Automatic synchronization of data between model and controller components"
-            },
-            {
-              "id": 3,
-              "label": "Technique to save html data in the database"
-            },
-            {
-              "id": 4,
-              "label": "Technique to bind database data to html control"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          2
+        ]
+      },
+      {
+        "question": "Which angular decorator allows us to define the pipe name that is globally available for use in any template in the across application?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "pipeName"
+          },
+          {
+            "id": 2,
+            "label": "pipeDeco"
+          },
+          {
+            "id": 3,
+            "label": "Pipe"
+          },
+          {
+            "id": 4,
+            "label": "None of the above"
           }
-        },
-        {
-          "question": "AngularJS expressions bind AngularJS data to HTML like which of the following directive?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "ng-repeat"
-            },
-            {
-              "id": 2,
-              "label": "ng-bind"
-            },
-            {
-              "id": 3,
-              "label": "ng-app"
-            },
-            {
-              "id": 4,
-              "label": "ng-model"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          3
+        ]
+      },
+      {
+        "question": "Which of the following will map the name of an input parameter `userData` to a field named `users`?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "@Input('userData') users"
+          },
+          {
+            "id": 2,
+            "label": "@Input() userData: users"
+          },
+          {
+            "id": 3,
+            "label": "@Input() users: userData"
+          },
+          {
+            "id": 4,
+            "label": "@Input('users') userData"
           }
-        },
-        {
-          "question": "Among the following, on which architectural pattern is AngularJS based?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "Decorater Pattern"
-            },
-            {
-              "id": 2,
-              "label": "Observer Pattern"
-            },
-            {
-              "id": 3,
-              "label": "MVVM architecture Pattern"
-            },
-            {
-              "id": 4,
-              "label": "MVC architecture Pattern"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "What is Angular?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "A programming language"
+          },
+          {
+            "id": 2,
+            "label": "A JavaScript library"
+          },
+          {
+            "id": 3,
+            "label": "A framework for building web applications"
+          },
+          {
+            "id": 4,
+            "label": "A database management system"
           }
-        },
-        {
-          "question": "Which of the following is an advantage of AngularJS?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "AngularJS code is unit testable."
-            },
-            {
-              "id": 2,
-              "label": " AngularJS provides reusable components."
-            },
-            {
-              "id": 3,
-              "label": "AngularJS uses dependency injection and makes use of separation of concerns"
-            },
-            {
-              "id": 4,
-              "label": "All of the above"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          3
+        ]
+      }
+    ],
+    "2nd": [
+      {
+        "question": " What is the purpose of Angular CLI?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "To create and manage Angular projects"
+          },
+          {
+            "id": 2,
+            "label": "To write JavaScript code"
+          },
+          {
+            "id": 3,
+            "label": "To design user interfaces"
+          },
+          {
+            "id": 4,
+            "label": "To connect to databases"
           }
-        },
-        {
-          "question": " Which of the following types of the component can be used to create a custom directive?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "Element directives."
-            },
-            {
-              "id": 2,
-              "label": " Attribute"
-            },
-            {
-              "id": 3,
-              "label": "CSS"
-            },
-            {
-              "id": 4,
-              "label": "All of the above."
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "In Angular, what is the purpose of the @NgModule decorator?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "To define a component"
+          },
+          {
+            "id": 2,
+            "label": "To define a service"
+          },
+          {
+            "id": 3,
+            "label": "To define a module"
+          },
+          {
+            "id": 4,
+            "label": "To define a directive"
           }
-        },
-        {
-          "question": "  How many $RootScope an AngularJS application can have?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "Zero"
-            },
-            {
-              "id": 2,
-              "label": "One"
-            },
-            {
-              "id": 3,
-              "label": "Two"
-            },
-            {
-              "id": 4,
-              "label": "Infinity"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          3
+        ]
+      },
+      {
+        "question": "What is the purpose of the Angular Interceptor?",
+        "type": "checkbox",
+        "options": [
+          {
+            "id": 1,
+            "label": "To intercept HTTP requests and responses"
+          },
+          {
+            "id": 2,
+            "label": "To intercept user input"
+          },
+          {
+            "id": 3,
+            "label": "To intercept routing events"
+          },
+          {
+            "id": 4,
+            "label": "To intercept Angular CLI commands"
           }
-        },
-        {
-          "question": " What is deep linking in AngularJS?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "Deep linking is an SEO-based technique."
-            },
-            {
-              "id": 2,
-              "label": "Deep linking refers to linking various views to the main page."
-            },
-            {
-              "id": 3,
-              "label": "Deep linking allows you to encode the state of an application in the URL so that it can be bookmarked."
-            },
-            {
-              "id": 4,
-              "label": "All of the Above"
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "How do you communicate between components in Angular?",
+        "type": "checkbox",
+        "options": [
+          {
+            "id": 1,
+            "label": "Using @Input and @Output decorators"
+          },
+          {
+            "id": 2,
+            "label": "Using two way binding"
+          },
+          {
+            "id": 3,
+            "label": "By directly accessing component properties"
+          },
+          {
+            "id": 4,
+            "label": "Using JavaScript's window object"
           }
-        },
-        {
-          "question": "Which of the following statement is true in the case of $routeProvider?",
-          "type": "checkbox",
-          "options": [
-            {
-              "id": 1,
-              "label": "It is a service."
-            },
-            {
-              "id": 2,
-              "label": "It is a module."
-            },
-            {
-              "id": 3,
-              "label": "It is a component."
-            },
-            {
-              "id": 4,
-              "label": "None of the above."
-            }
-          ],
-          "answer": {
-            "id": [2,3]
+        ],
+        "answer": [
+          1,
+          2
+        ]
+      },
+      {
+        "question": "What is Angular CLI's ng serve command used for?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "Creating a new Angular project"
+          },
+          {
+            "id": 2,
+            "label": "Compiling TypeScript code"
+          },
+          {
+            "id": 3,
+            "label": "Running a development server for the Angular application"
+          },
+          {
+            "id": 4,
+            "label": "Generating Angular components"
           }
-        }
-      ]
-    }
+        ],
+        "answer": [
+          3
+        ]
+      }
+    ],
+    "3rd": [
+      {
+        "question": "What is an Angular resolver used for?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "To resolve routing conflicts"
+          },
+          {
+            "id": 2,
+            "label": "To resolve dependencies in Angular modules"
+          },
+          {
+            "id": 3,
+            "label": "To prefetch data before a route is activated"
+          },
+          {
+            "id": 4,
+            "label": "To resolve authentication issues"
+          }
+        ],
+        "answer": [
+          3
+        ]
+      },
+      {
+        "question": "What is an Angular directive, and how does it differ from a component?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "A directive is used for rendering HTML templates, while a component represents a page."
+          },
+          {
+            "id": 2,
+            "label": "A directive is used for extending HTML with custom behavior, while a component is a self-contained UI element."
+          },
+          {
+            "id": 3,
+            "label": "A directive is used for defining module dependencies, while a component is used for routing."
+          },
+          {
+            "id": 4,
+            "label": "A directive is used for managing API requests, while a component is used for UI design."
+          }
+        ],
+        "answer": [
+          2
+        ]
+      },
+      {
+        "question": "Explain the difference between ngOnInit and constructor in an Angular component.",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "ngOnInit is used for component initialization, while the constructor is used for dependency injection."
+          },
+          {
+            "id": 2,
+            "label": "ngOnInit is used for dependency injection, while the constructor is used for component initialization."
+          },
+          {
+            "id": 3,
+            "label": "They are interchangeable and can be used for the same purpose."
+          },
+          {
+            "id": 4,
+            "label": "ngOnInit is used for defining routes, while the constructor is used for event handling."
+          }
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "What is Angular's AOT (Ahead-of-Time) compilation, and why is it important?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "AOT compiles templates and components before runtime, improving application performance and security."
+          },
+          {
+            "id": 2,
+            "label": "AOT is a feature for routing optimization in Angular."
+          },
+          {
+            "id": 3,
+            "label": "AOT is used for asynchronous data loading in Angular applications."
+          },
+          {
+            "id": 4,
+            "label": "AOT stands for Angular's Offline Testing, which verifies application functionality without an internet connection."
+          }
+        ],
+        "answer": [
+          1
+        ]
+      },
+      {
+        "question": "How can you implement form validation in Angular?",
+        "type": "checkbox",
+        "options": [
+          {
+            "id": 1,
+            "label": "Using built-in HTML form validation attributes"
+          },
+          {
+            "id": 2,
+            "label": "By creating custom validators using Angular services"
+          },
+          {
+            "id": 3,
+            "label": "Form validation is not possible in Angular"
+          },
+          {
+            "id": 4,
+            "label": "None of the above."
+          }
+        ],
+        "answer": [
+          1,
+          2
+        ]
+      }
+    ]
+  }
 }

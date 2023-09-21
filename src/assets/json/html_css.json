@@ -1,337 +1,389 @@
 {
-  "html_css":
-  {
-    "quizId": "Html/CSS",
-    "rules": "<li class=\"container\">There will be a Negative Marking.</li><ul><li><b>Correct Answer </b> gives you <b>10 Point.</b></li><li><b>Incorrcet Answer </b> Deduct your <b> -1 Point.</b></li></ul><li>You will be given the time for each question.</li><ul><li>You have <b> 30 seconds </b> for each questions.</li></ul><li>After Completion of time for each question , The question will be change automatically.</li><li>If you want to go for next question before time ending then click on the <b>Next button</b></li>",
-    "timer": 30,
-    "positivePoints": 10,
-    "negativePoints": 1,
-    "numberOfQuestions": 3,
-    "title": "HTML-CSS Quiz",
-    "image": "assets\\img\\html-css.svg",
-    "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages.",
-    "questions": [
+  "id": "htmlCss",
+  "list": {
+    "1st": [
       {
-        "question": "What is HTML?",
+        "question": "What does HTML stand for?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "HTML describes the structure of a webpage"
+            "label": "High-Level Text Management Language"
           },
           {
             "id": 2,
-            "label": "HTML is the standard markup language mainly used to create web pages"
+            "label": "Hyperlink and Text Manipulation Language"
           },
           {
             "id": 3,
-            "label": "HTML consists of a set of elements that helps the browser how to view the content"
+            "label": "Hyper Text Markup Language"
           },
           {
             "id": 4,
-            "label": "All of the mentioned"
+            "label": "Hyper Transfer Markup Language"
           }
         ],
-        "answer": { "id": 4 }
+        "answer": [
+          3
+        ]
       },
       {
-        "question": "Which of the following tag is used for inserting the largest heading in HTML?",
+        "question": "What is the purpose of the CSS flexbox layout?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "head"
+            "label": "To create two-dimensional grids"
           },
           {
             "id": 2,
-            "label": "<h1>"
+            "label": "To create responsive web designs"
           },
           {
             "id": 3,
-            "label": "<h6>"
+            "label": "To apply animations to elements"
           },
           {
             "id": 4,
-            "label": "heading"
+            "label": "To align elements in a single dimension (either horizontally or vertically)"
           }
         ],
-        "answer": { "id": 2 }
+        "answer": [
+          4
+        ]
       },
       {
-        "question": " HTML stands for __________",
+        "question": "What is the correct CSS syntax for setting the text color of an element with the class `highlight` to red?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "HyperText Markup Language"
+            "label": ".highlight { text-color: red; }"
           },
           {
             "id": 2,
-            "label": "HyperText Machine Language"
+            "label": ".highlight { color: red; }"
           },
           {
             "id": 3,
-            "label": "HyperText Marking Language"
+            "label": "#highlight { text-color: red; }"
           },
           {
             "id": 4,
-            "label": "HighText Marking Language"
+            "label": "#highlight { color: red; }"
           }
         ],
-        "answer": { "id": 1 }
+        "answer": [
+          2
+        ]
       },
       {
-        "question": "Which element is used to get highlighted text in HTML5?",
+        "question": "In CSS, which property is used to control the size of an element's margin area?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "<u>"
+            "label": "padding"
           },
           {
             "id": 2,
-            "label": "<mark>"
+            "label": "border"
           },
           {
             "id": 3,
-            "label": "<highlight>"
+            "label": "margin"
           },
           {
             "id": 4,
-            "label": "<b>"
+            "label": "spacing"
           }
         ],
-        "answer": { "id": 2 }
+        "answer": [
+          3
+        ]
       },
       {
-        "question": "How do we write comments in HTML?",
+        "question": "What is the correct HTML tag for inserting a line break?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "</…….>"
+            "label": "<br>"
           },
           {
             "id": 2,
-            "label": "<!……>"
+            "label": "<lb>"
           },
           {
             "id": 3,
-            "label": "</……/>"
+            "label": "<break>"
           },
           {
             "id": 4,
-            "label": "<…….!>"
+            "label": "<newline>"
           }
         ],
-        "answer": { "id": 2 }
+        "answer": [
+          1
+        ]
+      }
+    ],
+    "2nd": [
+      {
+        "question": "How to add a background color in HTML?",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "<marquee bg color: `red`>"
+          },
+          {
+            "id": 2,
+            "label": "<marquee bg-color = `red`>"
+          },
+          {
+            "id": 3,
+            "label": "<marquee bgcolor = `red`>"
+          },
+          {
+            "id": 4,
+            "label": "<marquee color = `red`>"
+          }
+        ],
+        "answer": [
+          3
+        ]
       },
       {
-        "question": "Which of the following tag is used to embed css in html page?",
-        "type": "radio",
+        "question": "What are the types of unordered or bulleted list in HTML?",
+        "type": "checkbox",
         "options": [
           {
             "id": 1,
-            "label": "<css>"
+            "label": "disc"
           },
           {
             "id": 2,
-            "label": "<!DOCTYPE html>"
+            "label": "square"
           },
           {
             "id": 3,
-            "label": "<script>"
+            "label": "triangle"
           },
           {
             "id": 4,
-            "label": "<style>"
+            "label": "circle"
           }
         ],
-        "answer": { "id": 4 }
+        "answer": [
+          1,
+          2,
+          4
+        ]
       },
       {
-        "question": "Which of the following has introduced text, list, box, margin, border, color, and background properties?",
+        "question": "Which of the following is the correct way to change the font face in HTML?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "HTML"
+            "label": "<font name = `Calibri`> ……… </font>"
           },
           {
             "id": 2,
-            "label": "PHP"
+            "label": "<font face = `Calibri`> ……… </font>"
           },
           {
             "id": 3,
-            "label": "CSS"
+            "label": "<font = `Calibri`> ……… </font>"
           },
           {
             "id": 4,
-            "label": "Ajax"
+            "label": "None of the above"
           }
         ],
-        "answer": { "id": 3 }
+        "answer": [
+          2
+        ]
       },
       {
-        "question": "What is the work of <address> element in HTML5?",
+        "question": "Which of the following selector in CSS is used to select the elements that do not match the selectors?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "contains IP address"
+            "label": ":! selector"
           },
           {
             "id": 2,
-            "label": "contains home address"
+            "label": ":empty selector"
           },
           {
             "id": 3,
-            "label": "contains url"
+            "label": ":not selector"
           },
           {
             "id": 4,
-            "label": "contains contact details for author"
+            "label": "None of the above"
           }
         ],
-        "answer": { "id": 4 }
+        "answer": [
+          3
+        ]
       },
       {
-        "question": " Which tag is used to create a dropdown in HTML Form?",
+        "question": "The CSS property which is used to define the set the difference between two lines of your content is -",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "<input>"
+            "label": "min-height property"
           },
           {
             "id": 2,
-            "label": "<select>"
+            "label": "max-height property"
           },
           {
             "id": 3,
-            "label": "<text>"
+            "label": "line-height property"
           },
           {
             "id": 4,
-            "label": "<textarea>"
+            "label": "None of the above"
           }
         ],
-        "answer": { "id": 2 }
+        "answer": [
+          3
+        ]
+      }
+    ],
+    "3rd": [
+      {
+        "question": "The CSS property used to set the distance between the borders of the adjacent cells in the table is -",
+        "type": "radio",
+        "options": [
+          {
+            "id": 1,
+            "label": "border-collapse"
+          },
+          {
+            "id": 2,
+            "label": "border-radius"
+          },
+          {
+            "id": 3,
+            "label": "border-spacing"
+          },
+          {
+            "id": 4,
+            "label": "None of the above"
+          }
+        ],
+        "answer": [
+          3
+        ]
       },
       {
-        "question": "Which of the following CSS style property is used to specify an italic text?",
+        "question": "Which of the following is not a value of the font-variant property in CSS?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "style"
+            "label": "normal"
           },
           {
             "id": 2,
-            "label": "font"
+            "label": "small-caps"
           },
           {
             "id": 3,
-            "label": "font-style"
+            "label": "large-caps"
           },
           {
             "id": 4,
-            "label": "@font-face"
+            "label": "inherit"
           }
         ],
-        "answer": { "id": 3 }
+        "answer": [
+          3
+        ]
       },
       {
-        "question": " Which of the following function defines a linear gradient as a CSS image?",
-        "type": "radio",
+        "question": "Which of the following is correct about custom attributes in HTML5?",
+        "type": "checkbox",
         "options": [
           {
             "id": 1,
-            "label": "gradient()"
+            "label": "A custom data attribute starts with data- and would be named based on your requirement."
           },
           {
             "id": 2,
-            "label": "linear-gradient()"
+            "label": "You would be able to get the values of these attributes using JavaScript APIs or CSS in similar way as you get for standard attributes."
           },
           {
             "id": 3,
-            "label": "grayscale()"
+            "label": "The custom attributes are also known as data attributes."
           },
           {
             "id": 4,
-            "label": "image()"
+            "label": "None of the above."
           }
         ],
-        "answer": { "id": 2 }
+        "answer": [
+          1,
+          2,
+          3
+        ]
       },
       {
-        "question": "Which of the following CSS property can be used to set the image as a border instead of the border style?",
+        "question": "Which of the following input control represents a date and time (year, month, day, hour, minute, second, fractions of a second) encoded according to ISO 8601 with no time zone information in Web Form 2.0?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "background-image-source"
+            "label": "datetime"
           },
           {
             "id": 2,
-            "label": "background-image"
+            "label": "datetime-local"
           },
           {
             "id": 3,
-            "label": "border-image-source"
+            "label": "date"
           },
           {
             "id": 4,
-            "label": "border-image"
+            "label": "month"
           }
         ],
-        "answer": { "id": 3 }
+        "answer": [
+          2
+        ]
       },
       {
-        "question": "Which of the following CSS property sets the font size of text?",
+        "question": "Which of the following tag can be used to mark up a conversation in HTML5?",
         "type": "radio",
         "options": [
           {
             "id": 1,
-            "label": "font-size"
+            "label": "footer"
           },
           {
             "id": 2,
-            "label": "text-size"
+            "label": "nav"
           },
           {
             "id": 3,
-            "label": "text"
+            "label": "dialog"
           },
           {
             "id": 4,
-            "label": "size"
+            "label": "figure"
           }
         ],
-        "answer": { "id": 1 }
-      },
-      {
-        "question": "Which of the following CSS selector selects the elements that are checked?",
-        "type": "radio",
-        "options": [
-          {
-            "id": 1,
-            "label": ":checked"
-          },
-          {
-            "id": 2,
-            "label": "E ~ F"
-          },
-          {
-            "id": 3,
-            "label": "::after"
-          },
-          {
-            "id": 4,
-            "label": "none of the mentioned"
-          }
-        ],
-        "answer": { "id": 1 }
+        "answer": [
+          3
+        ]
       }
     ]
   }
