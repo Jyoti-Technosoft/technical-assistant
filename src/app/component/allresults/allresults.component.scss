@@ -13,10 +13,16 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    min-height: inherit;
     .chart-area {
       border: 1px solid #ddd;
       text-align: center;
     }
+  }
+
+  mat-spinner {
+    width: 100px !important;
+    height: 50px !important;
   }
 
   .hide-chart {

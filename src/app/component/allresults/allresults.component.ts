@@ -4,8 +4,8 @@ import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import * as d3 from 'd3';
 import { ResultService } from '@app/service/result.service';
-import { MESSAGE } from '@app/utility/utility';
 import { SnackbarService } from '@app/service/snackbar.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-allresults',
@@ -24,6 +24,7 @@ export class AllresultsComponent implements OnInit {
   showChart = false;
   sub: Subscription;
   isMobileView = false;
+  isApiCalling = true;
   resultObject: any[] = [];
   chartArray: any = {};
   tooltip: any;
@@ -60,28 +61,33 @@ export class AllresultsComponent implements OnInit {
   resultData(): void {
 
     const getData = this.result.getUserResultData(this.userId).subscribe({
-      next:(data) => {
-        if (data) {
-          this.allResultData = this.subjectWiseData = data;
+      next:(res) => {
+        if (res.success) {
+          this.allResultData = this.subjectWiseData = res.data;
           this.showChart = true;
+          this.isApiCalling = false;
           if (this.allResultData.length > 0) {
-            this.allResultData.forEach((res: any) => {
+            this.allResultData.forEach((data: any) => {
               const resultObject = {
-                points: res.points,
-                type: res.quiz_id,
+                points: Number(data.points),
+                type: data.quiz_id,
               };
               this.resultObject.push(resultObject);
             });
             this.createSvg();
             this.createSvg2();
             this.createTooltip();
-            this.cd.detectChanges();
           } else {
             this.showChart = false;
           }
+          this.cd?.detectChanges();
+
         } else {
-          this.snackBarService.error(MESSAGE.ALL_RESULT_FAILED)
+          this.snackBarService.error(res.message);
         }
+      },
+      error: (err) => {
+        this.snackBarService.error(err.message);
       }
     });
 
@@ -126,6 +132,8 @@ export class AllresultsComponent implements OnInit {
     const colorScale = d3.scaleOrdinal()
                       .domain(aggregatedData.map(d => d.type))
                       .range(d3.schemeCategory10);
+
+    console.log('aggregatedData', aggregatedData);
 
     const x = d3
       .scaleBand()
@@ -192,14 +200,19 @@ export class AllresultsComponent implements OnInit {
 
     d3.select('#bar1').remove();
     d3.select('#bar1').classed('hide-chart', true);
-    const filteredData = this.subjectWiseData.filter((d:any) => d.type === data.type);
 
-  // Group the filtered data by date and calculate the sum of points
+    const filteredData = this.subjectWiseData.filter((d:any) => d.quiz_id === data.type);
+
+    // Group the filtered data by date and calculate the sum of points
     const groupedData = d3.group(filteredData, (d:any) => d.created_at);
     const aggregatedData = Array.from(groupedData, ([date, values]) => ({
-      date,
+      date: moment(date).format("DD/MM/YYYY"),
       points: values.map(v => v.points)
     }));
+
+    console.log('filteredData', filteredData);
+    console.log('groupedData', groupedData);
+    console.log('aggregatedData', aggregatedData);
 
     this.secondChart(data.type, aggregatedData);
   }
@@ -240,13 +253,16 @@ export class AllresultsComponent implements OnInit {
               .domain(totalKeys)
               .range(d3.schemeCategory10);
 
+    console.log('transformedData', transformedData);
+    console.log('allPoints', allPoints);
+
     const stackedData = d3.stack().keys(totalKeys)(transformedData);
 
     const x = d3
       .scaleBand()
       .domain(transformedData.map((d:any) => d.date))
       .range([0, this.width])
-      .padding(0.4);
+      .padding(0.6);
 
     this.svg
       .append('text')
@@ -257,12 +273,20 @@ export class AllresultsComponent implements OnInit {
 
     const y = d3
       .scaleLinear()
-      .domain([Number(d3.min(allPoints)) - 3,
-              Number(d3.max(allPoints)) + 3])
+      .domain([Number(d3.min(allPoints)) - 5,
+              Number(d3.max(allPoints)) + 5])
       .nice()
       .range([this.height, 0]);
 
     this.svg.append('g').call(d3.axisLeft(y));
+
+    this.svg.append("line")
+      .attr("x1", 0)
+      .attr("x2", this.width - this.margin.right)
+      .attr("y1", y(0))
+      .attr("y2", y(0))
+      .attr("stroke", "black")
+      .attr("stroke-width", 1);
 
     this.svg
       .append('text')
@@ -278,6 +302,8 @@ export class AllresultsComponent implements OnInit {
       .call(d3.axisBottom(x))
       .selectAll('text')
       .style('text-anchor', 'middle');
+
+    console.log('stackedData', stackedData);
 
     this.svg
       .append("g")

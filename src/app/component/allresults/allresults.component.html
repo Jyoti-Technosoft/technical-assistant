@@ -1,5 +1,8 @@
 <div class="main-div">
-  <div [ngStyle]="{'width': isMobileView ? '100%' : '70%'}" class="empty-card row" *ngIf="subjectWiseData.length === 0 else chart">
+  <div class="d-flex flex-row justify-content-center" *ngIf="isApiCalling">
+    <mat-spinner [diameter]="50"></mat-spinner>
+  </div>
+  <div [ngStyle]="{'width': isMobileView ? '100%' : '70%'}" class="empty-card row" *ngIf="subjectWiseData.length === 0 && !isApiCalling">
     <div class="notdata col-6">
       <h4 class="notdata-title">Sorry, !No quiz played yet</h4>
       <p class="notdata-description">
@@ -11,7 +14,7 @@
       </div>
     </div>
   </div>
-  <ng-template #chart class="chart-card">
+  <div class="chart-card">
     <div class="col-12" [ngStyle]="{'width': isMobileView ? '100%' : '80%'}">
       <div #chartContainer class="chart-area" [ngStyle]="{'display': showChart ? 'block' : 'none'}">
         <div #tooltip class="tooltip"></div>
@@ -19,5 +22,5 @@
         <div id="bar2" class="hide-chart"></div>
       </div>
     </div>
-  </ng-template>
+  </div>
 </div>

@@ -456,7 +456,6 @@ export class Quizcomponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
     localStorage.removeItem(LOCALSTORAGE_KEY.QUIZ_DETAILS);
     this.stopTimer();
     this.timerInterval = null;

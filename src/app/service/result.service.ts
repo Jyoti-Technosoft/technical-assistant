@@ -8,7 +8,6 @@ import { environment } from '@environments/environment.development';
 })
 export class ResultService {
 
-  url = 'http://localhost:3000';
   serverUrl = environment.API_URL;
 
   constructor(
