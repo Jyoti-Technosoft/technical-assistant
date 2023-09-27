@@ -123,15 +123,8 @@ export class UserProfileComponent implements OnInit {
       confirmPassword: ['', [Validators.required, Validators.pattern(PATTERN.PASSWORD_PATTERN)]],
     });
 
-    // this.changePasswordForm.get('password')?.setValidators(this.passwordMatchValidator.bind(this));
     this.changePasswordForm.get('confirmPassword')?.setValidators(this.confirmPasswordMatchValidator.bind(this));
   }
-
-  // passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
-
-  //   let password = control.value;
-  //   return password === this.userData.password ? null : { passwordMismatch: true };
-  // }
 
   confirmPasswordMatchValidator(control: AbstractControl): ValidationErrors | null {
 

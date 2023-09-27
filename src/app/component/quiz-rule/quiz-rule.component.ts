@@ -1,12 +1,9 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
-import { QuizDataService } from '@app/service/quiz-data.service';
 import { Subscription } from 'rxjs';
 import { LOCALSTORAGE_KEY } from '@app/utility/utility';
-import { SnackbarService } from '@app/service/snackbar.service';
 import quizData from '@assets/json/quizDetails.json';
-
 @Component({
   selector: 'app-quiz-rule',
   templateUrl: './quiz-rule.component.html',
@@ -27,8 +24,6 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
     private route: Router,
     private activeRoute: ActivatedRoute,
     private auth: AuthenticationService,
-    private quizservice: QuizDataService,
-    private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
   ) {
 
@@ -54,6 +49,8 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
   }
 
   applyRulesForTest(data: string): void {
+
+    console.log('inroduction=====', this.instruction);
 
     data = data?.replaceAll('timer', this.instruction.timer);
     data = data?.replace('positivePoints', this.instruction.positivePoints);

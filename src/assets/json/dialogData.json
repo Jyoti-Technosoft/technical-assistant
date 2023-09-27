@@ -1,4 +1,10 @@
 {
+  "quizDetailModel": {
+    "modelLabel": "Learn More",
+    "label": "",
+    "yes": "Ok",
+    "type": "quizDetailModel"
+  },
   "skipModel": {
     "label": "Are you sure you want to skip this question as you will be able to answer this question again.",
     "yes": "Yes",

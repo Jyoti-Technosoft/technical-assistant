@@ -16,21 +16,10 @@ export enum PATTERN {
 }
 
 export enum MESSAGE {
-    LOGIN_SUCCESS = 'Login Successfully',
-    LOGIN_FAILED = 'Login Error',
-    LOGOUT_SUCESS = 'Logout Successfully',
-    REGISTRATION_SUCCESS = 'Registration Successfully',
-    REGISTRATION_FAILED = 'Registration Error',
-    ALL_RESULT_FAILED = 'Error! While fetching result data',
-    COUNT_FAILED = 'Error! While fetching quiz count data',
-    QUIZ_DETAIL_FAILED = 'Error! While fetching quiz details',
     QUESTION_FAILED = 'Sorry! No questions are available',
     TIMER_OFF = 'Sorry! Your time is over',
     NO_ANS_SELECTION = 'Your answer is already selected',
     MISSED_OUT = `Opps! You can not able to select any answer`,
-    SOMTHING = 'Sorry! Something went wrong',
     NO_QUIZ = 'No Recent Quiz Played Yet',
-    PASSWORD_CHANGE_SUCCESSFUL = 'Your password has been change successfully',
-    PROFILE_UPDATE_SUCCESSFUL = 'Your profile has been updated successfully',
     EXIT_FROM_QUIZ = 'You are successfully exit from quiz'
 };

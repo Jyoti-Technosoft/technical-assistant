@@ -5,7 +5,7 @@
         <img src="assets/img/quizlogin.svg" width="100%" height="100%" alt="login image"/>
       </div>
       <div class="d-flex col-6 align-items-center">
-        <div *ngIf="loginPage else registration">
+        <ng-container *ngIf="loginPage">
           <form class="p-2" [formGroup]="loginForm" *ngIf="loginForm">
             <span>
               <img src="assets/img/JT.png" alt="logo" class="d-inline-block logo-image"/>
@@ -34,15 +34,15 @@
             </mat-form-field>
 
             <div class="d-flex flex-column text-center">
-              <button class="mb-3 login-btn" mat-raised-button (click)="doLogin()"> Login </button>
+              <button class="mb-3 login-btn" [disabled]="isApiCalling" mat-raised-button (click)="doLogin()"> Login </button>
               <div>
                 Don't have an Account ?
               </div>
-              <a routerLink="registration" class="mt-3 cursor-pointer" (click)="redirectTo('new')"> Create New Account </a>
+              <a class="mt-3" (click)="redirectTo('new')"> Create New Account </a>
             </div>
           </form>
-        </div>
-        <ng-template #registration>
+        </ng-container>
+        <ng-container *ngIf="!loginPage">
           <form class="d-flex flex-column p-2" [formGroup]="registrationForm" *ngIf="registrationForm">
             <div class="w-100-p">
               <ul id="progressbar" class="d-flex progressbar p-0">
@@ -164,7 +164,7 @@
               </button>
             </div>
           </form>
-        </ng-template>
+        </ng-container>
       </div>
     </mat-card-content>
   </mat-card>

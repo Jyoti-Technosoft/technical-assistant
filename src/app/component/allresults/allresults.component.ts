@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Params, Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
@@ -133,8 +133,6 @@ export class AllresultsComponent implements OnInit {
                       .domain(aggregatedData.map(d => d.type))
                       .range(d3.schemeCategory10);
 
-    console.log('aggregatedData', aggregatedData);
-
     const x = d3
       .scaleBand()
       .domain(resultObject.map((d) => d.type))
@@ -204,15 +202,12 @@ export class AllresultsComponent implements OnInit {
     const filteredData = this.subjectWiseData.filter((d:any) => d.quiz_id === data.type);
 
     // Group the filtered data by date and calculate the sum of points
-    const groupedData = d3.group(filteredData, (d:any) => d.created_at);
+    const groupedData = d3.group(filteredData, (d:any) => moment(d.created_at).format("DD/MM/YYYY"));
+
     const aggregatedData = Array.from(groupedData, ([date, values]) => ({
-      date: moment(date).format("DD/MM/YYYY"),
+      date,
       points: values.map(v => v.points)
     }));
-
-    console.log('filteredData', filteredData);
-    console.log('groupedData', groupedData);
-    console.log('aggregatedData', aggregatedData);
 
     this.secondChart(data.type, aggregatedData);
   }
@@ -229,6 +224,8 @@ export class AllresultsComponent implements OnInit {
       let transformedItem:any = {
         "date": item.date
       };
+
+      item.points.sort((a:any,b:any) => a - b);
 
       item.points.forEach((point:any, index:number) => {
         transformedItem[`point${index + 1}`] = point;
@@ -253,9 +250,6 @@ export class AllresultsComponent implements OnInit {
               .domain(totalKeys)
               .range(d3.schemeCategory10);
 
-    console.log('transformedData', transformedData);
-    console.log('allPoints', allPoints);
-
     const stackedData = d3.stack().keys(totalKeys)(transformedData);
 
     const x = d3
@@ -271,22 +265,27 @@ export class AllresultsComponent implements OnInit {
       .attr('text-anchor', 'middle')
       .text('Date')
 
+    let hasNegative = allPoints.some((v:any) => v < 0);
+    let minValue = hasNegative ? Number(d3.min(allPoints)) - 5 : 0;
+
     const y = d3
       .scaleLinear()
-      .domain([Number(d3.min(allPoints)) - 5,
+      .domain([minValue,
               Number(d3.max(allPoints)) + 5])
       .nice()
       .range([this.height, 0]);
 
     this.svg.append('g').call(d3.axisLeft(y));
 
-    this.svg.append("line")
-      .attr("x1", 0)
-      .attr("x2", this.width - this.margin.right)
-      .attr("y1", y(0))
-      .attr("y2", y(0))
-      .attr("stroke", "black")
-      .attr("stroke-width", 1);
+    if (hasNegative) {
+      this.svg.append("line")
+        .attr("x1", 0)
+        .attr("x2", this.width - this.margin.right)
+        .attr("y1", y(0))
+        .attr("y2", y(0))
+        .attr("stroke", "black")
+        .attr("stroke-width", 1);
+    }
 
     this.svg
       .append('text')
@@ -303,8 +302,6 @@ export class AllresultsComponent implements OnInit {
       .selectAll('text')
       .style('text-anchor', 'middle');
 
-    console.log('stackedData', stackedData);
-
     this.svg
       .append("g")
       .selectAll('g')
@@ -319,21 +316,24 @@ export class AllresultsComponent implements OnInit {
       .attr("x", (d:any)=> x(d.data.date))
       // .attr("y", (d:any)=> Number(y(d[1])))
       // .attr('height', (d:any) => y(d[0]) - y(d[1]))
-      .attr("y", (d:any) => d[1] > 0 ? y(d[1]) : y(d[0]))
-      .attr("height", (d:any) => d[1] > 0 ? y(d[0]) - y(d[1]) : y(d[1]) - y(d[0]))
+      .attr("y", (d:any) => d[1] >= 0 ? y(d[1]) : y(d[0]))
+      .attr("height", (d:any) => d[1] >= 0 ? y(d[0]) - y(d[1]) : y(d[1]) - y(d[0]))
       .attr("width", x.bandwidth())
       .attr('cursor', 'pointer')
       .on('click', (event: MouseEvent, d: any) => {
         this.onSecondChartBarClick(event, d);
         this.mouseleaveChart2();
         this.subjectType = 'Results';
+        this.cd.detectChanges();
       })
       .on('mouseover', (event: MouseEvent, d: any) => {
-        const points = d[1];
+        const points =  d[0] === 0 ? d[1] : d[1] - d[0];
         this.mouseoverChart2(event, points);
       })
       .on('mousemove', this.mousemoveChart2)
       .on('mouseleave', this.mouseleaveChart2)
+
+    this.cd.detectChanges();
   }
 
   private onSecondChartBarClick(event: any, d: any) {

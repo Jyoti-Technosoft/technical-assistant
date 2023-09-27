@@ -10,7 +10,7 @@
       {{avatarName}}
     </div>
     <mat-menu #belowMenu="matMenu" yPosition="below">
-      <div mat-menu-item> {{userData?.name}} </div>
+      <div mat-menu-item routerLink="/user-profile"> {{userData?.name}} </div>
       <div mat-menu-item (click)="openSignOutDialog()"> Sign Out</div>
     </mat-menu>
   </span>

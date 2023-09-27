@@ -19,7 +19,7 @@
     "timer": 15,
     "positivePoints": 2,
     "negativePoints": 1,
-    "numberOfQuestions": 4,
+    "numberOfQuestions": 5,
     "testLevel": [
       "1st",
       "2nd"

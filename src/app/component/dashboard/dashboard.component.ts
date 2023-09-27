@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import dialogData from '@assets/json/dialogData.json';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { DashboardService } from '@app/service/dashboard.service';
 import { QuizDataService } from '@app/service/quiz-data.service';
 import { Params, Router } from '@angular/router';
 import { SnackbarService } from '@app/service/snackbar.service';
 import quizData from '@assets/json/quizDetails.json';
+import { DialogService } from '@app/dialog-service/dialog.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,16 +17,19 @@ import quizData from '@assets/json/quizDetails.json';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
+  dialogData = { ...dialogData };
   quizInformationdata = [...quizData];
   cardData = 8;
   sub: Subscription;
   quizCountData: any;
   userId!: number;
+  showMore: boolean = false;
   isMobileView = false;
 
   constructor(
     private auth: AuthenticationService,
     private quizservice: QuizDataService,
+    private dialogService: DialogService,
     private dashboard: DashboardService,
     private route: Router,
     private snackbarService: SnackbarService,
@@ -102,15 +107,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
+  showDetails(des: string): void {
+    let configData = this.dialogData.quizDetailModel;
+    configData.label = des;
+    this.dialogService.openDialog(configData);
+  }
+
   startQuiz(title: string) {
 
     const queryParams: Params = { quiz: title };
     this.route.navigate(['/rules'], { queryParams });
-  }
-
-  loadMore() {
-
-    this.cardData = this.cardData + 8;
   }
 
   ngOnDestroy(): void {

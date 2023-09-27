@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/authentication.service';
 import { Subscription } from 'rxjs';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import { LOCALSTORAGE_KEY, MESSAGE, PATTERN } from '@app/utility/utility';
+import { LOCALSTORAGE_KEY, PATTERN } from '@app/utility/utility';
 import { SnackbarService } from '@app/service/snackbar.service';
 
 export const MY_FORMATS = {
@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loginForm!: FormGroup;
   registrationForm!: FormGroup;
-  loginPage = true;
+  isApiCalling = false;
+  loginPage!: boolean;
   sub: Subscription;
   hidePassword = true;
   hideConfirmPassword = true;
@@ -78,6 +79,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     });
 
     this.steps.push(this.step1Template, this.step2Template, this.step3Template);
+    this.loginPage = this.router.url.includes('login') ? true : false;
     this.createForm();
   }
 
@@ -123,6 +125,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (this.loginForm.valid) {
 
+      this.isApiCalling = true;
       const formValue = this.loginForm.getRawValue();
       const logUser = this.auth.logInUser(formValue).subscribe({
         next: (res:any) => {
@@ -131,12 +134,15 @@ export class LoginComponent implements OnInit, OnDestroy {
             localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, res.data.token);
             this.router.navigateByUrl('layout');
             this.snackbarService.success(res.message);
+            this.isApiCalling = false;
           } else {
             this.snackbarService.error(res.message);
+            this.isApiCalling = false;
           }
         },
         error: (err) => {
           this.snackbarService.error(err.message);
+          this.isApiCalling = false;
         }
       });
       this.sub.add(logUser);
@@ -162,6 +168,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   submitUserData(): void {
 
+    this.isApiCalling = true;
     let user = this.registrationForm.getRawValue();
 
     const data = {
@@ -179,8 +186,10 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.loginPage = true;
           this.snackbarService.success(res.message);
           this.router.navigateByUrl('login');
+          this.isApiCalling = false;
         } else  {
           this.snackbarService.error(res.message);
+          this.isApiCalling = false;
         }
       },
       error: (err) => {
