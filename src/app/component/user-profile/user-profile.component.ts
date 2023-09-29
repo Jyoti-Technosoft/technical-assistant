@@ -149,7 +149,7 @@ export class UserProfileComponent implements OnInit {
 
           const userData = this.auth.changePassword(passData).subscribe({
             next: (res) => {
-              if (res.status) {
+              if (res.success) {
                 this.snackBarService.success(res.message);
                 this.editMode = false;
                 this.router.navigateByUrl('login');
@@ -184,10 +184,14 @@ export class UserProfileComponent implements OnInit {
           let data = this.profilePageForm.getRawValue();
           const userData = this.auth.updateUserData(data, this.userId).subscribe({
             next: (res) => {
-              this.snackBarService.success(res.message);
-              this.editMode = false;
-              this.getUserData(this.userId);
-              this.cd.detectChanges();
+              if (res.success) {
+                this.snackBarService.success(res.message);
+                this.editMode = false;
+                this.getUserData(this.userId);
+                this.cd.detectChanges();
+              } else {
+                this.snackBarService.error(res.message);
+              }
             },
             error: (err) => {
               this.snackBarService.error(err.message);

@@ -130,19 +130,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       const logUser = this.auth.logInUser(formValue).subscribe({
         next: (res:any) => {
           if (res.success) {
+            this.isApiCalling = false;
+            this.snackbarService.success(res.message);
             localStorage.setItem(LOCALSTORAGE_KEY.USERID, res.data.user_id);
             localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, res.data.token);
             this.router.navigateByUrl('layout');
-            this.snackbarService.success(res.message);
-            this.isApiCalling = false;
           } else {
-            this.snackbarService.error(res.message);
             this.isApiCalling = false;
+            this.snackbarService.error(res.message);
           }
         },
         error: (err) => {
-          this.snackbarService.error(err.message);
           this.isApiCalling = false;
+          this.snackbarService.error(err.message);
         }
       });
       this.sub.add(logUser);

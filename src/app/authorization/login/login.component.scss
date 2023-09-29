@@ -179,7 +179,6 @@ $steel_blue: #4682b4;
 
   .logo-image {
     width: 40px;
-    height: 40px;
   }
 
   .mat-mdc-raised-button:not(:disabled) {
@@ -188,10 +187,9 @@ $steel_blue: #4682b4;
   }
 
   .title {
-    // border-bottom: 3px solid green;
-    color: rgb(38 50 56);
-    font-weight: 500;
-    font-size: 20px;
+    border-bottom: 3px solid #98c01c;
+    color: #367dc8;
+    font-weight: bold;
   }
 
   .text-center {
@@ -220,6 +218,7 @@ $steel_blue: #4682b4;
 
   a {
     cursor: pointer;
+    color: #367dc8;
   }
 
   .login-btn {
