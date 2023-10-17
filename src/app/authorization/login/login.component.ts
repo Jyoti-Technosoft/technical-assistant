@@ -139,17 +139,18 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.isApiCalling = false;
             this.snackbarService.error(res.message);
           }
+          this.cd.detectChanges();
         },
         error: (err) => {
           this.isApiCalling = false;
-          this.snackbarService.error(err.message);
+          this.snackbarService.error(err.error.message);
+          this.cd.detectChanges();
         }
       });
       this.sub.add(logUser);
     } else {
       this.loginForm.markAllAsTouched();
     }
-    this.cd.detectChanges();
   }
 
   redirectTo(type: string): void {
@@ -193,7 +194,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        this.snackbarService.error(err.message);
+        this.snackbarService.error(err.error.message);
       }
     });
 

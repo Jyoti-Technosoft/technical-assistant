@@ -87,7 +87,7 @@ export class UserProfileComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.snackBarService.error(err.message);
+        this.snackBarService.error(err.error.message);
       }
     });
 
@@ -107,7 +107,7 @@ export class UserProfileComponent implements OnInit {
   createForm(data?:any) {
 
     this.profilePageForm = this.fb.group({
-      email: [data?.email || '', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
+      email: [String(data?.email).toLowerCase() || '', [Validators.required, Validators.pattern(PATTERN.EMAIL_PATTERN)]],
       name: [data?.name || '', [Validators.required, Validators.pattern(PATTERN.FULL_NAME_PATTERN)]],
       gender: [data?.gender || '', Validators.required],
       birth_date: [new Date(data?.birth_date) || '', Validators.required],
@@ -159,7 +159,7 @@ export class UserProfileComponent implements OnInit {
               }
             },
             error: (err) => {
-              this.snackBarService.error(err.message);
+              this.snackBarService.error(err.error.message);
             }
           });
           this.subs.add(userData);
@@ -188,13 +188,14 @@ export class UserProfileComponent implements OnInit {
                 this.snackBarService.success(res.message);
                 this.editMode = false;
                 this.getUserData(this.userId);
+                this.auth.changeFullName$.next(true);
                 this.cd.detectChanges();
               } else {
                 this.snackBarService.error(res.message);
               }
             },
             error: (err) => {
-              this.snackBarService.error(err.message);
+              this.snackBarService.error(err.error.message);
             }
           });
           this.subs.add(userData);

@@ -9,6 +9,12 @@ $steel_blue: #4682b4;
     margin-top: -6%;
   }
 
+  .logoImg {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
   .fixed-height {
     height: 10px;
   }
@@ -33,10 +39,6 @@ $steel_blue: #4682b4;
       padding: 8px !important;
       color: gray !important;
     }
-  }
-
-  form {
-    height: 408px !important
   }
 
   mat-radio-button {

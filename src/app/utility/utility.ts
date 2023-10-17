@@ -9,7 +9,7 @@ export enum LOCALSTORAGE_KEY {
 }
 
 export enum PATTERN {
-    EMAIL_PATTERN = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$",
+    EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$",
     PASSWORD_PATTERN = "^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).{8,}$",
     FULL_NAME_PATTERN = "^[a-zA-Z ]*$",
     MOBILE_PATTERN = "^[1-9]{1}[0-9]{9}$"

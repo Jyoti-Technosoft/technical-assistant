@@ -87,7 +87,7 @@ export class AllresultsComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.snackBarService.error(err.message);
+        this.snackBarService.error(err.error.message);
       }
     });
 
@@ -206,7 +206,7 @@ export class AllresultsComponent implements OnInit {
 
     const aggregatedData = Array.from(groupedData, ([date, values]) => ({
       date,
-      points: values.map(v => v.points)
+      points: values.map((v:any) => v.points)
     }));
 
     this.secondChart(data.type, aggregatedData);

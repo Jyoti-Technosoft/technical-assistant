@@ -50,8 +50,6 @@ export class QuizRuleComponent implements OnInit, OnDestroy{
 
   applyRulesForTest(data: string): void {
 
-    console.log('inroduction=====', this.instruction);
-
     data = data?.replaceAll('timer', this.instruction.timer);
     data = data?.replace('positivePoints', this.instruction.positivePoints);
     data = data?.replace('negativePoints', this.instruction.negativePoints);

@@ -7,7 +7,7 @@
       <div class="d-flex col-6 align-items-center">
         <ng-container *ngIf="loginPage">
           <form class="p-2" [formGroup]="loginForm" *ngIf="loginForm">
-            <span>
+            <span class="logoImg">
               <img src="assets/img/JT.png" alt="logo" class="d-inline-block logo-image"/>
               <span class="title h5"> Technical Assistant </span>
             </span>
@@ -44,6 +44,10 @@
         </ng-container>
         <ng-container *ngIf="!loginPage">
           <form class="d-flex flex-column p-2" [formGroup]="registrationForm" *ngIf="registrationForm">
+            <span class="logoImg">
+              <img src="assets/img/JT.png" alt="logo" class="d-inline-block logo-image"/>
+              <span class="title h5"> Technical Assistant </span>
+            </span>
             <div class="w-100-p">
               <ul id="progressbar" class="d-flex progressbar p-0">
                 <button class="back-btn mb-3" (click)="redirectTo('login')">

@@ -14,6 +14,7 @@ export class AuthenticationService {
   serverUrl = environment.API_URL;
   authStatusListener$: BehaviorSubject<boolean>;
   mobileView$: BehaviorSubject<boolean>;
+  changeFullName$: BehaviorSubject<boolean>;
 
   constructor(
     private http: HttpClient,
@@ -22,6 +23,7 @@ export class AuthenticationService {
 
     this.authStatusListener$ = new BehaviorSubject<boolean>(false);
     this.mobileView$ = new BehaviorSubject<boolean>(false);
+    this.changeFullName$ = new BehaviorSubject<boolean>(false);
 
     this.getScreenSize();
   }

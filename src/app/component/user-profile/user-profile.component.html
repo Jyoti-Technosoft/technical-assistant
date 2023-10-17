@@ -29,16 +29,16 @@
                   </tr>
                   <tr>
                     <th>Email</th>
-                    <td *ngIf="!editMode" class="h6 small">{{ userData?.email }}</td>
+                    <td *ngIf="!editMode" class="h6 small">{{ userData?.email | lowercase }}</td>
                     <td *ngIf="editMode">
                       <mat-form-field appearance="outline" class="w-100">
-                        <input matInput formControlName="email" required>
-                        <mat-error *ngIf="getControl(profilePageForm, 'email')?.hasError('required')">
+                        <input matInput formControlName="email" required readonly>
+                        <!-- <mat-error *ngIf="getControl(profilePageForm, 'email')?.hasError('required')">
                           Email is required
                         </mat-error>
                         <mat-error *ngIf="getControl(profilePageForm, 'email')?.hasError('pattern')">
                           Email valid email
-                        </mat-error>
+                        </mat-error> -->
                       </mat-form-field>
                     </td>
                   </tr>

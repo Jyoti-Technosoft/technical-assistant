@@ -16,7 +16,7 @@
   </div>
   <div class="chart-card">
     <div class="col-12" [ngStyle]="{'width': isMobileView ? '100%' : '80%'}">
-      <div *ngIf="!isApiCalling" class="h5 d-flex justify-content-center">{{ subjectType | titlecase }}</div>
+      <div *ngIf="!isApiCalling && subjectWiseData.length !== 0" class="h5 d-flex justify-content-center">{{ subjectType | titlecase }}</div>
       <div #chartContainer class="chart-area" [ngStyle]="{'display': showChart ? 'block' : 'none'}">
         <div #tooltip class="tooltip"></div>
         <div id="bar1"></div>

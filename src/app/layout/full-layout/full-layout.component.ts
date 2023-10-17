@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { OnInit } from '@angular/core';
+import { OnInit, AfterViewInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { DialogService } from '@app/dialog-service/dialog.service';
 import dialogData from '@assets/json/dialogData.json';
@@ -14,7 +14,7 @@ import { SnackbarService } from '@app/service/snackbar.service';
   styleUrls: ['./full-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FullLayoutComponent implements OnInit {
+export class FullLayoutComponent implements OnInit, AfterViewInit {
 
   dialogData = { ...dialogData };
   authListenerSubs: Subscription;
@@ -49,6 +49,21 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getUserDetails();
+  }
+
+  ngAfterViewInit(): void {
+
+    this.auth.changeFullName$.subscribe(v => {
+      if (v) {
+        this.getUserDetails();
+      }
+    });
+
+    this.auth.changeFullName$.next(false);
+  }
+
+  getUserDetails(): void {
     const userData = this.auth.getUserDetail(this.userId).subscribe({
       next: (res) => {
         if (res.success) {
@@ -60,7 +75,7 @@ export class FullLayoutComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.snackBarService.error(err.message);
+        this.snackBarService.error(err.error.message);
       }
     });
 
@@ -105,7 +120,7 @@ export class FullLayoutComponent implements OnInit {
             }
           },
           error: (err) => {
-            this.snackbarService.error(err.message);
+            this.snackbarService.error(err.error.message);
           }
         });
         this.subs.add(logOut);

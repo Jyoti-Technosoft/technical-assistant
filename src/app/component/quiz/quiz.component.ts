@@ -372,7 +372,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        this.snackBarService.error(err.message);
+        this.snackBarService.error(err.error.message);
       }
     });
     this.subs.add(resultData);

@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        this.snackbarService.error(err.message);
+        this.snackbarService.error(err.error.message);
       }
     });
     this.sub.add(countData);
@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        this.snackbarService.error(err.message);
+        this.snackbarService.error(err.error.message);
       }
     });
     this.sub.add(quizData);
