@@ -52,6 +52,11 @@ export class AuthenticationService {
     return this.http.post(`${this.serverUrl}/register`, userdata, {headers:{skip:"true"}});
   }
 
+  // check user email
+  checkUserEmail(data: any): Observable<any> {
+    return this.http.post(`${this.serverUrl}/check-email-availability`, data, {headers:{skip:"true"}});
+  }
+
   // logout
   signOutUser(userId: number): Observable<any> {
     return this.http.get(`${this.serverUrl}/sign-out/${userId}`, {headers:{skip:"true"}});

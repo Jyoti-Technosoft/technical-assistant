@@ -9,26 +9,26 @@
 }
 
 .no-btn {
-  background: #ce2a2af0;
-  color: white;
+  color: rgb(27, 26, 26);
+  border: 1px solid #dadbdd;
+  background: #dddddd;
+  border-radius: 5px;
   width: 15%;
-  box-shadow: 0 5px 10px #e7b1b1f0;
-  transition: 0.2s;
+  font-weight: 500;
   &:hover {
-    box-shadow: 0 0 40px 40px rgb(255 162 145) inset;
-    color: rgb(251 4 4);
+    background: #dddddd;
   }
 }
 
 .yes-btn {
-  background: rgb(16 144 27 / 94%);
+  background: #367dc8;
   color: white;
   width: 15%;
-  box-shadow: 0 5px 10px rgb(120 206 108 / 94%);
+  box-shadow: 0 5px 10px #a4c4e6;
   transition: 0.2s;
   &:hover {
-    box-shadow: 0 0 40px 40px rgb(186 234 194) inset;
-    color: rgb(12 61 15);
+    box-shadow: 0 0 40px 40px rgb(146, 199, 235) inset;
+    color: #174b83;
   }
 }
 

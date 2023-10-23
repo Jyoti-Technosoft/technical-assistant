@@ -7,7 +7,7 @@
     }
   }
 
-  mat-progress-spinner {
+  mat-spinner {
     width: 130px !important;
   }
 
@@ -43,14 +43,18 @@
     tr {
       border-bottom: 2px solid #f7f2f2;
     }
+    th {
+      width: 35%;
+    }
   }
 
   .common-btn {
     border: none;
+    padding: 10px;
     border-radius: 5px;
   }
 
-  .btn-update, .btn-change {
+  .btn-update, .btn-change, .btn-save {
     background: #367dc8;
     color: white;
     box-shadow: 0 5px 10px #a4c4e6;
@@ -66,29 +70,11 @@
   }
 
   .btn-cancel {
-    background: #ce2a2af0;
-    color: white;
-    box-shadow: 0 5px 10px #e7b1b1f0;
-    transition: 0.2s;
-    width: 25%;
-    &:hover {
-      box-shadow: 0 0 40px 40px rgb(255 162 145) inset;
-      color: rgb(251 4 4);
-      font-weight: 500;
-    }
-  }
-
-  .btn-save {
-    background: rgb(16 144 27 / 94%);
-    color: white;
-    box-shadow: 0 5px 10px rgb(120 206 108 / 94%);
-    transition: 0.2s;
-    width: 25%;
-    &:hover {
-      box-shadow: 0 0 40px 40px rgb(186 234 194) inset;
-      color: rgb(12 61 15);
-      font-weight: 500;
-    }
+    color: rgb(27, 26, 26);
+    border: 1px solid #dadbdd;
+    background: #dddddd;
+    border-radius: 5px;
+    font-weight: 500;
   }
 
   .mat-mdc-card-content {

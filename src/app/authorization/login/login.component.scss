@@ -3,6 +3,10 @@ $steel_blue: #4682b4;
 
 :host {
 
+  .allForms {
+    height: 330px;
+  }
+
   .userlogo {
     width: 60px;
     height: 60px;
@@ -12,7 +16,11 @@ $steel_blue: #4682b4;
   .logoImg {
     display: flex;
     justify-content: center;
-    margin-bottom: 15px;
+
+    .h5 {
+      margin-bottom: 0.3rem !important;
+      line-height: 1.5 !important;
+    }
   }
 
   .fixed-height {
@@ -23,15 +31,8 @@ $steel_blue: #4682b4;
     margin-bottom: 20px;
   }
 
-  .back-btn {
-    border: none;
-    background-color: transparent;
-  }
-  .back-img {
-    width: 40px;
-    height: 40px;
-    margin-left: -30%;
-    margin-top: -13%;
+  .mr-20-px {
+    margin-right:  20px;
   }
 
   mat-form-field {
@@ -221,11 +222,21 @@ $steel_blue: #4682b4;
   a {
     cursor: pointer;
     color: #367dc8;
+    &:hover {
+      color: #367dc8;
+      text-decoration: underline;
+    }
+  }
+
+  .error-mess {
+    color: #f44336;
+    margin-bottom: 5px;
   }
 
   .login-btn {
-    background: #367dc8;
+    background: #4682b4;
     color: white;
+    border-radius: 5px;
     box-shadow: 0 5px 10px #a4c4e6;
     transition: 0.2s;
     &:hover:not([disabled]) {
@@ -234,7 +245,19 @@ $steel_blue: #4682b4;
       font-weight: 500;
     }
     &:disabled {
-      background: #8f9ba8;
+      background: #174b83;
+      border-color: #174b83;
+    }
+  }
+
+  .back-btn {
+    color: rgb(27, 26, 26);
+    border: 1px solid #dadbdd;
+    background: #dddddd;
+    border-radius: 5px;
+    font-weight: 500;
+    &:hover {
+      background: #dddddd;
     }
   }
 }

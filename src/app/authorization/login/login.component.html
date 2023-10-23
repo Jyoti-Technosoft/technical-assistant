@@ -1,16 +1,17 @@
 <div class="login">
-  <mat-card [ngStyle]="{'width': isMobileView ? '100%' : '60%'}">
+  <mat-card [ngStyle]="{'width': isMobileView ? '100%' : '70%'}">
     <mat-card-content class="d-flex flex-row">
       <div class="d-flex col-6 text-align-center">
         <img src="assets/img/quizlogin.svg" width="100%" height="100%" alt="login image"/>
       </div>
-      <div class="d-flex col-6 align-items-center">
+      <div class="d-flex flex-column col-6 align-items-center">
+        <span class="logoImg">
+          <img src="assets/img/JT.png" alt="logo" class="d-inline-block logo-image"/>
+          <span class="title h5"> Technical Assistant </span>
+        </span>
         <ng-container *ngIf="loginPage">
           <form class="p-2" [formGroup]="loginForm" *ngIf="loginForm">
-            <span class="logoImg">
-              <img src="assets/img/JT.png" alt="logo" class="d-inline-block logo-image"/>
-              <span class="title h5"> Technical Assistant </span>
-            </span>
+
             <mat-form-field appearance="outline" class="w-100 mb-2 mt-4">
               <mat-label> Email </mat-label>
               <input matInput formControlName="email" placeholder="Enter Email" required>
@@ -22,7 +23,7 @@
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="w-100 mb-2">
+            <mat-form-field appearance="outline" class="w-100">
               <mat-label> Password </mat-label>
               <input matInput [type]="hidePassword ? 'password' : 'text'" placeholder="Enter Password" formControlName="password" minlength="8" required>
                 <mat-icon matSuffix (click)="hidePassword = !hidePassword">
@@ -33,139 +34,160 @@
               </mat-error>
             </mat-form-field>
 
-            <div class="d-flex flex-column text-center">
-              <button class="mb-3 login-btn" [disabled]="isApiCalling" mat-raised-button (click)="doLogin()"> Login </button>
-              <div>
-                Don't have an Account ?
-              </div>
-              <a class="mt-3" (click)="redirectTo('new')"> Create New Account </a>
+            <div *ngIf="!!displayErrorMess" class="error-mess d-flex text-center">
+              *{{displayErrorMess}}
             </div>
+
+            <div class="text-center">
+              <button class="mb-3 btn login-btn" [disabled]="isApiCalling" (click)="doLogin()"> Login </button>
+            </div>
+
+            <mat-divider></mat-divider>
+            <div class="d-flex flex-column text-center mt-3">
+              Don't have an Account ?
+              <a (click)="redirectTo('new')"> Create New Account </a>
+            </div>
+
           </form>
         </ng-container>
         <ng-container *ngIf="!loginPage">
-          <form class="d-flex flex-column p-2" [formGroup]="registrationForm" *ngIf="registrationForm">
-            <span class="logoImg">
-              <img src="assets/img/JT.png" alt="logo" class="d-inline-block logo-image"/>
-              <span class="title h5"> Technical Assistant </span>
-            </span>
-            <div class="w-100-p">
-              <ul id="progressbar" class="d-flex progressbar p-0">
-                <button class="back-btn mb-3" (click)="redirectTo('login')">
-                  <i class="bi bi-arrow-left"></i>
-                </button>
-                <ng-container *ngFor="let item of formSteps; let i = index">
-                  <li class="{{ item?.className }}" [ngClass]="{ active: i <= currentStepIndex }">
-                    <strong class="d-flex justify-content-center">
-                      {{ item?.label }}
-                    </strong>
-                  </li>
-                </ng-container>
-              </ul>
+          <form class="p-2" [formGroup]="registrationForm" *ngIf="registrationForm">
+            <div class="w-100-p allForms">
+              <mat-stepper #stepper>
+                <mat-step label="Account" state="account">
+                  <ng-container formGroupName="userCredential">
+                    <div class="row text-center mt-2">
+                      <mat-form-field appearance="outline" class="mb-2">
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email" required>
+                        <mat-error *ngIf="getUserDetailControl('userCredential','email').hasError('required')">
+                          Email is required.
+                        </mat-error>
+                        <mat-error *ngIf="getUserDetailControl('userCredential','email').hasError('pattern')">
+                          Enter valid Email.
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mb-2">
+                        <mat-label>Password</mat-label>
+                        <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" minlength="8" required>
+                        <mat-icon matSuffix (click)="hidePassword = !hidePassword">
+                          {{hidePassword ? 'visibility' : 'visibility_off'}}
+                        </mat-icon>
+                        <mat-icon mat-icon-button matSuffix matTooltip="Password must have 8 characters (contain one number,one character and one special character).">info</mat-icon>
+                        <mat-error *ngIf="getUserDetailControl('userCredential','password').hasError('required')">
+                          Password is required.
+                        </mat-error>
+                        <mat-error *ngIf="getUserDetailControl('userCredential','password').hasError('pattern')">
+                          Invalid Password. please read info.
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field appearance="outline" class="mb-2">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" minlength="8" required>
+                        <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
+                          {{hideConfirmPassword ? 'visibility' : 'visibility_off'}}
+                        </mat-icon>
+                        <mat-error *ngIf="getUserDetailControl('userCredential','confirmPassword').hasError('required')">
+                          Confirm Password is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </ng-container>
+                </mat-step>
+                <mat-step label="Personal" state="person">
+                  <ng-container formGroupName="personalInfo">
+                    <div class="row text-center mt-2">
+                      <mat-form-field appearance="outline" class="mb-2">
+                        <mat-label>Full Name</mat-label>
+                        <input matInput formControlName="fullName" required>
+                        <mat-error *ngIf="getUserDetailControl('personalInfo','fullName').hasError('required')">
+                          FullName is required.
+                        </mat-error>
+                        <mat-error *ngIf="getUserDetailControl('personalInfo','fullName').hasError('pattern')">
+                          Enter valid FullName.
+                        </mat-error>
+                      </mat-form-field>
+
+                      <div class="d-flex col mb-20">
+                        <mat-label class="d-flex align-items-center">Gender</mat-label>
+                        <mat-radio-group formControlName="gender">
+                          <mat-radio-button value="male"> Male </mat-radio-button>
+                          <mat-radio-button value="female">Female</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+
+                      <mat-form-field appearance="outline" class="mb-2">
+                        <mat-label>Date of Birth</mat-label>
+                        <input matInput formControlName="dateOfBirth" [matDatepicker]="picker" [max]="currentDate" placeholder="DD/MM/YYYY" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker ></mat-datepicker>
+                        <mat-error *ngIf="getUserDetailControl('personalInfo','dateOfBirth').hasError('required')">
+                          Date Of Birth is required.
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </ng-container>
+                </mat-step>
+                <mat-step label="Finish" state="finish">
+                  <ng-container formGroupName="extras">
+                    <div class="row text-center mt-2">
+                      <mat-form-field appearance="outline" class="mb-2">
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput formControlName="mobile" type="text" maxlength="10" required>
+                        <mat-error *ngIf="getUserDetailControl('extras','mobile').hasError('required')">
+                          Mobile is required.
+                        </mat-error>
+                        <mat-error *ngIf="getUserDetailControl('extras','mobile').hasError('pattern')">
+                          Enter valid mobile.
+                        </mat-error>
+                      </mat-form-field>
+
+                      <div class="mb-2">
+                        <mat-checkbox labelPosition="after" formControlName="acceptTerms">By continuing, you agree to Technical Assistant's
+                          <a (click)="redirectTo('tearms-condition')">Terms & Conditions</a> and
+                          <a (click)="redirectTo('privacy-policy')">Privacy Policy.</a>
+                        </mat-checkbox>
+                      </div>
+                    </div>
+                  </ng-container>
+                </mat-step>
+
+                <ng-template matStepperIcon="account">
+                  <mat-icon color="primary">lock</mat-icon>
+                </ng-template>
+                <ng-template matStepperIcon="person">
+                  <mat-icon color="primary">account_circle</mat-icon>
+                </ng-template>
+                <ng-template matStepperIcon="finish">
+                  <mat-icon color="primary">check_circle</mat-icon>
+                </ng-template>
+              </mat-stepper>
             </div>
-            <ng-container *ngIf="currentStepIndex == 0" formGroupName="userCredential">
-              <div class="row text-center">
-                <mat-form-field appearance="outline" class="mb-2">
-                  <mat-label>Email</mat-label>
-                  <input matInput formControlName="email" required>
-                  <mat-error *ngIf="getUserDetailControl('userCredential','email').hasError('required')">
-                    Email is required.
-                  </mat-error>
-                  <mat-error *ngIf="getUserDetailControl('userCredential','email').hasError('pattern')">
-                    Enter valid Email.
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="mb-2">
-                  <mat-label>Password</mat-label>
-                  <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" minlength="8" required>
-                  <mat-icon matSuffix (click)="hidePassword = !hidePassword">
-                    {{hidePassword ? 'visibility' : 'visibility_off'}}
-                  </mat-icon>
-                  <mat-icon mat-icon-button matSuffix matTooltip="Password must have 8 characters (contain one number,one character and one special character).">info</mat-icon>
-                  <mat-error *ngIf="getUserDetailControl('userCredential','password').hasError('required')">
-                    Password is required.
-                  </mat-error>
-                  <mat-error *ngIf="getUserDetailControl('userCredential','password').hasError('pattern')">
-                    Invalid Password. please read info.
-                  </mat-error>
-                </mat-form-field>
-
-                <mat-form-field appearance="outline" class="mb-2">
-                  <mat-label>Confirm Password</mat-label>
-                  <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" minlength="8" required>
-                  <mat-icon matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
-                    {{hideConfirmPassword ? 'visibility' : 'visibility_off'}}
-                  </mat-icon>
-                  <mat-error *ngIf="getUserDetailControl('userCredential','confirmPassword').hasError('required')">
-                    Confirm Password is required.
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="currentStepIndex == 1" formGroupName="personalInfo">
-              <div class="row text-center">
-                <mat-form-field appearance="outline" class="mb-2">
-                  <mat-label>Full Name</mat-label>
-                  <input matInput formControlName="fullName" required>
-                  <mat-error *ngIf="getUserDetailControl('personalInfo','fullName').hasError('required')">
-                    FullName is required.
-                  </mat-error>
-                  <mat-error *ngIf="getUserDetailControl('personalInfo','fullName').hasError('pattern')">
-                    Enter valid FullName.
-                  </mat-error>
-                </mat-form-field>
-
-                <div class="d-flex col mb-20">
-                  <mat-label class="d-flex align-items-center">Gender</mat-label>
-                  <mat-radio-group formControlName="gender" color="primary">
-                    <mat-radio-button value="male"> Male </mat-radio-button>
-                    <mat-radio-button value="female">Female</mat-radio-button>
-                  </mat-radio-group>
-                </div>
-
-                <mat-form-field appearance="outline" class="mb-2">
-                  <mat-label>Date of Birth</mat-label>
-                  <input matInput formControlName="dateOfBirth" [matDatepicker]="picker" placeholder="DD/MM/YYYY" required>
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker ></mat-datepicker>
-                  <mat-error *ngIf="getUserDetailControl('personalInfo','dateOfBirth').hasError('required')">
-                    Date Of Birth is required.
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </ng-container>
-
-            <ng-container *ngIf="currentStepIndex == 2" formGroupName="extras">
-              <div class="row text-center">
-                <mat-form-field appearance="outline" class="mb-2">
-                  <mat-label>Mobile Number</mat-label>
-                  <input matInput formControlName="mobile" type="text" maxlength="10" required>
-                  <mat-error *ngIf="getUserDetailControl('extras','mobile').hasError('required')">
-                    Mobile is required.
-                  </mat-error>
-                  <mat-error *ngIf="getUserDetailControl('extras','mobile').hasError('pattern')">
-                    Enter valid mobile.
-                  </mat-error>
-                </mat-form-field>
-
-                <div class="d-flex mb-2">
-                  <mat-checkbox labelPosition="after" color="primary" formControlName="acceptTerms">
-                    Accept Terms & Conditions
-                  </mat-checkbox>
-                </div>
-              </div>
-            </ng-container>
-
-            <div class="d-flex flex-column text-center">
+            <div *ngIf="!!displayErrorMess" class="error-mess d-flex text-center">
+              *{{displayErrorMess}}
+            </div>
+            <div class="d-flex justify-content-end mb-2">
               <button
-                mat-raised-button
-                [disabled]="isValid"
-                class="login-btn"
+                *ngIf="currentStepIndex !== 0"
+                class="btn back-btn mr-20-px"
+                (click)="backStep()"
+              >
+              Back
+              </button>
+              <button
+                [disabled]="isValid || !!displayErrorMess"
+                class="btn login-btn"
                 (click)="currentStepIndex < 2 ? nextStep() : submitUserData()"
               >
               {{ currentStepIndex < 2 ? 'Next' : 'Submit'}}
               </button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="d-flex flex-column text-center mt-3">
+                Already have an account?
+                <a (click)="redirectTo('login')"> Login </a>
             </div>
           </form>
         </ng-container>

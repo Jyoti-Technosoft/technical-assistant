@@ -115,7 +115,7 @@ export class Quizcomponent implements OnInit, OnDestroy {
 
   getQuestionList(): void {
 
-    const quizData = this.quizservice.getListOfQuizDetails(this.selectedQuiz).subscribe({
+    const quizData = this.quizservice.getListOfQuizDetails(this.quizInfo.file).subscribe({
       next: (res) => {
         if (!!res) {
           this.questionsData = res;

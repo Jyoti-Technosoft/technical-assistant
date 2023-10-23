@@ -90,3 +90,66 @@ mat-icon {
 ::-webkit-scrollbar-thumb:hover {
   background: #b9babd;
 }
+
+.mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: #4682b4;
+}
+
+.mat-stepper-horizontal {
+  background-color: transparent;
+}
+
+.mat-step-header .mat-step-icon-selected, .mat-step-icon-state-edit {
+  background-color: #4682b4 !important;
+  color: #fff;
+}
+
+.mat-step-header:hover:not([aria-disabled]) {
+  background-color: transparent;
+}
+
+/* Remove ripple and hover background for step labels */
+.mat-step-header {
+  pointer-events: none;
+}
+
+/* Remove hover styles on step icons */
+.mat-step-header:hover .mat-step-icon {
+  cursor: default;
+}
+
+/* Keep ripple color for step icons */
+.mat-step-header .mat-step-icon {
+  pointer-events: none;
+  background-color: #4682b4 !important;
+  color: #fff;
+  height: 28px;
+  width: 28px;
+
+  .mat-icon.mat-primary {
+    color: white
+  }
+}
+
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-focus-icon-color: #4682b4;
+  --mdc-checkbox-selected-hover-icon-color: #4682b4;
+  --mdc-checkbox-selected-icon-color: #4682b4;
+  --mdc-checkbox-selected-pressed-icon-color: #4682b4;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle {
+  border-color: #4682b4 !important;
+}
+
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle {
+  border-color: #4682b4 !important;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mat-mdc-radio-checked-ripple-color: none !important;
+}
+
+.mat-mdc-checkbox.mat-accent .mdc-checkbox--selected~.mdc-checkbox__ripple {
+  background: none !important
+}

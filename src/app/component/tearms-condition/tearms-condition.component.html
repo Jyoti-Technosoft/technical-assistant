@@ -1,4 +1,10 @@
-<section>
+<mat-toolbar color="primary" *ngIf="!this.flag">
+  <span>
+    <img src="assets/img/JT.png" alt="logo" class="d-inline-block image"/>
+    <span class="title h5"> Technical Assistant </span>
+  </span>
+</mat-toolbar>
+<section [ngClass]="!this.flag ? 'terms' : ''">
   <h2><b>Terms and Conditions  :</b></h2>
   <p><b>What are Terms and Conditions ?</b></p>
   <p>Terms and conditions are part of a that ensure parties understand their contractual rights and obligations.

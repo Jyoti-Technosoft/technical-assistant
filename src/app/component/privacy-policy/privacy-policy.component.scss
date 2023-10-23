@@ -5,4 +5,31 @@
     margin: 40px auto;
     min-height: calc(100vh - 115px) !important;
   }
+
+  .terms {
+    position: absolute;
+    top: 50px;
+  }
+
+  mat-toolbar {
+    padding: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background: #fafafa;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    color: black;
+  }
+
+  .image {
+    width: 40px;
+  }
+
+  .title {
+    border-bottom: 3px solid #98c01c;
+    color: #367dc8;
+    font-weight: bold;
+  }
 }

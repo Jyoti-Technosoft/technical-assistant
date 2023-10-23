@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class TearmsConditionComponent {
 
+  flag = false;
+
+  constructor() {
+
+    this.flag = !!localStorage.getItem('token') ? true : false;
+  }
+
 }

@@ -33,8 +33,7 @@ export class QuizDataService {
     return this.http.get(`${this.serverUrl}/quiz`);
   }
 
-  getListOfQuizDetails(id: string): Observable<any> {
-    let jsonFile = this.queData.filter(v => v.sub === id);
-    return this.http.get(jsonFile[0].dataFile);
+  getListOfQuizDetails(filePath: string): Observable<any> {
+    return this.http.get(filePath);
   }
 }

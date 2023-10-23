@@ -10,7 +10,8 @@
       "2nd"
     ],
     "title": "Angular",
-    "image": "assets\\img\\angular_logo.svg",
+    "file": "assets/json/angularjs.json",
+    "image": "assets\\img\\angular.svg",
     "description": "Angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you import into your applications."
   },
   {
@@ -25,7 +26,8 @@
       "2nd"
     ],
     "title": "HTML-CSS",
-    "image": "assets\\img\\htmlcss_logo.svg",
+    "file": "assets/json/html_css.json",
+    "image": "assets\\img\\htmlcss.svg",
     "description": "HTML (the Hypertext Markup Language) and CSS (Cascading Style Sheets) are two of the core technologies for building Web pages."
   },
   {
@@ -40,7 +42,8 @@
       "3rd"
     ],
     "title": "JavaScript",
-    "image": "assets\\img\\javascript_logo.png",
+    "file": "assets/json/javascript.json",
+    "image": "assets\\img\\javascript.svg",
     "description": "JavaScript is a light-weight object-oriented programming language that is used by several websites for scripting the webpages. It is an interpreted, full-fledged programming language. JavaScript enables dynamic interactivity on websites when it is applied to an HTML document."
   },
   {
@@ -55,7 +58,8 @@
       "3rd"
     ],
     "title": "React JS",
-    "image": "assets\\img\\react_logo.svg",
+    "file": "assets/json/reactjs.json",
+    "image": "assets\\img\\react.svg",
     "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta."
   }
 ]

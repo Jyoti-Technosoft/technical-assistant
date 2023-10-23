@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './authorization/login/login.component';
 import { AuthGuard } from './authorization/auth-guard/auth.guard';
+import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
+import { TearmsConditionComponent } from './component/tearms-condition/tearms-condition.component';
 
 const routes: Routes = [
 
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: LoginComponent },
+  { path: 'privacy-policy', component: PrivacyPolicyComponent },
+  { path: 'tearms-condition', component: TearmsConditionComponent },
   {
     path: 'layout',
     canActivate: [AuthGuard],
