@@ -214,7 +214,11 @@ export class Quizcomponent implements OnInit, OnDestroy {
           selectedAnswer: this.selectedAns
         });
       } else {
-        this.snackBarService.error(MESSAGE.NO_ANS_SELECTION);
+        if (timerValue === 0 && !this.selectedAns) {
+          this.snackBarService.error(MESSAGE.TIMER_OFF);
+        } else {
+          this.snackBarService.error(MESSAGE.NO_ANS_SELECTION);
+        }
       }
     }
   }

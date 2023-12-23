@@ -320,8 +320,8 @@ export class AllresultsComponent implements OnInit {
       .attr("height", (d:any) => d[1] >= 0 ? y(d[0]) - y(d[1]) : y(d[1]) - y(d[0]))
       .attr("width", x.bandwidth())
       .attr('cursor', 'pointer')
-      .on('click', (event: MouseEvent, d: any) => {
-        this.onSecondChartBarClick(event, d);
+      .on('click', () => {
+        this.onSecondChartBarClick();
         this.mouseleaveChart2();
         this.subjectType = 'Results';
         this.cd.detectChanges();
@@ -336,7 +336,7 @@ export class AllresultsComponent implements OnInit {
     this.cd.detectChanges();
   }
 
-  private onSecondChartBarClick(event: any, d: any) {
+  private onSecondChartBarClick() {
     d3.select('#bar1').classed('hide-chart', false);
     this.svg.selectAll('*').remove();
     this.firstChart(this.resultObject);
