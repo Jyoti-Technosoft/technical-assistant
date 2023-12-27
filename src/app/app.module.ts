@@ -9,7 +9,6 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { LayoutComponentModule } from '@app/layout/layout-component.module';
 import { ModalComponent } from '@app/dialog-service/modal/modal/modal.component';
 import { AuthGuard } from '@app/authorization/auth-guard/auth.guard';
-import { AuthenticationService } from '@app/service/authentication.service';
 import { MaterialModule } from '@app/material/material.module';
 import { NonAuthGuard } from '@app/authorization/auth-guard/non-auth.guard';
 import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard';

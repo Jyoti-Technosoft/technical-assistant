@@ -36,20 +36,38 @@
                 <div class="card-body d-inline-block rounded-2 p-3">
                   <span class="h6 user-select-none">
                     {{ "Q-" + (i + 1) }} {{ subRandomQueList.questions[i]["question"] }}
-                    <p class="h6 small"> {{ subRandomQueList.questions[i].type === 'checkbox' ? "( You can select multiple options )" : "( You can select only one option )" }} </p>
+                    <p class="h6 small"> {{ subRandomQueList.questions[i].type === 'checkbox' ? "( You can select multiple options )" : subRandomQueList.questions[i].type === 'radio' ? "( You can select only one option )" : '' }} </p>
                   </span>
 
-                  <ng-container
-                    *ngFor="let card of subRandomQueList.questions[i].options;">
-                    <div class="mx-0">
-                      <label
-                        class="h6 small option p-10 mt-3 w-100 rounded-2 align-items-center user-select-none"
-                        (click)="onSelectAnswer(card, i)"
-                        [class.hightlight-selected]="checkSelected(card.id)"
-                      >
-                        {{ card.label }}
-                      </label>
-                    </div>
+                  <ng-container *ngIf="subRandomQueList.questions[i].type !== 'code'">
+                    <ng-container
+                      *ngFor="let card of subRandomQueList.questions[i].options;">
+                      <div class="mx-0">
+                        <label
+                          class="h6 small option p-10 mt-3 w-100 rounded-2 align-items-center user-select-none"
+                          (click)="onSelectAnswer(card, i)"
+                          [class.hightlight-selected]="checkSelected(card.id)"
+                        >
+                          {{ card.label }}
+                        </label>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                  <ng-container *ngIf="subRandomQueList.questions[i].type === 'code'">
+                    <ngx-monaco-editor
+                      [options]="editorOptions"
+                      formControlName="userCode"
+                      style="height: 300px; width: 100%;"
+                    ></ngx-monaco-editor>
+
+                    <button type="button" class="mr-10 common-btn btn-next" style="width: 15%">
+                      Run Code
+                    </button>
+
+                    <!-- <div *ngIf="!!output">
+                      <h4>Output:</h4>
+                      <pre>{{ output }}</pre>
+                    </div> -->
                   </ng-container>
                 </div>
 
@@ -79,7 +97,6 @@
                         type="button"
                         [disabled]="getFormControlItem()[i].controls['next'].value"
                         (click)="skip(subRandomQueList.questions[i], i)"
-                        type="button"
                         class="mr-10 common-btn btn-skip"
                       >
                         Skip

@@ -1,7 +1,7 @@
 {
   "id": "javascript",
   "list": {
-    "1st": [
+    "low": [
       {
         "question": "What does JavaScript primarily add to web pages?",
         "type": "radio",
@@ -130,7 +130,7 @@
         ]
       }
     ],
-    "2nd": [
+    "medium": [
       {
         "question": "What is the result of 5 + `5` in JavaScript?",
         "type": "radio",
@@ -257,7 +257,7 @@
         ]
       }
     ],
-    "3rd": [
+    "high": [
       {
         "question": "What is the purpose of a JavaScript closure?",
         "type": "radio",

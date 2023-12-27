@@ -1,7 +1,13 @@
 {
   "id": "angular",
   "list": {
-    "1st": [
+    "low": [
+      {
+        "question": "Write a code for display counter",
+        "type": "code",
+        "options": [],
+        "answer": "function x() {\nconsole.log(\"Hello world!\");\n}"
+      },
       {
         "question": "Angular is a ____",
         "type": "radio",
@@ -128,7 +134,7 @@
         ]
       }
     ],
-    "2nd": [
+    "medium": [
       {
         "question": " What is the purpose of Angular CLI?",
         "type": "radio",
@@ -256,7 +262,7 @@
         ]
       }
     ],
-    "3rd": [
+    "high": [
       {
         "question": "What is an Angular resolver used for?",
         "type": "radio",

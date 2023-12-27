@@ -1,7 +1,7 @@
 {
   "id": "htmlCss",
   "list": {
-    "1st": [
+    "low": [
       {
         "question": "What does HTML stand for?",
         "type": "radio",
@@ -128,7 +128,7 @@
         ]
       }
     ],
-    "2nd": [
+    "medium": [
       {
         "question": "How to add a background color in HTML?",
         "type": "radio",
@@ -257,7 +257,7 @@
         ]
       }
     ],
-    "3rd": [
+    "high": [
       {
         "question": "The CSS property used to set the distance between the borders of the adjacent cells in the table is -",
         "type": "radio",

@@ -73,6 +73,10 @@ export class Quizcomponent implements OnInit, OnDestroy {
   timerInterval:any;
   isStartTimer = false;
 
+  // code editor
+  editorOptions: any;
+  output:any;
+
   constructor(
     private router: Router,
     private auth: AuthenticationService,
@@ -99,6 +103,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
       this.isMobileView = v;
       this.cd.detectChanges();
     });
+
+    this.editorOptions = {theme: 'vs-dark', language: 'javascript'};
 
     window.history.forward();
     window.addEventListener("keyup", this.disableF5);
@@ -156,7 +162,8 @@ export class Quizcomponent implements OnInit, OnDestroy {
         previous: 0,
         skip: 0,
         queType: que?.type,
-        answers: [que?.answer]
+        answers: [que?.answer],
+        userCode: null
       }));
     });
 

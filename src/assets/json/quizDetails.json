@@ -7,7 +7,7 @@
     "negativePoints": 0.25,
     "numberOfQuestions": 4,
     "testLevel": [
-      "2nd"
+      "low"
     ],
     "title": "Angular",
     "file": "assets/json/angularjs.json",
@@ -22,8 +22,8 @@
     "negativePoints": 1,
     "numberOfQuestions": 5,
     "testLevel": [
-      "1st",
-      "2nd"
+      "low",
+      "medium"
     ],
     "title": "HTML-CSS",
     "file": "assets/json/html_css.json",
@@ -38,8 +38,8 @@
     "negativePoints": 0.25,
     "numberOfQuestions": 3,
     "testLevel": [
-      "1st",
-      "3rd"
+      "low",
+      "high"
     ],
     "title": "JavaScript",
     "file": "assets/json/javascript.json",
@@ -54,8 +54,8 @@
     "negativePoints": 0.25,
     "numberOfQuestions": 3,
     "testLevel": [
-      "2nd",
-      "3rd"
+      "medium",
+      "high"
     ],
     "title": "React JS",
     "file": "assets/json/reactjs.json",

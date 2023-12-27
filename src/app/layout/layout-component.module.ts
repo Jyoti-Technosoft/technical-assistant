@@ -13,6 +13,7 @@ import { Quizcomponent } from "@app/component/quiz/quiz.component";
 import { ResultComponent } from "@app/component/result/result.component";
 import { HoverDirective } from '@app/directive/hover.directive';
 import { MaterialModule } from '../material/material.module';
+import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,8 @@ import { MaterialModule } from '../material/material.module';
         ReactiveFormsModule,
         NgbCarouselModule,
         LayoutRoutingModule,
-        NgbDatepickerModule
+        NgbDatepickerModule,
+        MonacoEditorModule.forRoot()
     ],
     exports:[
         FooterComponent,

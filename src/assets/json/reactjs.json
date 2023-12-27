@@ -1,7 +1,7 @@
 {
   "id": "reactJS",
   "list": {
-    "1st": [
+    "low": [
       {
         "question": "What is React.js?",
         "type": "radio",
@@ -128,7 +128,7 @@
         ]
       }
     ],
-    "2nd": [
+    "medium": [
       {
         "question": "In React, what is a prop?",
         "type": "radio",
@@ -255,7 +255,7 @@
         ]
       }
     ],
-    "3rd": [
+    "high": [
       {
         "question": "Choose the correct data flow sequence of flux concept.",
         "type": "radio",
