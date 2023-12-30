@@ -1,0 +1,54 @@
+<div class="user-list">
+    <div class="row">
+        <div class="mb-3">
+            <mat-form-field appearance="outline" ng-class="w-25">
+                <mat-label>Search</mat-label>
+                <input [formControl]="searchCtrl" type="text" matInput placeholder="Search by Name or Email">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
+        <mat-table [dataSource]="userList">
+
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.name | titlecase}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+              <mat-header-cell *matHeaderCellDef> Phone Number </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.contact}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="gender">
+              <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.gender | titlecase}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dob">
+                <mat-header-cell *matHeaderCellDef> Date of Birth </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.birth_date | date: 'dd/MM/YYYY'}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="noData">
+              <mat-footer-cell *matFooterCellDef class="justify-content-center">
+                No Records Found.
+              </mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayColumns;" (click)="showResults(row)" style="cursor: pointer;"></mat-row>
+            <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(userList!=null && userList.length === 0)}"></mat-footer-row>
+        </mat-table>
+
+        <mat-paginator
+            [length]="userLength"
+            [pageSizeOptions]="[5, 10, 25, 100]"
+            aria-label="Select page">
+        </mat-paginator>
+    </div>
+</div>

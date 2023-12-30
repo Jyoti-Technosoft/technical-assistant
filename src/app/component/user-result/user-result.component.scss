@@ -1,0 +1,25 @@
+:host {
+    .main-div {
+        padding: 0 40px;
+        margin: 40px auto;
+        min-height: calc(100vh - 115px) !important;
+    }
+
+    .no-result {
+        width: 400px;
+        height: 400px;
+    }
+
+    .img-content {
+        width: 150px;
+        margin: auto;
+    }
+
+    .row > * {
+        width: auto !important;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+}

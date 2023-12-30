@@ -36,7 +36,7 @@ export class AllresultsComponent implements OnInit {
 
   constructor(
     private auth: AuthenticationService,
-    private result: ResultService,
+    private resultService: ResultService,
     private router: Router,
     private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
@@ -60,7 +60,7 @@ export class AllresultsComponent implements OnInit {
 
   resultData(): void {
 
-    const getData = this.result.getUserResultData(this.userId).subscribe({
+    const getData = this.resultService.getUserResultData(this.userId).subscribe({
       next:(res) => {
         if (res.success) {
           this.allResultData = this.subjectWiseData = res.data;

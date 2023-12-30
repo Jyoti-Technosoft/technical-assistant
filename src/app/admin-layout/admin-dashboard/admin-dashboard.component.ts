@@ -1,43 +1,41 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
-import { OnInit, AfterViewInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { DialogService } from '@app/dialog-service/dialog.service';
+import { Subscription } from 'rxjs';
 import dialogData from '@assets/json/dialogData.json';
 import { AuthenticationService } from '@app/service/authentication.service';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { DialogService } from '@app/dialog-service/dialog.service';
 import { SnackbarService } from '@app/service/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-full-layout',
-  templateUrl: './full-layout.component.html',
-  styleUrls: ['./full-layout.component.scss'],
+  selector: 'app-admin-dashboard',
+  templateUrl: './admin-dashboard.component.html',
+  styleUrls: ['./admin-dashboard.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FullLayoutComponent implements OnInit, AfterViewInit {
+export class AdminDashboardComponent {
 
   dialogData = { ...dialogData };
   authListenerSubs: Subscription;
   userIsAuthenticated = false;
   @ViewChild('sidenav') sidenav!: MatSidenav;
   menuItem: any = [
-    { label: 'Dashboard', icon: 'dashboard', link: '/dashboard' },
-    { label: 'All Results', icon: 'pie_chart', link: '/results' },
-    { label: 'Profile', icon: 'account_circle', link: '/user-profile' },
+    { label: 'User', icon: 'supervisor_account', link: '/user-details' },
+    { label: 'User Results', icon: 'pie_chart', link: '/user-results' },
+    { label: 'Profile', icon: 'account_circle', link: '/profile' },
   ];
   reason = '';
   userToken!: boolean;
   userId: number;
   userData: any;
-  selected?: string = '';
   avatarName!: string;
   subs: Subscription;
 
   constructor(
     private auth: AuthenticationService,
     private dialogService: DialogService,
-    private router: Router,
     private snackBarService: SnackbarService,
+    private router: Router,
     private cd: ChangeDetectorRef
   ) {
 

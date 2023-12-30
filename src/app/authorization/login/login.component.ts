@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private auth: AuthenticationService,
-    private snackbarService: SnackbarService,
+    private snackBarService: SnackbarService,
     private fb: FormBuilder,
     private cd: ChangeDetectorRef,
   ) {
@@ -144,24 +144,32 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       this.isApiCalling = true;
       const formValue = this.loginForm.getRawValue();
+      let isAdmin = formValue.email === 'admin@domain.com' && formValue.password === 'admin@domain.com';
       const logUser = this.auth.logInUser(formValue).subscribe({
         next: (res:any) => {
           if (res.success) {
             this.isApiCalling = false;
-            this.snackbarService.success(res.message);
-            localStorage.setItem(LOCALSTORAGE_KEY.USERID, res.data.user_id);
+            this.snackBarService.success(res.message);
             localStorage.setItem(LOCALSTORAGE_KEY.TOKEN, res.data.token);
-            this.router.navigateByUrl('layout');
+            localStorage.setItem(LOCALSTORAGE_KEY.USERID, res.data.user_id);
+             if (isAdmin) {
+              localStorage.setItem('role', 'admin');
+              this.router.navigateByUrl('admin-layout');
+             } else {
+               localStorage.setItem('role', 'user');
+               this.router.navigateByUrl('layout');
+             }
+            this.cd.detectChanges();
           } else {
             this.isApiCalling = false;
-            this.snackbarService.error(res.message);
+            this.snackBarService.error(res.message);
+            this.cd.detectChanges();
           }
-          this.cd.detectChanges();
         },
         error: (err) => {
           this.isApiCalling = false;
           this.displayErrorMess = err.error.message;
-          this.snackbarService.error(err.error.message);
+          this.snackBarService.error(err.error.message);
           this.cd.detectChanges();
         }
       });
@@ -231,17 +239,17 @@ export class LoginComponent implements OnInit, OnDestroy {
       next: (res) => {
         if (res.success) {
           this.loginPage = true;
-          this.snackbarService.success(res.message);
+          this.snackBarService.success(res.message);
           this.router.navigateByUrl('login');
           this.isApiCalling = false;
         } else  {
-          this.snackbarService.error(res.message);
+          this.snackBarService.error(res.message);
           this.isApiCalling = false;
         }
       },
       error: (err) => {
         this.displayErrorMess = err.error.message;
-        this.snackbarService.error(err.error.message);
+        this.snackBarService.error(err.error.message);
       }
     });
 
@@ -265,12 +273,12 @@ export class LoginComponent implements OnInit, OnDestroy {
             } else  {
               this.displayErrorMess = 'This email is already exists';
               this.cd.detectChanges();
-              this.snackbarService.error('This email is already exists');
+              this.snackBarService.error('This email is already exists');
               this.isApiCalling = false;
             }
           },
           error: (err) => {
-            this.snackbarService.error(err.error.message);
+            this.snackBarService.error(err.error.message);
             this.isApiCalling = false;
           }
         });

@@ -1,0 +1,109 @@
+:host {
+    height: 100vh;
+
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+
+    .example-icon {
+      color: #3b3939b3;
+      margin: 15px;
+      font-size: 25px;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .user-logo {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .initial-letter {
+      width: 50px;
+      height:50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 1rem;
+      color: white;
+      text-align: center;
+      background-color: #6a9cd2;
+    }
+
+    mat-toolbar {
+      padding: 10px;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+      background: #fafafa;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 999;
+      color: black;
+    }
+
+    .main-container {
+      position: absolute;
+      top: 64px;
+      min-height: calc(100vh - 64px);
+      display: inline-grid;
+      width: 100%;
+    }
+
+    .dynamic-content {
+      min-height: calc(100vh - 115px) !important;
+    }
+
+    mat-sidenav {
+      position: fixed;
+      padding-top: 70px;
+    }
+
+    mat-sidenav-content {
+      min-height: calc(100vh - 260px);
+    }
+
+    mat-sidenav-container {
+      height: 100%;
+    }
+
+    ::ng-deep {
+      .mat-mdc-list-item {
+        mat-icon {
+          color: #3b3939b3;
+        }
+      }
+    }
+
+    mat-nav-list {
+      .active {
+        background-color: rgb(231 231 231) !important;
+        border-left: #3b3939b3 solid 2px;
+      }
+    }
+
+    .image-icon {
+      z-index: 1000;
+      margin-right: 1rem;
+    }
+
+    .title {
+      border-bottom: 3px solid #98c01c;
+      color: #367dc8;
+      font-weight: bold;
+    }
+
+    .image {
+      width: 40px;
+    }
+
+    .img-responsive {
+      border-radius: 50px;
+      width: 35px;
+      height: 35px;
+    }
+
+  }

@@ -2,10 +2,10 @@
   {
     "id": "angular",
     "rules": "<ul> <li>There are a total of <b>numberOfQuestions</b> questions in the test.</li> <li>There is negative marking, where an incorrect answer deducts <b>negativePoints Point.</b></li> <li>A correct answer earns you <b>positivePoints Point.</b></li> <li>Each question must be answered within a <b>timer seconds</b> time limit.</li> <li>After <b>timer seconds</b>, the question changes automatically.</li> <li>Participants have the option to proceed to the next question before the time limit ends by clicking on a <b>Next button<b>.</li> </ul>",
-    "timer": 30,
+    "timer": 50,
     "positivePoints": 1,
     "negativePoints": 0.25,
-    "numberOfQuestions": 4,
+    "numberOfQuestions": 10,
     "testLevel": [
       "low"
     ],
@@ -15,12 +15,12 @@
     "description": "Angular is a platform and framework for building single-page client applications using HTML and TypeScript. Angular is written in TypeScript. It implements core and optional functionality as a set of TypeScript libraries that you import into your applications."
   },
   {
-    "id": "htmlCss",
+    "id": "htmlcss",
     "rules": "<ul> <li>There are a total of <b>numberOfQuestions</b> questions in the test.</li> <li>There is negative marking, where an incorrect answer deducts <b>negativePoints Point.</b></li> <li>A correct answer earns you <b>positivePoints Point.</b></li> <li>Each question must be answered within a <b>timer seconds</b> time limit.</li> <li>After <b>timer seconds</b>, the question changes automatically.</li> <li>Participants have the option to proceed to the next question before the time limit ends by clicking on a <b>Next button<b>.</li> </ul>",
-    "timer": 15,
+    "timer": 50,
     "positivePoints": 2,
     "negativePoints": 1,
-    "numberOfQuestions": 5,
+    "numberOfQuestions": 10,
     "testLevel": [
       "low",
       "medium"
@@ -36,7 +36,7 @@
     "timer": 50,
     "positivePoints": 1,
     "negativePoints": 0.25,
-    "numberOfQuestions": 3,
+    "numberOfQuestions": 10,
     "testLevel": [
       "low",
       "high"
@@ -47,17 +47,17 @@
     "description": "JavaScript is a light-weight object-oriented programming language that is used by several websites for scripting the webpages. It is an interpreted, full-fledged programming language. JavaScript enables dynamic interactivity on websites when it is applied to an HTML document."
   },
   {
-    "id": "reactJS",
+    "id": "react",
     "rules": "<ul> <li>There are a total of <b>numberOfQuestions</b> questions in the test.</li> <li>There is negative marking, where an incorrect answer deducts <b>negativePoints Point.</b></li> <li>A correct answer earns you <b>positivePoints Point.</b></li> <li>Each question must be answered within a <b>timer seconds</b> time limit.</li> <li>After <b>timer seconds</b>, the question changes automatically.</li> <li>Participants have the option to proceed to the next question before the time limit ends by clicking on a <b>Next button<b>.</li> </ul>",
-    "timer": 20,
+    "timer": 50,
     "positivePoints": 1,
     "negativePoints": 0.25,
-    "numberOfQuestions": 3,
+    "numberOfQuestions": 10,
     "testLevel": [
       "medium",
       "high"
     ],
-    "title": "React JS",
+    "title": "ReactJS",
     "file": "assets/json/reactjs.json",
     "image": "assets\\img\\react.svg",
     "description": "React is a free and open-source front-end JavaScript library for building user interfaces based on components. It is maintained by Meta."

@@ -20,6 +20,14 @@ const routes: Routes = [
         (m) => m.LayoutComponentModule
       ),
   },
+  {
+    path: 'admin-layout',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./admin-layout/admin-layout.module').then(
+        (m) => m.AdminLayoutModule
+      ),
+  },
 ];
 
 @NgModule({

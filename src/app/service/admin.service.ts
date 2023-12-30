@@ -6,7 +6,7 @@ import { environment } from '@environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
-export class ResultService {
+export class AdminService {
 
   serverUrl = environment.API_URL;
 
@@ -14,11 +14,7 @@ export class ResultService {
     private http: HttpClient
   ) { }
 
-  addResultData(data: any): Observable<any> {
-    return this.http.post(`${this.serverUrl}/result`, data);
-  }
-
-  getUserResultData(userId: number): Observable<any> {
-    return this.http.get(`${this.serverUrl}/result/${userId}`);
+  getAllUserData(params: HttpParams): Observable<any> {
+    return this.http.get(`${this.serverUrl}/users`, {params}) as Observable<any>;
   }
 }

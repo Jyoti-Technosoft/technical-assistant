@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private dialogService: DialogService,
     private dashboard: DashboardService,
     private route: Router,
-    private snackbarService: SnackbarService,
+    private snackBarService: SnackbarService,
     private cd: ChangeDetectorRef
   ) {
     this.sub = new Subscription();
@@ -58,11 +58,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.quizCountData = res.data;
           this.cd.detectChanges();
         } else {
-          this.snackbarService.error(res.message);
+          this.snackBarService.error(res.message);
         }
       },
       error: (err) => {
-        this.snackbarService.error(err.error.message);
+        this.snackBarService.error(err.error.message);
       }
     });
     this.sub.add(countData);
@@ -76,11 +76,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.addOtherQuizDetails(res.data);
           this.cd.detectChanges();
         } else {
-          this.snackbarService.error(res.message);
+          this.snackBarService.error(res.message);
         }
       },
       error: (err) => {
-        this.snackbarService.error(err.error.message);
+        this.snackBarService.error(err.error.message);
       }
     });
     this.sub.add(quizData);

@@ -39,7 +39,7 @@
                     <p class="h6 small"> {{ subRandomQueList.questions[i].type === 'checkbox' ? "( You can select multiple options )" : subRandomQueList.questions[i].type === 'radio' ? "( You can select only one option )" : '' }} </p>
                   </span>
 
-                  <ng-container *ngIf="subRandomQueList.questions[i].type !== 'code'">
+                  <ng-container *ngIf="subRandomQueList.questions[i].type !== 'code' else writeCode">
                     <ng-container
                       *ngFor="let card of subRandomQueList.questions[i].options;">
                       <div class="mx-0">
@@ -53,7 +53,8 @@
                       </div>
                     </ng-container>
                   </ng-container>
-                  <ng-container *ngIf="subRandomQueList.questions[i].type === 'code'">
+
+                  <ng-template #writeCode>
                     <ngx-monaco-editor
                       [options]="editorOptions"
                       formControlName="userCode"
@@ -68,7 +69,7 @@
                       <h4>Output:</h4>
                       <pre>{{ output }}</pre>
                     </div> -->
-                  </ng-container>
+                  </ng-template>
                 </div>
 
                 <div

@@ -1,47 +1,35 @@
 import { NgModule } from "@angular/core";
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgbCarouselModule, NgbDatepickerModule, NgbDropdownModule, NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { FooterComponent } from "@app/component/footer/footer.component";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FullLayoutComponent } from '@app/layout/full-layout/full-layout.component';
 import { LayoutRoutingModule } from "@app/layout/layout-routing.module";
 import { DashboardComponent } from "@app/component/dashboard/dashboard.component";
-import { CommonModule } from "@angular/common";
 import { AllresultsComponent } from "@app/component/allresults/allresults.component";
-import { UserProfileComponent } from '@app/component/user-profile/user-profile.component';
 import { Quizcomponent } from "@app/component/quiz/quiz.component";
 import { ResultComponent } from "@app/component/result/result.component";
-import { HoverDirective } from '@app/directive/hover.directive';
-import { MaterialModule } from '../material/material.module';
 import { MonacoEditorModule } from 'ngx-monaco-editor-v2';
+import { SharedModule } from "@app/shared/shared.module";
+import { QuizRuleComponent } from "@app/component/quiz-rule/quiz-rule.component";
 
 @NgModule({
     declarations: [
         DashboardComponent,
-        FooterComponent,
         Quizcomponent,
         ResultComponent,
         FullLayoutComponent,
         AllresultsComponent,
-        UserProfileComponent,
-        HoverDirective
+        QuizRuleComponent,
     ],
     imports:[
-        NgbDropdownModule,
-        CommonModule,
+        LayoutRoutingModule,
         FormsModule,
-        MaterialModule,
         RouterModule,
         NgbModule,
         ReactiveFormsModule,
-        NgbCarouselModule,
-        LayoutRoutingModule,
-        NgbDatepickerModule,
+        SharedModule,
         MonacoEditorModule.forRoot()
-    ],
-    exports:[
-        FooterComponent,
-    ],
+    ]
 })
 
 export class LayoutComponentModule {}

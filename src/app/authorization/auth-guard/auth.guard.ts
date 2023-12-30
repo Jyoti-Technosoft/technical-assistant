@@ -10,26 +10,28 @@ import { AuthenticationService } from '@app/service/authentication.service';
 export class AuthGuard  {
 
   userToken!: string;
+  userRole!: string;
 
   constructor(
     private router: Router,
     private auth: AuthenticationService
-  ) {
-    this.userToken = auth.getAuthToken();
-  }
+  ) { }
 
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+    this.userToken = this.auth.getAuthToken();
+    this.userRole = JSON.parse(JSON.stringify(localStorage.getItem('role')));
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ):
-  | Observable<boolean | UrlTree>
-  | Promise<boolean | UrlTree>
-  | boolean
-  | UrlTree {
-
-    let checkData = this.userToken ? true : this.router.createUrlTree(['/login']);
-    return checkData;
+    if (this.userToken) {
+      if (this.userRole === 'admin') {
+        this.router.createUrlTree(['/admin-layout']);
+        return true;
+      } else {
+        this.router.createUrlTree(['/layout']);
+        return true;
+      }
+    } else {
+      return this.router.createUrlTree(['/login']);
+    }
   }
 
 }

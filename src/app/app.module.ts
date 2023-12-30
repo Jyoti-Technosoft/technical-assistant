@@ -7,6 +7,7 @@ import { AppComponent } from '@app/app.component';
 import { LoginComponent } from '@app/authorization/login/login.component';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { LayoutComponentModule } from '@app/layout/layout-component.module';
+import { AdminLayoutModule } from '@app/admin-layout/admin-layout.module';
 import { ModalComponent } from '@app/dialog-service/modal/modal/modal.component';
 import { AuthGuard } from '@app/authorization/auth-guard/auth.guard';
 import { MaterialModule } from '@app/material/material.module';
@@ -15,8 +16,8 @@ import { RedirectGuard } from '@app/authorization/redirect-guard/redirect.guard'
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PrivacyPolicyComponent } from './component/privacy-policy/privacy-policy.component';
 import { TearmsConditionComponent } from './component/tearms-condition/tearms-condition.component';
-import { QuizRuleComponent } from './component/quiz-rule/quiz-rule.component';
 import { AuthInterceptor } from './auth.interceptor';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,7 @@ import { AuthInterceptor } from './auth.interceptor';
     LoginComponent,
     ModalComponent,
     PrivacyPolicyComponent,
-    TearmsConditionComponent,
-    QuizRuleComponent,
+    TearmsConditionComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +35,9 @@ import { AuthInterceptor } from './auth.interceptor';
     FormsModule,
     ReactiveFormsModule,
     LayoutComponentModule,
+    AdminLayoutModule,
     NgbToastModule,
+    SharedModule,
     NgbDatepickerModule,
     HttpClientModule
   ],
